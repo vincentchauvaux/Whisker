@@ -16,7 +16,6 @@
 </template>
 
 <script setup>
-import Layout from "../layouts/Layout.vue";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import AboutSection from "../components/AboutSection.vue";
