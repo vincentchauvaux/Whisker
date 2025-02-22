@@ -1,14 +1,20 @@
 <template>
-  <section class="py-16 bg-secondary-light">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">
+  <section class="relative isolate overflow-hidden bg-white py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <h2
+        class="text-center text-4xl font-bold tracking-tight text-primary sm:text-6xl"
+      >
         Ils nous font confiance
       </h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
+      <div
+        class="mx-auto mt-20 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-12 sm:max-w-xl sm:grid-cols-4 sm:gap-x-10 sm:gap-y-14 lg:mx-0 lg:max-w-none"
+      >
         <!-- SPA -->
-        <div class="flex flex-col items-center justify-center group">
+        <div
+          class="group relative flex flex-col items-center transition duration-300 hover:scale-110"
+        >
           <div
-            class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-4 group-hover:bg-primary-light transition duration-300"
+            class="h-24 w-24 rounded-full bg-white shadow-lg flex items-center justify-center mb-4 group-hover:bg-primary-light transition duration-300"
           >
             <svg
               class="w-12 h-12 text-primary group-hover:text-primary-dark"
@@ -21,15 +27,17 @@
             </svg>
           </div>
           <span
-            class="text-primary font-medium group-hover:text-primary-dark transition duration-300"
+            class="text-lg font-medium text-primary group-hover:text-primary-dark transition duration-300"
             >SPA France</span
           >
         </div>
 
         <!-- Clinique Vétérinaire -->
-        <div class="flex flex-col items-center justify-center group">
+        <div
+          class="group relative flex flex-col items-center transition duration-300 hover:scale-110"
+        >
           <div
-            class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-4 group-hover:bg-primary-light transition duration-300"
+            class="h-24 w-24 rounded-full bg-white shadow-lg flex items-center justify-center mb-4 group-hover:bg-primary-light transition duration-300"
           >
             <svg
               class="w-12 h-12 text-primary group-hover:text-primary-dark"
@@ -42,15 +50,17 @@
             </svg>
           </div>
           <span
-            class="text-primary font-medium group-hover:text-primary-dark transition duration-300"
+            class="text-lg font-medium text-primary group-hover:text-primary-dark transition duration-300"
             >Cliniques Partenaires</span
           >
         </div>
 
         <!-- Refuges -->
-        <div class="flex flex-col items-center justify-center group">
+        <div
+          class="group relative flex flex-col items-center transition duration-300 hover:scale-110"
+        >
           <div
-            class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-4 group-hover:bg-primary-light transition duration-300"
+            class="h-24 w-24 rounded-full bg-white shadow-lg flex items-center justify-center mb-4 group-hover:bg-primary-light transition duration-300"
           >
             <svg
               class="w-12 h-12 text-primary group-hover:text-primary-dark"
@@ -63,15 +73,17 @@
             </svg>
           </div>
           <span
-            class="text-primary font-medium group-hover:text-primary-dark transition duration-300"
+            class="text-lg font-medium text-primary group-hover:text-primary-dark transition duration-300"
             >Réseau de Refuges</span
           >
         </div>
 
         <!-- Communes -->
-        <div class="flex flex-col items-center justify-center group">
+        <div
+          class="group relative flex flex-col items-center transition duration-300 hover:scale-110"
+        >
           <div
-            class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-4 group-hover:bg-primary-light transition duration-300"
+            class="h-24 w-24 rounded-full bg-white shadow-lg flex items-center justify-center mb-4 group-hover:bg-primary-light transition duration-300"
           >
             <svg
               class="w-12 h-12 text-primary group-hover:text-primary-dark"
@@ -84,7 +96,7 @@
             </svg>
           </div>
           <span
-            class="text-primary font-medium group-hover:text-primary-dark transition duration-300"
+            class="text-lg font-medium text-primary group-hover:text-primary-dark transition duration-300"
             >Services Communaux</span
           >
         </div>

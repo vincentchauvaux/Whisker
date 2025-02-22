@@ -1,12 +1,16 @@
 <template>
   <section class="py-20 bg-white">
     <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
-          Carte des signalements
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <h2
+          class="text-4xl md:text-5xl font-bold tracking-tight text-primary mb-6"
+        >
+          Mapbox
         </h2>
-        <p class="text-xl text-primary-dark">
-          Découvrez les chats perdus et trouvés dans votre région
+        <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+          Une carte subtile conçue pour fournir un contexte géographique tout en
+          mettant en valeur vos données. Parfaite pour visualiser les
+          signalements d'animaux perdus et trouvés dans votre région.
         </p>
       </div>
 

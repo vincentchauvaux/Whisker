@@ -39,13 +39,13 @@
               <div class="absolute top-4 left-4">
                 <span
                   :class="[
-                    'text-xl font-bold px-6 py-2 rounded-full',
+                    'px-4 py-2 rounded-full text-sm self-start',
                     pet.status === 'lost'
-                      ? 'bg-red-500 text-white'
-                      : 'bg-green-500 text-white',
+                      ? 'bg-red-100 text-red-800'
+                      : 'bg-green-100 text-green-800',
                   ]"
                 >
-                  {{ pet.status === "lost" ? "Perdu" : "Trouvé" }}
+                  {{ pet.duration }}
                 </span>
               </div>
             </div>
@@ -83,19 +83,9 @@
                   </svg>
                   <span class="text-gray-600">{{ pet.date }}</span>
                 </div>
-                <span
-                  :class="[
-                    'px-4 py-1 rounded-full text-sm self-start',
-                    pet.status === 'lost'
-                      ? 'bg-red-100 text-red-800'
-                      : 'bg-green-100 text-green-800',
-                  ]"
-                >
-                  {{ pet.duration }}
-                </span>
               </div>
 
-              <div class="flex flex-wrap gap-2 mt-auto">
+              <div class="flex flex-wrap gap-2 md-auto">
                 <span
                   v-for="tag in pet.tags"
                   :key="tag"

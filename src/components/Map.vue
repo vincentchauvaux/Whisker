@@ -110,7 +110,7 @@ export default {
 
     const map = new mapboxgl.Map({
       container: this.$refs.mapContainer,
-      style: "mapbox://styles/mapbox/streets-v12",
+      style: "mapbox://styles/mapbox/light-v11",
       center: [lng, lat],
       bearing,
       pitch,
