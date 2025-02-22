@@ -1,5 +1,12 @@
 <template>
-  <header class="absolute inset-x-0 top-0 z-50">
+  <header 
+    class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+    :class="[
+      scrolled 
+        ? 'bg-white/95 backdrop-blur-sm shadow-sm' 
+        : 'bg-transparent'
+    ]"
+  >
     <nav
       class="flex items-center justify-between p-6 lg:px-8"
       aria-label="Global"
@@ -114,7 +121,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
 const navigation = [
   { name: "Accueil", href: "#" },
@@ -124,4 +131,17 @@ const navigation = [
 ];
 
 const mobileMenuOpen = ref(false);
+const scrolled = ref(false);
+
+const handleScroll = () => {
+  scrolled.value = window.scrollY > 20;
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
