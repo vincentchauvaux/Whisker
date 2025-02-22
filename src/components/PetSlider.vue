@@ -1,20 +1,20 @@
 <template>
   <div class="relative px-12">
-    <div class="overflow-hidden">
+    <div class="overflow-hidden px-4">
       <swiper
         :modules="[Navigation, Pagination]"
         :slides-per-view="1"
         :breakpoints="{
           '640': {
             slidesPerView: 2,
-            spaceBetween: 20,
+            spaceBetween: 12,
           },
           '1024': {
             slidesPerView: 4,
-            spaceBetween: 24,
+            spaceBetween: 12,
           },
         }"
-        :space-between="16"
+        :space-between="12"
         :navigation="{
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
@@ -24,9 +24,9 @@
           bulletActiveClass: 'swiper-pagination-bullet-active',
         }"
         :loop="true"
-        class="pet-swiper pb-12"
+        class="pet-swiper !px-2 pb-12"
       >
-        <swiper-slide v-for="pet in pets" :key="pet.id" class="h-full">
+        <swiper-slide v-for="pet in pets" :key="pet.id" class="h-full !px-2">
           <div
             class="bg-white rounded-3xl shadow-lg overflow-hidden h-full flex flex-col transform transition-transform duration-300 hover:scale-[1.02]"
           >
@@ -39,7 +39,7 @@
               <div class="absolute top-4 left-4">
                 <span
                   :class="[
-                    'px-4 py-2 rounded-full text-sm self-start',
+                    'px-4 py-2 rounded-full text-sm self-start ',
                     pet.status === 'lost'
                       ? 'bg-red-100 text-red-800'
                       : 'bg-green-100 text-green-800',
@@ -51,9 +51,9 @@
             </div>
 
             <div class="p-6 flex-grow flex flex-col min-h-[200px]">
-              <div class="flex items-center gap-2 mb-4">
+              <div class="flex items-center gap-2 mb-4 w-full">
                 <svg
-                  class="w-6 h-6 text-primary"
+                  class="w-5 h-5 shrink-0 text-primary"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -63,9 +63,10 @@
                     fill="currentColor"
                   />
                 </svg>
-                <span class="text-xl font-semibold text-primary">{{
-                  pet.location
-                }}</span>
+                <span
+                  class="font-medium text-primary responsive-text whitespace-nowrap overflow-hidden text-ellipsis]"
+                  >{{ pet.location }}</span
+                >
               </div>
 
               <div class="flex flex-col gap-2 mb-4">
@@ -125,13 +126,18 @@ const props = defineProps({
 <style>
 .pet-swiper {
   padding: 20px 0 48px !important;
-  margin-bottom: 0 !important;
+  margin: 0 -8px !important;
 }
 
-.swiper,
-.swiper-wrapper,
 .swiper-slide {
   height: auto !important;
+  box-sizing: border-box;
+}
+
+/* Ajout de la classe pour la typographie responsive */
+.responsive-text {
+  font-size: clamp(0.875rem, calc(0.7rem + 0.7vw), 1.25rem);
+  line-height: 1.2;
 }
 
 .swiper-button-next,

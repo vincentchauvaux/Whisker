@@ -5,7 +5,7 @@
         <h2
           class="text-4xl md:text-5xl font-bold tracking-tight text-primary mb-6"
         >
-          Mapbox
+          Carte des signalements
         </h2>
         <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
           Une carte subtile conçue pour fournir un contexte géographique tout en

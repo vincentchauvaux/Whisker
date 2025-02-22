@@ -77,5 +77,45 @@ const lostPets = [
     duration: "Perdu depuis 7 jours",
     tags: ["Calme", "Chat Ragdoll"],
   },
+  {
+    id: 7,
+    status: "lost",
+    image:
+      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=400&auto=format&fit=crop",
+    location: "Courtrai",
+    date: "08/02/24 - 15:20",
+    duration: "Perdu depuis 8 jours",
+    tags: ["Affectueux", "Chat Siamois"],
+  },
+  {
+    id: 8,
+    status: "lost",
+    image:
+      "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?q=80&w=400&auto=format&fit=crop",
+    location: "Tournai",
+    date: "07/02/24 - 13:10",
+    duration: "Perdu depuis 9 jours",
+    tags: ["Sociable", "Chat Bengal"],
+  },
+  {
+    id: 9,
+    status: "lost",
+    image:
+      "https://images.unsplash.com/photo-1516750105099-4b8a83e217ee?q=80&w=400&auto=format&fit=crop",
+    location: "Ypres",
+    date: "06/02/24 - 10:45",
+    duration: "Perdu depuis 10 jours",
+    tags: ["Joueur", "Chat Norvégien"],
+  },
+  {
+    id: 10,
+    status: "lost",
+    image:
+      "https://images.unsplash.com/photo-1506891536236-3e07892564b7?q=80&w=400&auto=format&fit=crop",
+    location: "Arlon",
+    date: "05/02/24 - 09:30",
+    duration: "Perdu depuis 11 jours",
+    tags: ["Timide", "Chat Sacré de Birmanie"],
+  },
 ];
 </script>

@@ -22,7 +22,7 @@ const foundPets = [
     status: "found",
     image:
       "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=400&auto=format&fit=crop",
-    location: "Brugges",
+    location: "Bruges",
     date: "14/02/24 - 12:45",
     duration: "Trouvé sur la voie publique",
     tags: ["Curieux", "Indemne", "Chat Siamois"],
@@ -71,11 +71,51 @@ const foundPets = [
     id: 6,
     status: "found",
     image:
-      "https://images.unsplash.com/photo-1543852786-1cf6624b9987?q=80&w=400&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1494256997604-768d1f608cac?q=80&w=400&auto=format&fit=crop",
     location: "Gand",
-    date: "09/02/24 - 14:15",
+    date: "09/02/24 - 14:20",
     duration: "Trouvé sur la voie publique",
-    tags: ["Calme", "Indemne", "Chat Noir"],
+    tags: ["Calme", "Indemne", "Chat Persan"],
+  },
+  {
+    id: 7,
+    status: "found",
+    image:
+      "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?q=80&w=400&auto=format&fit=crop",
+    location: "Louvain",
+    date: "08/02/24 - 10:15",
+    duration: "Trouvé sur la voie publique",
+    tags: ["Affectueux", "Indemne", "Chat Angora"],
+  },
+  {
+    id: 8,
+    status: "found",
+    image:
+      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?q=80&w=400&auto=format&fit=crop",
+    location: "Ostende",
+    date: "07/02/24 - 09:45",
+    duration: "Trouvé sur la voie publique",
+    tags: ["Joueur", "Indemne", "Chat Maine Coon"],
+  },
+  {
+    id: 9,
+    status: "found",
+    image:
+      "https://images.unsplash.com/photo-1543852786-1cf6624b9987?q=80&w=400&auto=format&fit=crop",
+    location: "Mons",
+    date: "06/02/24 - 16:30",
+    duration: "Trouvé sur la voie publique",
+    tags: ["Sociable", "Indemne", "Chat British"],
+  },
+  {
+    id: 10,
+    status: "found",
+    image:
+      "https://images.unsplash.com/photo-1548546738-8509cb246ed3?q=80&w=400&auto=format&fit=crop",
+    location: "Hasselt",
+    date: "05/02/24 - 13:20",
+    duration: "Trouvé sur la voie publique",
+    tags: ["Curieux", "Indemne", "Chat Ragdoll"],
   },
 ];
 </script>

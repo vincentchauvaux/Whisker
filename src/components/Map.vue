@@ -17,7 +17,7 @@ const cats = [
     description: "Perdu depuis 2 jours",
     type: "lost",
     date: "14/02/24 - 12:45",
-    tags: ["Curieux", "Indemne", "Chat Siamois"],
+    tags: ["Curieux", "Chat Siamois"],
     image:
       "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=400&auto=format&fit=crop",
   },
@@ -27,7 +27,7 @@ const cats = [
     description: "Trouvé sur la voie publique",
     type: "found",
     date: "13/02/24 - 15:30",
-    tags: ["Amical", "Indemne", "Chat Européen"],
+    tags: ["Amical", "Chat Européen"],
     image:
       "https://images.unsplash.com/photo-1573865526739-10659fec78a5?q=80&w=400&auto=format&fit=crop",
   },
@@ -78,6 +78,76 @@ const cats = [
     type: "lost",
     date: "13/02/24 - 14:30",
     tags: ["Peureux", "Chat Noir"],
+    image:
+      "https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=400&auto=format&fit=crop",
+  },
+  {
+    coordinates: [3.7174, 51.0543], // Gand
+    title: "Simba",
+    description: "Trouvé dans un jardin",
+    type: "found",
+    date: "12/02/24 - 11:20",
+    tags: ["Sociable", "Chat Tigré"],
+    image:
+      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=400&auto=format&fit=crop",
+  },
+  {
+    coordinates: [3.2247, 51.2093], // Bruges
+    title: "Nala",
+    description: "Perdu depuis 5 jours",
+    type: "lost",
+    date: "09/02/24 - 16:45",
+    tags: ["Timide", "Chat Siamois"],
+    image:
+      "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?q=80&w=400&auto=format&fit=crop",
+  },
+  {
+    coordinates: [4.4428, 50.4108], // Charleroi
+    title: "Minou",
+    description: "Trouvé près d'une école",
+    type: "found",
+    date: "11/02/24 - 13:30",
+    tags: ["Joueur", "Chat Européen"],
+    image:
+      "https://images.unsplash.com/photo-1516750105099-4b8a83e217ee?q=80&w=400&auto=format&fit=crop",
+  },
+  {
+    coordinates: [5.8167, 49.6833], // Arlon
+    title: "Caramel",
+    description: "Perdu depuis une semaine",
+    type: "lost",
+    date: "07/02/24 - 09:15",
+    tags: ["Affectueux", "Chat Roux"],
+    image:
+      "https://images.unsplash.com/photo-1506891536236-3e07892564b7?q=80&w=400&auto=format&fit=crop",
+  },
+  {
+    coordinates: [3.2492, 50.8297], // Courtrai
+    title: "Moustache",
+    description: "Trouvé dans un parc",
+    type: "found",
+    date: "10/02/24 - 15:40",
+    tags: ["Calme", "Chat Maine Coon"],
+    image:
+      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?q=80&w=400&auto=format&fit=crop",
+  },
+  {
+    coordinates: [2.8333, 50.8333], // Ypres
+    title: "Sushi",
+    description: "Perdu depuis 4 jours",
+    type: "lost",
+    date: "10/02/24 - 12:20",
+    tags: ["Curieux", "Chat Bengal"],
+    image:
+      "https://images.unsplash.com/photo-1543852786-1cf6624b9987?q=80&w=400&auto=format&fit=crop",
+  },
+  {
+    coordinates: [3.3889, 50.6097], // Tournai
+    title: "Pixel",
+    description: "Trouvé près d'un commerce",
+    type: "found",
+    date: "08/02/24 - 17:30",
+    tags: ["Sociable", "Chat British"],
     image:
       "https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=400&auto=format&fit=crop",
   },

@@ -28,7 +28,7 @@
           </div>
           <span
             class="text-lg font-medium text-primary group-hover:text-primary-dark transition duration-300"
-            >SPA France</span
+            >SRPA Belgique</span
           >
         </div>
 
@@ -51,7 +51,7 @@
           </div>
           <span
             class="text-lg font-medium text-primary group-hover:text-primary-dark transition duration-300"
-            >Cliniques Partenaires</span
+            >Ordre des Vétérinaires</span
           >
         </div>
 
@@ -74,7 +74,7 @@
           </div>
           <span
             class="text-lg font-medium text-primary group-hover:text-primary-dark transition duration-300"
-            >Réseau de Refuges</span
+            >Refuges Agréés</span
           >
         </div>
 
@@ -97,7 +97,7 @@
           </div>
           <span
             class="text-lg font-medium text-primary group-hover:text-primary-dark transition duration-300"
-            >Services Communaux</span
+            >Communes Belges</span
           >
         </div>
       </div>
