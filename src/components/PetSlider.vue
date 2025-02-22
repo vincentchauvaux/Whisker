@@ -42,7 +42,7 @@
                     'text-xl font-bold px-6 py-2 rounded-full',
                     pet.status === 'lost'
                       ? 'bg-red-500 text-white'
-                      : 'bg-white text-primary',
+                      : 'bg-green-500 text-white',
                   ]"
                 >
                   {{ pet.status === "lost" ? "Perdu" : "Trouvé" }}
@@ -50,10 +50,10 @@
               </div>
             </div>
 
-            <div class="p-6 flex-grow flex flex-col">
-              <div class="flex items-center gap-2 mb-2">
+            <div class="p-6 flex-grow flex flex-col min-h-[200px]">
+              <div class="flex items-center gap-2 mb-4">
                 <svg
-                  class="w-6 h-6"
+                  class="w-6 h-6 text-primary"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -63,28 +63,29 @@
                     fill="currentColor"
                   />
                 </svg>
-                <span class="text-xl font-semibold">{{ pet.location }}</span>
+                <span class="text-xl font-semibold text-primary">{{
+                  pet.location
+                }}</span>
               </div>
 
-              <div class="flex items-center gap-2 mb-4">
-                <svg
-                  class="w-6 h-6"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M19 4h-1V3c0-.55-.45-1-1-1s-1 .45-1 1v1H8V3c0-.55-.45-1-1-1s-1 .45-1 1v1H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"
-                    fill="currentColor"
-                  />
-                </svg>
-                <span class="text-gray-600">{{ pet.date }}</span>
-              </div>
-
-              <div class="flex flex-wrap gap-2 mt-auto">
+              <div class="flex flex-col gap-2 mb-4">
+                <div class="flex items-center gap-2">
+                  <svg
+                    class="w-6 h-6 text-primary"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19 4h-1V3c0-.55-.45-1-1-1s-1 .45-1 1v1H8V3c0-.55-.45-1-1-1s-1 .45-1 1v1H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <span class="text-gray-600">{{ pet.date }}</span>
+                </div>
                 <span
                   :class="[
-                    'px-4 py-1 rounded-full text-sm',
+                    'px-4 py-1 rounded-full text-sm self-start',
                     pet.status === 'lost'
                       ? 'bg-red-100 text-red-800'
                       : 'bg-green-100 text-green-800',
@@ -92,6 +93,9 @@
                 >
                   {{ pet.duration }}
                 </span>
+              </div>
+
+              <div class="flex flex-wrap gap-2 mt-auto">
                 <span
                   v-for="tag in pet.tags"
                   :key="tag"

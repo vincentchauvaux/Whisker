@@ -3,9 +3,10 @@
     <HeroSection />
     <SearchAppSection />
     <FoundFriendsSection />
-    <CTASection />
-    <LostFriendsSection />
+    <MapSection />
     <SponsorsSection />
+    <LostFriendsSection />
+    <CTASection />
   </Layout>
 </template>
 
@@ -17,4 +18,5 @@ import FoundFriendsSection from "../components/FoundFriendsSection.vue";
 import SponsorsSection from "../components/SponsorsSection.vue";
 import LostFriendsSection from "../components/LostFriendsSection.vue";
 import CTASection from "../components/CTASection.vue";
+import MapSection from "../components/MapSection.vue";
 </script>

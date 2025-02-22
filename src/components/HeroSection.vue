@@ -41,7 +41,12 @@
         </div>
       </div>
     </div>
-    <div class="absolute right-0 bottom-0 w-1/2 transform translate-x-1/4">
+    <div
+      class="absolute right-0 bottom-0 w-1/2 transform translate-x-1/4 transition-transform duration-300 ease-out"
+      :style="{
+        transform: `translate3d(0, ${scrollY * 0.15}px, 0) translate(25%)`,
+      }"
+    >
       <img
         src="/mockup/mokup-phone.png"
         alt="Application mobile mockup"
@@ -59,3 +64,27 @@
     </div>
   </section>
 </template>
+
+<script setup>
+import { ref, onMounted, onUnmounted } from "vue";
+
+const scrollY = ref(0);
+
+const handleScroll = () => {
+  scrollY.value = window.scrollY;
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
+</script>
+
+<style scoped>
+.section {
+  perspective: 1000px;
+}
+</style>
