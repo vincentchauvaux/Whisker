@@ -2,7 +2,9 @@
   <header
     class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
     :class="[
-      scrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-transparent',
+      scrolled
+        ? 'bg-white/95 backdrop-blur-sm shadow-[0_8px_15px_-3px_rgba(0,0,0,0.05)]'
+        : 'bg-transparent',
     ]"
   >
     <nav
