@@ -45,8 +45,8 @@ export default defineComponent({
     const mapConfig = ref({
       lng: 4.3517,
       lat: 50.8503,
-      zoom: 8,
-      pitch: 45,
+      zoom: 9,
+      pitch: 70,
       bearing: 0,
     });
 

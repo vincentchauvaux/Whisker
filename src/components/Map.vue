@@ -151,6 +151,36 @@ const cats = [
     image:
       "https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=400&auto=format&fit=crop",
   },
+  {
+    coordinates: [4.0409, 50.8368], // Aalst
+    title: "Whisky",
+    description: "Trouvé près d'une école",
+    type: "found",
+    date: "15/02/24 - 09:15",
+    tags: ["Joueur", "Chat Européen"],
+    image:
+      "https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=400&auto=format&fit=crop",
+  },
+  {
+    coordinates: [3.7784, 50.6333], // Ath
+    title: "Noisette",
+    description: "Perdu depuis hier",
+    type: "lost",
+    date: "14/02/24 - 18:30",
+    tags: ["Timide", "Chat Roux"],
+    image:
+      "https://images.unsplash.com/photo-1494256997604-768d1f608cac?q=80&w=400&auto=format&fit=crop",
+  },
+  {
+    coordinates: [4.9333, 50.5833], // Eghezée
+    title: "Oreo",
+    description: "Trouvé dans un jardin",
+    type: "found",
+    date: "15/02/24 - 11:45",
+    tags: ["Sociable", "Chat Noir et Blanc"],
+    image:
+      "https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?q=80&w=400&auto=format&fit=crop",
+  },
 ];
 
 export default {
