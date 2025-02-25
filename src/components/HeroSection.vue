@@ -39,9 +39,9 @@
             <div
               class="relative flex items-center gap-x-4 rounded-full bg-white px-4 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20"
             >
-              <span class="font-semibold text-primary">Nouveau</span>
+              <span class="font-semibold text-primary font-serif">Nouveau</span>
               <span class="h-4 w-px bg-gray-900/10" aria-hidden="true" />
-              <a href="#" class="flex items-center gap-x-1">
+              <a href="#" class="flex items-center gap-x-1 font-sans">
                 <span class="absolute inset-0" aria-hidden="true" />
                 Application mobile disponible
                 <svg
@@ -59,12 +59,12 @@
             </div>
           </div>
           <h1
-            class="mt-10 text-pretty text-5xl font-semibold tracking-tight text-primary sm:text-7xl"
+            class="mt-10 text-pretty text-4xl font-bold tracking-tight text-primary font-serif sm:text-6xl"
           >
             Trouver ou perdu, Vous êtes au bon endroit !
           </h1>
           <p
-            class="mt-8 text-pretty text-lg font-medium text-primary-dark sm:text-xl/8"
+            class="mt-8 text-pretty text-lg font-medium text-primary-dark font-sans sm:text-xl/8"
           >
             Notre plateforme innovante combine technologie et compassion pour
             créer un réseau efficace de recherche d'animaux perdus, connectant
@@ -73,10 +73,12 @@
           <div class="mt-10 flex items-center gap-x-6">
             <a
               href="#"
-              class="rounded-full bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              class="rounded-full bg-secondary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary font-sans"
               >Commencer</a
             >
-            <a href="#" class="text-sm/6 font-semibold text-primary"
+            <a
+              href="#"
+              class="text-sm/6 font-semibold text-secondary hover:text-secondary-dark font-sans"
               >En savoir plus <span aria-hidden="true">→</span></a
             >
           </div>
@@ -109,8 +111,9 @@
               clip-path="url(#2ade4387-9c63-4fc4-b754-10e687a0d332)"
             >
               <img
-                src="/mockup/affiche-3-720-texte.png"
+                src="/affiches/affiche-3-720.jpg"
                 alt="Capture d'écran de l'application mobile"
+                class="w-full h-full object-cover"
               />
             </foreignObject>
           </svg>

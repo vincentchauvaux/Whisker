@@ -10,12 +10,16 @@ module.exports = {
           dark: "#162E35", // version plus foncée du bleu-vert
         },
         secondary: {
-          light: "#F5EFE7", // beige clair
-          DEFAULT: "#E8E0D5", // version plus foncée du beige
-          dark: "#D6CBB8", // version encore plus foncée du beige
+          light: "#F7A39B", // version plus claire
+          DEFAULT: "#F26052", // couleur principale
+          dark: "#D94535", // version plus foncée
         },
+      },
+      fontFamily: {
+        sans: ["Montserrat", "sans-serif"],
+        serif: ['"Old Standard TT"', "serif"],
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };

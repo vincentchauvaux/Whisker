@@ -2,23 +2,27 @@
   <footer class="bg-primary">
     <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-        <img class="h-9 brightness-0 invert" src="/logo.svg" alt="Whisker" />
+        <img class="h-9" src="/logo-blanc-1141.png" alt="Whisker" />
         <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-sm/6 font-semibold text-white">Navigation</h3>
+              <h3 class="text-sm/6 font-semibold text-white font-serif">
+                Navigation
+              </h3>
               <ul role="list" class="mt-6 space-y-4">
                 <li v-for="item in navigation.main" :key="item.name">
                   <a
                     :href="item.href"
-                    class="text-sm/6 text-primary-light hover:text-white transition-colors"
+                    class="text-sm/6 text-primary-light hover:text-white transition-colors font-sans"
                     >{{ item.name }}</a
                   >
                 </li>
               </ul>
             </div>
             <div class="mt-10 md:mt-0">
-              <h3 class="text-sm/6 font-semibold text-white">Services</h3>
+              <h3 class="text-sm/6 font-semibold text-white font-serif">
+                Services
+              </h3>
               <ul role="list" class="mt-6 space-y-4">
                 <li v-for="item in navigation.services" :key="item.name">
                   <a
@@ -32,25 +36,33 @@
           </div>
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-sm/6 font-semibold text-white">Contact</h3>
+              <h3 class="text-sm/6 font-semibold text-white font-serif">
+                Contact
+              </h3>
               <ul role="list" class="mt-6 space-y-4">
-                <li class="text-sm/6 text-primary-light">123 Rue Example</li>
-                <li class="text-sm/6 text-primary-light">75000 Paris</li>
-                <li class="text-sm/6 text-primary-light">
+                <li class="text-sm/6 text-primary-light font-sans">
+                  123 Rue Example
+                </li>
+                <li class="text-sm/6 text-primary-light font-sans">
+                  75000 Paris
+                </li>
+                <li class="text-sm/6 text-primary-light font-sans">
                   Tél: 01 23 45 67 89
                 </li>
-                <li class="text-sm/6 text-primary-light">
+                <li class="text-sm/6 text-primary-light font-sans">
                   Email: contact@example.com
                 </li>
               </ul>
             </div>
             <div class="mt-10 md:mt-0">
-              <h3 class="text-sm/6 font-semibold text-white">Légal</h3>
+              <h3 class="text-sm/6 font-semibold text-white font-serif">
+                Légal
+              </h3>
               <ul role="list" class="mt-6 space-y-4">
                 <li v-for="item in navigation.legal" :key="item.name">
                   <a
                     :href="item.href"
-                    class="text-sm/6 text-primary-light hover:text-white transition-colors"
+                    class="text-sm/6 text-primary-light hover:text-white transition-colors font-sans"
                     >{{ item.name }}</a
                   >
                 </li>
@@ -74,7 +86,7 @@
               <component :is="item.icon" class="size-6" aria-hidden="true" />
             </a>
           </div>
-          <p class="text-sm/6 text-primary-light">
+          <p class="text-sm/6 text-primary-light font-sans">
             &copy; {{ new Date().getFullYear() }} Whisker. Tous droits réservés.
           </p>
         </div>

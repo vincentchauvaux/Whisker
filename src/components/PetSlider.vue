@@ -39,7 +39,7 @@
               <div class="absolute top-4 left-4">
                 <span
                   :class="[
-                    'px-4 py-2 rounded-full text-sm self-start ',
+                    'px-4 py-2 rounded-full text-sm self-start font-sans',
                     pet.status === 'lost'
                       ? 'bg-red-100 text-red-800'
                       : 'bg-green-100 text-green-800',
@@ -64,7 +64,7 @@
                   />
                 </svg>
                 <span
-                  class="font-medium text-primary responsive-text whitespace-nowrap overflow-hidden text-ellipsis]"
+                  class="font-medium text-primary responsive-text whitespace-nowrap overflow-hidden text-ellipsis font-serif"
                   >{{ pet.location }}</span
                 >
               </div>
@@ -82,7 +82,7 @@
                       fill="currentColor"
                     />
                   </svg>
-                  <span class="text-gray-600">{{ pet.date }}</span>
+                  <span class="text-gray-600 font-sans">{{ pet.date }}</span>
                 </div>
               </div>
 
@@ -90,7 +90,7 @@
                 <span
                   v-for="tag in pet.tags"
                   :key="tag"
-                  class="bg-gray-100 text-gray-800 px-4 py-1 rounded-full text-sm"
+                  class="bg-gray-100 text-gray-800 px-4 py-1 rounded-full text-sm font-sans"
                 >
                   {{ tag }}
                 </span>
@@ -142,7 +142,7 @@ const props = defineProps({
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: theme("colors.primary.DEFAULT") !important;
+  color: theme("colors.secondary.DEFAULT") !important;
   background: white;
   width: 40px !important;
   height: 40px !important;
@@ -163,7 +163,7 @@ const props = defineProps({
 }
 
 .swiper-pagination-bullet {
-  background: theme("colors.primary.DEFAULT") !important;
+  background: theme("colors.secondary.DEFAULT") !important;
   width: 10px !important;
   height: 10px !important;
   margin: 0 6px !important;

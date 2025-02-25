@@ -37,37 +37,43 @@
       >
         <div class="max-w-xl lg:max-w-lg">
           <h2
-            class="text-3xl font-bold tracking-tight text-primary sm:text-4xl"
+            class="text-3xl font-bold tracking-tight text-primary font-serif sm:text-4xl"
           >
             Rejoignez notre équipe !
           </h2>
-          <p class="mt-4 text-lg leading-8 text-primary-dark">
+          <p class="mt-4 text-lg leading-8 text-primary-dark font-sans">
             Vous souhaitez contribuer à notre mission de protection des animaux
             ? Nous recherchons des personnes passionnées et motivées pour nous
             aider à développer notre plateforme.
           </p>
-          <div class="mt-6 flex max-w-md gap-x-4">
+          <div class="mt-6 flex max-w-md">
             <label for="email-address" class="sr-only">Adresse email</label>
-            <input
-              id="email-address"
-              name="email"
-              type="email"
-              autocomplete="email"
-              required
-              class="min-w-0 flex-auto rounded-md border-0 bg-white px-3.5 py-2 text-primary shadow-sm ring-1 ring-inset ring-primary/20 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
-              placeholder="Entrez votre email"
-            />
-            <button
-              type="submit"
-              class="flex-none rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            <div
+              class="flex w-full rounded-full bg-white shadow-sm ring-1 ring-inset ring-primary/20"
             >
-              Je postule
-            </button>
+              <input
+                id="email-address"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                class="min-w-0 flex-auto rounded-l-full border-0 bg-transparent px-4 py-2.5 text-primary placeholder:text-gray-500 focus:ring-0 sm:text-sm sm:leading-6 font-sans"
+                placeholder="Entrez votre email"
+              />
+              <button
+                type="submit"
+                class="flex-none rounded-r-full bg-secondary px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary font-sans"
+              >
+                Je postule
+              </button>
+            </div>
           </div>
         </div>
         <dl class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
           <div class="flex flex-col items-start">
-            <div class="rounded-md bg-white/5 p-2 ring-1 ring-primary/20">
+            <div
+              class="rounded-md bg-white p-2 ring-1 ring-primary/20 shadow-sm"
+            >
               <svg
                 class="h-6 w-6 text-primary"
                 fill="none"
@@ -82,16 +88,18 @@
                 />
               </svg>
             </div>
-            <dt class="mt-4 font-semibold text-primary">
+            <dt class="mt-4 font-semibold text-primary font-serif">
               Développeur Full-Stack
             </dt>
-            <dd class="mt-2 leading-7 text-primary-dark">
+            <dd class="mt-2 leading-7 text-primary-dark font-sans">
               Aidez-nous à améliorer notre plateforme et à développer de
               nouvelles fonctionnalités.
             </dd>
           </div>
           <div class="flex flex-col items-start">
-            <div class="rounded-md bg-white/5 p-2 ring-1 ring-primary/20">
+            <div
+              class="rounded-md bg-white p-2 ring-1 ring-primary/20 shadow-sm"
+            >
               <svg
                 class="h-6 w-6 text-primary"
                 fill="none"
@@ -106,8 +114,10 @@
                 />
               </svg>
             </div>
-            <dt class="mt-4 font-semibold text-primary">Community Manager</dt>
-            <dd class="mt-2 leading-7 text-primary-dark">
+            <dt class="mt-4 font-semibold text-primary font-serif">
+              Community Manager
+            </dt>
+            <dd class="mt-2 leading-7 text-primary-dark font-sans">
               Gérez notre présence sur les réseaux sociaux et animez notre
               communauté.
             </dd>

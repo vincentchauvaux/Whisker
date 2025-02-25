@@ -5,6 +5,7 @@
       <HeroSection />
       <SearchAppSection />
       <FoundFriendsSection />
+
       <MapSection />
       <LostFriendsSection />
       <SponsorsSection />
@@ -22,8 +23,8 @@ import AboutSection from "../components/AboutSection.vue";
 import HeroSection from "../components/HeroSection.vue";
 import SearchAppSection from "../components/SearchAppSection.vue";
 import FoundFriendsSection from "../components/FoundFriendsSection.vue";
-import SponsorsSection from "../components/SponsorsSection.vue";
 import LostFriendsSection from "../components/LostFriendsSection.vue";
+import SponsorsSection from "../components/SponsorsSection.vue";
 import CTASection from "../components/CTASection.vue";
 import MapSection from "../components/MapSection.vue";
 </script>

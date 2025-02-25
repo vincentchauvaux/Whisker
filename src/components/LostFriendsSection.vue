@@ -2,7 +2,7 @@
   <section class="py-20 bg-white">
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4 font-serif">
           Nos Amis perdus
         </h2>
         <p class="text-xl text-primary-dark">Aidez-nous à les retrouver</p>
