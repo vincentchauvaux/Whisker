@@ -1,6 +1,6 @@
 <template>
   <section class="relative isolate overflow-hidden bg-white py-24 sm:py-32">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="container mx-auto px-4">
       <div
         class="mx-auto grid max-w-2xl gap-x-16 gap-y-16 lg:max-w-none lg:grid-cols-2 lg:items-center"
       >
