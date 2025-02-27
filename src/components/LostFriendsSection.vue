@@ -8,114 +8,93 @@
         <p class="text-xl text-primary-dark">Aidez-nous à les retrouver</p>
       </div>
 
-      <PetSlider :pets="lostPets" />
+      <div v-if="loading" class="flex justify-center items-center py-12">
+        <div
+          class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"
+        ></div>
+      </div>
+
+      <div v-else-if="error" class="text-center py-12">
+        <p class="text-red-500">{{ error }}</p>
+        <button
+          @click="loadLostPets"
+          class="mt-4 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition"
+        >
+          Réessayer
+        </button>
+      </div>
+
+      <div v-else-if="lostPets.length === 0" class="text-center py-12">
+        <p class="text-gray-500">Aucun animal perdu pour le moment.</p>
+      </div>
+
+      <PetSlider v-else :pets="formattedPets" />
     </div>
   </section>
 </template>
 
 <script setup>
+import { ref, onMounted, computed } from "vue";
 import PetSlider from "./PetSlider.vue";
+import { petService } from "../services/petService";
 
-const lostPets = [
-  {
-    id: 1,
-    status: "lost",
-    image:
-      "https://images.unsplash.com/photo-1543852786-1cf6624b9987?q=80&w=400&auto=format&fit=crop",
-    location: "Anvers",
-    date: "14/02/24 - 08:30",
-    duration: "Perdu depuis 2 jours",
-    tags: ["Peureux", "Chat Européen"],
-  },
-  {
-    id: 2,
-    status: "lost",
-    image:
-      "https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=400&auto=format&fit=crop",
-    location: "Gand",
-    date: "13/02/24 - 16:45",
-    duration: "Perdu depuis 3 jours",
-    tags: ["Sociable", "Chat Persan"],
-  },
-  {
-    id: 3,
-    status: "lost",
-    image:
-      "https://images.unsplash.com/photo-1513245543132-31f507417b26?q=80&w=400&auto=format&fit=crop",
-    location: "Bruxelles",
-    date: "12/02/24 - 10:20",
-    duration: "Perdu depuis 4 jours",
-    tags: ["Joueur", "Chat Maine Coon"],
-  },
-  {
-    id: 4,
-    status: "lost",
-    image:
-      "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?q=80&w=400&auto=format&fit=crop",
-    location: "Louvain",
-    date: "11/02/24 - 14:15",
-    duration: "Perdu depuis 5 jours",
-    tags: ["Timide", "Chat Angora"],
-  },
-  {
-    id: 5,
-    status: "lost",
-    image:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?q=80&w=400&auto=format&fit=crop",
-    location: "Ostende",
-    date: "10/02/24 - 09:45",
-    duration: "Perdu depuis 6 jours",
-    tags: ["Curieux", "Chat British Shorthair"],
-  },
-  {
-    id: 6,
-    status: "lost",
-    image:
-      "https://images.unsplash.com/photo-1494256997604-768d1f608cac?q=80&w=400&auto=format&fit=crop",
-    location: "Malines",
-    date: "09/02/24 - 11:30",
-    duration: "Perdu depuis 7 jours",
-    tags: ["Calme", "Chat Ragdoll"],
-  },
-  {
-    id: 7,
-    status: "lost",
-    image:
-      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=400&auto=format&fit=crop",
-    location: "Courtrai",
-    date: "08/02/24 - 15:20",
-    duration: "Perdu depuis 8 jours",
-    tags: ["Affectueux", "Chat Siamois"],
-  },
-  {
-    id: 8,
-    status: "lost",
-    image:
-      "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?q=80&w=400&auto=format&fit=crop",
-    location: "Tournai",
-    date: "07/02/24 - 13:10",
-    duration: "Perdu depuis 9 jours",
-    tags: ["Sociable", "Chat Bengal"],
-  },
-  {
-    id: 9,
-    status: "lost",
-    image:
-      "https://images.unsplash.com/photo-1516750105099-4b8a83e217ee?q=80&w=400&auto=format&fit=crop",
-    location: "Ypres",
-    date: "06/02/24 - 10:45",
-    duration: "Perdu depuis 10 jours",
-    tags: ["Joueur", "Chat Norvégien"],
-  },
-  {
-    id: 10,
-    status: "lost",
-    image:
-      "https://images.unsplash.com/photo-1506891536236-3e07892564b7?q=80&w=400&auto=format&fit=crop",
-    location: "Arlon",
-    date: "05/02/24 - 09:30",
-    duration: "Perdu depuis 11 jours",
-    tags: ["Timide", "Chat Sacré de Birmanie"],
-  },
-];
+const lostPets = ref([]);
+const loading = ref(true);
+const error = ref(null);
+
+// Formater les données pour le PetSlider
+const formattedPets = computed(() => {
+  return lostPets.value.map((pet) => {
+    // Calculer la durée depuis la création
+    const createdDate = pet.createdAt?.toDate() || new Date();
+    const now = new Date();
+    const diffTime = Math.abs(now - createdDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    // Formater la date
+    const dateOptions = {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+    const formattedDate = createdDate
+      .toLocaleDateString("fr-FR", dateOptions)
+      .replace(",", " -");
+
+    return {
+      id: pet.id,
+      status: pet.status,
+      image:
+        pet.images && pet.images.length > 0
+          ? pet.images[0]
+          : "https://via.placeholder.com/400x300?text=Pas+d%27image",
+      location: pet.last_seen_location?.address || "Lieu inconnu",
+      date: formattedDate,
+      duration: `Perdu depuis ${diffDays} jour${diffDays > 1 ? "s" : ""}`,
+      tags: [pet.breed, pet.color].filter(Boolean),
+      name: pet.name || "Sans nom",
+    };
+  });
+});
+
+const loadLostPets = async () => {
+  loading.value = true;
+  error.value = null;
+
+  try {
+    lostPets.value = await petService.getPetsByStatus("lost");
+  } catch (err) {
+    console.error("Erreur lors du chargement des animaux perdus:", err);
+    error.value =
+      "Impossible de charger les animaux perdus. Veuillez réessayer.";
+  } finally {
+    loading.value = false;
+  }
+};
+
+onMounted(() => {
+  loadLostPets();
+});
 </script>

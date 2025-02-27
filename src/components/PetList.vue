@@ -130,12 +130,12 @@
               </span>
             </div>
 
-            <button
-              @click="showPetDetails(pet)"
-              class="mt-4 w-full bg-secondary/30 text-gray-900 py-2 px-4 rounded-full font-sans hover:bg-secondary/40 transition-colors duration-300"
+            <router-link
+              :to="{ name: 'PetDetails', params: { id: pet.id } }"
+              class="mt-4 block w-full bg-secondary/30 text-gray-900 py-2 px-4 rounded-full font-sans hover:bg-secondary/40 transition-colors duration-300 text-center"
             >
               Voir les détails
-            </button>
+            </router-link>
           </div>
         </div>
       </template>
@@ -210,10 +210,6 @@ const formatDate = (date) => {
     hour: "2-digit",
     minute: "2-digit",
   });
-};
-
-const showPetDetails = (pet) => {
-  router.push({ name: "PetDetails", params: { id: pet.id } });
 };
 
 watch(filterStatus, () => {

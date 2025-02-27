@@ -53,6 +53,15 @@ const routes = [
     component: UserProfile,
     beforeEnter: requireAuth,
   },
+  {
+    path: "/profile/:id",
+    name: "UserProfileById",
+    component: UserProfile,
+    beforeEnter: requireAuth,
+    props: (route) => ({
+      userId: route.params.id,
+    }),
+  },
 ];
 
 const router = createRouter({

@@ -146,8 +146,31 @@
                 </a>
               </div>
               <div class="py-6">
+                <router-link
+                  v-if="user"
+                  to="/profile"
+                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-primary hover:bg-primary-light font-sans flex items-center gap-3"
+                  @click="mobileMenuOpen = false"
+                >
+                  <img
+                    :src="user.photoURL || '/default-avatar.png'"
+                    alt="Photo de profil"
+                    class="w-8 h-8 rounded-full object-cover"
+                  />
+                  Mon profil
+                </router-link>
                 <a
+                  v-if="user"
                   href="#"
+                  @click.prevent="logout"
+                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-primary hover:bg-primary-light font-sans"
+                >
+                  Déconnexion
+                </a>
+                <a
+                  v-else
+                  href="#"
+                  @click.prevent="showLoginModal = true"
                   class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-primary hover:bg-primary-light font-sans"
                 >
                   Connexion
@@ -287,8 +310,10 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   signInWithPopup,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { useRouter } from "vue-router";
+import { userService } from "../services/userService";
 
 const router = useRouter();
 const navigation = [
@@ -315,13 +340,23 @@ const handleScroll = () => {
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
   // Écouter les changements d'état de l'authentification
-  auth.onAuthStateChanged((currentUser) => {
-    user.value = currentUser;
+  const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    if (currentUser) {
+      user.value = currentUser;
+      // Mettre à jour les données utilisateur à chaque connexion
+      await userService.createOrUpdateUser(currentUser);
+      console.log("Utilisateur connecté:", currentUser.email);
+    } else {
+      user.value = null;
+      console.log("Aucun utilisateur connecté");
+    }
   });
-});
 
-onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll);
+  // Nettoyer l'écouteur lors du démontage du composant
+  onUnmounted(() => {
+    window.removeEventListener("scroll", handleScroll);
+    unsubscribe();
+  });
 });
 
 const login = async () => {
@@ -366,7 +401,11 @@ const logout = async () => {
 const signInWithGoogle = async () => {
   try {
     loginError.value = "";
-    await signInWithPopup(auth, googleProvider);
+    const result = await signInWithPopup(auth, googleProvider);
+
+    // Sauvegarder les données utilisateur dans Firestore
+    await userService.createOrUpdateUser(result.user);
+
     showLoginModal.value = false;
     router.push("/profile");
   } catch (error) {

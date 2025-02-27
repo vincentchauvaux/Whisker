@@ -5,183 +5,10 @@
 <script>
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { petService } from "../services/petService";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoidGliYWxpbyIsImEiOiJjbG82M2Z0OWcwaG1xMmttdjI1YmNudWUyIn0.BnGzE7APfkeVsCrtjWTQLw";
-
-// Données des chats
-const cats = [
-  {
-    coordinates: [4.3991, 50.7147], // Waterloo
-    title: "Milo",
-    description: "Perdu depuis 2 jours",
-    type: "lost",
-    date: "14/02/24 - 12:45",
-    tags: ["Curieux", "Chat Siamois"],
-    image:
-      "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [4.6157, 50.7167], // Wavre
-    title: "Luna",
-    description: "Trouvé sur la voie publique",
-    type: "found",
-    date: "13/02/24 - 15:30",
-    tags: ["Amical", "Chat Européen"],
-    image:
-      "https://images.unsplash.com/photo-1573865526739-10659fec78a5?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [4.3297, 50.5982], // Nivelles
-    title: "Felix",
-    description: "Perdu depuis 4 jours",
-    type: "lost",
-    date: "12/02/24 - 09:15",
-    tags: ["Timide", "Chat Maine Coon"],
-    image:
-      "https://images.unsplash.com/photo-1513245543132-31f507417b26?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [4.2056, 50.6911], // Tubize
-    title: "Oscar",
-    description: "Trouvé hier soir",
-    type: "found",
-    date: "14/02/24 - 20:30",
-    tags: ["Joueur", "Chat Tigré"],
-    image:
-      "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [4.3517, 50.8503], // Bruxelles
-    title: "Charlie",
-    description: "Perdu depuis 3 jours",
-    type: "lost",
-    date: "11/02/24 - 16:20",
-    tags: ["Sociable", "Chat Persan"],
-    image:
-      "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [4.4024, 51.2194], // Anvers
-    title: "Leo",
-    description: "Trouvé ce matin",
-    type: "found",
-    date: "14/02/24 - 08:15",
-    tags: ["Calme", "Chat Roux"],
-    image:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [5.5719, 50.6337], // Liège
-    title: "Max",
-    description: "Perdu depuis hier",
-    type: "lost",
-    date: "13/02/24 - 14:30",
-    tags: ["Peureux", "Chat Noir"],
-    image:
-      "https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [3.7174, 51.0543], // Gand
-    title: "Simba",
-    description: "Trouvé dans un jardin",
-    type: "found",
-    date: "12/02/24 - 11:20",
-    tags: ["Sociable", "Chat Tigré"],
-    image:
-      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [3.2247, 51.2093], // Bruges
-    title: "Nala",
-    description: "Perdu depuis 5 jours",
-    type: "lost",
-    date: "09/02/24 - 16:45",
-    tags: ["Timide", "Chat Siamois"],
-    image:
-      "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [4.4428, 50.4108], // Charleroi
-    title: "Minou",
-    description: "Trouvé près d'une école",
-    type: "found",
-    date: "11/02/24 - 13:30",
-    tags: ["Joueur", "Chat Européen"],
-    image:
-      "https://images.unsplash.com/photo-1516750105099-4b8a83e217ee?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [5.8167, 49.6833], // Arlon
-    title: "Caramel",
-    description: "Perdu depuis une semaine",
-    type: "lost",
-    date: "07/02/24 - 09:15",
-    tags: ["Affectueux", "Chat Roux"],
-    image:
-      "https://images.unsplash.com/photo-1506891536236-3e07892564b7?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [3.2492, 50.8297], // Courtrai
-    title: "Moustache",
-    description: "Trouvé dans un parc",
-    type: "found",
-    date: "10/02/24 - 15:40",
-    tags: ["Calme", "Chat Maine Coon"],
-    image:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [2.8333, 50.8333], // Ypres
-    title: "Sushi",
-    description: "Perdu depuis 4 jours",
-    type: "lost",
-    date: "10/02/24 - 12:20",
-    tags: ["Curieux", "Chat Bengal"],
-    image:
-      "https://images.unsplash.com/photo-1543852786-1cf6624b9987?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [3.3889, 50.6097], // Tournai
-    title: "Pixel",
-    description: "Trouvé près d'un commerce",
-    type: "found",
-    date: "08/02/24 - 17:30",
-    tags: ["Sociable", "Chat British"],
-    image:
-      "https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [4.0409, 50.8368], // Aalst
-    title: "Whisky",
-    description: "Trouvé près d'une école",
-    type: "found",
-    date: "15/02/24 - 09:15",
-    tags: ["Joueur", "Chat Européen"],
-    image:
-      "https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [3.7784, 50.6333], // Ath
-    title: "Noisette",
-    description: "Perdu depuis hier",
-    type: "lost",
-    date: "14/02/24 - 18:30",
-    tags: ["Timide", "Chat Roux"],
-    image:
-      "https://images.unsplash.com/photo-1494256997604-768d1f608cac?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    coordinates: [4.9333, 50.5833], // Eghezée
-    title: "Oreo",
-    description: "Trouvé dans un jardin",
-    type: "found",
-    date: "15/02/24 - 11:45",
-    tags: ["Sociable", "Chat Noir et Blanc"],
-    image:
-      "https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?q=80&w=400&auto=format&fit=crop",
-  },
-];
 
 export default {
   name: "Map",
@@ -191,9 +18,9 @@ export default {
       type: Object,
       required: true,
       default: () => ({
-        lng: 4.3517,
-        lat: 50.8503,
-        zoom: 8,
+        lng: 4.399,
+        lat: 50.7184,
+        zoom: 12,
         bearing: 0,
         pitch: 45,
       }),
@@ -203,6 +30,9 @@ export default {
   data: () => ({
     map: null,
     markers: [],
+    cats: [],
+    loading: false,
+    error: null,
   }),
 
   mounted() {
@@ -231,7 +61,8 @@ export default {
     const updateLocation = () =>
       this.$emit("update:modelValue", this.getLocation());
 
-    map.on("load", () => {
+    map.on("load", async () => {
+      await this.loadPetsData();
       this.addCatMarkers();
       this.$emit("map-loaded", map);
     });
@@ -284,8 +115,80 @@ export default {
       };
     },
 
+    async loadPetsData() {
+      this.loading = true;
+      this.error = null;
+
+      try {
+        // Récupérer tous les animaux
+        const lostPets = await petService.getPetsByStatus("lost");
+        const foundPets = await petService.getPetsByStatus("found");
+
+        // Coordonnées de Waterloo, Belgique
+        const waterlooLat = 50.7184;
+        const waterlooLng = 4.399;
+
+        // Rayon maximum en degrés (environ 5km)
+        const maxRadius = 0.05;
+
+        // Formater les données pour l'affichage sur la carte
+        this.cats = [...lostPets, ...foundPets].map((pet) => {
+          // Générer des coordonnées aléatoires autour de Waterloo
+          const randomAngle = Math.random() * 2 * Math.PI;
+          const randomRadius = Math.random() * maxRadius;
+          const randomLat = waterlooLat + randomRadius * Math.cos(randomAngle);
+          const randomLng = waterlooLng + randomRadius * Math.sin(randomAngle);
+
+          // Calculer le temps écoulé
+          const createdDate = pet.createdAt?.toDate() || new Date();
+          const dateOptions = {
+            day: "2-digit",
+            month: "2-digit",
+            year: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+          };
+          const formattedDate = createdDate
+            .toLocaleDateString("fr-FR", dateOptions)
+            .replace(",", " -");
+
+          return {
+            coordinates: [randomLng, randomLat],
+            title: pet.name || "Chat sans nom",
+            description: pet.description || "Aucune description disponible",
+            type: pet.status,
+            date: formattedDate,
+            tags: [pet.breed, pet.color].filter(Boolean),
+            image:
+              pet.images && pet.images.length > 0
+                ? pet.images[0]
+                : "https://via.placeholder.com/400x300?text=Pas+d%27image",
+          };
+        });
+      } catch (err) {
+        console.error(
+          "Erreur lors du chargement des animaux pour la carte:",
+          err
+        );
+        this.error = "Impossible de charger les données pour la carte.";
+      } finally {
+        this.loading = false;
+      }
+    },
+
     addCatMarkers() {
-      cats.forEach((cat) => {
+      // Nettoyer les marqueurs existants
+      this.markers.forEach((marker) => marker.remove());
+      this.markers = [];
+
+      if (this.cats.length === 0) {
+        console.warn(
+          "Aucun animal avec des coordonnées valides pour afficher sur la carte"
+        );
+        return;
+      }
+
+      this.cats.forEach((cat) => {
         // Créer l'élément du marqueur
         const el = document.createElement("div");
         el.className = "cat-marker";
@@ -298,7 +201,7 @@ export default {
             } transform transition-transform duration-300 hover:scale-110 bg-white shadow-lg cursor-pointer">
               <img src="${cat.image}" alt="${
           cat.title
-        }" class="w-full h-full object-cover" />
+        }" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x300?text=Pas+d%27image'" />
             </div>
           </div>
         `;
@@ -310,7 +213,7 @@ export default {
             <div class="relative h-48 mb-4 rounded-xl overflow-hidden">
               <img src="${cat.image}" alt="${
           cat.title
-        }" class="w-full h-full object-cover" />
+        }" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x300?text=Pas+d%27image'" />
               <div class="absolute top-4 left-4">
                 <span class="px-4 py-2 rounded-full text-white font-bold ${
                   cat.type === "lost" ? "bg-red-500" : "bg-green-500"
@@ -353,12 +256,13 @@ export default {
           </div>
         `);
 
-        // Créer et ajouter le marqueur
+        // Créer et ajouter le marqueur à la carte
         const marker = new mapboxgl.Marker(el)
           .setLngLat(cat.coordinates)
           .setPopup(popup)
           .addTo(this.map);
 
+        // Stocker le marqueur pour pouvoir le supprimer plus tard
         this.markers.push(marker);
       });
     },

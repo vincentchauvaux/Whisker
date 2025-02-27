@@ -160,7 +160,15 @@
             <h2 class="text-xl font-serif text-gray-900 mb-4">Contact</h2>
             <div class="space-y-3">
               <p class="text-sm font-sans text-gray-600">
-                <span class="font-medium">Nom:</span> {{ pet.contact.name }}
+                <span class="font-medium">Nom:</span>
+                <router-link
+                  v-if="pet.userId"
+                  :to="{ name: 'UserProfileById', params: { id: pet.userId } }"
+                  class="text-secondary hover:underline"
+                >
+                  {{ pet.contact.name }}
+                </router-link>
+                <span v-else>{{ pet.contact.name }}</span>
               </p>
               <p class="text-sm font-sans text-gray-600">
                 <span class="font-medium">Téléphone:</span>
@@ -179,6 +187,28 @@
                 >
                   {{ pet.contact.email }}
                 </a>
+              </p>
+              <p v-if="pet.userId" class="text-sm font-sans text-gray-600">
+                <span class="font-medium">Profil:</span>
+                <router-link
+                  :to="{ name: 'UserProfileById', params: { id: pet.userId } }"
+                  class="text-secondary hover:underline flex items-center gap-2 mt-2"
+                >
+                  <span>Voir le profil de l'utilisateur</span>
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </router-link>
               </p>
             </div>
           </div>

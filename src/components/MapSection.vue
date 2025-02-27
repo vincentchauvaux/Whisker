@@ -38,17 +38,35 @@
             </h3>
             <div class="flex gap-2">
               <button
-                class="px-3 py-1 rounded-full text-sm font-medium bg-primary-light text-primary hover:bg-primary/10 transition-colors font-sans"
+                @click="setFilter('all')"
+                :class="[
+                  'px-3 py-1 rounded-full text-sm font-medium transition-colors font-sans',
+                  activeFilter === 'all'
+                    ? 'bg-primary-light text-primary'
+                    : 'text-primary hover:bg-primary-light',
+                ]"
               >
                 Tous
               </button>
               <button
-                class="px-3 py-1 rounded-full text-sm font-medium text-primary hover:bg-primary-light transition-colors font-sans"
+                @click="setFilter('lost')"
+                :class="[
+                  'px-3 py-1 rounded-full text-sm font-medium transition-colors font-sans',
+                  activeFilter === 'lost'
+                    ? 'bg-primary-light text-primary'
+                    : 'text-primary hover:bg-primary-light',
+                ]"
               >
                 Perdus
               </button>
               <button
-                class="px-3 py-1 rounded-full text-sm font-medium text-primary hover:bg-primary-light transition-colors font-sans"
+                @click="setFilter('found')"
+                :class="[
+                  'px-3 py-1 rounded-full text-sm font-medium transition-colors font-sans',
+                  activeFilter === 'found'
+                    ? 'bg-primary-light text-primary'
+                    : 'text-primary hover:bg-primary-light',
+                ]"
               >
                 Trouvés
               </button>
@@ -58,7 +76,33 @@
           <div
             class="overflow-y-auto flex-1 -mx-4 px-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400"
           >
-            <div class="space-y-4 py-2">
+            <!-- État de chargement -->
+            <div v-if="loading" class="flex justify-center items-center py-12">
+              <div
+                class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"
+              ></div>
+            </div>
+
+            <!-- Message d'erreur -->
+            <div v-else-if="error" class="text-center py-12">
+              <p class="text-red-500">{{ error }}</p>
+              <button
+                @click="loadPets"
+                class="mt-4 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition"
+              >
+                Réessayer
+              </button>
+            </div>
+
+            <!-- Aucun résultat -->
+            <div v-else-if="pets.length === 0" class="text-center py-12">
+              <p class="text-gray-500">
+                Aucun signalement disponible pour le moment.
+              </p>
+            </div>
+
+            <!-- Liste des signalements -->
+            <div v-else class="space-y-4 py-2">
               <div
                 v-for="pet in pets"
                 :key="pet.id"
@@ -68,6 +112,10 @@
                   :src="pet.image"
                   :alt="pet.name"
                   class="w-24 h-24 object-cover rounded-lg"
+                  @error="
+                    $event.target.src =
+                      'https://via.placeholder.com/200x200?text=Pas+d%27image'
+                  "
                 />
                 <div class="flex-1 min-w-0">
                   <div class="flex items-start justify-between gap-2">
@@ -116,8 +164,9 @@
 </template>
 
 <script>
-import { ref, defineComponent } from "vue";
+import { ref, defineComponent, onMounted, computed } from "vue";
 import Map from "./Map.vue";
+import { petService } from "../services/petService";
 
 export default defineComponent({
   components: {
@@ -127,75 +176,91 @@ export default defineComponent({
   setup() {
     const isMapLoaded = ref(false);
     const mapConfig = ref({
-      lng: 4.3517,
-      lat: 50.8503,
-      zoom: 9,
+      lng: 4.399,
+      lat: 50.7184,
+      zoom: 14,
       pitch: 70,
       bearing: 0,
     });
 
-    const pets = ref([
-      {
-        id: 1,
-        status: "lost",
-        name: "Milo",
-        date: "Il y a 2h",
-        location: "Ixelles, Bruxelles",
-        description:
-          "Chat tigré gris avec un collier rouge. Vu pour la dernière fois près du parc.",
-        image:
-          "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=200&auto=format&fit=crop",
-      },
-      {
-        id: 2,
-        status: "found",
-        name: null,
-        date: "Il y a 3h",
-        location: "Etterbeek, Bruxelles",
-        description: "Chat noir et blanc, très amical. Trouvé près de la gare.",
-        image:
-          "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?q=80&w=200&auto=format&fit=crop",
-      },
-      {
-        id: 3,
-        status: "lost",
-        name: "Luna",
-        date: "Il y a 5h",
-        location: "Schaerbeek, Bruxelles",
-        description: "Chatte siamoise avec yeux bleus. Peureux mais gentil.",
-        image:
-          "https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?q=80&w=200&auto=format&fit=crop",
-      },
-      {
-        id: 4,
-        status: "found",
-        name: null,
-        date: "Il y a 6h",
-        location: "Saint-Gilles, Bruxelles",
-        description: "Chat roux trouvé dans le jardin. Porte un collier bleu.",
-        image:
-          "https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=200&auto=format&fit=crop",
-      },
-      {
-        id: 5,
-        status: "lost",
-        name: "Oscar",
-        date: "Il y a 8h",
-        location: "Uccle, Bruxelles",
-        description: "Chat persan blanc. Nécessite des soins médicaux.",
-        image:
-          "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?q=80&w=200&auto=format&fit=crop",
-      },
-    ]);
+    const allPets = ref([]);
+    const loading = ref(true);
+    const error = ref(null);
+    const activeFilter = ref("all"); // 'all', 'lost', 'found'
+
+    const pets = computed(() => {
+      if (activeFilter.value === "all") {
+        return allPets.value;
+      } else {
+        return allPets.value.filter((pet) => pet.status === activeFilter.value);
+      }
+    });
+
+    const loadPets = async () => {
+      loading.value = true;
+      error.value = null;
+
+      try {
+        // Récupérer tous les animaux
+        const lostPets = await petService.getPetsByStatus("lost");
+        const foundPets = await petService.getPetsByStatus("found");
+
+        // Formater les données pour l'affichage
+        const formattedPets = [...lostPets, ...foundPets].map((pet) => {
+          // Calculer le temps écoulé
+          const createdDate = pet.createdAt?.toDate() || new Date();
+          const now = new Date();
+          const diffTime = Math.abs(now - createdDate);
+          const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+          const timeAgo =
+            diffHours < 24
+              ? `Il y a ${diffHours}h`
+              : `Il y a ${Math.floor(diffHours / 24)}j`;
+
+          return {
+            id: pet.id,
+            status: pet.status,
+            name: pet.name,
+            date: timeAgo,
+            location: pet.last_seen_location?.address || "Lieu inconnu",
+            description: pet.description || "Aucune description disponible",
+            image:
+              pet.images && pet.images.length > 0
+                ? pet.images[0]
+                : "https://via.placeholder.com/200x200?text=Pas+d%27image",
+            coordinates: pet.last_seen_location?.coordinates || null,
+          };
+        });
+
+        allPets.value = formattedPets;
+      } catch (err) {
+        console.error("Erreur lors du chargement des animaux:", err);
+        error.value = "Impossible de charger les données. Veuillez réessayer.";
+      } finally {
+        loading.value = false;
+      }
+    };
+
+    const setFilter = (filter) => {
+      activeFilter.value = filter;
+    };
 
     const onMapLoaded = () => {
       isMapLoaded.value = true;
     };
 
+    onMounted(() => {
+      loadPets();
+    });
+
     return {
       isMapLoaded,
       mapConfig,
       pets,
+      loading,
+      error,
+      activeFilter,
+      setFilter,
       onMapLoaded,
     };
   },
