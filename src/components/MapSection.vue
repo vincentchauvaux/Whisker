@@ -103,58 +103,63 @@
 
             <!-- Liste des signalements -->
             <div v-else class="space-y-4 py-2">
-              <div
+              <router-link
                 v-for="pet in pets"
                 :key="pet.id"
-                class="flex gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer border border-gray-100"
+                :to="{ name: 'PetDetails', params: { id: pet.id } }"
+                class="block"
               >
-                <img
-                  :src="pet.image"
-                  :alt="pet.name"
-                  class="w-24 h-24 object-cover rounded-lg"
-                  @error="
-                    $event.target.src =
-                      'https://via.placeholder.com/200x200?text=Pas+d%27image'
-                  "
-                />
-                <div class="flex-1 min-w-0">
-                  <div class="flex items-start justify-between gap-2">
-                    <div>
-                      <span
-                        :class="[
-                          'px-2 py-0.5 rounded-full text-xs font-medium inline-block mb-1',
-                          pet.status === 'lost'
-                            ? 'bg-red-100 text-red-800'
-                            : 'bg-green-100 text-green-800',
-                        ]"
-                      >
-                        {{ pet.status === "lost" ? "Perdu" : "Trouvé" }}
-                      </span>
-                      <h4 class="font-medium text-primary truncate">
-                        {{ pet.name || "Chat sans nom" }}
-                      </h4>
+                <div
+                  class="flex gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer border border-gray-100"
+                >
+                  <img
+                    :src="pet.image"
+                    :alt="pet.name"
+                    class="w-24 h-24 object-cover rounded-lg"
+                    @error="
+                      $event.target.src =
+                        'https://via.placeholder.com/200x200?text=Pas+d%27image'
+                    "
+                  />
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-start justify-between gap-2">
+                      <div>
+                        <span
+                          :class="[
+                            'px-2 py-0.5 rounded-full text-xs font-medium inline-block mb-1',
+                            pet.status === 'lost'
+                              ? 'bg-red-100 text-red-800'
+                              : 'bg-green-100 text-green-800',
+                          ]"
+                        >
+                          {{ pet.status === "lost" ? "Perdu" : "Trouvé" }}
+                        </span>
+                        <h4 class="font-medium text-primary truncate">
+                          {{ pet.name || "Chat sans nom" }}
+                        </h4>
+                      </div>
+                      <span class="text-xs text-gray-500 whitespace-nowrap">{{
+                        pet.date
+                      }}</span>
                     </div>
-                    <span class="text-xs text-gray-500 whitespace-nowrap">{{
-                      pet.date
-                    }}</span>
-                  </div>
-                  <p class="text-sm text-gray-600 line-clamp-2 mb-1">
-                    {{ pet.description }}
-                  </p>
-                  <div class="flex items-center gap-1 text-sm text-primary">
-                    <svg
-                      class="w-4 h-4"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
-                      />
-                    </svg>
-                    <span class="truncate">{{ pet.location }}</span>
+                    <p class="text-sm text-gray-600 line-clamp-2 mb-1">
+                      {{ pet.description }}
+                    </p>
+                    <div class="flex items-center gap-1 text-sm text-primary">
+                      <svg
+                        class="w-4 h-4"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                        />
+                      </svg>
+                      <span class="truncate">{{ pet.location }}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </router-link>
             </div>
           </div>
         </div>

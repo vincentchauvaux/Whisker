@@ -117,7 +117,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          <div>
+          <div v-if="pet.medical_info">
             <h2 class="text-xl font-serif text-gray-900 mb-4">
               Informations médicales
             </h2>
@@ -129,7 +129,8 @@
                     ? pet.medical_info.microchipped
                       ? "Oui"
                       : "Non"
-                    : pet.medical_info.microchipped
+                    : pet.medical_info.microchipped ||
+                      "Information non disponible"
                 }}
               </p>
               <p
@@ -154,6 +155,15 @@
                 {{ pet.medical_info.medications }}
               </p>
             </div>
+          </div>
+
+          <div v-else>
+            <h2 class="text-xl font-serif text-gray-900 mb-4">
+              Informations médicales
+            </h2>
+            <p class="text-sm font-sans text-gray-600">
+              Aucune information médicale disponible
+            </p>
           </div>
 
           <div>
@@ -244,34 +254,60 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { petService } from "../services/petService";
+import { ref, onMounted, watch, inject, getCurrentInstance } from "vue";
+import { useRoute } from "vue-router";
 
+const route = useRoute();
 const props = defineProps({
   petId: {
     type: String,
-    required: true,
+    required: false,
   },
 });
+
+// Accéder au store
+const { proxy } = getCurrentInstance();
+const petStore = proxy.$petStore;
 
 const pet = ref(null);
 const loading = ref(true);
 const error = ref(null);
 
+// Utiliser l'ID du prop ou l'ID de la route
+const getPetId = () => {
+  return props.petId || route.params.id;
+};
+
 const loadPetDetails = async () => {
   try {
+    const id = getPetId();
+    console.log("Chargement des détails du chat avec ID:", id);
+
     loading.value = true;
     error.value = null;
-    // Note: Cette fonction devra être implémentée dans petService
-    const result = await petService.getPetById(props.petId);
+
+    // Utiliser le store au lieu du service
+    const result = await petStore.fetchPetById(id);
+    console.log("Données du chat récupérées:", result);
     pet.value = result;
   } catch (err) {
     error.value = "Une erreur est survenue lors du chargement des détails.";
-    console.error(err);
+    console.error("Erreur lors du chargement des détails:", err);
   } finally {
     loading.value = false;
   }
 };
+
+// Recharger les données si l'ID change
+watch(
+  () => route.params.id,
+  (newId, oldId) => {
+    if (newId !== oldId) {
+      loadPetDetails();
+    }
+  },
+  { immediate: false }
+);
 
 const formatDate = (date) => {
   return new Date(date).toLocaleDateString("fr-FR", {

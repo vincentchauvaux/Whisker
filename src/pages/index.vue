@@ -1,24 +1,22 @@
 <template>
-  <div class="bg-white">
-    <Header />
-    <main>
-      <HeroSection />
-      <SearchAppSection />
-      <FoundFriendsSection />
-
-      <MapSection />
-      <LostFriendsSection />
-      <SponsorsSection />
-      <AboutSection />
-      <CTASection />
-    </main>
-    <Footer />
-  </div>
+  <MainLayout>
+    <div class="bg-white">
+      <main>
+        <HeroSection />
+        <SearchAppSection />
+        <FoundFriendsSection />
+        <MapSection />
+        <LostFriendsSection />
+        <SponsorsSection />
+        <AboutSection />
+        <CTASection />
+      </main>
+    </div>
+  </MainLayout>
 </template>
 
 <script setup>
-import Header from "../components/Header.vue";
-import Footer from "../components/Footer.vue";
+import MainLayout from "../layouts/MainLayout.vue";
 import AboutSection from "../components/AboutSection.vue";
 import HeroSection from "../components/HeroSection.vue";
 import SearchAppSection from "../components/SearchAppSection.vue";

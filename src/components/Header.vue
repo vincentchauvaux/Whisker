@@ -55,14 +55,28 @@
           </button>
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
-          <a
-            v-for="item in navigation"
-            :key="item.name"
-            :href="item.href"
-            class="text-sm/6 font-semibold text-primary hover:text-primary-dark font-sans"
+          <router-link
+            to="/"
+            class="text-gray-700 hover:text-primary transition-colors"
+            active-class="text-primary"
+            exact
           >
-            {{ item.name }}
-          </a>
+            Accueil
+          </router-link>
+          <router-link
+            to="/pets"
+            class="text-gray-700 hover:text-primary transition-colors"
+            active-class="text-primary"
+          >
+            Tous les chats
+          </router-link>
+          <router-link
+            to="/lost"
+            class="text-gray-700 hover:text-primary transition-colors"
+            active-class="text-primary"
+          >
+            Chats perdus
+          </router-link>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
           <div v-if="user" class="flex items-center gap-4">
@@ -136,14 +150,28 @@
           <div class="mt-6 flow-root">
             <div class="-my-6 divide-y divide-gray-500/10">
               <div class="space-y-2 py-6">
-                <a
-                  v-for="item in navigation"
-                  :key="item.name"
-                  :href="item.href"
-                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-primary hover:bg-primary-light font-sans"
+                <router-link
+                  to="/"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-100"
+                  active-class="text-primary"
+                  exact
                 >
-                  {{ item.name }}
-                </a>
+                  Accueil
+                </router-link>
+                <router-link
+                  to="/pets"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-100"
+                  active-class="text-primary"
+                >
+                  Tous les chats
+                </router-link>
+                <router-link
+                  to="/lost"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-100"
+                  active-class="text-primary"
+                >
+                  Chats perdus
+                </router-link>
               </div>
               <div class="py-6">
                 <router-link

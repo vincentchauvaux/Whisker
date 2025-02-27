@@ -5,7 +5,6 @@
 <script>
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { petService } from "../services/petService";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoidGliYWxpbyIsImEiOiJjbG82M2Z0OWcwaG1xMmttdjI1YmNudWUyIn0.BnGzE7APfkeVsCrtjWTQLw";
@@ -120,9 +119,12 @@ export default {
       this.error = null;
 
       try {
-        // Récupérer tous les animaux
-        const lostPets = await petService.getPetsByStatus("lost");
-        const foundPets = await petService.getPetsByStatus("found");
+        // Récupérer tous les animaux via le store
+        await this.$petStore.fetchLostPets();
+        await this.$petStore.fetchFoundPets();
+
+        const lostPets = this.$petStore.getLostPets();
+        const foundPets = this.$petStore.getFoundPets();
 
         // Coordonnées de Waterloo, Belgique
         const waterlooLat = 50.7184;
@@ -153,6 +155,7 @@ export default {
             .replace(",", " -");
 
           return {
+            id: pet.id,
             coordinates: [randomLng, randomLat],
             title: pet.name || "Chat sans nom",
             description: pet.description || "Aucune description disponible",
@@ -245,7 +248,7 @@ export default {
               <span class="text-gray-600">${cat.description}</span>
             </div>
 
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-2 mb-4">
               ${cat.tags
                 .map(
                   (tag) =>
@@ -253,6 +256,15 @@ export default {
                 )
                 .join("")}
             </div>
+            
+            <button 
+              class="block w-full bg-secondary text-white py-2 px-4 rounded-full text-center font-medium hover:bg-secondary-dark transition-colors"
+              onclick="window.dispatchEvent(new CustomEvent('navigate-to-pet', { detail: { id: '${
+                cat.id
+              }' } }))"
+            >
+              Voir les détails
+            </button>
           </div>
         `);
 

@@ -55,343 +55,401 @@ const sampleUsers = [
   },
 ];
 
-// Données des chats perdus
-const lostPets = [
+// Coordonnées autour de Waterloo
+const getRandomWaterlooCoordinates = () => {
+  // Centre de Waterloo: 50.7184, 4.3990
+  const centerLat = 50.7184;
+  const centerLng = 4.399;
+  // Rayon aléatoire (en degrés) pour rester dans la région
+  const radius = 0.03;
+
+  // Générer des coordonnées aléatoires dans ce rayon
+  const randomLat = centerLat + (Math.random() - 0.5) * 2 * radius;
+  const randomLng = centerLng + (Math.random() - 0.5) * 2 * radius;
+
+  return { lat: randomLat, lng: randomLng };
+};
+
+// Adresses autour de Waterloo
+const waterlooAddresses = [
   {
-    id: "lost1",
-    name: "Milo",
-    status: "lost",
-    species: "chat",
-    breed: "Européen",
-    color: "tigré gris",
-    age: 3,
-    gender: "male",
-    description:
-      "Chat tigré gris avec un collier rouge. Très affectueux et répond à son nom.",
-    last_seen_date: Timestamp.now(),
-    last_seen_location: {
-      address: "Rue de la Paix, Bruxelles",
-      city: "Bruxelles",
-      region: "Bruxelles-Capitale",
-      coordinates: { lat: 50.8476, lng: 4.3572 },
-    },
-    contact: {
-      name: "Sophie Martin",
-      email: "user1@example.com",
-      phone: "+32 470 12 34 56",
-    },
-    images: [
-      "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=2043&auto=format&fit=crop",
-    ],
-    tags: ["collier rouge", "tigré", "sociable"],
-    userId: "user1",
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
+    address: "Chaussée de Bruxelles, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
   },
   {
-    id: "lost2",
-    name: "Felix",
-    status: "lost",
-    species: "chat",
-    breed: "Maine Coon",
-    color: "roux et blanc",
-    age: 5,
-    gender: "male",
-    description:
-      "Grand chat Maine Coon roux et blanc. Très poilu avec une queue touffue. Peureux avec les étrangers.",
-    last_seen_date: Timestamp.now(),
-    last_seen_location: {
-      address: "Avenue Louise, Bruxelles",
-      city: "Bruxelles",
-      region: "Bruxelles-Capitale",
-      coordinates: { lat: 50.8271, lng: 4.3663 },
-    },
-    contact: {
-      name: "Thomas Dubois",
-      email: "user2@example.com",
-      phone: "+32 470 23 45 67",
-    },
-    images: [
-      "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?q=80&w=2574&auto=format&fit=crop",
-    ],
-    tags: ["maine coon", "poilu", "peureux"],
-    userId: "user2",
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
+    address: "Rue de la Station, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
   },
   {
-    id: "lost3",
-    name: "Luna",
-    status: "lost",
-    species: "chat",
-    breed: "Siamois",
-    color: "beige et marron",
-    age: 2,
-    gender: "female",
-    description:
-      "Chatte siamoise aux yeux bleus. Très vocale et affectueuse. Porte un collier bleu avec une clochette.",
-    last_seen_date: Timestamp.now(),
-    last_seen_location: {
-      address: "Place Flagey, Ixelles",
-      city: "Bruxelles",
-      region: "Bruxelles-Capitale",
-      coordinates: { lat: 50.8271, lng: 4.3722 },
-    },
-    contact: {
-      name: "Emma Leroy",
-      email: "user3@example.com",
-      phone: "+32 470 34 56 78",
-    },
-    images: [
-      "https://images.unsplash.com/photo-1568152950566-c1bf43f4ab28?q=80&w=2565&auto=format&fit=crop",
-    ],
-    tags: ["siamois", "yeux bleus", "collier bleu"],
-    userId: "user3",
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
+    address: "Boulevard de la Cense, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
   },
   {
-    id: "lost4",
-    name: "Oscar",
-    status: "lost",
-    species: "chat",
-    breed: "British Shorthair",
-    color: "gris bleu",
-    age: 4,
-    gender: "male",
-    description:
-      "Chat British Shorthair gris-bleu aux yeux orange. Calme et indépendant. Pucé et castré.",
-    last_seen_date: Timestamp.now(),
-    last_seen_location: {
-      address: "Rue Royale, Bruxelles",
-      city: "Bruxelles",
-      region: "Bruxelles-Capitale",
-      coordinates: { lat: 50.8454, lng: 4.3613 },
-    },
-    contact: {
-      name: "Lucas Bernard",
-      email: "user4@example.com",
-      phone: "+32 470 45 67 89",
-    },
-    images: [
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?q=80&w=2592&auto=format&fit=crop",
-    ],
-    tags: ["british", "gris", "pucé"],
-    userId: "user4",
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
+    address: "Rue François Libert, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
   },
   {
-    id: "lost5",
-    name: "Nala",
-    status: "lost",
-    species: "chat",
-    breed: "Persan",
-    color: "blanc",
-    age: 6,
-    gender: "female",
-    description:
-      "Chatte persane blanche à poil long. Très calme et timide. Nécessite des soins particuliers pour son pelage.",
-    last_seen_date: Timestamp.now(),
-    last_seen_location: {
-      address: "Boulevard Anspach, Bruxelles",
-      city: "Bruxelles",
-      region: "Bruxelles-Capitale",
-      coordinates: { lat: 50.8468, lng: 4.3487 },
-    },
-    contact: {
-      name: "Chloé Petit",
-      email: "user5@example.com",
-      phone: "+32 470 56 78 90",
-    },
-    images: [
-      "https://images.unsplash.com/photo-1618189063538-57c73af27adb?q=80&w=2670&auto=format&fit=crop",
-    ],
-    tags: ["persan", "blanc", "poil long"],
-    userId: "user5",
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
+    address: "Avenue des Chasseurs, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Drève Richelle, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Rue du Couvent, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Chaussée de Tervuren, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Rue de la Croix, Braine-l'Alleud",
+    city: "Braine-l'Alleud",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Avenue Reine Astrid, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Rue du Gaz, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Rue des Bégonias, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Avenue des Pâquerettes, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Rue des Merisiers, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Rue du Ménil, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Rue de la Ferme, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Rue du Chenois, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Avenue des Tourterelles, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Rue des Charmes, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
+  },
+  {
+    address: "Rue du Bois, Waterloo",
+    city: "Waterloo",
+    region: "Brabant Wallon",
   },
 ];
 
-// Données des chats trouvés
-const foundPets = [
-  {
-    id: "found1",
-    name: "Chat trouvé",
-    status: "found",
-    species: "chat",
-    breed: "Européen",
-    color: "noir et blanc",
-    age_estimate: "2-3 ans",
-    gender: "unknown",
-    description:
-      "Chat noir et blanc trouvé errant. Très amical et en bonne santé. Porte un collier vert sans médaille.",
-    found_date: Timestamp.now(),
-    found_location: {
-      address: "Parc du Cinquantenaire, Bruxelles",
-      city: "Bruxelles",
-      region: "Bruxelles-Capitale",
-      coordinates: { lat: 50.84, lng: 4.3936 },
-    },
-    contact: {
-      name: "Sophie Martin",
-      email: "user1@example.com",
-      phone: "+32 470 12 34 56",
-    },
-    images: [
-      "https://images.unsplash.com/photo-1494256997604-768d1f608cac?q=80&w=2529&auto=format&fit=crop",
-    ],
-    tags: ["noir et blanc", "collier vert", "amical"],
-    userId: "user1",
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
-  },
-  {
-    id: "found2",
-    name: "Chat trouvé",
-    status: "found",
-    species: "chat",
-    breed: "Inconnu",
-    color: "gris tigré",
-    age_estimate: "1-2 ans",
-    gender: "female",
-    description:
-      "Jeune chatte grise tigrée trouvée près d'une école. Très maigre mais affectueuse. Pas de collier ni de puce.",
-    found_date: Timestamp.now(),
-    found_location: {
-      address: "Rue de la Loi, Bruxelles",
-      city: "Bruxelles",
-      region: "Bruxelles-Capitale",
-      coordinates: { lat: 50.8465, lng: 4.3707 },
-    },
-    contact: {
-      name: "Thomas Dubois",
-      email: "user2@example.com",
-      phone: "+32 470 23 45 67",
-    },
-    images: [
-      "https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?q=80&w=2670&auto=format&fit=crop",
-    ],
-    tags: ["tigré", "maigre", "jeune"],
-    userId: "user2",
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
-  },
-  {
-    id: "found3",
-    name: "Chat trouvé",
-    status: "found",
-    species: "chat",
-    breed: "Possible Bengal",
-    color: "tacheté brun",
-    age_estimate: "3-4 ans",
-    gender: "male",
-    description:
-      "Chat au pelage tacheté type Bengal trouvé dans un jardin. Très actif et curieux. Porte un collier anti-puces noir.",
-    found_date: Timestamp.now(),
-    found_location: {
-      address: "Avenue de Tervuren, Bruxelles",
-      city: "Bruxelles",
-      region: "Bruxelles-Capitale",
-      coordinates: { lat: 50.8364, lng: 4.4103 },
-    },
-    contact: {
-      name: "Emma Leroy",
-      email: "user3@example.com",
-      phone: "+32 470 34 56 78",
-    },
-    images: [
-      "https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?q=80&w=2670&auto=format&fit=crop",
-    ],
-    tags: ["bengal", "tacheté", "collier noir"],
-    userId: "user3",
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
-  },
-  {
-    id: "found4",
-    name: "Chat trouvé",
-    status: "found",
-    species: "chat",
-    breed: "Possible Ragdoll",
-    color: "blanc et gris",
-    age_estimate: "5-6 ans",
-    gender: "female",
-    description:
-      "Chatte type Ragdoll à poil mi-long trouvée près d'un parc. Très douce et calme. Yeux bleus. Pucée mais pas de coordonnées à jour.",
-    found_date: Timestamp.now(),
-    found_location: {
-      address: "Bois de la Cambre, Bruxelles",
-      city: "Bruxelles",
-      region: "Bruxelles-Capitale",
-      coordinates: { lat: 50.8054, lng: 4.3841 },
-    },
-    contact: {
-      name: "Lucas Bernard",
-      email: "user4@example.com",
-      phone: "+32 470 45 67 89",
-    },
-    images: [
-      "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?q=80&w=2670&auto=format&fit=crop",
-    ],
-    tags: ["ragdoll", "yeux bleus", "pucée"],
-    userId: "user4",
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
-  },
-  {
-    id: "found5",
-    name: "Chat trouvé",
-    status: "found",
-    species: "chat",
-    breed: "Européen",
-    color: "roux",
-    age_estimate: "7-8 ans",
-    gender: "male",
-    description:
-      "Chat roux âgé trouvé dans un garage. Très maigre et craintif. Semble avoir été abandonné depuis longtemps.",
-    found_date: Timestamp.now(),
-    found_location: {
-      address: "Chaussée de Waterloo, Uccle",
-      city: "Bruxelles",
-      region: "Bruxelles-Capitale",
-      coordinates: { lat: 50.8054, lng: 4.3561 },
-    },
-    contact: {
-      name: "Chloé Petit",
-      email: "user5@example.com",
-      phone: "+32 470 56 78 90",
-    },
-    images: [
-      "https://images.unsplash.com/photo-1501820488136-72669149e0d4?q=80&w=2670&auto=format&fit=crop",
-    ],
-    tags: ["roux", "âgé", "craintif"],
-    userId: "user5",
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
-  },
+// Images de chats
+const catImages = [
+  "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=2043&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1573865526739-10659fec78a5?q=80&w=2015&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?q=80&w=2036&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?q=80&w=2670&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?q=80&w=2574&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?q=80&w=2574&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=2580&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1618826411640-d6df44dd3f7a?q=80&w=2574&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1543852786-1cf6624b9987?q=80&w=2574&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?q=80&w=2580&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1561948955-570b270e7c36?q=80&w=2601&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1548247416-ec66f4900b2e?q=80&w=2563&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?q=80&w=2670&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1494256997604-768d1f608cac?q=80&w=2529&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=2576&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?q=80&w=2592&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1511044568932-338cba0ad803?q=80&w=2670&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?q=80&w=2574&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1596854273338-cbf078ec7071?q=80&w=2580&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1598935888738-cd2622bcd437?q=80&w=2670&auto=format&fit=crop",
 ];
+
+// Noms de chats
+const catNames = [
+  "Milo",
+  "Felix",
+  "Luna",
+  "Simba",
+  "Nala",
+  "Oscar",
+  "Bella",
+  "Charlie",
+  "Lily",
+  "Max",
+  "Lucy",
+  "Leo",
+  "Zoe",
+  "Loki",
+  "Cleo",
+  "Ollie",
+  "Daisy",
+  "Jasper",
+  "Ruby",
+  "Shadow",
+  "Misty",
+  "Oreo",
+  "Gizmo",
+  "Coco",
+];
+
+// Races de chats
+const catBreeds = [
+  "Européen",
+  "Siamois",
+  "Maine Coon",
+  "Persan",
+  "Bengal",
+  "Ragdoll",
+  "Abyssin",
+  "British Shorthair",
+  "Sphynx",
+  "Sacré de Birmanie",
+  "Norvégien",
+  "Chartreux",
+  "Exotic Shorthair",
+  "Angora Turc",
+];
+
+// Couleurs de chats
+const catColors = [
+  "noir",
+  "blanc",
+  "roux",
+  "tigré gris",
+  "tigré roux",
+  "noir et blanc",
+  "tricolore",
+  "gris",
+  "crème",
+  "bleu",
+  "chocolat",
+  "lilas",
+  "écaille de tortue",
+  "blanc et gris",
+  "tacheté brun",
+];
+
+// Tags pour les chats
+const lostTags = [
+  "collier rouge",
+  "collier bleu",
+  "collier noir",
+  "pucé",
+  "tatoué",
+  "sociable",
+  "craintif",
+  "timide",
+  "joueur",
+  "affectueux",
+  "jeune",
+  "âgé",
+  "castré",
+  "stérilisée",
+  "médicaments",
+];
+
+const foundTags = [
+  "sans collier",
+  "collier cassé",
+  "pucé",
+  "tatoué",
+  "blessé",
+  "maigre",
+  "bien nourri",
+  "sociable",
+  "craintif",
+  "agressif",
+  "jeune",
+  "âgé",
+  "castré",
+  "stérilisée",
+  "indemne",
+];
+
+// Générer un timestamp aléatoire dans les 30 derniers jours
+const getRandomRecentTimestamp = () => {
+  const now = new Date();
+  const daysAgo = Math.floor(Math.random() * 30);
+  const hoursAgo = Math.floor(Math.random() * 24);
+  const minutesAgo = Math.floor(Math.random() * 60);
+
+  now.setDate(now.getDate() - daysAgo);
+  now.setHours(now.getHours() - hoursAgo);
+  now.setMinutes(now.getMinutes() - minutesAgo);
+
+  return Timestamp.fromDate(now);
+};
+
+// Fonction pour obtenir des tags aléatoires
+const getRandomTags = (tagsList, count = 3) => {
+  const shuffled = [...tagsList].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, Math.max(1, Math.min(count, tagsList.length)));
+};
+
+// Générer les chats perdus (10)
+const lostPets = Array.from({ length: 10 }, (_, index) => {
+  const userId = `user${Math.floor(Math.random() * 5) + 1}`;
+  const user = sampleUsers.find((u) => u.id === userId);
+  const addressIndex = Math.floor(Math.random() * waterlooAddresses.length);
+  const timestamp = getRandomRecentTimestamp();
+  const imageIndex = Math.floor(Math.random() * catImages.length);
+  const nameIndex = Math.floor(Math.random() * catNames.length);
+  const breedIndex = Math.floor(Math.random() * catBreeds.length);
+  const colorIndex = Math.floor(Math.random() * catColors.length);
+  const gender = Math.random() > 0.5 ? "male" : "female";
+  const age = Math.floor(Math.random() * 15) + 1;
+
+  return {
+    id: `lost${index + 1}`,
+    name: catNames[nameIndex],
+    status: "lost",
+    species: "chat",
+    breed: catBreeds[breedIndex],
+    color: catColors[colorIndex],
+    age: age,
+    gender: gender,
+    description: `Chat ${catColors[colorIndex]} de race ${
+      catBreeds[breedIndex]
+    }. ${gender === "male" ? "Il" : "Elle"} a ${age} an${
+      age > 1 ? "s" : ""
+    } et ${gender === "male" ? "il" : "elle"} est ${
+      Math.random() > 0.5 ? "très affectueux" : "plutôt timide"
+    }.`,
+    last_seen_date: timestamp,
+    last_seen_location: {
+      ...waterlooAddresses[addressIndex],
+      coordinates: getRandomWaterlooCoordinates(),
+    },
+    contact: {
+      name: user.displayName,
+      email: user.email,
+      phone: `+32 ${Math.floor(Math.random() * 900) + 100} ${
+        Math.floor(Math.random() * 90) + 10
+      } ${Math.floor(Math.random() * 90) + 10} ${
+        Math.floor(Math.random() * 90) + 10
+      }`,
+    },
+    images: [catImages[imageIndex]],
+    tags: getRandomTags(lostTags),
+    userId: userId,
+    createdAt: timestamp,
+    updatedAt: timestamp,
+  };
+});
+
+// Générer les chats trouvés (10)
+const foundPets = Array.from({ length: 10 }, (_, index) => {
+  const userId = `user${Math.floor(Math.random() * 5) + 1}`;
+  const user = sampleUsers.find((u) => u.id === userId);
+  const addressIndex = Math.floor(Math.random() * waterlooAddresses.length);
+  const timestamp = getRandomRecentTimestamp();
+  const imageIndex = Math.floor(Math.random() * catImages.length);
+  const nameIndex = Math.floor(Math.random() * catNames.length);
+  const breedIndex = Math.floor(Math.random() * catBreeds.length);
+  const colorIndex = Math.floor(Math.random() * catColors.length);
+  const gender = Math.random() > 0.5 ? "male" : "female";
+  const ageEstimate = `${Math.floor(Math.random() * 10) + 1}-${
+    Math.floor(Math.random() * 5) + 2
+  } ans`;
+
+  return {
+    id: `found${index + 1}`,
+    name: Math.random() > 0.3 ? catNames[nameIndex] : "",
+    status: "found",
+    species: "chat",
+    breed: `Possible ${catBreeds[breedIndex]}`,
+    color: catColors[colorIndex],
+    age_estimate: ageEstimate,
+    gender: gender,
+    description: `Chat ${catColors[colorIndex]} trouvé près de ${
+      waterlooAddresses[addressIndex].address
+    }. ${gender === "male" ? "Il" : "Elle"} semble être un ${
+      catBreeds[breedIndex]
+    } et ${gender === "male" ? "il" : "elle"} est ${
+      Math.random() > 0.5 ? "très sociable" : "plutôt craintif"
+    }.`,
+    found_date: timestamp,
+    found_location: {
+      ...waterlooAddresses[addressIndex],
+      coordinates: getRandomWaterlooCoordinates(),
+    },
+    contact: {
+      name: user.displayName,
+      email: user.email,
+      phone: `+32 ${Math.floor(Math.random() * 900) + 100} ${
+        Math.floor(Math.random() * 90) + 10
+      } ${Math.floor(Math.random() * 90) + 10} ${
+        Math.floor(Math.random() * 90) + 10
+      }`,
+    },
+    images: [catImages[imageIndex]],
+    tags: getRandomTags(foundTags),
+    userId: userId,
+    createdAt: timestamp,
+    updatedAt: timestamp,
+  };
+});
 
 // Fonction pour réinitialiser les données Firebase
 export const resetFirebaseData = async () => {
   try {
-    console.log("Suppression des données existantes...");
+    console.log("Réinitialisation des données Firebase...");
 
     // Supprimer tous les chats
     const petsRef = collection(db, "pets");
     const petsSnapshot = await getDocs(petsRef);
-    await Promise.all(petsSnapshot.docs.map((doc) => deleteDoc(doc.ref)));
+    const deletePromises = [];
+
+    petsSnapshot.forEach((doc) => {
+      deletePromises.push(deleteDoc(doc.ref));
+    });
 
     // Supprimer tous les utilisateurs
     const usersRef = collection(db, "users");
     const usersSnapshot = await getDocs(usersRef);
-    await Promise.all(usersSnapshot.docs.map((doc) => deleteDoc(doc.ref)));
 
-    console.log("Données supprimées avec succès");
-    return "Données supprimées avec succès";
+    usersSnapshot.forEach((doc) => {
+      deletePromises.push(deleteDoc(doc.ref));
+    });
+
+    await Promise.all(deletePromises);
+    console.log("Données Firebase réinitialisées avec succès");
   } catch (error) {
-    console.error("Erreur lors de la suppression des données:", error);
+    console.error("Erreur lors de la réinitialisation des données:", error);
     throw error;
   }
 };

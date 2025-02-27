@@ -35,15 +35,19 @@ export const petService = {
   // Récupérer un signalement par son ID
   async getPetById(petId) {
     try {
+      console.log("getPetById appelé avec ID:", petId);
       const docRef = doc(db, COLLECTION_NAME, petId);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        return {
+        const petData = {
           id: docSnap.id,
           ...docSnap.data(),
         };
+        console.log("Données du chat récupérées avec succès:", petData);
+        return petData;
       } else {
+        console.error("Aucun document trouvé avec l'ID:", petId);
         throw new Error("Aucun chat trouvé avec cet ID");
       }
     } catch (error) {

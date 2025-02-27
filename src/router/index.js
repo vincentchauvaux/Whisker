@@ -4,6 +4,10 @@ import PetDetails from "../components/PetDetails.vue";
 import UserProfile from "../pages/UserProfile.vue";
 import { auth } from "../firebase/config";
 import Index from "../pages/index.vue";
+import PetsIndex from "../pages/pets/index.vue";
+import PetDetailsPage from "../pages/pets/[id].vue";
+import LostPetsPage from "../pages/lost.vue";
+import FoundPetsPage from "../pages/found.vue";
 
 // Navigation guard pour les routes protégées
 const requireAuth = (to, from, next) => {
@@ -26,26 +30,29 @@ const routes = [
   {
     path: "/lost",
     name: "LostPets",
-    component: PetList,
-    props: {
-      status: "lost",
-    },
+    component: LostPetsPage,
   },
   {
     path: "/found",
     name: "FoundPets",
-    component: PetList,
-    props: {
-      status: "found",
-    },
+    component: FoundPetsPage,
   },
   {
     path: "/pet/:id",
     name: "PetDetails",
-    component: PetDetails,
-    props: (route) => ({
-      petId: route.params.id,
-    }),
+    redirect: (to) => {
+      return { name: "PetDetailsPage", params: { id: to.params.id } };
+    },
+  },
+  {
+    path: "/pets",
+    name: "PetsIndex",
+    component: PetsIndex,
+  },
+  {
+    path: "/pets/:id",
+    name: "PetDetailsPage",
+    component: PetDetailsPage,
   },
   {
     path: "/profile",

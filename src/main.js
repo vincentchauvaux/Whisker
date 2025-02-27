@@ -7,9 +7,8 @@ import {
   initializeFirebaseData,
   initializeDataOnce,
 } from "./data/initializeFirebase";
-import { auth } from "./firebase/config";
-import { onAuthStateChanged } from "firebase/auth";
-import { userService } from "./services/userService";
+import { userStore } from "./stores/userStore";
+import { petStore } from "./stores/petStore";
 
 const app = createApp(App);
 
@@ -17,6 +16,20 @@ const app = createApp(App);
 app.use(FirebasePlugin);
 // Use router
 app.use(router);
+
+// Rendre les stores disponibles globalement
+app.config.globalProperties.$userStore = userStore;
+app.config.globalProperties.$petStore = petStore;
+
+// Initialiser l'écouteur d'authentification
+userStore.initAuthListener();
+
+// Ajouter un écouteur d'événement global pour la navigation
+window.addEventListener("navigate-to-pet", (event) => {
+  const id = event.detail.id;
+  console.log(`[Global Event] Navigating to pet details: ${id}`);
+  router.push({ name: "PetDetailsPage", params: { id } });
+});
 
 // Initialize Firebase data without force reset
 initializeFirebaseData(false)
@@ -29,24 +42,6 @@ initializeFirebaseData(false)
       error
     );
   });
-
-// Configurer l'écouteur d'authentification global
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    console.log("Utilisateur connecté dans main.js:", user.email);
-    try {
-      // Sauvegarder les données utilisateur dans Firestore
-      await userService.createOrUpdateUser(user);
-    } catch (error) {
-      console.error(
-        "Erreur lors de la sauvegarde des données utilisateur:",
-        error
-      );
-    }
-  } else {
-    console.log("Aucun utilisateur connecté dans main.js");
-  }
-});
 
 // Exposer la fonction d'initialisation des données dans la console
 window.initializeDataOnce = initializeDataOnce;

@@ -1,9 +1,9 @@
 <template>
-  <IndexPage />
+  <RouterView />
 </template>
 
 <script setup>
-import IndexPage from "./pages/index.vue";
+import { RouterView } from "vue-router";
 </script>
 
 <main class="pt-20">

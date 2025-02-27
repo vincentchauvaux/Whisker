@@ -6,6 +6,9 @@ import {
   setDoc,
   updateDoc,
   Timestamp,
+  query,
+  where,
+  getDocs,
 } from "firebase/firestore";
 
 const COLLECTION_NAME = "users";
@@ -101,6 +104,26 @@ export const userService = {
       });
     } catch (error) {
       console.error("Erreur lors de la mise à jour du profil:", error);
+      throw error;
+    }
+  },
+
+  // Récupérer les animaux d'un utilisateur
+  async getUserPets(userId) {
+    try {
+      const petsCollection = collection(db, "pets");
+      const q = query(petsCollection, where("userId", "==", userId));
+      const querySnapshot = await getDocs(q);
+
+      return querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération des animaux de l'utilisateur:",
+        error
+      );
       throw error;
     }
   },
