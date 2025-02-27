@@ -23,6 +23,7 @@
           </div>
           <Map
             v-model="mapConfig"
+            :activeFilter="activeFilter"
             class="absolute inset-0"
             @map-loaded="onMapLoaded"
           />
@@ -169,7 +170,7 @@
 </template>
 
 <script>
-import { ref, defineComponent, onMounted, computed } from "vue";
+import { ref, defineComponent, onMounted, computed, watch } from "vue";
 import Map from "./Map.vue";
 import { petService } from "../services/petService";
 
@@ -192,6 +193,7 @@ export default defineComponent({
     const loading = ref(true);
     const error = ref(null);
     const activeFilter = ref("all"); // 'all', 'lost', 'found'
+    const mapInstance = ref(null);
 
     const pets = computed(() => {
       if (activeFilter.value === "all") {
@@ -250,8 +252,9 @@ export default defineComponent({
       activeFilter.value = filter;
     };
 
-    const onMapLoaded = () => {
+    const onMapLoaded = (map) => {
       isMapLoaded.value = true;
+      mapInstance.value = map;
     };
 
     onMounted(() => {

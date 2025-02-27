@@ -24,6 +24,11 @@ export default {
         pitch: 45,
       }),
     },
+    activeFilter: {
+      type: String,
+      default: "all",
+      validator: (value) => ["all", "lost", "found"].includes(value),
+    },
   },
 
   data: () => ({
@@ -97,6 +102,10 @@ export default {
       if (curr.pitch !== next.pitch) map.setPitch(next.pitch);
       if (curr.bearing !== next.bearing) map.setBearing(next.bearing);
       if (curr.zoom !== next.zoom) map.setZoom(next.zoom);
+    },
+    activeFilter() {
+      // Mettre à jour les marqueurs lorsque le filtre change
+      this.updateMarkers();
     },
   },
 
@@ -179,6 +188,15 @@ export default {
       }
     },
 
+    updateMarkers() {
+      // Supprimer tous les marqueurs existants
+      this.markers.forEach((marker) => marker.remove());
+      this.markers = [];
+
+      // Ajouter les nouveaux marqueurs filtrés
+      this.addCatMarkers();
+    },
+
     addCatMarkers() {
       // Nettoyer les marqueurs existants
       this.markers.forEach((marker) => marker.remove());
@@ -190,6 +208,12 @@ export default {
         );
         return;
       }
+
+      // Filtrer les chats en fonction du filtre actif
+      const filteredCats =
+        this.activeFilter === "all"
+          ? this.cats
+          : this.cats.filter((cat) => cat.type === this.activeFilter);
 
       // Fonction pour attribuer une couleur à chaque tag
       const getTagColorClass = (tag) => {
@@ -251,7 +275,7 @@ export default {
         return "bg-emerald-100 text-emerald-800";
       };
 
-      this.cats.forEach((cat) => {
+      filteredCats.forEach((cat) => {
         // Créer l'élément du marqueur
         const el = document.createElement("div");
         el.className = "cat-marker";
