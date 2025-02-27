@@ -125,12 +125,12 @@ export const petService = {
   },
 
   // Récupérer les signalements récents
-  async getRecentPets(limit = 5) {
+  async getRecentPets(limitCount = 5) {
     try {
       const q = query(
         collection(db, COLLECTION_NAME),
         orderBy("createdAt", "desc"),
-        limit(limit)
+        limit(limitCount)
       );
       const querySnapshot = await getDocs(q);
       return querySnapshot.docs.map((doc) => ({
