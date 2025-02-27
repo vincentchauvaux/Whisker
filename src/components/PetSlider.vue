@@ -19,9 +19,9 @@
       }"
       class="pet-slider"
     >
-      <swiper-slide v-for="pet in pets" :key="pet.id">
+      <swiper-slide v-for="pet in pets" :key="pet.id" class="h-auto">
         <div
-          class="bg-white rounded-xl shadow-lg overflow-hidden h-full group transform transition-transform duration-300 hover:scale-[1.02] flex flex-col"
+          class="bg-white rounded-xl shadow-lg overflow-hidden w-full group transform transition-transform duration-300 hover:scale-[1.02] flex flex-col"
         >
           <router-link
             :to="{ name: 'PetDetailsPage', params: { id: pet.id } }"
@@ -84,7 +84,7 @@
                 <span class="text-gray-600 font-sans">{{ pet.date }}</span>
               </div>
 
-              <div class="flex flex-wrap gap-2 mt-auto">
+              <div class="flex flex-wrap gap-2 mb-auto">
                 <span
                   v-for="(tag, index) in pet.tags"
                   :key="index"
@@ -128,6 +128,16 @@ const SwiperAutoplay = Autoplay;
 
 .pet-slider {
   padding-bottom: 50px;
+}
+
+/* Assurer une hauteur égale pour toutes les slides */
+.pet-slider :deep(.swiper-slide) {
+  height: auto;
+  display: flex;
+}
+
+.pet-slider :deep(.swiper-wrapper) {
+  align-items: stretch;
 }
 
 .pet-slider :deep(.swiper-button-next),

@@ -10,7 +10,7 @@
     <div class="container mx-auto px-4">
       <nav class="flex items-center justify-between py-6" aria-label="Global">
         <div class="flex lg:flex-1">
-          <a href="#" class="-m-1.5 p-1.5 flex items-center gap-3">
+          <router-link to="/" class="-m-1.5 p-1.5 flex items-center gap-3">
             <span class="sr-only">Whisker</span>
             <img
               class="w-auto transition-all duration-300"
@@ -29,7 +29,7 @@
               <span class="font-sans font-bold text-primary">Whisker</span>
               <span class="font-serif text-secondary">Quest</span>
             </div>
-          </a>
+          </router-link>
         </div>
         <div class="flex lg:hidden">
           <button
@@ -113,7 +113,7 @@
       >
         <div class="container mx-auto px-4">
           <div class="flex items-center justify-between">
-            <a href="#" class="-m-1.5 p-1.5 flex items-center gap-3">
+            <router-link to="/" class="-m-1.5 p-1.5 flex items-center gap-3">
               <span class="sr-only">Whisker</span>
               <img
                 class="w-auto transition-all duration-300 h-8 brightness-100 sepia-[.25] hue-rotate-[310deg] saturate-[.9]"
@@ -124,7 +124,7 @@
                 <span class="font-sans font-bold text-primary">Whisker</span>
                 <span class="font-serif text-secondary">Quest</span>
               </div>
-            </a>
+            </router-link>
             <button
               type="button"
               class="-m-2.5 rounded-md p-2.5 text-primary"
