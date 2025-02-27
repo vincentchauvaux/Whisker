@@ -162,7 +162,10 @@
                     <span
                       v-for="tag in [pet.breed, pet.color].filter(Boolean)"
                       :key="tag"
-                      class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-sans"
+                      :class="[
+                        'px-3 py-1 rounded-full text-sm font-sans',
+                        getTagColorClass(tag),
+                      ]"
                     >
                       {{ tag }}
                     </span>
@@ -193,6 +196,40 @@ const petStore = proxy.$petStore;
 const loading = ref(false);
 const error = ref(null);
 const activeFilter = ref("all"); // 'all', 'lost', 'found'
+
+// Fonction pour déterminer la couleur du tag en fonction de son contenu
+const getTagColorClass = (tag) => {
+  const tagLower = tag.toLowerCase();
+
+  // Races/Types
+  if (tagLower.includes("européen")) return "bg-blue-100 text-blue-800";
+  if (tagLower.includes("siamois")) return "bg-purple-100 text-purple-800";
+  if (tagLower.includes("bengal")) return "bg-amber-100 text-amber-800";
+  if (tagLower.includes("persan")) return "bg-pink-100 text-pink-800";
+
+  // Couleurs
+  if (tagLower.includes("noir")) return "bg-gray-800 text-white";
+  if (tagLower.includes("blanc"))
+    return "bg-gray-50 text-gray-800 border border-gray-200";
+  if (tagLower.includes("orange") || tagLower.includes("roux"))
+    return "bg-orange-100 text-orange-800";
+  if (tagLower.includes("gris")) return "bg-slate-200 text-slate-800";
+  if (tagLower.includes("tigré") || tagLower.includes("tabby"))
+    return "bg-amber-50 text-amber-800";
+  if (tagLower.includes("tacheté") || tagLower.includes("spotted"))
+    return "bg-lime-100 text-lime-800";
+  if (tagLower.includes("chartreux")) return "bg-blue-200 text-blue-800";
+
+  // Âge
+  if (tagLower.includes("chaton") || tagLower.includes("bébé"))
+    return "bg-pink-100 text-pink-800";
+  if (tagLower.includes("adulte")) return "bg-teal-100 text-teal-800";
+  if (tagLower.includes("senior") || tagLower.includes("âgé"))
+    return "bg-purple-100 text-purple-800";
+
+  // Couleur par défaut
+  return "bg-emerald-100 text-emerald-800";
+};
 
 // Calculer le libellé du filtre actif
 const activeFilterLabel = computed(() => {

@@ -191,6 +191,66 @@ export default {
         return;
       }
 
+      // Fonction pour attribuer une couleur à chaque tag
+      const getTagColorClass = (tag) => {
+        const tagLower = tag.toLowerCase();
+
+        // Couleurs pour les races ou types
+        if (tagLower.includes("européen") || tagLower.includes("europeen")) {
+          return "bg-blue-100 text-blue-800";
+        }
+        if (tagLower.includes("siamois") || tagLower.includes("siamese")) {
+          return "bg-purple-100 text-purple-800";
+        }
+        if (tagLower.includes("bengal")) {
+          return "bg-amber-100 text-amber-800";
+        }
+        if (tagLower.includes("persan") || tagLower.includes("persian")) {
+          return "bg-pink-100 text-pink-800";
+        }
+
+        // Couleurs pour les caractéristiques physiques
+        if (tagLower.includes("noir") || tagLower.includes("black")) {
+          return "bg-gray-800 text-white";
+        }
+        if (tagLower.includes("blanc") || tagLower.includes("white")) {
+          return "bg-gray-100 text-gray-800 border border-gray-300";
+        }
+        if (
+          tagLower.includes("roux") ||
+          tagLower.includes("orange") ||
+          tagLower.includes("ginger")
+        ) {
+          return "bg-orange-100 text-orange-800";
+        }
+        if (tagLower.includes("gris") || tagLower.includes("gray")) {
+          return "bg-slate-200 text-slate-800";
+        }
+        if (tagLower.includes("tigré") || tagLower.includes("tabby")) {
+          return "bg-amber-50 text-amber-800";
+        }
+        if (tagLower.includes("tacheté") || tagLower.includes("spotted")) {
+          return "bg-lime-100 text-lime-800";
+        }
+        if (tagLower.includes("chartreux")) {
+          return "bg-blue-200 text-blue-800";
+        }
+
+        // Couleurs pour l'âge
+        if (tagLower.includes("chaton") || tagLower.includes("kitten")) {
+          return "bg-pink-100 text-pink-800";
+        }
+        if (tagLower.includes("adulte") || tagLower.includes("adult")) {
+          return "bg-teal-100 text-teal-800";
+        }
+        if (tagLower.includes("senior")) {
+          return "bg-violet-100 text-violet-800";
+        }
+
+        // Couleur par défaut pour les autres tags
+        return "bg-emerald-100 text-emerald-800";
+      };
+
       this.cats.forEach((cat) => {
         // Créer l'élément du marqueur
         const el = document.createElement("div");
@@ -252,7 +312,9 @@ export default {
               ${cat.tags
                 .map(
                   (tag) =>
-                    `<span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">${tag}</span>`
+                    `<span class="${getTagColorClass(
+                      tag
+                    )} px-3 py-1 rounded-full text-sm">${tag}</span>`
                 )
                 .join("")}
             </div>
