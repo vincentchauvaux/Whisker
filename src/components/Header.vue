@@ -111,7 +111,7 @@
       <div
         class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
       >
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4 py-6">
           <div class="flex items-center justify-between">
             <router-link to="/" class="-m-1.5 p-1.5 flex items-center gap-3">
               <span class="sr-only">Whisker</span>
@@ -331,7 +331,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
 import { auth, googleProvider } from "../firebase/config";
 import {
   signInWithEmailAndPassword,
@@ -361,6 +361,24 @@ const loginForm = ref({
 const loginError = ref("");
 const user = ref(null);
 
+// Bloquer le défilement du body lorsque le menu mobile est ouvert
+watch(mobileMenuOpen, (isOpen) => {
+  if (isOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+});
+
+// Bloquer le défilement du body lorsque le modal de connexion est ouvert
+watch(showLoginModal, (isOpen) => {
+  if (isOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+});
+
 const handleScroll = () => {
   scrolled.value = window.scrollY > 20;
 };
@@ -384,6 +402,8 @@ onMounted(() => {
   onUnmounted(() => {
     window.removeEventListener("scroll", handleScroll);
     unsubscribe();
+    // Réactiver le défilement au cas où le composant est démonté avec le menu ouvert
+    document.body.style.overflow = "";
   });
 });
 
