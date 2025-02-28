@@ -7,8 +7,8 @@
         class="px-3 py-1 rounded-full text-sm font-medium"
         :class="
           isFound
-            ? 'bg-green-100 text-green-800'
-            : 'bg-yellow-100 text-yellow-800'
+            ? STATUS_COLORS.FOUND.bg + ' ' + STATUS_COLORS.FOUND.text
+            : STATUS_COLORS.LOST.bg + ' ' + STATUS_COLORS.LOST.text
         "
       >
         {{ isFound ? "Trouvé" : "Perdu" }}
@@ -149,6 +149,7 @@
 <script setup>
 import { computed } from "vue";
 import { useAnimalData } from "../functions";
+import { STATUS_COLORS } from "../constants/colors.js";
 
 const props = defineProps({
   animalData: {

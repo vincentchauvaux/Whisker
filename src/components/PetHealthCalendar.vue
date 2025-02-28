@@ -8,7 +8,7 @@
         <button
           v-if="isCurrentUser"
           @click="showAddEventModal = true"
-          class="px-3 py-1.5 bg-secondary text-white rounded-full hover:bg-secondary-dark transition-colors text-sm flex items-center gap-1"
+          class="px-4 py-2 bg-white text-secondary border border-secondary rounded-full hover:bg-secondary hover:text-white transition-colors text-sm flex items-center gap-1 shadow-sm"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -144,77 +144,43 @@
             <div
               v-for="event in upcomingEvents"
               :key="event.id"
-              class="border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-shadow"
+              class="border-l-4 pl-3 py-2 mb-3 hover:bg-gray-50 rounded-r transition-colors relative"
+              :class="{
+                'border-blue-500': event.type === 'vet_visit',
+                'border-green-500': event.type === 'vaccination',
+                'border-yellow-500': event.type === 'medication',
+                'border-purple-500': event.type === 'grooming',
+                'border-red-500': event.type === 'surgery',
+                'border-gray-500': !event.type || event.type === 'other',
+              }"
             >
-              <div class="flex items-start gap-3">
-                <div
-                  :class="[
-                    'p-2 rounded-full',
-                    event.type === 'vet_visit' ? 'bg-red-100' : 'bg-blue-100',
-                  ]"
-                >
-                  <!-- Icône patte avec croix pour visite vétérinaire -->
-                  <svg
-                    v-if="event.type === 'vet_visit'"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 text-red-600"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
+              <div class="flex justify-between items-start">
+                <div>
+                  <h4 class="font-medium text-gray-900">{{ event.title }}</h4>
+                  <p class="text-sm text-gray-600">
+                    {{ formatDate(event.date) }}
+                    <span
+                      v-if="event.isRecurring"
+                      class="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full"
+                    >
+                      Récurrent
+                    </span>
+                  </p>
+                  <p class="text-sm text-gray-500 mt-1">
+                    {{ event.petName }}
+                  </p>
+                  <p
+                    v-if="event.description"
+                    class="text-sm text-gray-600 mt-1"
                   >
-                    <path
-                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"
-                    />
-                  </svg>
-                  <!-- Icône seringue pour vaccination -->
-                  <svg
-                    v-else
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 text-blue-600"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M12.5 2c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5zM12.5 6c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5zM12.5 10c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5zM12.5 14c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5zM12.5 18c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5z"
-                    />
-                  </svg>
-                </div>
-                <div class="flex-1">
-                  <div class="flex justify-between">
-                    <h4 class="font-medium text-gray-800">{{ event.title }}</h4>
-                    <span class="text-sm text-gray-500">{{
-                      formatDate(event.date)
-                    }}</span>
-                  </div>
-                  <p class="text-sm text-gray-600 mt-1">
                     {{ event.description }}
                   </p>
-                  <div class="flex items-center mt-2">
-                    <span
-                      :class="[
-                        'text-xs px-2 py-1 rounded-full',
-                        event.type === 'vet_visit'
-                          ? 'bg-red-100 text-red-800'
-                          : 'bg-blue-100 text-blue-800',
-                      ]"
-                    >
-                      {{
-                        event.type === "vet_visit"
-                          ? "Visite vétérinaire"
-                          : "Vaccination"
-                      }}
-                    </span>
-                    <span
-                      v-if="event.petName"
-                      class="text-xs text-gray-500 ml-2"
-                    >
-                      {{ event.petName }}
-                    </span>
-                  </div>
                 </div>
+
                 <div v-if="isCurrentUser" class="flex space-x-1">
                   <button
                     @click="editEvent(event)"
-                    class="p-1 text-gray-500 hover:text-primary"
+                    class="p-1 text-gray-500 hover:text-primary transition-colors"
                     title="Modifier"
                   >
                     <svg
@@ -233,8 +199,8 @@
                     </svg>
                   </button>
                   <button
-                    @click="deleteEvent(event.id)"
-                    class="p-1 text-gray-500 hover:text-red-500"
+                    @click="confirmDeleteEvent(event)"
+                    class="p-1 text-gray-500 hover:text-red-500 transition-colors"
                     title="Supprimer"
                   >
                     <svg
@@ -334,6 +300,58 @@
                 ></textarea>
               </div>
 
+              <!-- Ajout des options de récurrence -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Récurrence
+                </label>
+                <select
+                  v-model="eventForm.recurrence"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                >
+                  <option value="none">Pas de récurrence</option>
+                  <option value="daily">Tous les jours</option>
+                  <option value="weekly">Toutes les semaines</option>
+                  <option value="monthly">Tous les mois</option>
+                  <option value="yearly">Tous les ans</option>
+                </select>
+              </div>
+
+              <div v-if="eventForm.recurrence !== 'none'">
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Fin de récurrence
+                </label>
+                <div class="flex items-center space-x-2">
+                  <select
+                    v-model="eventForm.recurrenceEnd"
+                    class="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  >
+                    <option value="never">Jamais</option>
+                    <option value="after">Après</option>
+                    <option value="on">Le</option>
+                  </select>
+
+                  <input
+                    v-if="eventForm.recurrenceEnd === 'after'"
+                    type="number"
+                    v-model="eventForm.recurrenceCount"
+                    min="1"
+                    class="w-20 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                    placeholder="10"
+                  />
+                  <span v-if="eventForm.recurrenceEnd === 'after'"
+                    >occurrences</span
+                  >
+
+                  <input
+                    v-if="eventForm.recurrenceEnd === 'on'"
+                    type="date"
+                    v-model="eventForm.recurrenceUntil"
+                    class="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  />
+                </div>
+              </div>
+
               <div v-if="userPets.length > 0">
                 <label class="block text-sm font-medium text-gray-700 mb-1">
                   Animal concerné
@@ -355,14 +373,14 @@
             <button
               type="button"
               @click="saveEvent"
-              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm"
+              class="w-full inline-flex justify-center rounded-md border border-primary shadow-sm px-4 py-2 bg-white text-primary font-medium hover:bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors sm:ml-3 sm:w-auto sm:text-sm"
             >
               {{ editingEvent ? "Mettre à jour" : "Ajouter" }}
             </button>
             <button
               type="button"
               @click="showAddEventModal = false"
-              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-gray-700 font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
             >
               Annuler
             </button>
@@ -405,6 +423,10 @@ const eventForm = ref({
   date: "",
   description: "",
   petId: "",
+  recurrence: "none",
+  recurrenceEnd: "never",
+  recurrenceCount: 1,
+  recurrenceUntil: "",
 });
 
 // Calendrier
@@ -560,6 +582,10 @@ const editEvent = (event) => {
     date: new Date(event.date).toISOString().split("T")[0],
     description: event.description || "",
     petId: event.petId,
+    recurrence: event.recurrence || "none",
+    recurrenceEnd: event.recurrenceEnd || "never",
+    recurrenceCount: event.recurrenceCount || 1,
+    recurrenceUntil: event.recurrenceUntil || "",
   };
   showAddEventModal.value = true;
 };
@@ -572,6 +598,10 @@ const resetForm = () => {
     date: "",
     description: "",
     petId: props.userPets.length > 0 ? props.userPets[0].id : "",
+    recurrence: "none",
+    recurrenceEnd: "never",
+    recurrenceCount: 1,
+    recurrenceUntil: "",
   };
 };
 
@@ -586,11 +616,18 @@ const saveEvent = async () => {
       toast.success("Événement mis à jour avec succès");
     } else {
       // Création d'un nouvel événement
-      await petHealthService.addHealthEvent({
-        ...eventForm.value,
-        userId: props.userId,
-      });
-      toast.success("Événement ajouté avec succès");
+      if (eventForm.value.recurrence === "none") {
+        // Événement unique
+        await petHealthService.addHealthEvent({
+          ...eventForm.value,
+          userId: props.userId,
+        });
+        toast.success("Événement ajouté avec succès");
+      } else {
+        // Événement récurrent
+        await createRecurringEvents();
+        toast.success("Événements récurrents ajoutés avec succès");
+      }
     }
 
     showAddEventModal.value = false;
@@ -598,20 +635,136 @@ const saveEvent = async () => {
     loadHealthEvents();
   } catch (error) {
     console.error("Erreur lors de l'enregistrement de l'événement:", error);
-    toast.error("Impossible d'enregistrer l'événement");
+    toast.error("Erreur lors de l'enregistrement de l'événement");
+  }
+};
+
+// Fonction pour créer des événements récurrents
+const createRecurringEvents = async () => {
+  const startDate = new Date(eventForm.value.date);
+  let endDate = null;
+  let occurrences = 0;
+
+  // Déterminer la date de fin ou le nombre d'occurrences
+  if (
+    eventForm.value.recurrenceEnd === "on" &&
+    eventForm.value.recurrenceUntil
+  ) {
+    endDate = new Date(eventForm.value.recurrenceUntil);
+  } else if (eventForm.value.recurrenceEnd === "after") {
+    occurrences = parseInt(eventForm.value.recurrenceCount) || 1;
+  } else {
+    // Si "jamais", on limite à 5 ans pour éviter de créer trop d'événements
+    endDate = new Date(startDate);
+    endDate.setFullYear(endDate.getFullYear() + 5);
+  }
+
+  // Créer les événements récurrents
+  const events = [];
+  let currentDate = new Date(startDate);
+  let count = 0;
+
+  while (
+    (!endDate || currentDate <= endDate) &&
+    (eventForm.value.recurrenceEnd !== "after" || count < occurrences)
+  ) {
+    // Créer l'événement pour cette date
+    const eventData = {
+      ...eventForm.value,
+      date: new Date(currentDate).toISOString().split("T")[0],
+      userId: props.userId,
+      isRecurring: true,
+      recurrenceGroup: startDate.toISOString(), // Identifiant du groupe de récurrence
+    };
+
+    // Ajouter l'événement à la liste
+    events.push(eventData);
+    count++;
+
+    // Calculer la prochaine date selon le type de récurrence
+    currentDate = getNextRecurrenceDate(
+      currentDate,
+      eventForm.value.recurrence
+    );
+  }
+
+  // Enregistrer tous les événements
+  for (const event of events) {
+    await petHealthService.addHealthEvent(event);
+  }
+};
+
+// Fonction pour calculer la prochaine date selon le type de récurrence
+const getNextRecurrenceDate = (date, recurrenceType) => {
+  const nextDate = new Date(date);
+
+  switch (recurrenceType) {
+    case "daily":
+      nextDate.setDate(nextDate.getDate() + 1);
+      break;
+    case "weekly":
+      nextDate.setDate(nextDate.getDate() + 7);
+      break;
+    case "monthly":
+      nextDate.setMonth(nextDate.getMonth() + 1);
+      break;
+    case "yearly":
+      nextDate.setFullYear(nextDate.getFullYear() + 1);
+      break;
+  }
+
+  return nextDate;
+};
+
+const confirmDeleteEvent = (event) => {
+  if (event.isRecurring) {
+    if (
+      confirm(
+        "Cet événement fait partie d'une série récurrente. Voulez-vous supprimer uniquement cet événement ou toute la série ?"
+      )
+    ) {
+      deleteRecurringSeries(event);
+    } else {
+      deleteEvent(event.id);
+    }
+  } else {
+    if (confirm("Êtes-vous sûr de vouloir supprimer cet événement ?")) {
+      deleteEvent(event.id);
+    }
   }
 };
 
 const deleteEvent = async (eventId) => {
-  if (confirm("Êtes-vous sûr de vouloir supprimer cet événement ?")) {
-    try {
-      await petHealthService.deleteHealthEvent(eventId);
-      toast.success("Événement supprimé avec succès");
-      loadHealthEvents();
-    } catch (error) {
-      console.error("Erreur lors de la suppression de l'événement:", error);
-      toast.error("Impossible de supprimer l'événement");
+  try {
+    await petHealthService.deleteHealthEvent(eventId);
+    toast.success("Événement supprimé avec succès");
+    loadHealthEvents();
+  } catch (error) {
+    console.error("Erreur lors de la suppression de l'événement:", error);
+    toast.error("Impossible de supprimer l'événement");
+  }
+};
+
+const deleteRecurringSeries = async (event) => {
+  try {
+    // Récupérer tous les événements de la série
+    const allEvents = healthEvents.value.filter(
+      (e) => e.recurrenceGroup === event.recurrenceGroup
+    );
+
+    // Supprimer chaque événement de la série
+    for (const evt of allEvents) {
+      await petHealthService.deleteHealthEvent(evt.id);
     }
+
+    toast.success("Série d'événements supprimée avec succès");
+    loadHealthEvents();
+  } catch (error) {
+    console.error(
+      "Erreur lors de la suppression de la série d'événements:",
+      error
+    );
+    toast.error("Impossible de supprimer la série d'événements");
   }
 };
 

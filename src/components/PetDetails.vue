@@ -21,10 +21,10 @@
         <div class="absolute top-4 right-4">
           <span
             :class="[
-              'px-4 py-2 rounded-full text-sm font-sans',
+              'px-4 py-2 rounded-full text-sm font-medium',
               pet.status === 'lost'
-                ? 'bg-red-100 text-red-800'
-                : 'bg-green-100 text-green-800',
+                ? STATUS_COLORS.LOST.bg + ' ' + STATUS_COLORS.LOST.text
+                : STATUS_COLORS.FOUND.bg + ' ' + STATUS_COLORS.FOUND.text,
             ]"
           >
             {{ pet.status === "lost" ? "Perdu" : "Trouvé" }}
@@ -258,7 +258,8 @@
 
 <script setup>
 import { ref, onMounted, watch, inject, getCurrentInstance } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { getTagColorClass, STATUS_COLORS } from "../constants/colors.js";
 
 const route = useRoute();
 const props = defineProps({
@@ -275,40 +276,6 @@ const petStore = proxy.$petStore;
 const pet = ref(null);
 const loading = ref(true);
 const error = ref(null);
-
-// Fonction pour déterminer la couleur du tag en fonction de son contenu
-const getTagColorClass = (tag) => {
-  const tagLower = tag.toLowerCase();
-
-  // Races/Types
-  if (tagLower.includes("européen")) return "bg-blue-100 text-blue-800";
-  if (tagLower.includes("siamois")) return "bg-purple-100 text-purple-800";
-  if (tagLower.includes("bengal")) return "bg-amber-100 text-amber-800";
-  if (tagLower.includes("persan")) return "bg-pink-100 text-pink-800";
-
-  // Couleurs
-  if (tagLower.includes("noir")) return "bg-gray-800 text-white";
-  if (tagLower.includes("blanc"))
-    return "bg-gray-50 text-gray-800 border border-gray-200";
-  if (tagLower.includes("orange") || tagLower.includes("roux"))
-    return "bg-orange-100 text-orange-800";
-  if (tagLower.includes("gris")) return "bg-slate-200 text-slate-800";
-  if (tagLower.includes("tigré") || tagLower.includes("tabby"))
-    return "bg-amber-50 text-amber-800";
-  if (tagLower.includes("tacheté") || tagLower.includes("spotted"))
-    return "bg-lime-100 text-lime-800";
-  if (tagLower.includes("chartreux")) return "bg-blue-200 text-blue-800";
-
-  // Âge
-  if (tagLower.includes("chaton") || tagLower.includes("bébé"))
-    return "bg-pink-100 text-pink-800";
-  if (tagLower.includes("adulte")) return "bg-teal-100 text-teal-800";
-  if (tagLower.includes("senior") || tagLower.includes("âgé"))
-    return "bg-purple-100 text-purple-800";
-
-  // Couleur par défaut
-  return "bg-emerald-100 text-emerald-800";
-};
 
 // Utiliser l'ID du prop ou l'ID de la route
 const getPetId = () => {

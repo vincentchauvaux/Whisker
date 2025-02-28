@@ -124,8 +124,8 @@
               class="px-2 py-1 rounded-full text-xs font-medium"
               :class="
                 animal.status === 'found'
-                  ? 'bg-green-100 text-green-800'
-                  : 'bg-yellow-100 text-yellow-800'
+                  ? STATUS_COLORS.FOUND.bg + ' ' + STATUS_COLORS.FOUND.text
+                  : STATUS_COLORS.LOST.bg + ' ' + STATUS_COLORS.LOST.text
               "
             >
               {{ animal.status === "found" ? "Trouvé" : "Perdu" }}
@@ -184,6 +184,7 @@
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useAnimalsList, formatDate } from "../functions";
+import { STATUS_COLORS } from "../constants/colors.js";
 
 const router = useRouter();
 const { animals, isLoading, error, fetchAnimals } = useAnimalsList();

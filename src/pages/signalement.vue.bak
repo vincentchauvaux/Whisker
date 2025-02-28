@@ -398,257 +398,245 @@
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1"
-                  >Adresse personnelle</label
-                >
-                <div class="relative">
-                  <input
-                    type="text"
-                    v-model="formData.userAddress"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
-                    placeholder="Votre adresse (pour faciliter les signalements)"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1"
-                >Longueur des poils</label
-              >
-              <div class="grid grid-cols-4 gap-2">
-                <div
-                  class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
-                  :class="
-                    formData.fur_length === 'Court'
-                      ? 'bg-amber-50 border-amber-300'
-                      : 'border-gray-300 hover:bg-gray-50'
-                  "
-                  @click="formData.fur_length = 'Court'"
-                >
-                  <div
-                    class="w-6 h-6 rounded-full flex items-center justify-center mb-1"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6 text-amber-700"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                    >
-                      <path
-                        d="M12 4 L12 20"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </div>
-                  <span class="text-xs text-center">Court</span>
-                </div>
-
-                <div
-                  class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
-                  :class="
-                    formData.fur_length === 'Mi-long'
-                      ? 'bg-amber-50 border-amber-300'
-                      : 'border-gray-300 hover:bg-gray-50'
-                  "
-                  @click="formData.fur_length = 'Mi-long'"
-                >
-                  <div
-                    class="w-6 h-6 rounded-full flex items-center justify-center mb-1"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6 text-amber-700"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                    >
-                      <path
-                        d="M12 4 L12 20 M10 6 L10 18 M14 6 L14 18"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </div>
-                  <span class="text-xs text-center">Mi-long</span>
-                </div>
-
-                <div
-                  class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
-                  :class="
-                    formData.fur_length === 'Long'
-                      ? 'bg-amber-50 border-amber-300'
-                      : 'border-gray-300 hover:bg-gray-50'
-                  "
-                  @click="formData.fur_length = 'Long'"
-                >
-                  <div
-                    class="w-6 h-6 rounded-full flex items-center justify-center mb-1"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6 text-amber-700"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                    >
-                      <path
-                        d="M12 4 L12 20 M9 7 L9 17 M15 7 L15 17 M6 10 L6 14 M18 10 L18 14"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </div>
-                  <span class="text-xs text-center">Long</span>
-                </div>
-
-                <div
-                  class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
-                  :class="
-                    formData.fur_length === 'Sans poils'
-                      ? 'bg-amber-50 border-amber-300'
-                      : 'border-gray-300 hover:bg-gray-50'
-                  "
-                  @click="formData.fur_length = 'Sans poils'"
-                >
-                  <div
-                    class="w-6 h-6 rounded-full flex items-center justify-center mb-1"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6 text-amber-700"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                    >
-                      <circle cx="12" cy="12" r="8" stroke-width="2" />
-                    </svg>
-                  </div>
-                  <span class="text-xs text-center">Sans poils</span>
-                </div>
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1"
-                  >Couleur principale</label
+                  >Longueur des poils</label
                 >
                 <div class="grid grid-cols-4 gap-2">
                   <div
                     class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
                     :class="
-                      formData.color === 'Noir'
-                        ? 'bg-gray-100 border-gray-500'
-                        : 'border-gray-300 hover:bg-gray-50'
-                    "
-                    @click="formData.color = 'Noir'"
-                  >
-                    <div class="w-6 h-6 rounded-full bg-black mb-1"></div>
-                    <span class="text-xs text-center">Noir</span>
-                  </div>
-
-                  <div
-                    class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
-                    :class="
-                      formData.color === 'Blanc'
-                        ? 'bg-gray-50 border-gray-300'
-                        : 'border-gray-300 hover:bg-gray-50'
-                    "
-                    @click="formData.color = 'Blanc'"
-                  >
-                    <div
-                      class="w-6 h-6 rounded-full bg-white border border-gray-300 mb-1"
-                    ></div>
-                    <span class="text-xs text-center">Blanc</span>
-                  </div>
-
-                  <div
-                    class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
-                    :class="
-                      formData.color === 'Roux'
-                        ? 'bg-orange-50 border-orange-300'
-                        : 'border-gray-300 hover:bg-gray-50'
-                    "
-                    @click="formData.color = 'Roux'"
-                  >
-                    <div class="w-6 h-6 rounded-full bg-orange-600 mb-1"></div>
-                    <span class="text-xs text-center">Roux</span>
-                  </div>
-
-                  <div
-                    class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
-                    :class="
-                      formData.color === 'Gris'
-                        ? 'bg-gray-100 border-gray-400'
-                        : 'border-gray-300 hover:bg-gray-50'
-                    "
-                    @click="formData.color = 'Gris'"
-                  >
-                    <div class="w-6 h-6 rounded-full bg-gray-500 mb-1"></div>
-                    <span class="text-xs text-center">Gris</span>
-                  </div>
-
-                  <div
-                    class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
-                    :class="
-                      formData.color === 'Tigré'
+                      formData.fur_length === 'Court'
                         ? 'bg-amber-50 border-amber-300'
                         : 'border-gray-300 hover:bg-gray-50'
                     "
-                    @click="formData.color = 'Tigré'"
+                    @click="formData.fur_length = 'Court'"
                   >
                     <div
-                      class="w-6 h-6 rounded-full mb-1 relative overflow-hidden"
-                      :style="{ background: getColorBackground('tigré') }"
-                    ></div>
-                    <span class="text-xs text-center">Tigré</span>
+                      class="w-6 h-6 rounded-full flex items-center justify-center mb-1"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-amber-700"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                      >
+                        <path
+                          d="M12 4 L12 20"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                    </div>
+                    <span class="text-xs text-center">Court</span>
                   </div>
 
                   <div
                     class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
                     :class="
-                      formData.color === 'Bicolore'
-                        ? 'bg-gray-100 border-gray-400'
-                        : 'border-gray-300 hover:bg-gray-50'
-                    "
-                    @click="formData.color = 'Bicolore'"
-                  >
-                    <div
-                      class="w-6 h-6 rounded-full mb-1 relative overflow-hidden"
-                      :style="{ background: getColorBackground('bicolore') }"
-                    ></div>
-                    <span class="text-xs text-center">Bicolore</span>
-                  </div>
-
-                  <div
-                    class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
-                    :class="
-                      formData.color === 'Tricolore'
-                        ? 'bg-orange-50 border-orange-300'
-                        : 'border-gray-300 hover:bg-gray-50'
-                    "
-                    @click="formData.color = 'Tricolore'"
-                  >
-                    <div
-                      class="w-6 h-6 rounded-full mb-1 relative overflow-hidden"
-                      :style="{ background: getColorBackground('tricolore') }"
-                    ></div>
-                    <span class="text-xs text-center">Tricolore</span>
-                  </div>
-
-                  <div
-                    class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
-                    :class="
-                      formData.color === 'Autre'
+                      formData.fur_length === 'Mi-long'
                         ? 'bg-amber-50 border-amber-300'
                         : 'border-gray-300 hover:bg-gray-50'
                     "
-                    @click="formData.color = 'Autre'"
+                    @click="formData.fur_length = 'Mi-long'"
                   >
                     <div
-                      class="w-6 h-6 rounded-full mb-1 relative overflow-hidden"
-                      :style="{ background: getColorBackground('spotted') }"
-                    ></div>
-                    <span class="text-xs text-center">Autre</span>
+                      class="w-6 h-6 rounded-full flex items-center justify-center mb-1"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-amber-700"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                      >
+                        <path
+                          d="M12 4 L12 20 M10 6 L10 18 M14 6 L14 18"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                    </div>
+                    <span class="text-xs text-center">Mi-long</span>
+                  </div>
+
+                  <div
+                    class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
+                    :class="
+                      formData.fur_length === 'Long'
+                        ? 'bg-amber-50 border-amber-300'
+                        : 'border-gray-300 hover:bg-gray-50'
+                    "
+                    @click="formData.fur_length = 'Long'"
+                  >
+                    <div
+                      class="w-6 h-6 rounded-full flex items-center justify-center mb-1"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-amber-700"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                      >
+                        <path
+                          d="M12 4 L12 20 M9 7 L9 17 M15 7 L15 17 M6 10 L6 14 M18 10 L18 14"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                    </div>
+                    <span class="text-xs text-center">Long</span>
+                  </div>
+
+                  <div
+                    class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
+                    :class="
+                      formData.fur_length === 'Sans poils'
+                        ? 'bg-amber-50 border-amber-300'
+                        : 'border-gray-300 hover:bg-gray-50'
+                    "
+                    @click="formData.fur_length = 'Sans poils'"
+                  >
+                    <div
+                      class="w-6 h-6 rounded-full flex items-center justify-center mb-1"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-amber-700"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                      >
+                        <circle cx="12" cy="12" r="8" stroke-width="2" />
+                      </svg>
+                    </div>
+                    <span class="text-xs text-center">Sans poils</span>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Couleur principale</label
+                  >
+                  <div class="grid grid-cols-4 gap-2">
+                    <div
+                      class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
+                      :class="
+                        formData.color === 'Noir'
+                          ? 'bg-gray-100 border-gray-500'
+                          : 'border-gray-300 hover:bg-gray-50'
+                      "
+                      @click="formData.color = 'Noir'"
+                    >
+                      <div class="w-6 h-6 rounded-full bg-black mb-1"></div>
+                      <span class="text-xs text-center">Noir</span>
+                    </div>
+
+                    <div
+                      class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
+                      :class="
+                        formData.color === 'Blanc'
+                          ? 'bg-gray-50 border-gray-300'
+                          : 'border-gray-300 hover:bg-gray-50'
+                      "
+                      @click="formData.color = 'Blanc'"
+                    >
+                      <div
+                        class="w-6 h-6 rounded-full bg-white border border-gray-300 mb-1"
+                      ></div>
+                      <span class="text-xs text-center">Blanc</span>
+                    </div>
+
+                    <div
+                      class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
+                      :class="
+                        formData.color === 'Roux'
+                          ? 'bg-orange-50 border-orange-300'
+                          : 'border-gray-300 hover:bg-gray-50'
+                      "
+                      @click="formData.color = 'Roux'"
+                    >
+                      <div
+                        class="w-6 h-6 rounded-full bg-orange-600 mb-1"
+                      ></div>
+                      <span class="text-xs text-center">Roux</span>
+                    </div>
+
+                    <div
+                      class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
+                      :class="
+                        formData.color === 'Gris'
+                          ? 'bg-gray-100 border-gray-400'
+                          : 'border-gray-300 hover:bg-gray-50'
+                      "
+                      @click="formData.color = 'Gris'"
+                    >
+                      <div class="w-6 h-6 rounded-full bg-gray-500 mb-1"></div>
+                      <span class="text-xs text-center">Gris</span>
+                    </div>
+
+                    <div
+                      class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
+                      :class="
+                        formData.color === 'Tigré'
+                          ? 'bg-amber-50 border-amber-300'
+                          : 'border-gray-300 hover:bg-gray-50'
+                      "
+                      @click="formData.color = 'Tigré'"
+                    >
+                      <div
+                        class="w-6 h-6 rounded-full mb-1 relative overflow-hidden"
+                        :style="{ background: getColorBackground('tigré') }"
+                      ></div>
+                      <span class="text-xs text-center">Tigré</span>
+                    </div>
+
+                    <div
+                      class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
+                      :class="
+                        formData.color === 'Bicolore'
+                          ? 'bg-gray-100 border-gray-400'
+                          : 'border-gray-300 hover:bg-gray-50'
+                      "
+                      @click="formData.color = 'Bicolore'"
+                    >
+                      <div
+                        class="w-6 h-6 rounded-full mb-1 relative overflow-hidden"
+                        :style="{ background: getColorBackground('bicolore') }"
+                      ></div>
+                      <span class="text-xs text-center">Bicolore</span>
+                    </div>
+
+                    <div
+                      class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
+                      :class="
+                        formData.color === 'Tricolore'
+                          ? 'bg-orange-50 border-orange-300'
+                          : 'border-gray-300 hover:bg-gray-50'
+                      "
+                      @click="formData.color = 'Tricolore'"
+                    >
+                      <div
+                        class="w-6 h-6 rounded-full mb-1 relative overflow-hidden"
+                        :style="{ background: getColorBackground('tricolore') }"
+                      ></div>
+                      <span class="text-xs text-center">Tricolore</span>
+                    </div>
+
+                    <div
+                      class="cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-center transition-colors"
+                      :class="
+                        formData.color === 'Autre'
+                          ? 'bg-amber-50 border-amber-300'
+                          : 'border-gray-300 hover:bg-gray-50'
+                      "
+                      @click="formData.color = 'Autre'"
+                    >
+                      <div
+                        class="w-6 h-6 rounded-full mb-1 relative overflow-hidden"
+                        :style="{ background: getColorBackground('spotted') }"
+                      ></div>
+                      <span class="text-xs text-center">Autre</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -664,7 +652,6 @@
                   v-model="formData.distinctive_features"
                   @input="filterFeatures"
                   @focus="showFeatureSuggestions = true"
-                  @keydown.enter.prevent="addCustomFeature"
                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
                   placeholder="Rechercher un signe distinctif..."
                 />
@@ -685,6 +672,10 @@
                   </div>
                 </div>
               </div>
+              <p class="text-xs text-gray-500 mt-1 mb-2">
+                Cliquez sur les signes distinctifs ci-dessous pour les ajouter
+                ou les supprimer
+              </p>
               <div
                 class="flex flex-wrap gap-2 mt-2 max-h-40 overflow-y-auto p-2 border border-gray-200 rounded-lg"
               >
@@ -725,7 +716,7 @@
                   class="px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-600 cursor-pointer hover:bg-gray-200"
                   @click="toggleMoreFeatures"
                 >
-                  {{ showAllFeatures ? "Voir moins" : "+" }}
+                  {{ showAllFeatures ? "Voir moins" : "..." }}
                 </div>
                 <div
                   v-if="visibleFeatures.length === 0"
@@ -751,7 +742,7 @@
                 >
                   {{ tag }}
                   <button
-                    @click="removeTag(tag, index)"
+                    @click="removeTag(index)"
                     class="ml-2 hover:text-primary-dark"
                   >
                     <svg
@@ -811,25 +802,18 @@
               <label class="block text-sm font-medium text-gray-700 mb-1"
                 >Adresse</label
               >
-              <div class="relative flex">
+              <div class="relative">
                 <input
                   type="text"
                   v-model="formData.location.address"
                   @input="filterAddresses"
                   @focus="showAddressSuggestions = true"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
-                  :placeholder="formData.userAddress || 'Rue, numéro...'"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
+                  placeholder="Rue, numéro..."
                 />
-                <button
-                  @click="useUserAddress"
-                  class="px-3 py-2 bg-secondary text-white rounded-r-lg hover:bg-secondary-dark transition-colors"
-                  title="Utiliser mon adresse personnelle"
-                >
-                  +
-                </button>
                 <div
                   v-if="showAddressSuggestions && filteredAddresses.length > 0"
-                  class="absolute z-10 w-full mt-1 top-full left-0 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto"
+                  class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto"
                 >
                   <div
                     v-for="(address, index) in filteredAddresses"
@@ -1277,7 +1261,6 @@ const formData = ref({
   tags: [],
   reward_offered: false,
   reward_amount: 0,
-  userAddress: "", // Adresse personnelle de l'utilisateur
 });
 
 // Propriété calculée pour les caractéristiques visibles
@@ -1492,13 +1475,6 @@ const selectCity = (city) => {
   showCitySuggestions.value = false;
 };
 
-// Utiliser l'adresse personnelle de l'utilisateur pour l'adresse du signalement
-const useUserAddress = () => {
-  if (formData.value.userAddress) {
-    formData.value.location.address = formData.value.userAddress;
-  }
-};
-
 // Ajouter ou supprimer un signe distinctif de la liste
 const toggleFeature = (feature) => {
   const index = selectedFeatures.value.indexOf(feature);
@@ -1537,7 +1513,8 @@ const toggleMoreFeatures = () => {
 };
 
 // Supprimer un tag de la liste des tags
-const removeTag = (tag, index) => {
+const removeTag = (index) => {
+  const tag = formData.value.tags[index];
   formData.value.tags.splice(index, 1);
 
   // Si le tag est aussi dans les caractéristiques sélectionnées, le supprimer
@@ -1556,80 +1533,5 @@ const removeTag = (tag, index) => {
 
   // Fermer les suggestions
   showFeatureSuggestions.value = false;
-};
-
-// Fonction pour sélectionner le statut du signalement (perdu ou trouvé)
-const selectStatus = (status) => {
-  formData.value.status = status;
-  currentStep.value = 2;
-};
-
-// Ajouter un signe distinctif personnalisé
-const addCustomFeature = () => {
-  if (!formData.value.distinctive_features.trim()) return;
-
-  const customFeature = formData.value.distinctive_features.trim();
-
-  // Vérifier si le feature existe déjà
-  if (!selectedFeatures.value.includes(customFeature)) {
-    // Ajouter le feature personnalisé
-    selectedFeatures.value.push(customFeature);
-
-    // Ajouter le feature comme tag
-    if (!formData.value.tags.includes(customFeature)) {
-      formData.value.tags.push(customFeature);
-    }
-  }
-
-  // Réinitialiser le champ
-  formData.value.distinctive_features = "";
-
-  // Mettre à jour les suggestions
-  filterFeatures();
-
-  // Fermer les suggestions
-  showFeatureSuggestions.value = false;
-};
-
-// Soumettre le formulaire
-const submitForm = async () => {
-  try {
-    isSubmitting.value = true;
-
-    // Vérifier les champs obligatoires
-    if (!formData.value.status) {
-      alert("Veuillez indiquer si le chat est perdu ou trouvé.");
-      isSubmitting.value = false;
-      return;
-    }
-
-    if (!formData.value.location.city) {
-      alert("Veuillez indiquer la ville où le chat a été perdu/trouvé.");
-      isSubmitting.value = false;
-      return;
-    }
-
-    // Préparer les données pour la soumission
-    const petData = {
-      ...formData.value,
-      userId: auth.currentUser.uid,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-
-    // Créer le signalement
-    const petId = await petService.createPet(petData);
-    submittedPetId.value = petId;
-
-    // Rediriger vers la page de détails du signalement
-    router.push({ name: "PetDetailsPage", params: { id: petId } });
-  } catch (error) {
-    console.error("Erreur lors de la création du signalement:", error);
-    alert(
-      "Une erreur est survenue lors de la création du signalement. Veuillez réessayer."
-    );
-  } finally {
-    isSubmitting.value = false;
-  }
 };
 </script>
