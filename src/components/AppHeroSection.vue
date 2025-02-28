@@ -87,11 +87,24 @@
                 class="aspect-[577/310] w-[36.0625rem] bg-gradient-to-r from-primary-light to-secondary opacity-30 animate-blob animation-delay-4000"
               ></div>
             </div>
-            <img
-              src="https://placehold.co/350x700/f8fafc/475569?text=Animal+Search+App"
-              alt="Application Animal Search"
-              class="w-full h-auto drop-shadow-2xl rounded-[3rem]"
-            />
+            <div
+              class="phone-container overflow-hidden rounded-[3rem] h-[600px] relative"
+            >
+              <div
+                class="phone-screen animate-scroll"
+                :style="{
+                  transform: `translateY(${
+                    Math.max(-scrollY, -400) * 0.2 - scrollOffset
+                  }px)`,
+                }"
+              >
+                <img
+                  src="/img/fullscreen-home.png"
+                  alt="Application Animal Search"
+                  class="w-full drop-shadow-2xl"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -100,7 +113,33 @@
 </template>
 
 <script setup>
-// Pas de logique spécifique nécessaire pour cette section
+import { ref, onMounted, onUnmounted } from "vue";
+
+const scrollY = ref(0);
+const scrollOffset = ref(0);
+let animationId = null;
+
+const handleScroll = () => {
+  scrollY.value = window.scrollY;
+};
+
+const animateScroll = () => {
+  // Animation douce automatique
+  scrollOffset.value = (scrollOffset.value + 0.3) % 200; // Défilement plus lent et moins profond
+  animationId = requestAnimationFrame(animateScroll);
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+  animateScroll(); // Démarrer l'animation automatique
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+  }
+});
 </script>
 
 <style scoped>
@@ -129,5 +168,17 @@
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+.phone-container {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 10px solid #293a42;
+  position: relative;
+  z-index: 1;
+}
+
+.phone-screen {
+  height: 1000px; /* Plus grand que le conteneur pour permettre le défilement */
+  transition: transform 0.05s linear;
 }
 </style>
