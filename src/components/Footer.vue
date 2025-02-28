@@ -2,7 +2,27 @@
   <footer class="bg-primary">
     <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-        <img class="h-9" src="/logo-blanc-1141.png" alt="Whisker" />
+        <div>
+          <div class="flex items-center gap-2">
+            <img
+              class="h-12 w-auto brightness-100 sepia-[.25] hue-rotate-[310deg] saturate-[.9]"
+              src="/logo-blanc-1141.png"
+              alt="Whisker Logo"
+            />
+            <div class="flex items-baseline gap-1">
+              <span class="font-sans font-bold text-white text-xl"
+                >Whisker</span
+              >
+              <span class="font-serif text-secondary text-xl">Quest</span>
+            </div>
+          </div>
+          <p
+            class="mt-4 text-sm text-primary-light font-sans max-w-xs leading-relaxed"
+          >
+            Whisker Quest est une plateforme dédiée à la recherche et au
+            signalement des chats perdus ou trouvés.
+          </p>
+        </div>
         <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>

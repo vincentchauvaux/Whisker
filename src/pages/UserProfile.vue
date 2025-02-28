@@ -50,9 +50,10 @@
                 class="absolute bottom-0 left-0 w-full transform translate-y-1/2 flex justify-center"
               >
                 <img
-                  :src="userData.photoURL || '/default-avatar.png'"
+                  :src="userData.photoURL"
                   alt="Photo de profil"
                   class="w-32 h-32 rounded-full border-4 border-white object-cover"
+                  @error="handleProfileImageError"
                 />
               </div>
             </div>
@@ -179,6 +180,428 @@
                 </div>
               </div>
 
+              <!-- Badges et accomplissements -->
+              <div class="mt-8 border-t border-gray-200 pt-8">
+                <h2 class="text-xl font-semibold text-primary font-serif mb-4">
+                  Badges et accomplissements
+                </h2>
+
+                <div v-if="userBadges.length === 0" class="text-center py-6">
+                  <p class="text-gray-500 font-sans">
+                    {{
+                      isCurrentUser
+                        ? "Vous n'avez pas encore obtenu de badges."
+                        : "Cet utilisateur n'a pas encore obtenu de badges."
+                    }}
+                  </p>
+                  <p class="text-sm text-gray-400 mt-2 font-sans">
+                    Participez activement à la communauté pour débloquer des
+                    badges.
+                  </p>
+                </div>
+
+                <div
+                  v-else
+                  class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4"
+                >
+                  <!-- Badge: Explorateur urbain -->
+                  <div
+                    v-if="userBadges.includes('explorer')"
+                    class="flex flex-col items-center p-3 rounded-lg bg-blue-100 hover:shadow-md transition-shadow group relative"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center mb-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-10 w-10 text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <polygon
+                          points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"
+                        />
+                      </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-center">
+                      Explorateur urbain
+                    </h3>
+                    <div
+                      class="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 mb-2 w-48 text-center"
+                    >
+                      Obtenu en signalant un chat errant dans votre quartier
+                    </div>
+                  </div>
+
+                  <!-- Badge: Gardien des animaux -->
+                  <div
+                    v-if="userBadges.includes('guardian')"
+                    class="flex flex-col items-center p-3 rounded-lg bg-green-100 hover:shadow-md transition-shadow group relative"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-green-600 flex items-center justify-center mb-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-10 w-10 text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-center">
+                      Gardien des animaux
+                    </h3>
+                    <div
+                      class="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 mb-2 w-48 text-center"
+                    >
+                      Obtenu en trouvant un animal perdu et en créant une alerte
+                    </div>
+                  </div>
+
+                  <!-- Badge: Samaritain communautaire -->
+                  <div
+                    v-if="userBadges.includes('samaritan')"
+                    class="flex flex-col items-center p-3 rounded-lg bg-orange-100 hover:shadow-md transition-shadow group relative"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center mb-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-10 w-10 text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+                        />
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                      </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-center">
+                      Samaritain communautaire
+                    </h3>
+                    <div
+                      class="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 mb-2 w-48 text-center"
+                    >
+                      Obtenu en aidant un voisin à signaler un chat trouvé
+                    </div>
+                  </div>
+
+                  <!-- Badge: Détective des poils -->
+                  <div
+                    v-if="userBadges.includes('detective')"
+                    class="flex flex-col items-center p-3 rounded-lg bg-yellow-100 hover:shadow-md transition-shadow group relative"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-yellow-500 flex items-center justify-center mb-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-10 w-10 text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                      </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-center">
+                      Détective des poils
+                    </h3>
+                    <div
+                      class="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 mb-2 w-48 text-center"
+                    >
+                      Obtenu en comparant les particularités d'un animal trouvé
+                    </div>
+                  </div>
+
+                  <!-- Badge: Contributeur assidu -->
+                  <div
+                    v-if="userBadges.includes('contributor')"
+                    class="flex flex-col items-center p-3 rounded-lg bg-blue-100 hover:shadow-md transition-shadow group relative"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-blue-800 flex items-center justify-center mb-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-10 w-10 text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <rect
+                          x="3"
+                          y="4"
+                          width="18"
+                          height="18"
+                          rx="2"
+                          ry="2"
+                        />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                      </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-center">
+                      Contributeur assidu
+                    </h3>
+                    <div
+                      class="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 mb-2 w-48 text-center"
+                    >
+                      Obtenu en se connectant quotidiennement pour suivre les
+                      signalements
+                    </div>
+                  </div>
+
+                  <!-- Badge: Diplomate des chats -->
+                  <div
+                    v-if="userBadges.includes('diplomat')"
+                    class="flex flex-col items-center p-3 rounded-lg bg-purple-100 hover:shadow-md transition-shadow group relative"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-purple-500 flex items-center justify-center mb-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-10 w-10 text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                      </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-center">
+                      Diplomate des chats
+                    </h3>
+                    <div
+                      class="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 mb-2 w-48 text-center"
+                    >
+                      Obtenu en aidant à résoudre un conflit concernant la
+                      propriété d'un chat
+                    </div>
+                  </div>
+
+                  <!-- Badge: Garde-forestier -->
+                  <div
+                    v-if="userBadges.includes('ranger')"
+                    class="flex flex-col items-center p-3 rounded-lg bg-green-100 hover:shadow-md transition-shadow group relative"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-green-800 flex items-center justify-center mb-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-10 w-10 text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M17 22v-2a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2" />
+                        <path d="M12 2v7" />
+                        <path d="M8 9l4 4 4-4" />
+                      </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-center">
+                      Garde-forestier
+                    </h3>
+                    <div
+                      class="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 mb-2 w-48 text-center"
+                    >
+                      Obtenu en signalant un animal perdu dans une zone boisée
+                    </div>
+                  </div>
+
+                  <!-- Badge: Éducateur animalier -->
+                  <div
+                    v-if="userBadges.includes('educator')"
+                    class="flex flex-col items-center p-3 rounded-lg bg-gray-100 hover:shadow-md transition-shadow group relative"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center mb-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-10 w-10 text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                      </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-center">
+                      Éducateur animalier
+                    </h3>
+                    <div
+                      class="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 mb-2 w-48 text-center"
+                    >
+                      Obtenu en publiant un article éducatif sur les soins aux
+                      chats errants
+                    </div>
+                  </div>
+
+                  <!-- Badge: Ami des animaux -->
+                  <div
+                    v-if="userBadges.includes('friend')"
+                    class="flex flex-col items-center p-3 rounded-lg bg-pink-100 hover:shadow-md transition-shadow group relative"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-pink-500 flex items-center justify-center mb-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-10 w-10 text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                        />
+                      </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-center">
+                      Ami des animaux
+                    </h3>
+                    <div
+                      class="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 mb-2 w-48 text-center"
+                    >
+                      Obtenu en adoptant un animal signalé et en partageant des
+                      nouvelles de sa vie
+                    </div>
+                  </div>
+
+                  <!-- Badge: Chasseur de trésors -->
+                  <div
+                    v-if="userBadges.includes('treasure')"
+                    class="flex flex-col items-center p-3 rounded-lg bg-amber-100 hover:shadow-md transition-shadow group relative"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-amber-600 flex items-center justify-center mb-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-10 w-10 text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M4 7V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3" />
+                        <path d="M20 14v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3" />
+                        <path d="M2 7h20v7H2z" />
+                      </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-center">
+                      Chasseur de trésors
+                    </h3>
+                    <div
+                      class="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 mb-2 w-48 text-center"
+                    >
+                      Obtenu en trouvant un animal avec une particularité rare
+                    </div>
+                  </div>
+
+                  <!-- Badge: Vétéran des sauvetages -->
+                  <div
+                    v-if="userBadges.includes('veteran')"
+                    class="flex flex-col items-center p-3 rounded-lg bg-blue-100 hover:shadow-md transition-shadow group relative"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-blue-700 flex items-center justify-center mb-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-10 w-10 text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <circle cx="12" cy="8" r="7" />
+                        <polyline
+                          points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"
+                        />
+                      </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-center">
+                      Vétéran des sauvetages
+                    </h3>
+                    <div
+                      class="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 mb-2 w-48 text-center"
+                    >
+                      Obtenu en participant à plusieurs sauvetages réussis
+                    </div>
+                  </div>
+
+                  <!-- Badge: Éclaireur nocturne -->
+                  <div
+                    v-if="userBadges.includes('night')"
+                    class="flex flex-col items-center p-3 rounded-lg bg-gray-800 hover:shadow-md transition-shadow group relative"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mb-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-10 w-10 text-yellow-300"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                        />
+                      </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-center text-white">
+                      Éclaireur nocturne
+                    </h3>
+                    <div
+                      class="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 mb-2 w-48 text-center"
+                    >
+                      Obtenu en repérant un animal errant tard dans la nuit
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-6 bg-gray-50 p-4 rounded-lg">
+                  <h3 class="text-sm font-medium text-gray-700 mb-2">
+                    À propos des badges
+                  </h3>
+                  <p class="text-xs text-gray-600">
+                    Les badges sont attribués automatiquement en fonction de vos
+                    actions sur la plateforme. Passez votre souris sur un badge
+                    pour découvrir comment l'obtenir. Continuez à participer
+                    activement pour débloquer de nouveaux badges !
+                  </p>
+                </div>
+              </div>
+
               <div class="mt-8 border-t border-gray-200 pt-8">
                 <h2 class="text-xl font-semibold text-primary font-serif mb-4">
                   {{
@@ -198,7 +621,7 @@
                   </p>
                   <button
                     v-if="isCurrentUser"
-                    @click="router.push('/')"
+                    @click="router.push('/signalement')"
                     class="mt-4 px-4 py-2 bg-secondary text-white rounded-full hover:bg-secondary-dark transition-colors"
                   >
                     Créer un signalement
@@ -469,6 +892,19 @@ const userPets = ref([]);
 const loading = ref(true);
 const isCurrentUser = ref(true);
 
+// Badges de l'utilisateur (données en dur pour démonstration)
+const userBadges = ref([
+  "explorer", // Explorateur urbain
+  "guardian", // Gardien des animaux
+  "detective", // Détective des poils
+  "friend", // Ami des animaux
+  "contributor", // Contributeur assidu
+  "samaritan", // Samaritain communautaire
+  "night", // Éclaireur nocturne
+  "treasure", // Chasseur de trésors
+  "veteran", // Vétéran des sauvetages
+]);
+
 // Modals
 const showBannerModal = ref(false);
 const showProfileModal = ref(false);
@@ -548,6 +984,13 @@ onMounted(async () => {
 
       // Initialiser les formulaires avec les données existantes
       initForms();
+
+      // Forcer le rechargement de l'image de profil si nécessaire
+      if (userData.value && userData.value.photoURL) {
+        console.log("URL de l'image de profil:", userData.value.photoURL);
+        // Ne pas ajouter de timestamp qui peut causer des problèmes
+        // Laisser le service userService gérer correctement l'URL
+      }
     }
   } catch (error) {
     console.error("Erreur lors du chargement des données utilisateur:", error);
@@ -639,6 +1082,37 @@ const logout = async () => {
     router.push("/");
   } catch (error) {
     console.error("Erreur lors de la déconnexion:", error);
+  }
+};
+
+const handleProfileImageError = (event) => {
+  console.error(
+    "Erreur lors du chargement de l'image de profil:",
+    event.target.src
+  );
+
+  // Vérifier si l'URL est une URL Google
+  const src = event.target.src;
+  if (src && src.includes("googleusercontent.com")) {
+    // Essayer une approche simple sans paramètres de temps ni de taille
+    const baseUrl = src.split("=")[0];
+    const newUrl = baseUrl + "=s96-c"; // Taille standard qui fonctionne bien
+
+    console.log("Tentative avec URL simplifiée:", newUrl);
+    event.target.src = newUrl;
+
+    // Ajouter un gestionnaire pour cette nouvelle tentative
+    event.target.onerror = () => {
+      console.error(
+        "Échec avec l'URL simplifiée, utilisation de l'image par défaut"
+      );
+      event.target.src = "/logo-nb-transparent.png";
+      // Supprimer le gestionnaire pour éviter les boucles
+      event.target.onerror = null;
+    };
+  } else {
+    // Pour les autres types d'URL ou si la tentative alternative a échoué
+    event.target.src = "/logo-nb-transparent.png";
   }
 };
 </script>

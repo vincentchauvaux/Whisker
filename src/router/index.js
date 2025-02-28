@@ -38,6 +38,11 @@ const routes = [
     component: FoundPetsPage,
   },
   {
+    path: "/signalement",
+    name: "SignalementPage",
+    component: () => import("../pages/signalement.vue"),
+  },
+  {
     path: "/pet/:id",
     name: "PetDetails",
     redirect: (to) => {

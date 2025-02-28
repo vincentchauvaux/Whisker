@@ -24,10 +24,24 @@ export const userService = {
       const userRef = doc(db, COLLECTION_NAME, user.uid);
       const userDoc = await getDoc(userRef);
 
+      // Correction pour les URL d'images Google qui peuvent avoir des problèmes de CORS
+      let photoURL = user.photoURL;
+      if (photoURL && photoURL.includes("googleusercontent.com")) {
+        // Approche simple : utiliser l'URL de base sans paramètres
+        if (photoURL.includes("=")) {
+          photoURL = photoURL.split("=")[0];
+        }
+
+        // Ajouter un paramètre de taille plus petit qui fonctionne mieux
+        photoURL = photoURL + "=s96-c";
+
+        console.log("URL d'image Google modifiée:", photoURL);
+      }
+
       const userData = {
         email: user.email,
         displayName: user.displayName || "Utilisateur",
-        photoURL: user.photoURL || null,
+        photoURL: photoURL || null,
         lastLogin: Timestamp.now(),
       };
 

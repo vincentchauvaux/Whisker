@@ -2,7 +2,7 @@
   <MainLayout>
     <div class="bg-white">
       <main class="container mx-auto px-4 py-12">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-7xl mx-auto mt-16">
           <div class="text-center mb-12">
             <h1 class="text-4xl font-bold text-primary mb-4 font-serif">
               Tous nos amis à quatre pattes

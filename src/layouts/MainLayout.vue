@@ -4,7 +4,7 @@
     <Header />
 
     <!-- Main Content -->
-    <main class="flex-grow pt-20">
+    <main class="flex-grow">
       <slot />
     </main>
 

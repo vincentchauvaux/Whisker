@@ -9,7 +9,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDj67jvbns5fRsFepsugjEHRThgi7yCOrM",
   authDomain: "whikser-a5580.firebaseapp.com",
   projectId: "whikser-a5580",
-  storageBucket: "whikser-a5580.firebasestorage.app",
+  storageBucket: "whikser-a5580.appspot.com",
   messagingSenderId: "755105843888",
   appId: "1:755105843888:web:a41ec068f30eabd2a18975",
   measurementId: "G-M921298DP2",

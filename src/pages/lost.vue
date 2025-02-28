@@ -1,6 +1,6 @@
 <template>
   <MainLayout>
-    <div class="bg-white min-h-screen">
+    <div class="bg-white min-h-screen mt-16">
       <PetList status="lost" />
     </div>
   </MainLayout>

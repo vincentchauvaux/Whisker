@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white">
-    <div class="relative isolate pt-14">
+    <div class="relative isolate pt-24">
       <svg
         class="absolute inset-0 -z-10 size-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
         aria-hidden="true"
