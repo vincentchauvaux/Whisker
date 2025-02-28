@@ -3,7 +3,19 @@
     <div class="bg-white">
       <main>
         <HeroSection />
-        <SearchAppSection />
+        <SearchAppSection>
+          <template #app-link>
+            <div class="mt-4">
+              <router-link
+                to="/app-mobile"
+                class="text-sm font-semibold leading-6 text-secondary hover:text-secondary-dark font-sans"
+              >
+                Découvrir notre application mobile
+                <span aria-hidden="true">→</span>
+              </router-link>
+            </div>
+          </template>
+        </SearchAppSection>
         <FoundFriendsSection />
         <MapSection />
         <LostFriendsSection />

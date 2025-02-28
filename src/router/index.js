@@ -8,6 +8,8 @@ import PetsIndex from "../pages/pets/index.vue";
 import PetDetailsPage from "../pages/pets/[id].vue";
 import LostPetsPage from "../pages/lost.vue";
 import FoundPetsPage from "../pages/found.vue";
+import AppMobilePage from "../pages/app-mobile.vue";
+import HowItWorksPage from "../pages/how-it-works.vue";
 
 // Navigation guard pour les routes protégées
 const requireAuth = (to, from, next) => {
@@ -36,6 +38,16 @@ const routes = [
     path: "/found",
     name: "FoundPets",
     component: FoundPetsPage,
+  },
+  {
+    path: "/app-mobile",
+    name: "AppMobile",
+    component: AppMobilePage,
+  },
+  {
+    path: "/how-it-works",
+    name: "HowItWorks",
+    component: HowItWorksPage,
   },
   {
     path: "/signalement",

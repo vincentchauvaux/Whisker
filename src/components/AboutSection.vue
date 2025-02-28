@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-hidden bg-white py-24 sm:py-32">
+  <div id="about" class="overflow-hidden bg-white py-24 sm:py-32">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl">
         <p class="text-base/7 font-semibold text-primary font-serif">

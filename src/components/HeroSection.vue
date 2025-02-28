@@ -41,7 +41,7 @@
             >
               <span class="font-semibold text-primary font-serif">Nouveau</span>
               <span class="h-4 w-px bg-gray-900/10" aria-hidden="true" />
-              <a href="#" class="flex items-center gap-x-1 font-sans">
+              <a href="/app-mobile" class="flex items-center gap-x-1 font-sans">
                 <span class="absolute inset-0" aria-hidden="true" />
                 Application mobile disponible
                 <svg
@@ -77,7 +77,7 @@
               >Commencer</a
             >
             <a
-              href="#"
+              href="#about"
               class="text-sm/6 font-semibold text-secondary hover:text-secondary-dark font-sans"
               >En savoir plus <span aria-hidden="true">→</span></a
             >

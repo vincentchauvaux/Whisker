@@ -35,13 +35,14 @@
             >
               Télécharger l'app
             </a>
-            <a
-              href="#"
+            <router-link
+              to="/how-it-works"
               class="text-sm font-semibold leading-6 text-secondary hover:text-secondary-dark font-sans"
             >
               Comment ça marche <span aria-hidden="true">→</span>
-            </a>
+            </router-link>
           </div>
+          <slot name="app-link"></slot>
         </div>
 
         <div class="relative flex items-center rounded-2xl shadow-2xl">
