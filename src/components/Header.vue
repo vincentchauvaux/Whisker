@@ -7,7 +7,7 @@
         : 'bg-transparent',
     ]"
   >
-    <div class="mx-auto px-4">
+    <div class="mx-auto max-w-7xl px-4 md:px-8">
       <nav
         class="flex items-center justify-between py-2 md:py-6"
         aria-label="Global"

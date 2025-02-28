@@ -1,6 +1,6 @@
 <template>
   <MainLayout>
-    <div class="bg-white min-h-screen">
+    <div class="bg-white min-h-screen mt-16">
       <main class="container mx-auto px-4 py-12">
         <!-- État de chargement -->
         <div v-if="loading" class="flex justify-center items-center py-24">
