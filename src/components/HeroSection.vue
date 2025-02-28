@@ -71,13 +71,14 @@
             propriétaires, refuges et communautés locales.
           </p>
           <div class="mt-10 flex items-center gap-x-6">
-            <a
-              href="#"
+            <button
+              @click="handleCommencer"
               class="rounded-full bg-secondary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary font-sans"
-              >Commencer</a
             >
+              Commencer
+            </button>
             <a
-              href="#about"
+              href="/how-it-works"
               class="text-sm/6 font-semibold text-secondary hover:text-secondary-dark font-sans"
               >En savoir plus <span aria-hidden="true">→</span></a
             >
@@ -120,11 +121,93 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal de connexion -->
+    <div
+      v-if="showLoginModal"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
+        <h2 class="text-xl font-bold mb-4 text-primary font-serif">
+          Connexion
+        </h2>
+
+        <form @submit.prevent="login" class="space-y-4">
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="email"
+              v-model="loginForm.email"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              for="password"
+              class="block text-sm font-medium text-gray-700"
+              >Mot de passe</label
+            >
+            <input
+              type="password"
+              id="password"
+              v-model="loginForm.password"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+              required
+            />
+          </div>
+
+          <p v-if="loginError" class="text-red-500 text-sm">{{ loginError }}</p>
+
+          <div class="flex justify-between">
+            <button
+              type="button"
+              @click="showLoginModal = false"
+              class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
+            >
+              Annuler
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary-dark"
+            >
+              Se connecter
+            </button>
+          </div>
+
+          <div class="text-center text-sm text-gray-500">
+            <a href="/register" class="text-primary hover:text-primary-dark"
+              >Créer un compte</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
+import { useRouter } from "vue-router";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
+const router = useRouter();
+const auth = getAuth();
+const isLoggedIn = ref(false);
+const showLoginModal = ref(false);
+const loginForm = ref({
+  email: "",
+  password: "",
+});
+const loginError = ref("");
 
 const scrollY = ref(0);
 
@@ -132,8 +215,37 @@ const handleScroll = () => {
   scrollY.value = window.scrollY;
 };
 
+const handleCommencer = () => {
+  if (isLoggedIn.value) {
+    router.push("/signalement");
+  } else {
+    showLoginModal.value = true;
+  }
+};
+
+const login = async () => {
+  try {
+    loginError.value = "";
+    await signInWithEmailAndPassword(
+      auth,
+      loginForm.value.email,
+      loginForm.value.password
+    );
+    showLoginModal.value = false;
+    router.push("/signalement");
+  } catch (error) {
+    console.error("Erreur de connexion:", error);
+    loginError.value = "Email ou mot de passe incorrect";
+  }
+};
+
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
+
+  // Vérifier l'état de l'authentification
+  onAuthStateChanged(auth, (user) => {
+    isLoggedIn.value = !!user;
+  });
 });
 
 onUnmounted(() => {
