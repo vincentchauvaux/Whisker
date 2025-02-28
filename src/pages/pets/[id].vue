@@ -273,6 +273,169 @@
                   </div>
                 </div>
               </div>
+
+              <!-- Calendrier de santé simplifié -->
+              <div class="bg-white rounded-xl shadow-sm p-8 mb-8">
+                <h2 class="text-xl font-bold text-gray-900 mb-6 font-serif">
+                  Calendrier de santé
+                </h2>
+
+                <!-- Navigation du calendrier -->
+                <div class="flex justify-between items-center mb-4">
+                  <button
+                    @click="previousMonth"
+                    class="p-1 rounded-full hover:bg-gray-100"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-gray-600"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 19l-7-7 7-7"
+                      />
+                    </svg>
+                  </button>
+                  <h3 class="text-lg font-medium text-gray-800">
+                    {{ currentMonthName }} {{ currentYear }}
+                  </h3>
+                  <button
+                    @click="nextMonth"
+                    class="p-1 rounded-full hover:bg-gray-100"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-gray-600"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <!-- Jours de la semaine -->
+                <div class="grid grid-cols-7 gap-1 mb-2">
+                  <div
+                    v-for="day in weekDays"
+                    :key="day"
+                    class="text-center text-xs font-medium text-gray-500 py-1"
+                  >
+                    {{ day }}
+                  </div>
+                </div>
+
+                <!-- Jours du mois -->
+                <div class="grid grid-cols-7 gap-1 mb-6">
+                  <div
+                    v-for="(day, index) in calendarDays"
+                    :key="index"
+                    :class="[
+                      'relative h-10 flex items-center justify-center rounded-full cursor-pointer',
+                      day.isCurrentMonth
+                        ? 'text-gray-800'
+                        : 'text-gray-400 bg-gray-50',
+                      day.isToday ? 'bg-primary-light' : '',
+                      day.hasEvent ? 'font-bold' : '',
+                    ]"
+                    @click="selectDay(day)"
+                  >
+                    <span>{{ day.number }}</span>
+                    <div
+                      v-if="day.hasEvent"
+                      class="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex space-x-1"
+                    >
+                      <span
+                        v-if="day.hasVetVisit"
+                        class="w-2 h-2 rounded-full bg-red-500"
+                        title="Visite vétérinaire"
+                      ></span>
+                      <span
+                        v-if="day.hasVaccination"
+                        class="w-2 h-2 rounded-full bg-blue-500"
+                        title="Vaccination"
+                      ></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Événements du jour sélectionné -->
+                <div v-if="selectedDayEvents.length > 0">
+                  <h4 class="font-medium text-gray-800 mb-3">
+                    Événements du {{ formatSelectedDay }}
+                  </h4>
+                  <div class="space-y-3">
+                    <div
+                      v-for="event in selectedDayEvents"
+                      :key="event.id"
+                      class="border border-gray-200 rounded-lg p-3 hover:shadow-sm transition-shadow"
+                    >
+                      <div class="flex items-center gap-2">
+                        <div
+                          :class="[
+                            'p-1.5 rounded-full',
+                            event.type === 'vet_visit'
+                              ? 'bg-red-100'
+                              : 'bg-blue-100',
+                          ]"
+                        >
+                          <svg
+                            v-if="event.type === 'vet_visit'"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 text-red-600"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path
+                              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"
+                            />
+                          </svg>
+                          <svg
+                            v-else
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 text-blue-600"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path
+                              d="M12.5 2c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5zM12.5 6c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5zM12.5 10c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5zM12.5 14c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5zM12.5 18c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5z"
+                            />
+                          </svg>
+                        </div>
+                        <div class="flex-1">
+                          <div class="flex justify-between">
+                            <h5 class="font-medium text-gray-800 text-sm">
+                              {{ event.title }}
+                            </h5>
+                          </div>
+                          <p
+                            v-if="event.description"
+                            class="text-xs text-gray-600 mt-1 line-clamp-1"
+                          >
+                            {{ event.description }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div v-else-if="selectedDay" class="text-center py-4">
+                  <p class="text-gray-500 text-sm">
+                    Aucun événement prévu pour cette date
+                  </p>
+                </div>
+              </div>
             </div>
 
             <!-- Sidebar avec informations de contact -->
@@ -409,6 +572,152 @@
                 </p>
               </div>
 
+              <!-- Calendrier de santé -->
+              <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                <h2 class="text-xl font-bold text-gray-900 mb-4 font-serif">
+                  Calendrier de santé
+                </h2>
+
+                <div class="space-y-4">
+                  <!-- Prochains rendez-vous -->
+                  <div
+                    v-for="(event, index) in healthEvents"
+                    :key="index"
+                    class="border border-gray-200 rounded-lg p-3 hover:shadow-sm transition-shadow"
+                  >
+                    <div class="flex items-start gap-3">
+                      <div
+                        :class="[
+                          'p-2 rounded-full',
+                          event.type === 'vet_visit'
+                            ? 'bg-red-100'
+                            : 'bg-blue-100',
+                        ]"
+                      >
+                        <!-- Icône patte avec croix pour visite vétérinaire -->
+                        <svg
+                          v-if="event.type === 'vet_visit'"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5 text-red-600"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"
+                          />
+                        </svg>
+                        <!-- Icône seringue pour vaccination -->
+                        <svg
+                          v-else
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5 text-blue-600"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path
+                            d="M12.5 2c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5zM12.5 6c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5zM12.5 10c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5zM12.5 14c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5zM12.5 18c-0.28 0-0.5 0.22-0.5 0.5v2c0 0.28 0.22 0.5 0.5 0.5s0.5-0.22 0.5-0.5v-2c0-0.28-0.22-0.5-0.5-0.5z"
+                          />
+                        </svg>
+                      </div>
+                      <div class="flex-1">
+                        <div class="flex justify-between">
+                          <h4 class="font-medium text-gray-800">
+                            {{ event.title }}
+                          </h4>
+                          <span class="text-sm text-gray-500">{{
+                            formatDate(event.date, true)
+                          }}</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-1">
+                          {{ event.description }}
+                        </p>
+                        <div class="flex items-center mt-2">
+                          <span
+                            :class="[
+                              'text-xs px-2 py-1 rounded-full',
+                              event.type === 'vet_visit'
+                                ? 'bg-red-100 text-red-800'
+                                : 'bg-blue-100 text-blue-800',
+                            ]"
+                          >
+                            {{
+                              event.type === "vet_visit"
+                                ? "Visite vétérinaire"
+                                : "Vaccination"
+                            }}
+                          </span>
+                        </div>
+                      </div>
+                      <div v-if="isCurrentUserPet" class="flex space-x-1">
+                        <button
+                          @click="editEvent(event)"
+                          class="p-1 text-gray-500 hover:text-primary"
+                          title="Modifier"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                            />
+                          </svg>
+                        </button>
+                        <button
+                          @click="deleteEvent(event.id)"
+                          class="p-1 text-gray-500 hover:text-red-500"
+                          title="Supprimer"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="isCurrentUserPet" class="mt-4">
+                  <button
+                    @click="showAddEventModal = true"
+                    class="w-full bg-secondary text-white py-2 px-4 rounded-lg font-medium hover:bg-secondary-dark transition-colors flex items-center justify-center gap-2"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 4v16m8-8H4"
+                      />
+                    </svg>
+                    Ajouter un événement
+                  </button>
+                </div>
+              </div>
+
               <!-- Signaler -->
               <div class="bg-white rounded-xl shadow-sm p-6">
                 <h2 class="text-xl font-bold text-gray-900 mb-4 font-serif">
@@ -447,6 +756,102 @@
         </div>
       </main>
     </div>
+
+    <!-- Modal pour ajouter/modifier un événement de santé -->
+    <div
+      v-if="showAddEventModal"
+      class="fixed inset-0 z-50 overflow-y-auto"
+      aria-modal="true"
+    >
+      <div
+        class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      >
+        <div
+          class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+          @click="showAddEventModal = false"
+        ></div>
+
+        <div
+          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        >
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <h3 class="text-lg font-medium text-gray-900 font-serif mb-4">
+              {{
+                editingEvent ? "Modifier l'événement" : "Ajouter un événement"
+              }}
+            </h3>
+
+            <form @submit.prevent="saveEvent" class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Type d'événement
+                </label>
+                <select
+                  v-model="eventForm.type"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  required
+                >
+                  <option value="vet_visit">Visite vétérinaire</option>
+                  <option value="vaccination">Vaccination</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Titre
+                </label>
+                <input
+                  type="text"
+                  v-model="eventForm.title"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  required
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Date
+                </label>
+                <input
+                  type="date"
+                  v-model="eventForm.date"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  required
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Description
+                </label>
+                <textarea
+                  v-model="eventForm.description"
+                  rows="3"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button
+              type="button"
+              @click="saveEvent"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              {{ editingEvent ? "Mettre à jour" : "Ajouter" }}
+            </button>
+            <button
+              type="button"
+              @click="showAddEventModal = false"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Annuler
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </MainLayout>
 </template>
 
@@ -468,6 +873,50 @@ const loading = ref(false);
 const error = ref(null);
 const currentImageIndex = ref(0);
 const petOwner = ref(null);
+const showAddEventModal = ref(false);
+const editingEvent = ref(null);
+const currentDate = ref(new Date());
+const selectedDay = ref(null);
+const weekDays = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+
+// Formulaire pour les événements de santé
+const eventForm = ref({
+  type: "vet_visit",
+  title: "",
+  date: "",
+  description: "",
+});
+
+// Données en dur pour les événements de santé
+const healthEvents = ref([
+  {
+    id: 1,
+    type: "vet_visit",
+    title: "Visite annuelle",
+    date: new Date(new Date().setDate(new Date().getDate() + 15)), // Dans 15 jours
+    description: "Visite annuelle de contrôle et vaccins",
+  },
+  {
+    id: 2,
+    type: "vaccination",
+    title: "Rappel vaccin rage",
+    date: new Date(new Date().setDate(new Date().getDate() + 45)), // Dans 45 jours
+    description: "Rappel du vaccin contre la rage",
+  },
+  {
+    id: 3,
+    type: "vet_visit",
+    title: "Contrôle dentaire",
+    date: new Date(new Date().setDate(new Date().getDate() + 30)), // Dans 30 jours
+    description: "Vérification de l'état des dents et détartrage si nécessaire",
+  },
+]);
+
+// Vérifier si l'utilisateur connecté est le propriétaire de l'animal
+const isCurrentUserPet = computed(() => {
+  const currentUser = userStore.currentUser;
+  return currentUser && pet.value && pet.value.userId === currentUser.uid;
+});
 
 // Obtenir l'ID du chat depuis les paramètres de route
 const petId = computed(() => route.params.id);
@@ -567,6 +1016,74 @@ const getInitials = (name) => {
     .join("");
 };
 
+// Éditer un événement existant
+const editEvent = (event) => {
+  editingEvent.value = event;
+  eventForm.value = {
+    type: event.type,
+    title: event.title,
+    date: new Date(event.date).toISOString().split("T")[0],
+    description: event.description || "",
+  };
+  showAddEventModal.value = true;
+};
+
+// Réinitialiser le formulaire
+const resetForm = () => {
+  editingEvent.value = null;
+  eventForm.value = {
+    type: "vet_visit",
+    title: "",
+    date: "",
+    description: "",
+  };
+};
+
+// Sauvegarder un événement (ajout ou modification)
+const saveEvent = () => {
+  // Vérifier que les champs obligatoires sont remplis
+  if (!eventForm.value.title || !eventForm.value.date) {
+    alert("Veuillez remplir tous les champs obligatoires");
+    return;
+  }
+
+  if (editingEvent.value) {
+    // Mise à jour d'un événement existant
+    const index = healthEvents.value.findIndex(
+      (e) => e.id === editingEvent.value.id
+    );
+    if (index !== -1) {
+      healthEvents.value[index] = {
+        ...editingEvent.value,
+        ...eventForm.value,
+        date: new Date(eventForm.value.date),
+      };
+    }
+  } else {
+    // Création d'un nouvel événement
+    const newId = Math.max(0, ...healthEvents.value.map((e) => e.id)) + 1;
+    healthEvents.value.push({
+      id: newId,
+      ...eventForm.value,
+      date: new Date(eventForm.value.date),
+    });
+  }
+
+  // Trier les événements par date
+  healthEvents.value.sort((a, b) => a.date - b.date);
+
+  // Fermer le modal et réinitialiser le formulaire
+  showAddEventModal.value = false;
+  resetForm();
+};
+
+// Supprimer un événement
+const deleteEvent = (eventId) => {
+  if (confirm("Êtes-vous sûr de vouloir supprimer cet événement ?")) {
+    healthEvents.value = healthEvents.value.filter((e) => e.id !== eventId);
+  }
+};
+
 // Observer les changements d'ID pour recharger les données
 watch(petId, () => {
   loadPetDetails();
@@ -576,4 +1093,138 @@ watch(petId, () => {
 onMounted(() => {
   loadPetDetails();
 });
+
+// Calendrier
+const currentMonthName = computed(() => {
+  const months = [
+    "Janvier",
+    "Février",
+    "Mars",
+    "Avril",
+    "Mai",
+    "Juin",
+    "Juillet",
+    "Août",
+    "Septembre",
+    "Octobre",
+    "Novembre",
+    "Décembre",
+  ];
+  return months[currentDate.value.getMonth()];
+});
+
+const currentYear = computed(() => {
+  return currentDate.value.getFullYear();
+});
+
+const calendarDays = computed(() => {
+  const year = currentDate.value.getFullYear();
+  const month = currentDate.value.getMonth();
+
+  // Premier jour du mois
+  const firstDay = new Date(year, month, 1);
+  // Dernier jour du mois
+  const lastDay = new Date(year, month + 1, 0);
+
+  // Ajuster pour commencer par lundi (1) au lieu de dimanche (0)
+  let dayOfWeek = firstDay.getDay() || 7;
+  dayOfWeek = dayOfWeek - 1; // 0 pour lundi, 6 pour dimanche
+
+  const days = [];
+
+  // Jours du mois précédent
+  const prevMonthLastDay = new Date(year, month, 0).getDate();
+  for (let i = dayOfWeek - 1; i >= 0; i--) {
+    days.push({
+      number: prevMonthLastDay - i,
+      isCurrentMonth: false,
+      isToday: false,
+      hasEvent: false,
+      date: new Date(year, month - 1, prevMonthLastDay - i),
+    });
+  }
+
+  // Jours du mois actuel
+  const today = new Date();
+  for (let i = 1; i <= lastDay.getDate(); i++) {
+    const date = new Date(year, month, i);
+
+    // Vérifier si ce jour a des événements
+    const dayEvents = healthEvents.value.filter((event) => {
+      const eventDate = new Date(event.date);
+      return (
+        eventDate.getDate() === i &&
+        eventDate.getMonth() === month &&
+        eventDate.getFullYear() === year
+      );
+    });
+
+    days.push({
+      number: i,
+      isCurrentMonth: true,
+      isToday:
+        today.getDate() === i &&
+        today.getMonth() === month &&
+        today.getFullYear() === year,
+      hasEvent: dayEvents.length > 0,
+      hasVetVisit: dayEvents.some((e) => e.type === "vet_visit"),
+      hasVaccination: dayEvents.some((e) => e.type === "vaccination"),
+      date: new Date(year, month, i),
+    });
+  }
+
+  // Jours du mois suivant
+  const remainingDays = 42 - days.length; // 6 semaines complètes
+  for (let i = 1; i <= remainingDays; i++) {
+    days.push({
+      number: i,
+      isCurrentMonth: false,
+      isToday: false,
+      hasEvent: false,
+      date: new Date(year, month + 1, i),
+    });
+  }
+
+  return days;
+});
+
+const selectedDayEvents = computed(() => {
+  if (!selectedDay.value) return [];
+
+  return healthEvents.value.filter((event) => {
+    const eventDate = new Date(event.date);
+    const selectedDate = new Date(selectedDay.value.date);
+    return (
+      eventDate.getDate() === selectedDate.getDate() &&
+      eventDate.getMonth() === selectedDate.getMonth() &&
+      eventDate.getFullYear() === selectedDate.getFullYear()
+    );
+  });
+});
+
+const formatSelectedDay = computed(() => {
+  if (!selectedDay.value) return "";
+
+  const options = { day: "numeric", month: "long" };
+  return new Date(selectedDay.value.date).toLocaleDateString("fr-FR", options);
+});
+
+// Navigation du calendrier
+const previousMonth = () => {
+  const date = new Date(currentDate.value);
+  date.setMonth(date.getMonth() - 1);
+  currentDate.value = date;
+  selectedDay.value = null;
+};
+
+const nextMonth = () => {
+  const date = new Date(currentDate.value);
+  date.setMonth(date.getMonth() + 1);
+  currentDate.value = date;
+  selectedDay.value = null;
+};
+
+const selectDay = (day) => {
+  selectedDay.value = day;
+};
 </script>

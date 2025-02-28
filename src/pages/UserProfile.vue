@@ -249,6 +249,18 @@
                 </div>
               </div>
 
+              <!-- Calendrier de santé des animaux -->
+              <div
+                v-if="userPets.length > 0"
+                class="mt-8 border-t border-gray-200 pt-8"
+              >
+                <PetHealthCalendar
+                  :userId="userData.id"
+                  :userPets="userPets"
+                  :isCurrentUser="isCurrentUser"
+                />
+              </div>
+
               <div v-if="isCurrentUser" class="mt-8 flex justify-center">
                 <button
                   @click="logout"
@@ -449,6 +461,7 @@ import { signOut } from "firebase/auth";
 import { userService } from "../services/userService";
 import { petService } from "../services/petService";
 import MainLayout from "../layouts/MainLayout.vue";
+import PetHealthCalendar from "../components/PetHealthCalendar.vue";
 
 const router = useRouter();
 const userData = ref(null);

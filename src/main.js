@@ -10,12 +10,34 @@ import {
 import { userStore } from "./stores/userStore";
 import { petStore } from "./stores/petStore";
 
+// Import Toast
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+
 const app = createApp(App);
 
 // Use Firebase plugin
 app.use(FirebasePlugin);
 // Use router
 app.use(router);
+// Use Toast
+app.use(Toast, {
+  transition: "Vue-Toastification__bounce",
+  maxToasts: 5,
+  newestOnTop: true,
+  position: "top-right",
+  timeout: 3000,
+  closeOnClick: true,
+  pauseOnFocusLoss: true,
+  pauseOnHover: true,
+  draggable: true,
+  draggablePercent: 0.6,
+  showCloseButtonOnHover: false,
+  hideProgressBar: false,
+  closeButton: "button",
+  icon: true,
+  rtl: false,
+});
 
 // Rendre les stores disponibles globalement
 app.config.globalProperties.$userStore = userStore;

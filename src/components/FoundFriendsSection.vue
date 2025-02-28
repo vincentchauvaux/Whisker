@@ -70,8 +70,9 @@ const formattedPets = computed(() => {
   return foundPets.value.map((pet) => {
     // Calculer la durée depuis la création
     const createdDate = pet.createdAt?.toDate() || new Date();
+    const foundDate = pet.found_date?.toDate() || createdDate;
     const now = new Date();
-    const diffTime = Math.abs(now - createdDate);
+    const diffTime = Math.abs(now - foundDate);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
     // Formater la date
@@ -93,10 +94,14 @@ const formattedPets = computed(() => {
         pet.images && pet.images.length > 0
           ? pet.images[0]
           : "https://via.placeholder.com/400x300?text=Pas+d%27image",
-      location: pet.last_seen_location?.address || "Lieu inconnu",
+      location:
+        pet.found_location?.address ||
+        pet.found_location?.city ||
+        "Lieu inconnu",
       date: formattedDate,
-      duration: "Trouvé sur la voie publique",
-      tags: [pet.breed, pet.color, "Indemne"].filter(Boolean),
+      duration: `Trouvé depuis ${diffDays} jour${diffDays > 1 ? "s" : ""}`,
+      tags:
+        pet.tags || [pet.breed, pet.color, pet.age_estimate].filter(Boolean),
       name: pet.name || "Sans nom",
     };
   });
