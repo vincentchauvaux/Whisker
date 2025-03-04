@@ -1,4 +1,3 @@
-import { petService } from "../services/petService";
 import { db } from "../firebase/config";
 import {
   collection,
@@ -11,7 +10,7 @@ import {
   Timestamp,
 } from "firebase/firestore";
 
-// Données des utilisateurs fictifs
+// Données des utilisateurs fictifs avec badges
 const sampleUsers = [
   {
     id: "user1",
@@ -20,6 +19,8 @@ const sampleUsers = [
     photoURL: "https://randomuser.me/api/portraits/women/1.jpg",
     createdAt: Timestamp.now(),
     lastLogin: Timestamp.now(),
+    badges: ["explorer", "guardian", "samaritan", "detective"],
+    petsCount: 0, // Sera mis à jour lors de la création des animaux
   },
   {
     id: "user2",
@@ -28,6 +29,8 @@ const sampleUsers = [
     photoURL: "https://randomuser.me/api/portraits/men/2.jpg",
     createdAt: Timestamp.now(),
     lastLogin: Timestamp.now(),
+    badges: ["explorer", "detective", "contributor"],
+    petsCount: 0,
   },
   {
     id: "user3",
@@ -36,6 +39,8 @@ const sampleUsers = [
     photoURL: "https://randomuser.me/api/portraits/women/3.jpg",
     createdAt: Timestamp.now(),
     lastLogin: Timestamp.now(),
+    badges: ["guardian", "ranger", "educator"],
+    petsCount: 0,
   },
   {
     id: "user4",
@@ -44,6 +49,8 @@ const sampleUsers = [
     photoURL: "https://randomuser.me/api/portraits/men/4.jpg",
     createdAt: Timestamp.now(),
     lastLogin: Timestamp.now(),
+    badges: ["friend", "night", "veteran"],
+    petsCount: 0,
   },
   {
     id: "user5",
@@ -52,6 +59,8 @@ const sampleUsers = [
     photoURL: "https://randomuser.me/api/portraits/women/5.jpg",
     createdAt: Timestamp.now(),
     lastLogin: Timestamp.now(),
+    badges: ["diplomat", "ranger", "friend"],
+    petsCount: 0,
   },
 ];
 
@@ -263,6 +272,9 @@ const catColors = [
   "tacheté brun",
 ];
 
+// Longueurs de poils
+const furLengths = ["Court", "Mi-long", "Long", "Sans poils"];
+
 // Tags pour les chats
 const lostTags = [
   "collier rouge",
@@ -300,6 +312,78 @@ const foundTags = [
   "indemne",
 ];
 
+// Types d'événements de santé
+const healthEventTypes = [
+  "vet_visit", // Visite vétérinaire
+  "vaccination", // Vaccination
+  "medication", // Médicament
+  "grooming", // Toilettage
+  "surgery", // Chirurgie
+  "checkup", // Contrôle de routine
+  "deworming", // Vermifuge
+  "flea_treatment", // Traitement antipuces
+];
+
+// Titres d'événements de santé
+const healthEventTitles = {
+  vet_visit: [
+    "Visite annuelle",
+    "Contrôle de santé",
+    "Consultation vétérinaire",
+    "Examen médical",
+    "Visite de suivi",
+  ],
+  vaccination: [
+    "Vaccin contre la rage",
+    "Vaccin contre le typhus",
+    "Vaccin contre le coryza",
+    "Vaccin contre la leucose",
+    "Rappel de vaccination",
+  ],
+  medication: [
+    "Antibiotiques",
+    "Anti-inflammatoires",
+    "Traitement pour les yeux",
+    "Traitement pour les oreilles",
+    "Médicament pour le cœur",
+  ],
+  grooming: [
+    "Toilettage complet",
+    "Coupe des griffes",
+    "Nettoyage des oreilles",
+    "Bain",
+    "Brossage professionnel",
+  ],
+  surgery: [
+    "Stérilisation",
+    "Castration",
+    "Détartrage",
+    "Extraction dentaire",
+    "Retrait de masse",
+  ],
+  checkup: [
+    "Bilan sanguin",
+    "Contrôle dentaire",
+    "Contrôle du poids",
+    "Examen cardiaque",
+    "Contrôle des yeux",
+  ],
+  deworming: [
+    "Vermifuge intestinal",
+    "Traitement antiparasitaire",
+    "Vermifuge complet",
+    "Traitement préventif",
+    "Vermifuge semestriel",
+  ],
+  flea_treatment: [
+    "Traitement antipuces",
+    "Traitement antitiques",
+    "Pipette antipuces",
+    "Collier antiparasitaire",
+    "Traitement préventif parasites",
+  ],
+};
+
 // Générer un timestamp aléatoire dans les 30 derniers jours
 const getRandomRecentTimestamp = () => {
   const now = new Date();
@@ -314,10 +398,25 @@ const getRandomRecentTimestamp = () => {
   return Timestamp.fromDate(now);
 };
 
+// Générer un timestamp aléatoire dans le futur (pour les événements de santé)
+const getRandomFutureTimestamp = (maxDaysInFuture = 180) => {
+  const now = new Date();
+  const daysInFuture = Math.floor(Math.random() * maxDaysInFuture) + 1;
+
+  now.setDate(now.getDate() + daysInFuture);
+
+  return Timestamp.fromDate(now);
+};
+
 // Fonction pour obtenir des tags aléatoires
 const getRandomTags = (tagsList, count = 3) => {
   const shuffled = [...tagsList].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, Math.max(1, Math.min(count, tagsList.length)));
+};
+
+// Fonction pour obtenir une longueur de poil aléatoire
+const getRandomFurLength = () => {
+  return furLengths[Math.floor(Math.random() * furLengths.length)];
 };
 
 // Générer les chats perdus (10)
@@ -332,6 +431,7 @@ const lostPets = Array.from({ length: 10 }, (_, index) => {
   const colorIndex = Math.floor(Math.random() * catColors.length);
   const gender = Math.random() > 0.5 ? "male" : "female";
   const age = Math.floor(Math.random() * 15) + 1;
+  const furLength = getRandomFurLength();
 
   return {
     id: `lost${index + 1}`,
@@ -342,13 +442,14 @@ const lostPets = Array.from({ length: 10 }, (_, index) => {
     color: catColors[colorIndex],
     age: age,
     gender: gender,
+    fur_length: furLength,
     description: `Chat ${catColors[colorIndex]} de race ${
       catBreeds[breedIndex]
-    }. ${gender === "male" ? "Il" : "Elle"} a ${age} an${
-      age > 1 ? "s" : ""
-    } et ${gender === "male" ? "il" : "elle"} est ${
-      Math.random() > 0.5 ? "très affectueux" : "plutôt timide"
-    }.`,
+    } avec des poils ${furLength.toLowerCase()}. ${
+      gender === "male" ? "Il" : "Elle"
+    } a ${age} an${age > 1 ? "s" : ""} et ${
+      gender === "male" ? "il" : "elle"
+    } est ${Math.random() > 0.5 ? "très affectueux" : "plutôt timide"}.`,
     last_seen_date: timestamp,
     last_seen_location: {
       ...waterlooAddresses[addressIndex],
@@ -382,25 +483,29 @@ const foundPets = Array.from({ length: 10 }, (_, index) => {
   const breedIndex = Math.floor(Math.random() * catBreeds.length);
   const colorIndex = Math.floor(Math.random() * catColors.length);
   const gender = Math.random() > 0.5 ? "male" : "female";
-  const ageEstimate = `${Math.floor(Math.random() * 10) + 1}-${
-    Math.floor(Math.random() * 5) + 2
-  } ans`;
+  const age = Math.floor(Math.random() * 15) + 1;
+  const furLength = getRandomFurLength();
 
   return {
     id: `found${index + 1}`,
     name: Math.random() > 0.3 ? catNames[nameIndex] : "",
     status: "found",
     species: "chat",
-    breed: `Possible ${catBreeds[breedIndex]}`,
+    breed: ` ${catBreeds[breedIndex]}`,
     color: catColors[colorIndex],
-    age_estimate: ageEstimate,
+    age: age,
     gender: gender,
-    description: `Chat ${catColors[colorIndex]} trouvé près de ${
+    fur_length: furLength,
+    description: `Chat ${
+      catColors[colorIndex]
+    } avec des poils ${furLength.toLowerCase()} trouvé près de ${
       waterlooAddresses[addressIndex].address
     }. ${gender === "male" ? "Il" : "Elle"} semble être un ${
       catBreeds[breedIndex]
     } et ${gender === "male" ? "il" : "elle"} est ${
       Math.random() > 0.5 ? "très sociable" : "plutôt craintif"
+    }. ${gender === "male" ? "Il" : "Elle"} a environ ${age} an${
+      age > 1 ? "s" : ""
     }.`,
     found_date: timestamp,
     found_location: {
@@ -424,6 +529,36 @@ const foundPets = Array.from({ length: 10 }, (_, index) => {
   };
 });
 
+// Générer des événements de santé pour les animaux
+const generateHealthEvents = (petId, userId, petName, count = 3) => {
+  return Array.from({ length: count }, (_, index) => {
+    const eventTypeIndex = Math.floor(Math.random() * healthEventTypes.length);
+    const eventType = healthEventTypes[eventTypeIndex];
+    const titles = healthEventTitles[eventType];
+    const titleIndex = Math.floor(Math.random() * titles.length);
+
+    // 50% des événements dans le passé, 50% dans le futur
+    const isInFuture = Math.random() > 0.5;
+    const eventDate = isInFuture
+      ? getRandomFutureTimestamp()
+      : getRandomRecentTimestamp();
+
+    return {
+      id: `health_${petId}_${index + 1}`,
+      petId: petId,
+      userId: userId,
+      petName: petName,
+      type: eventType,
+      title: titles[titleIndex],
+      date: eventDate,
+      description: `Événement de santé pour ${petName}: ${titles[titleIndex]}`,
+      completed: !isInFuture,
+      createdAt: Timestamp.now(),
+      updatedAt: Timestamp.now(),
+    };
+  });
+};
+
 // Fonction pour réinitialiser les données Firebase
 export const resetFirebaseData = async () => {
   try {
@@ -443,6 +578,14 @@ export const resetFirebaseData = async () => {
     const usersSnapshot = await getDocs(usersRef);
 
     usersSnapshot.forEach((doc) => {
+      deletePromises.push(deleteDoc(doc.ref));
+    });
+
+    // Supprimer tous les événements de santé
+    const healthEventsRef = collection(db, "healthEvents");
+    const healthEventsSnapshot = await getDocs(healthEventsRef);
+
+    healthEventsSnapshot.forEach((doc) => {
       deletePromises.push(deleteDoc(doc.ref));
     });
 
@@ -475,19 +618,57 @@ export const initializeFirebaseData = async (forceReset = false) => {
 
     console.log("Initialisation des données Firebase...");
 
+    // Compter les animaux par utilisateur
+    const userPetCounts = {};
+    [...lostPets, ...foundPets].forEach((pet) => {
+      if (!userPetCounts[pet.userId]) {
+        userPetCounts[pet.userId] = 0;
+      }
+      userPetCounts[pet.userId]++;
+    });
+
+    // Mettre à jour le compteur d'animaux pour chaque utilisateur
+    sampleUsers.forEach((user) => {
+      user.petsCount = userPetCounts[user.id] || 0;
+    });
+
     // Ajouter les utilisateurs
     for (const user of sampleUsers) {
       await setDoc(doc(db, "users", user.id), user);
     }
 
-    // Ajouter les chats perdus
+    // Ajouter les chats perdus et leurs événements de santé
+    const healthEvents = [];
     for (const pet of lostPets) {
       await setDoc(doc(db, "pets", pet.id), pet);
+
+      // Générer des événements de santé pour ce chat
+      const petHealthEvents = generateHealthEvents(
+        pet.id,
+        pet.userId,
+        pet.name,
+        Math.floor(Math.random() * 3) + 1 // 1 à 3 événements par chat
+      );
+      healthEvents.push(...petHealthEvents);
     }
 
-    // Ajouter les chats trouvés
+    // Ajouter les chats trouvés et leurs événements de santé
     for (const pet of foundPets) {
       await setDoc(doc(db, "pets", pet.id), pet);
+
+      // Générer des événements de santé pour ce chat
+      const petHealthEvents = generateHealthEvents(
+        pet.id,
+        pet.userId,
+        pet.name || "Chat sans nom",
+        Math.floor(Math.random() * 3) + 1 // 1 à 3 événements par chat
+      );
+      healthEvents.push(...petHealthEvents);
+    }
+
+    // Ajouter tous les événements de santé
+    for (const event of healthEvents) {
+      await setDoc(doc(db, "healthEvents", event.id), event);
     }
 
     console.log("Données Firebase initialisées avec succès");

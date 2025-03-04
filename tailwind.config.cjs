@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          light: "#E9EDF2", // gris clair
+          light: "#CFD4DA", // gris clair
           DEFAULT: "#1B3B44", // bleu-vert foncé
           dark: "#162E35", // version plus foncée du bleu-vert
         },

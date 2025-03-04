@@ -176,7 +176,7 @@ export default {
             image:
               pet.images && pet.images.length > 0
                 ? pet.images[0]
-                : "https://via.placeholder.com/400x300?text=Pas+d%27image",
+                : "/logo-nb-transparent.png",
           };
         });
       } catch (err) {
@@ -242,7 +242,7 @@ export default {
             } transform transition-transform duration-300 hover:scale-110 bg-white shadow-lg cursor-pointer">
               <img src="${cat.image}" alt="${
           cat.title
-        }" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x300?text=Pas+d%27image'" />
+        }" class="w-full h-full object-cover" onerror="this.src='/logo-nb-transparent.png'" />
             </div>
           </div>
         `;
@@ -254,7 +254,7 @@ export default {
             <div class="relative h-48 mb-4 rounded-xl overflow-hidden">
               <img src="${cat.image}" alt="${
           cat.title
-        }" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x300?text=Pas+d%27image'" />
+        }" class="w-full h-full object-cover" onerror="this.src='/logo-nb-transparent.png'" />
               <div class="absolute top-4 left-4">
                 <span class="px-4 py-2 rounded-full text-white font-bold ${
                   cat.type === "lost" ? "bg-red-500" : "bg-green-500"

@@ -9,12 +9,15 @@
             v-model="searchQuery"
             :placeholder="searchPlaceholder"
             class="w-full px-4 py-3 pl-10 bg-white text-gray-700 border-0 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+            @keyup="handleSearchInput"
             @keyup.enter="searchLocation"
+            :disabled="isAddressSearching"
           />
           <div
             class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
           >
             <svg
+              v-if="!isAddressSearching"
               xmlns="http://www.w3.org/2000/svg"
               class="h-5 w-5 text-orange-500"
               fill="none"
@@ -28,26 +31,89 @@
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
-          </div>
-          <button
-            @click="searchLocation"
-            class="absolute inset-y-0 right-0 flex items-center pr-3 text-orange-500 hover:text-orange-700"
-          >
             <svg
+              v-else
+              class="animate-spin h-5 w-5 text-orange-500"
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor"
             >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5l7 7-7 7"
-              />
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
             </svg>
-          </button>
+          </div>
+
+          <!-- Bouton pour rechercher l'adresse -->
+          <div class="absolute inset-y-0 right-0 flex items-center">
+            <!-- Bouton de recherche standard -->
+            <button
+              @click="searchLocation"
+              class="h-full px-3 text-orange-500 hover:text-orange-700 transition-colors"
+              :disabled="isAddressSearching"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Liste d'autocomplétion -->
+          <div
+            v-if="autocompleteResults.length > 0"
+            class="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-lg z-20 max-h-60 overflow-y-auto"
+          >
+            <div
+              v-for="(result, index) in autocompleteResults"
+              :key="index"
+              @click="selectAutocompleteResult(result)"
+              :class="[
+                'px-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-gray-100 last:border-b-0',
+                selectedAutocompleteIndex === index ? 'bg-gray-100' : '',
+              ]"
+            >
+              <div class="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4 text-orange-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                </svg>
+                <span class="text-sm text-gray-700 truncate">{{
+                  result.place_name
+                }}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -64,8 +130,9 @@
           class="px-4 py-2 bg-white text-gray-700 rounded-full shadow-md hover:bg-gray-50 transition-colors flex items-center gap-2 border border-gray-200"
         >
           <svg
+            v-if="!isSearching"
             xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 text-orange-500"
+            class="h-5 w-5 text-orange-500 transition-all duration-300"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -83,7 +150,27 @@
               d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
             />
           </svg>
-          Trouver ma position
+          <svg
+            v-else
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 text-red-500 transition-all duration-300"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+          <span v-if="!isSearching" class="transition-all duration-300"
+            >Trouver ma position</span
+          >
+          <span v-else class="transition-all duration-300"
+            >à {{ displayDistance }} km</span
+          >
         </button>
       </div>
     </div>
@@ -91,7 +178,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, computed, watch, onUnmounted } from "vue";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -113,7 +200,7 @@ export default {
     },
     height: {
       type: String,
-      default: "250px",
+      default: "400px",
     },
     isEditable: {
       type: Boolean,
@@ -127,6 +214,14 @@ export default {
     const marker = ref(null);
     const mapLoaded = ref(false);
     const searchQuery = ref("");
+    const isSearching = ref(false);
+    const isAddressSearching = ref(false);
+    const displayDistance = ref(0);
+    const targetDistance = ref(0);
+    const animationInterval = ref(null);
+    const autocompleteResults = ref([]);
+    const autocompleteTimeout = ref(null);
+    const selectedAutocompleteIndex = ref(-1);
 
     // Placeholder pour la barre de recherche
     const searchPlaceholder = computed(() => {
@@ -147,7 +242,7 @@ export default {
       }
 
       // Valeur par défaut
-      return "39 rue cloquet braine l'alleud";
+      return "Braine-l'Alleud, Belgique";
     });
 
     // Calculer les coordonnées à partir des données utilisateur
@@ -162,8 +257,7 @@ export default {
         return coords;
       }
 
-      // Si l'adresse est "39 rue cloquet braine l'alleud", utiliser ces coordonnées
-      // Ces coordonnées sont approximatives pour Braine-l'Alleud, Belgique
+      // Si aucune coordonnée n'est disponible, utiliser les coordonnées par défaut pour Braine-l'Alleud
       return [4.3687, 50.6837];
     });
 
@@ -241,7 +335,7 @@ export default {
           mapLoaded.value = true;
 
           // Rechercher directement l'adresse spécifique
-          const defaultAddress = "39 rue cloquet braine l'alleud";
+          const defaultAddress = searchPlaceholder.value;
           searchLocation(defaultAddress).then((result) => {
             if (!result) {
               // Si la recherche échoue, utiliser les coordonnées par défaut et le géocodage inverse
@@ -352,7 +446,7 @@ export default {
               props.userData.displayName || "Vincent Chauvaux"
             }</h3>
             <p class="text-sm text-gray-600 break-words">${
-              address || "39 rue cloquet braine l'alleud"
+              address || getLocationText()
             }</p>
           </div>
         `);
@@ -404,7 +498,7 @@ export default {
                   props.userData.displayName || "Vincent Chauvaux"
                 }</h3>
                 <p class="text-sm text-gray-600 break-words">${
-                  address || "39 rue cloquet braine l'alleud"
+                  address || getLocationText()
                 }</p>
               </div>
             `);
@@ -428,20 +522,209 @@ export default {
       if (props.userData.city) parts.push(props.userData.city);
       if (props.userData.country) parts.push(props.userData.country);
 
-      return parts.join(", ") || "Localisation non spécifiée";
+      return parts.join(", ") || searchPlaceholder.value;
     };
 
     // Variable pour stocker l'adresse complète récupérée par géocodage inverse
     const fullAddress = ref("");
 
+    // Gérer la saisie dans le champ de recherche pour l'autocomplétion
+    const handleSearchInput = (event) => {
+      // Gérer la navigation dans la liste d'autocomplétion avec les touches fléchées
+      if (autocompleteResults.value.length > 0) {
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          selectedAutocompleteIndex.value = Math.min(
+            selectedAutocompleteIndex.value + 1,
+            autocompleteResults.value.length - 1
+          );
+          scrollToSelectedItem();
+          return;
+        } else if (event.key === "ArrowUp") {
+          event.preventDefault();
+          selectedAutocompleteIndex.value = Math.max(
+            selectedAutocompleteIndex.value - 1,
+            -1
+          );
+          scrollToSelectedItem();
+          return;
+        } else if (
+          event.key === "Enter" &&
+          selectedAutocompleteIndex.value >= 0
+        ) {
+          event.preventDefault();
+          selectAutocompleteResult(
+            autocompleteResults.value[selectedAutocompleteIndex.value]
+          );
+          return;
+        }
+      }
+
+      // Si l'utilisateur appuie sur Enter et que le champ est vide, rechercher le placeholder
+      if (
+        event.key === "Enter" &&
+        !searchQuery.value.trim() &&
+        searchPlaceholder.value
+      ) {
+        event.preventDefault();
+        searchLocation(searchPlaceholder.value);
+        return;
+      }
+
+      // Fermer la liste d'autocomplétion si l'utilisateur appuie sur Escape
+      if (event.key === "Escape") {
+        autocompleteResults.value = [];
+        selectedAutocompleteIndex.value = -1;
+        return;
+      }
+
+      // Ignorer les autres touches de navigation
+      if (["Enter"].includes(event.key)) {
+        return;
+      }
+
+      const query = searchQuery.value.trim();
+
+      // Effacer les résultats si le champ est vide
+      if (!query) {
+        autocompleteResults.value = [];
+        selectedAutocompleteIndex.value = -1;
+        return;
+      }
+
+      // Utiliser un délai pour éviter trop de requêtes pendant la frappe
+      clearTimeout(autocompleteTimeout.value);
+      autocompleteTimeout.value = setTimeout(() => {
+        fetchAutocompleteResults(query);
+      }, 300);
+    };
+
+    // Faire défiler la liste pour que l'élément sélectionné soit visible
+    const scrollToSelectedItem = () => {
+      if (selectedAutocompleteIndex.value >= 0) {
+        setTimeout(() => {
+          const selectedItem = document.querySelector(".bg-gray-100");
+          if (selectedItem) {
+            selectedItem.scrollIntoView({
+              block: "nearest",
+              behavior: "smooth",
+            });
+          }
+        }, 0);
+      }
+    };
+
+    // Récupérer les suggestions d'autocomplétion
+    const fetchAutocompleteResults = async (query) => {
+      try {
+        const response = await fetch(
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+            query
+          )}.json?access_token=${
+            mapboxgl.accessToken
+          }&limit=5&types=address,place,locality,neighborhood`
+        );
+
+        const data = await response.json();
+
+        if (data.features && data.features.length > 0) {
+          autocompleteResults.value = data.features;
+          selectedAutocompleteIndex.value = -1; // Réinitialiser l'index sélectionné
+        } else {
+          autocompleteResults.value = [];
+          selectedAutocompleteIndex.value = -1;
+        }
+      } catch (error) {
+        console.error("Erreur lors de la récupération des suggestions:", error);
+        autocompleteResults.value = [];
+        selectedAutocompleteIndex.value = -1;
+      }
+    };
+
+    // Sélectionner un résultat d'autocomplétion
+    const selectAutocompleteResult = (result) => {
+      searchQuery.value = result.place_name;
+      autocompleteResults.value = [];
+      selectedAutocompleteIndex.value = -1;
+
+      // Utiliser les coordonnées du résultat sélectionné
+      const newCoords = result.center; // [lng, lat]
+
+      // Mettre à jour la carte et le marqueur
+      if (map.value && mapLoaded.value) {
+        // Centrer la carte sur les nouvelles coordonnées avec une animation
+        map.value.flyTo({
+          center: newCoords,
+          zoom: 14,
+          essential: true,
+          duration: 1500,
+        });
+
+        // Mettre à jour le marqueur
+        updateMarkerPosition(newCoords, result.place_name);
+
+        // Afficher le popup uniquement en mode édition
+        if (marker.value && props.isEditable) {
+          setTimeout(() => {
+            marker.value.togglePopup();
+          }, 1600);
+        }
+
+        // Si éditable, émettre les nouvelles coordonnées
+        if (props.isEditable) {
+          // Extraire les composants de l'adresse
+          let address = "";
+          let city = "";
+          let country = "";
+
+          // Parcourir les contextes pour extraire les informations
+          if (result.context) {
+            result.context.forEach((context) => {
+              if (context.id.startsWith("place.")) {
+                city = context.text;
+              } else if (context.id.startsWith("country.")) {
+                country = context.text;
+              }
+            });
+          }
+
+          // L'adresse est généralement le texte principal du résultat
+          address = result.text || "";
+
+          emit("update:coordinates", {
+            lng: newCoords[0],
+            lat: newCoords[1],
+            fullAddress: result.place_name,
+            address,
+            city,
+            country,
+          });
+        }
+      }
+    };
+
     // Rechercher une localisation
     const searchLocation = async (customQuery = null) => {
-      const query = customQuery || searchQuery.value;
+      // Si aucune requête personnalisée n'est fournie et que le champ est vide,
+      // utiliser le placeholder comme valeur de recherche
+      let query = customQuery;
+      if (!query) {
+        query = searchQuery.value.trim();
+        // Si le champ est toujours vide, utiliser le placeholder
+        if (!query) {
+          query = searchPlaceholder.value;
+        }
+      }
+
       if (!query) return;
 
-      try {
-        // Afficher un indicateur de chargement ou désactiver le bouton ici si nécessaire
+      // Effacer les résultats d'autocomplétion
+      autocompleteResults.value = [];
 
+      // Afficher l'indicateur de chargement
+      isAddressSearching.value = true;
+
+      try {
         const response = await fetch(
           `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
             query
@@ -526,6 +809,9 @@ export default {
       } catch (error) {
         console.error("Erreur lors de la recherche de localisation:", error);
         return null;
+      } finally {
+        // Masquer l'indicateur de chargement
+        isAddressSearching.value = false;
       }
     };
 
@@ -556,7 +842,7 @@ export default {
                   props.userData.displayName || "Vincent Chauvaux"
                 }</h3>
                 <p class="text-sm text-gray-600 break-words">${
-                  fullAddress.value || "39 rue cloquet braine l'alleud"
+                  fullAddress.value || getLocationText()
                 }</p>
               </div>
             `);
@@ -629,7 +915,37 @@ export default {
 
     // Fonction pour trouver la position de l'utilisateur
     const findMyLocation = () => {
+      // Si déjà en recherche, on réinitialise le bouton à son état original
+      if (isSearching.value) {
+        isSearching.value = false;
+        clearInterval(animationInterval.value);
+        return;
+      }
+
       if (navigator.geolocation) {
+        isSearching.value = true;
+        displayDistance.value = 0;
+
+        // Animation du compteur qui monte pendant 2 secondes
+        let startTime = Date.now();
+        const duration = 2000; // 2 secondes
+
+        // Générer une distance aléatoire entre 0.5 et 5 km
+        targetDistance.value = (Math.random() * 4.5 + 0.5).toFixed(1);
+
+        // Démarrer l'animation
+        clearInterval(animationInterval.value);
+        animationInterval.value = setInterval(() => {
+          const elapsed = Date.now() - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+
+          displayDistance.value = (progress * targetDistance.value).toFixed(1);
+
+          if (progress >= 1) {
+            clearInterval(animationInterval.value);
+          }
+        }, 50);
+
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const { longitude, latitude } = position.coords;
@@ -654,12 +970,16 @@ export default {
                   marker.value.togglePopup();
                 }, 1600);
               }
+
+              // L'animation est terminée, on garde l'affichage de la distance
+              // mais on ne réinitialise pas isSearching pour conserver l'icône de croix
             });
           },
           (error) => {
             console.error("Erreur lors de la géolocalisation:", error);
             // Fallback: rechercher l'adresse par défaut
-            searchLocation("39 rue cloquet braine l'alleud");
+            searchLocation(searchPlaceholder.value);
+            isSearching.value = false;
           },
           {
             enableHighAccuracy: true,
@@ -672,12 +992,36 @@ export default {
           "La géolocalisation n'est pas supportée par ce navigateur"
         );
         // Fallback: rechercher l'adresse par défaut
-        searchLocation("39 rue cloquet braine l'alleud");
+        searchLocation(searchPlaceholder.value);
       }
     };
 
     onMounted(() => {
       initializeMap();
+
+      // Ajouter un écouteur d'événement pour fermer la liste d'autocomplétion lorsque l'utilisateur clique en dehors
+      document.addEventListener("click", (event) => {
+        // Vérifier si le clic est en dehors de la barre de recherche et de la liste d'autocomplétion
+        const searchContainer = document.querySelector(
+          ".user-location-map-container"
+        );
+        if (searchContainer && !searchContainer.contains(event.target)) {
+          autocompleteResults.value = [];
+        }
+      });
+
+      // Ajouter un écouteur d'événement pour la touche Escape
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          autocompleteResults.value = [];
+        }
+      });
+    });
+
+    // Nettoyer les écouteurs d'événements lors de la destruction du composant
+    onUnmounted(() => {
+      document.removeEventListener("click", () => {});
+      document.removeEventListener("keydown", () => {});
     });
 
     return {
@@ -692,6 +1036,13 @@ export default {
       getLocationText,
       fullAddress,
       findMyLocation,
+      isSearching,
+      isAddressSearching,
+      displayDistance,
+      autocompleteResults,
+      selectedAutocompleteIndex,
+      handleSearchInput,
+      selectAutocompleteResult,
     };
   },
 };

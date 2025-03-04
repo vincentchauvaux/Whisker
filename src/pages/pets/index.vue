@@ -93,7 +93,7 @@
                     :src="
                       pet.images && pet.images.length > 0
                         ? pet.images[0]
-                        : 'https://via.placeholder.com/400x300?text=Pas+d%27image'
+                        : '/logo-nb-transparent.png'
                     "
                     :alt="pet.name || 'Chat sans nom'"
                     class="w-full h-full object-cover"

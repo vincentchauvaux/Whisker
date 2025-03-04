@@ -397,16 +397,48 @@
               </div>
 
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1"
-                  >Adresse personnelle</label
-                >
-                <div class="relative">
+                <label class="block text-sm font-medium text-gray-700 mb-1">{{
+                  formData.status === "found"
+                    ? "Endroit trouvé"
+                    : "Adresse personnelle"
+                }}</label>
+                <div class="relative flex">
                   <input
                     type="text"
                     v-model="formData.userAddress"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
-                    placeholder="Votre adresse (pour faciliter les signalements)"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
+                    :placeholder="
+                      formData.status === 'found'
+                        ? 'Où avez-vous trouvé ce chat?'
+                        : 'Votre adresse (pour faciliter les signalements)'
+                    "
                   />
+                  <button
+                    @click="getCurrentLocation"
+                    class="px-3 py-2 bg-white text-primary border border-l-0 border-gray-300 rounded-r-lg hover:bg-primary-dark hover:text-white transition-colors"
+                    title="Utiliser ma position actuelle"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
@@ -659,123 +691,103 @@
                 >Signes distinctifs</label
               >
               <div class="relative">
-                <input
-                  type="text"
-                  v-model="formData.distinctive_features"
-                  @input="filterFeatures"
-                  @focus="showFeatureSuggestions = true"
-                  @keydown.enter.prevent="addCustomFeature"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
-                  placeholder="Rechercher un signe distinctif..."
-                />
                 <div
-                  v-if="showFeatureSuggestions && filteredFeatures.length > 0"
-                  class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-secondary focus-within:border-secondary flex flex-wrap gap-2 items-center"
                 >
                   <div
-                    v-for="(feature, index) in filteredFeatures"
+                    v-for="feature in selectedFeatures"
                     :key="feature"
-                    @click="toggleFeature(feature)"
-                    class="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                    :class="{
-                      'bg-primary-light': index === selectedSuggestionIndex,
-                    }"
+                    :class="[
+                      'px-3 py-1 rounded-full text-sm flex items-center cursor-pointer transition-colors',
+                      getTagColorClass(feature),
+                    ]"
                   >
                     {{ feature }}
+                    <span
+                      @click="toggleFeature(feature)"
+                      class="ml-2 hover:text-primary-dark"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </span>
                   </div>
+                  <input
+                    type="text"
+                    v-model="formData.distinctive_features"
+                    @input="filterFeatures"
+                    @focus="
+                      showFeatureSuggestions = true;
+                      filterFeatures();
+                    "
+                    @blur="hideFeatureSuggestions"
+                    @keydown.enter.prevent="addCustomFeature"
+                    class="flex-grow min-w-[120px] outline-none border-none focus:ring-0"
+                    placeholder="Rechercher un signe distinctif..."
+                  />
                 </div>
-              </div>
-              <div
-                class="flex flex-wrap gap-2 mt-2 max-h-40 overflow-y-auto p-2 border border-gray-200 rounded-lg"
-              >
                 <div
-                  v-for="(feature, index) in visibleFeatures"
-                  :key="feature"
-                  @click="toggleFeature(feature)"
-                  :class="[
-                    'px-3 py-1 rounded-full text-sm flex items-center cursor-pointer transition-colors',
-                    selectedFeatures.includes(feature)
-                      ? getTagColorClass(feature)
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
-                  ]"
+                  v-if="showFeatureSuggestions"
+                  class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg p-3"
                 >
-                  {{ feature }}
-                  <span
-                    v-if="selectedFeatures.includes(feature)"
-                    class="ml-2 hover:text-primary-dark"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                  <div class="flex flex-wrap gap-2">
+                    <div
+                      v-for="feature in filteredFeatures"
+                      :key="feature"
+                      @click="toggleFeature(feature)"
+                      :class="[
+                        'px-3 py-1 rounded-full text-sm flex items-center cursor-pointer transition-colors',
+                        selectedFeatures.includes(feature)
+                          ? getTagColorClass(feature)
+                          : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
+                      ]"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </span>
-                </div>
-                <div
-                  v-if="commonFeatures.length > visibleFeatureCount"
-                  class="px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-600 cursor-pointer hover:bg-gray-200"
-                  @click="toggleMoreFeatures"
-                >
-                  {{ showAllFeatures ? "Voir moins" : "+" }}
-                </div>
-                <div
-                  v-if="visibleFeatures.length === 0"
-                  class="text-sm text-gray-500 p-2"
-                >
-                  Aucun signe distinctif disponible
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-6">
-              <h3 class="text-lg font-medium text-gray-900 mb-2">
-                Tags associés
-              </h3>
-              <div class="flex flex-wrap gap-2">
-                <div
-                  v-for="(tag, index) in formData.tags"
-                  :key="index"
-                  :class="[
-                    'px-3 py-1 rounded-full text-sm flex items-center',
-                    getTagColorClass(tag),
-                  ]"
-                >
-                  {{ tag }}
-                  <button
-                    @click="removeTag(tag, index)"
-                    class="ml-2 hover:text-primary-dark"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                      {{ feature }}
+                      <span
+                        v-if="selectedFeatures.includes(feature)"
+                        class="ml-2 hover:text-primary-dark"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+                    <div
+                      v-if="filteredFeatures.length > visibleFeatureCount"
+                      class="px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-600 cursor-pointer hover:bg-gray-200"
+                      @click="toggleMoreFeatures"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div
-                  v-if="formData.tags.length === 0"
-                  class="text-sm text-gray-500"
-                >
-                  Aucun tag ajouté. Les tags seront générés automatiquement à
-                  partir des informations saisies.
+                      {{ showAllFeatures ? "Voir moins" : "+" }}
+                    </div>
+                    <div
+                      v-if="filteredFeatures.length === 0"
+                      class="text-sm text-gray-500 p-2 w-full"
+                    >
+                      Aucun signe distinctif correspondant
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -814,7 +826,7 @@
               <div class="relative flex">
                 <input
                   type="text"
-                  v-model="formData.location.address"
+                  v-model="formData.last_seen_location.address"
                   @input="filterAddresses"
                   @focus="showAddressSuggestions = true"
                   class="w-full px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
@@ -854,7 +866,7 @@
                 <div class="relative">
                   <input
                     type="text"
-                    v-model="formData.location.city"
+                    v-model="formData.last_seen_location.city"
                     @input="filterCities"
                     @focus="showCitySuggestions = true"
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
@@ -885,7 +897,7 @@
                 >
                 <input
                   type="text"
-                  v-model="formData.location.region"
+                  v-model="formData.last_seen_location.region"
                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
                   placeholder="Région"
                   value="Bruxelles"
@@ -899,9 +911,57 @@
               >
               <input
                 type="date"
-                v-model="formData.date"
+                v-model="formData.last_seen_date"
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
               />
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
+              <h3 class="text-lg font-medium text-gray-900 mb-3">
+                Informations de contact
+              </h3>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Votre nom</label
+                  >
+                  <input
+                    type="text"
+                    v-model="formData.contact.name"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
+                    placeholder="Nom complet"
+                  />
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Téléphone</label
+                  >
+                  <input
+                    type="tel"
+                    v-model="formData.contact.phone"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
+                    placeholder="+32 XX XXX XX XX"
+                  />
+                </div>
+              </div>
+
+              <div class="mt-3">
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  v-model="formData.contact.email"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
+                  placeholder="votre@email.com"
+                />
+                <p class="text-xs text-gray-500 mt-1">
+                  Ces informations permettront aux personnes intéressées de vous
+                  contacter.
+                </p>
+              </div>
             </div>
 
             <div>
@@ -938,6 +998,12 @@
                   <p class="text-xs text-gray-400 mt-1">
                     Format JPG, PNG - Max 5MB
                   </p>
+                  <button
+                    @click.stop="useDefaultImage"
+                    class="mt-3 text-sm text-primary hover:text-primary-dark underline"
+                  >
+                    Utiliser l'image par défaut
+                  </button>
                 </div>
                 <div v-else-if="isUploadingImage" class="py-4">
                   <div
@@ -953,6 +1019,7 @@
                     :src="formData.images[0]"
                     alt="Preview"
                     class="max-h-48 mx-auto rounded-lg"
+                    @error="$event.target.src = '/logo-nb-transparent.png'"
                   />
                   <button
                     @click.stop="formData.images = []"
@@ -978,16 +1045,6 @@
               <div class="flex mt-2 justify-between text-xs text-gray-400">
                 <p>Formats acceptés : JPG, PNG, GIF</p>
                 <p>Taille maximale : 5 MB par image</p>
-              </div>
-              <!-- Bouton pour utiliser l'image par défaut -->
-              <div class="mt-2 text-center">
-                <button
-                  type="button"
-                  @click.prevent="useDefaultImage"
-                  class="text-sm text-secondary hover:text-secondary-dark transition-colors"
-                >
-                  Utiliser l'image par défaut du chat noir
-                </button>
               </div>
             </div>
 
@@ -1259,25 +1316,37 @@ const commonAddresses = [
 // Initialiser le formulaire avec des valeurs par défaut
 const formData = ref({
   status: "",
-  name: "",
+  name: "", // Nom du chat
+  species: "chat", // Espèce (toujours "chat" dans ce cas)
   breed: "",
   color: "",
   fur_length: "",
   gender: "",
-  age_estimate: "",
-  distinctive_features: "",
-  description: "",
-  location: {
+  age: "", // Âge numérique au lieu de age_estimate
+  description: "", // Description générale du chat
+  distinctive_features: "", // Champ temporaire pour la saisie
+  last_seen_location: {
+    // Remplace location
     address: "",
     city: "",
     region: "Bruxelles",
+    coordinates: {
+      lat: null,
+      lng: null,
+    },
   },
-  date: new Date().toISOString().substr(0, 10),
+  last_seen_date: new Date().toISOString().substr(0, 10), // Remplace date
   images: [],
   tags: [],
+  contact: {
+    // Informations de contact
+    name: "", // Nom du propriétaire/découvreur
+    email: "", // Email de contact
+    phone: "", // Téléphone de contact
+  },
   reward_offered: false,
   reward_amount: 0,
-  userAddress: "", // Adresse personnelle de l'utilisateur
+  userAddress: "", // Adresse personnelle de l'utilisateur (champ temporaire)
 });
 
 // Propriété calculée pour les caractéristiques visibles
@@ -1432,35 +1501,31 @@ const selectBreed = (breed) => {
 const filterFeatures = () => {
   selectedSuggestionIndex.value = 0;
 
-  // Si le champ est vide, afficher tous les signes distinctifs non sélectionnés
+  // Si le champ est vide, afficher tous les signes distinctifs
   if (!formData.value.distinctive_features) {
-    filteredFeatures.value = commonFeatures.filter(
-      (feature) => !selectedFeatures.value.includes(feature)
-    );
+    filteredFeatures.value = commonFeatures;
     return;
   }
 
   // Sinon, filtrer selon la saisie
   const query = formData.value.distinctive_features.toLowerCase();
-  filteredFeatures.value = commonFeatures.filter(
-    (feature) =>
-      feature.toLowerCase().includes(query) &&
-      !selectedFeatures.value.includes(feature)
+  filteredFeatures.value = commonFeatures.filter((feature) =>
+    feature.toLowerCase().includes(query)
   );
 
   // Afficher les suggestions si des résultats sont trouvés
-  showFeatureSuggestions.value = filteredFeatures.value.length > 0;
+  showFeatureSuggestions.value = true;
 };
 
 // Filtrer les adresses en fonction de la saisie
 const filterAddresses = () => {
   selectedSuggestionIndex.value = 0;
-  if (!formData.value.location.address) {
+  if (!formData.value.last_seen_location.address) {
     filteredAddresses.value = [...commonAddresses];
     return;
   }
 
-  const query = formData.value.location.address.toLowerCase();
+  const query = formData.value.last_seen_location.address.toLowerCase();
   filteredAddresses.value = commonAddresses.filter((address) =>
     address.toLowerCase().includes(query)
   );
@@ -1468,19 +1533,19 @@ const filterAddresses = () => {
 
 // Sélectionner une adresse dans la liste
 const selectAddress = (address) => {
-  formData.value.location.address = address;
+  formData.value.last_seen_location.address = address;
   showAddressSuggestions.value = false;
 };
 
 // Filtrer les villes en fonction de la saisie
 const filterCities = () => {
   selectedSuggestionIndex.value = 0;
-  if (!formData.value.location.city) {
+  if (!formData.value.last_seen_location.city) {
     filteredCities.value = [...belgianCities];
     return;
   }
 
-  const query = formData.value.location.city.toLowerCase();
+  const query = formData.value.last_seen_location.city.toLowerCase();
   filteredCities.value = belgianCities.filter((city) =>
     city.toLowerCase().includes(query)
   );
@@ -1488,15 +1553,103 @@ const filterCities = () => {
 
 // Sélectionner une ville dans la liste
 const selectCity = (city) => {
-  formData.value.location.city = city;
+  formData.value.last_seen_location.city = city;
   showCitySuggestions.value = false;
 };
 
 // Utiliser l'adresse personnelle de l'utilisateur pour l'adresse du signalement
 const useUserAddress = () => {
   if (formData.value.userAddress) {
-    formData.value.location.address = formData.value.userAddress;
+    formData.value.last_seen_location.address = formData.value.userAddress;
   }
+};
+
+// Récupérer la position actuelle de l'utilisateur
+const getCurrentLocation = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        try {
+          const { latitude, longitude } = position.coords;
+
+          // Stocker les coordonnées
+          formData.value.last_seen_location.coordinates.lat = latitude;
+          formData.value.last_seen_location.coordinates.lng = longitude;
+
+          // Utiliser l'API de géocodage inverse pour obtenir l'adresse
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=fr`
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+
+            // Extraire les informations d'adresse
+            const address = data.address;
+            let formattedAddress = "";
+
+            if (address.road) {
+              formattedAddress += address.road;
+              if (address.house_number) {
+                formattedAddress += " " + address.house_number;
+              }
+            }
+
+            // Mettre à jour l'adresse personnelle
+            formData.value.userAddress = formattedAddress;
+
+            // Mettre à jour la ville si disponible
+            if (address.city || address.town || address.village) {
+              formData.value.last_seen_location.city =
+                address.city || address.town || address.village;
+            }
+
+            // Mettre à jour la région si disponible
+            if (address.state) {
+              formData.value.last_seen_location.region = address.state;
+            }
+          } else {
+            alert(
+              "Impossible de récupérer l'adresse à partir de vos coordonnées."
+            );
+          }
+        } catch (error) {
+          console.error("Erreur lors de la récupération de l'adresse:", error);
+          alert(
+            "Une erreur est survenue lors de la récupération de votre position."
+          );
+        }
+      },
+      (error) => {
+        console.error("Erreur de géolocalisation:", error);
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            alert("Vous avez refusé l'accès à votre position.");
+            break;
+          case error.POSITION_UNAVAILABLE:
+            alert("Les informations de position ne sont pas disponibles.");
+            break;
+          case error.TIMEOUT:
+            alert("La demande de position a expiré.");
+            break;
+          default:
+            alert(
+              "Une erreur inconnue est survenue lors de la géolocalisation."
+            );
+            break;
+        }
+      }
+    );
+  } else {
+    alert("La géolocalisation n'est pas prise en charge par votre navigateur.");
+  }
+};
+
+// Utiliser une image par défaut pour le signalement
+const useDefaultImage = () => {
+  // Utiliser le logo local comme image par défaut
+  const defaultImageUrl = "/logo-nb-transparent.png";
+  formData.value.images = [defaultImageUrl];
 };
 
 // Ajouter ou supprimer un signe distinctif de la liste
@@ -1529,6 +1682,13 @@ const toggleFeature = (feature) => {
 
   // Fermer les suggestions
   showFeatureSuggestions.value = false;
+};
+
+// Cacher les suggestions de signes distinctifs avec un délai
+const hideFeatureSuggestions = () => {
+  setTimeout(() => {
+    showFeatureSuggestions.value = false;
+  }, 200);
 };
 
 // Afficher plus ou moins de caractéristiques
@@ -1591,6 +1751,25 @@ const addCustomFeature = () => {
   showFeatureSuggestions.value = false;
 };
 
+// Fonction pour passer à l'étape suivante
+const nextStep = () => {
+  // Validation de base pour l'étape 2
+  if (currentStep.value === 2) {
+    if (!formData.value.color) {
+      alert("Veuillez sélectionner une couleur pour le chat.");
+      return;
+    }
+
+    if (!formData.value.age_estimate) {
+      alert("Veuillez sélectionner une estimation d'âge pour le chat.");
+      return;
+    }
+  }
+
+  // Passer à l'étape suivante
+  currentStep.value += 1;
+};
+
 // Soumettre le formulaire
 const submitForm = async () => {
   try {
@@ -1603,10 +1782,59 @@ const submitForm = async () => {
       return;
     }
 
-    if (!formData.value.location.city) {
+    if (!formData.value.last_seen_location.city) {
       alert("Veuillez indiquer la ville où le chat a été perdu/trouvé.");
       isSubmitting.value = false;
       return;
+    }
+
+    // Convertir l'âge en nombre si possible
+    if (formData.value.age_estimate) {
+      // Convertir l'estimation d'âge en valeur numérique approximative
+      switch (formData.value.age_estimate) {
+        case "Chaton":
+          formData.value.age = 0.5; // 6 mois
+          break;
+        case "Jeune":
+          formData.value.age = 1.5; // 1.5 ans
+          break;
+        case "Adulte":
+          formData.value.age = 5; // 5 ans
+          break;
+        case "Senior":
+          formData.value.age = 12; // 12 ans
+          break;
+        default:
+          formData.value.age = null;
+      }
+    }
+
+    // Générer une description automatique si elle n'est pas fournie
+    if (!formData.value.description) {
+      let description = `Chat ${formData.value.color.toLowerCase()} `;
+      if (formData.value.breed) {
+        description += `de race ${formData.value.breed} `;
+      }
+      if (formData.value.fur_length) {
+        description += `avec des poils ${formData.value.fur_length.toLowerCase()}. `;
+      }
+      if (formData.value.age) {
+        description += `Il a ${formData.value.age} ans `;
+      }
+      if (formData.value.tags.length > 0) {
+        description += `et est ${formData.value.tags.join(", ")}.`;
+      }
+      formData.value.description = description;
+    }
+
+    // Récupérer les informations de l'utilisateur connecté pour le contact
+    if (auth.currentUser) {
+      if (!formData.value.contact.email) {
+        formData.value.contact.email = auth.currentUser.email || "";
+      }
+      if (!formData.value.contact.name && auth.currentUser.displayName) {
+        formData.value.contact.name = auth.currentUser.displayName;
+      }
     }
 
     // Préparer les données pour la soumission
@@ -1615,10 +1843,16 @@ const submitForm = async () => {
       userId: auth.currentUser.uid,
       createdAt: new Date(),
       updatedAt: new Date(),
+      last_seen_date: new Date(formData.value.last_seen_date),
     };
 
+    // Supprimer les champs temporaires qui ne doivent pas être stockés
+    delete petData.distinctive_features;
+    delete petData.userAddress;
+    delete petData.age_estimate;
+
     // Créer le signalement
-    const petId = await petService.createPet(petData);
+    const petId = await petService.addPet(petData);
     submittedPetId.value = petId;
 
     // Rediriger vers la page de détails du signalement

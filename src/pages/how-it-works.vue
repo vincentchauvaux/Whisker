@@ -64,10 +64,10 @@
             >
               <div class="text-center">
                 <div
-                  class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-light"
+                  class="mx-auto flex h-12 w-12 items-center justify-center rounded-full"
                 >
                   <svg
-                    class="h-6 w-6 text-primary"
+                    class="h-8 w-8 text-green-500"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
@@ -83,7 +83,7 @@
                 <h3
                   class="mt-3 text-base font-semibold leading-7 text-primary font-serif"
                 >
-                  <span class="text-secondary">25K+</span> Utilisateurs
+                  <span class="text-green-500">25K+</span> Utilisateurs
                 </h3>
                 <p class="mt-2 text-sm leading-6 text-gray-600 font-sans">
                   Une communauté active et engagée à travers l'Europe et au-delà
@@ -92,10 +92,10 @@
 
               <div class="text-center">
                 <div
-                  class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-light"
+                  class="mx-auto flex h-12 w-12 items-center justify-center rounded-full"
                 >
                   <svg
-                    class="h-6 w-6 text-primary"
+                    class="h-8 w-8 text-yellow-500"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
@@ -116,7 +116,7 @@
                 <h3
                   class="mt-3 text-base font-semibold leading-7 text-primary font-serif"
                 >
-                  <span class="text-secondary">150+</span> Villes
+                  <span class="text-yellow-500">150+</span> Villes
                 </h3>
                 <p class="mt-2 text-sm leading-6 text-gray-600 font-sans">
                   Présence dans les principales métropoles et zones urbaines
@@ -125,10 +125,10 @@
 
               <div class="text-center">
                 <div
-                  class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-light"
+                  class="mx-auto flex h-12 w-12 items-center justify-center rounded-full"
                 >
                   <svg
-                    class="h-6 w-6 text-primary"
+                    class="h-8 w-8 text-blue-500"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
@@ -144,7 +144,7 @@
                 <h3
                   class="mt-3 text-base font-semibold leading-7 text-primary font-serif"
                 >
-                  <span class="text-secondary">10+</span> Pays
+                  <span class="text-blue-500">10+</span> Pays
                 </h3>
                 <p class="mt-2 text-sm leading-6 text-gray-600 font-sans">
                   Une présence internationale en constante expansion
@@ -153,10 +153,10 @@
 
               <div class="text-center">
                 <div
-                  class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-light"
+                  class="mx-auto flex h-12 w-12 items-center justify-center rounded-full"
                 >
                   <svg
-                    class="h-6 w-6 text-primary"
+                    class="h-8 w-8 text-gray-400"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
@@ -172,7 +172,7 @@
                 <h3
                   class="mt-3 text-base font-semibold leading-7 text-primary font-serif"
                 >
-                  <span class="text-secondary">5.2K+</span> Succès
+                  <span class="text-gray-400">5.2K+</span> Succès
                 </h3>
                 <p class="mt-2 text-sm leading-6 text-gray-600 font-sans">
                   Animaux retrouvés et réunis avec leurs familles

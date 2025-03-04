@@ -47,7 +47,7 @@
               </button>
 
               <div
-                class="absolute bottom-0 left-0 w-full transform translate-y-1/2 flex justify-center"
+                class="absolute bottom-0 translate-y-1/2 mx-auto right-0 left-0 w-fit"
               >
                 <img
                   :src="userData.photoURL"
@@ -59,97 +59,158 @@
             </div>
 
             <!-- Informations du profil -->
-            <div class="pt-20 pb-8 px-8">
-              <h1
-                class="text-3xl font-bold text-center text-primary font-serif"
-              >
-                {{ userData.displayName }}
-              </h1>
-
-              <!-- Informations de contact -->
-              <div class="mt-4 flex justify-center">
-                <div class="flex flex-wrap justify-center gap-4">
-                  <a
-                    :href="`mailto:${userData.email}`"
-                    class="text-gray-600 hover:text-primary bg-gray-50 transition-all duration-300 flex items-center gap-2 font-sans group px-3 py-1 rounded-full hover:bg-white shadow-sm hover:shadow-lg"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="w-5 h-5 text-primary"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+            <div class="pb-8 px-8">
+              <div class="grid grid-cols-3 gap-2 md:gap-8">
+                <!-- Boutons de contact dans la grille de droite -->
+                <div>
+                  <!-- Boutons de contact style [id].vue -->
+                  <div class="mt-3 flex flex-col gap-3 overflow-hidden">
+                    <a
+                      v-if="userData.contactEmail || userData.email"
+                      :href="`mailto:${
+                        userData.contactEmail || userData.email
+                      }`"
+                      class="group w-fit md:gap-2 px-2 md:px-4 py-2 bg-primary text-white border border-primary rounded-full hover:bg-white hover:text-primary transition-all duration-300 text-sm flex items-center shadow-sm"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      />
-                    </svg>
-                    <span>{{ userData.email }}</span>
-                  </a>
-                  <a
-                    v-if="userData.phone"
-                    :href="`tel:${userData.phone}`"
-                    class="text-gray-600 hover:text-primary bg-gray-50 transition-all duration-300 flex items-center gap-2 font-sans group px-3 py-1 rounded-full hover:bg-white shadow-sm hover:shadow-lg"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="w-5 h-5 text-primary"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                      <svg
+                        class="w-5 h-5 flex-shrink-0"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                      <span
+                        class="overflow-hidden max-w-0 md:max-w-xs md:group-hover:max-w-xs transition-all duration-300 whitespace-nowrap ml-0 group-hover:ml-2"
+                      >
+                        Envoyer un email
+                      </span>
+                    </a>
+                    <a
+                      v-if="userData.phone"
+                      :href="`tel:${userData.phone}`"
+                      class="group md:gap-2 w-fit px-2 md:px-4 py-2 bg-green-500 text-white border border-green-500 rounded-full hover:bg-white hover:text-green-500 transition-all duration-300 text-sm flex items-center shadow-sm"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                      />
-                    </svg>
-                    <span>{{ userData.phone }}</span>
-                  </a>
+                      <svg
+                        class="w-5 h-5 flex-shrink-0"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                      <span
+                        class="overflow-hidden max-w-0 md:max-w-xs md:group-hover:max-w-xs transition-all duration-300 whitespace-nowrap ml-0 group-hover:ml-2"
+                      >
+                        Appeler {{ userData.phone }}
+                      </span>
+                    </a>
+                  </div>
                 </div>
-              </div>
+                <!-- mon display name -->
+                <div class="flex items-end justify-center">
+                  <h1
+                    class="text-2xl lg:text-3xl font-bold text-center text-primary drop-shadow-xl font-serif whitespace-nowrap"
+                  >
+                    {{ userData.displayName }}
+                  </h1>
+                </div>
+                <!-- Informations de localisation -->
+                <div
+                  v-if="userData.address || userData.city || userData.country"
+                  class="flex justify-end"
+                >
+                  <!-- Informations textuelles de localisation -->
+                  <div class="mt-3">
+                    <div
+                      class="grid grid-cols-1 gap-2 overflow-hidden items-start"
+                    >
+                      <div
+                        v-if="userData.address"
+                        class="flex items-center gap-2 -translate-x-[-80%] md:hover:translate-x-0 transition-all duration-300"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5 text-primary-light self-end flex-shrink-0"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                          />
+                        </svg>
 
-              <!-- Boutons de contact style [id].vue -->
-              <div class="mt-6 flex flex-col gap-3 max-w-md mx-auto">
-                <a
-                  :href="`mailto:${userData.email}`"
-                  class="w-full bg-primary text-white py-3 px-4 rounded-lg font-medium hover:bg-primary-dark transition-colors flex items-center justify-center gap-2"
-                >
-                  <svg
-                    class="w-5 h-5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                  Contacter par email
-                </a>
-                <a
-                  v-if="userData.phone"
-                  :href="`tel:${userData.phone}`"
-                  class="w-full bg-green-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-green-600 transition-colors flex items-center justify-center gap-2"
-                >
-                  <svg
-                    class="w-5 h-5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                  Appeler
-                </a>
+                        <p class="font-medium text-gray-900 whitespace-nowrap">
+                          {{ userData.address }}
+                        </p>
+                      </div>
+
+                      <div
+                        v-if="userData.city"
+                        class="flex items-center gap-2 -translate-x-[-80%] md:hover:translate-x-0 transition-all duration-300"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5 text-primary-light self-end flex-shrink-0"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          />
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
+
+                        <p class="font-medium text-gray-900 whitespace-nowrap">
+                          {{ userData.city }}
+                        </p>
+                      </div>
+
+                      <div
+                        v-if="userData.country"
+                        class="flex items-center gap-2 -translate-x-[-80%] md:hover:translate-x-0 transition-all duration-300"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5 text-primary-light self-end flex-shrink-0"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+
+                        <p class="font-medium text-gray-900 whitespace-nowrap">
+                          {{ userData.country }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div class="mt-8 border-t border-gray-200 pt-8">
@@ -157,15 +218,50 @@
                   <h2 class="text-xl font-semibold text-primary font-serif">
                     Informations du compte
                   </h2>
+                  <!-- Bouton d'administration (visible uniquement pour l'utilisateur avec l'email spécifique) -->
+                  <button
+                    v-if="
+                      isCurrentUser &&
+                      userData.email === 'vincent.chauvaux@gmail.com'
+                    "
+                    @click="router.push('/admin')"
+                    class="group ml-2 px-2 md:px-4 py-2 bg-white text-red-600 border border-red-600 rounded-full hover:bg-red-600 hover:text-white transition-colors text-sm flex items-center md:gap-1 shadow-sm"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                    <p
+                      class="overflow-hidden max-w-0 md:max-w-xs group-hover:max-w-xs transition-all duration-300 whitespace-nowrap ml-0 group-hover:ml-2"
+                    >
+                      Administration
+                    </p>
+                  </button>
                   <!-- Bouton pour modifier le profil (visible uniquement pour l'utilisateur actuel) -->
                   <button
                     v-if="isCurrentUser"
                     @click="showEditProfileModal"
-                    class="px-4 py-2 bg-white text-primary border border-primary rounded-full hover:bg-primary hover:text-white transition-colors text-sm flex items-center gap-1 shadow-sm"
+                    class="group px-2 md:px-4 py-2 bg-white text-primary border border-primary rounded-full hover:bg-primary hover:text-white transition-colors text-sm flex items-center md:gap-1 shadow-sm"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-4 w-4"
+                      class="h-5 w-5"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -177,7 +273,11 @@
                         d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
                       />
                     </svg>
-                    Modifier mon profil
+                    <p
+                      class="overflow-hidden max-w-0 md:max-w-xs group-hover:max-w-xs transition-all duration-300 whitespace-nowrap ml-0 group-hover:ml-2"
+                    >
+                      Modifier mon profil
+                    </p>
                   </button>
                 </div>
 
@@ -208,7 +308,7 @@
                     class="mt-6"
                   >
                     <h3
-                      class="text-lg font-semibold text-primary font-serif mb-3"
+                      class="text-xl font-semibold text-primary font-serif mb-3"
                     >
                       Information de localisation
                     </h3>
@@ -218,89 +318,6 @@
                       :isEditable="false"
                       height="250px"
                     />
-
-                    <!-- Informations textuelles de localisation -->
-                    <div class="mt-3 bg-gray-50 rounded-lg p-4 shadow-sm">
-                      <div class="grid grid-cols-3 gap-4">
-                        <div
-                          v-if="userData.address"
-                          class="flex items-center gap-2"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 text-primary"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                            />
-                          </svg>
-                          <div>
-                            <span class="text-xs text-gray-500">Adresse</span>
-                            <p class="font-medium text-gray-900">
-                              {{ userData.address }}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div
-                          v-if="userData.city"
-                          class="flex items-center gap-2"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 text-primary"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                            />
-                          </svg>
-                          <div>
-                            <span class="text-xs text-gray-500">Ville</span>
-                            <p class="font-medium text-gray-900">
-                              {{ userData.city }}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div
-                          v-if="userData.country"
-                          class="flex items-center gap-2"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 text-primary"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg>
-                          <div>
-                            <span class="text-xs text-gray-500">Pays</span>
-                            <p class="font-medium text-gray-900">
-                              {{ userData.country }}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
 
                   <!-- Site web -->
@@ -770,16 +787,49 @@
                   </div>
                 </div>
 
-                <div class="mt-6 bg-gray-50 p-4 rounded-lg">
-                  <h3 class="text-sm font-medium text-gray-700 mb-2">
-                    À propos des badges
-                  </h3>
-                  <p class="text-xs text-gray-600">
-                    Les badges sont attribués automatiquement en fonction de vos
-                    actions sur la plateforme. Passez votre souris sur un badge
-                    pour découvrir comment l'obtenir. Continuez à participer
-                    activement pour débloquer de nouveaux badges !
-                  </p>
+                <div
+                  class="mt-6 bg-gray-50 p-4 rounded-lg relative group"
+                  @mouseenter="clearBadgeInfoTimeout"
+                  @mouseleave="startBadgeInfoTimeout"
+                >
+                  <div class="flex justify-between items-center">
+                    <h3 class="text-sm font-medium text-gray-700">
+                      À propos des badges
+                    </h3>
+                    <button @click="toggleBadgeInfo" class="focus:outline-none">
+                      <svg
+                        :class="[
+                          'w-5 h-5 text-gray-500 transition-transform duration-300',
+                          badgeInfoVisible ? 'transform rotate-180' : '',
+                        ]"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <transition
+                    name="badge-info"
+                    @enter="startBadgeInfoEnterAnimation"
+                    @leave="startBadgeInfoLeaveAnimation"
+                  >
+                    <p
+                      v-if="badgeInfoVisible"
+                      class="text-xs text-gray-600 mt-2 overflow-hidden"
+                    >
+                      Les badges sont attribués automatiquement en fonction de
+                      vos actions sur la plateforme. Passez votre souris sur un
+                      badge pour découvrir comment l'obtenir. Continuez à
+                      participer activement pour débloquer de nouveaux badges !
+                    </p>
+                  </transition>
                 </div>
               </div>
 
@@ -826,7 +876,7 @@
                           :src="
                             pet.images && pet.images.length > 0
                               ? pet.images[0]
-                              : '/default-cat.jpg'
+                              : '/logo-nb-transparent.png'
                           "
                           alt="Photo de l'animal"
                           class="w-20 h-20 object-cover rounded-lg"
@@ -1085,6 +1135,22 @@
                   class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                 />
               </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Email de contact</label
+                >
+                <input
+                  type="email"
+                  v-model="profileForm.contactEmail"
+                  placeholder="contact@exemple.com"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                />
+                <p class="mt-1 text-xs text-gray-500">
+                  Cet email sera utilisé pour les boutons de contact. Si vide,
+                  votre email de connexion sera utilisé.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -1156,6 +1222,7 @@ const profileForm = ref({
   country: "",
   website: "",
   coordinates: null,
+  contactEmail: "", // Ajout d'un champ pour l'email de contact
 });
 
 // Style calculé pour la bannière
@@ -1261,6 +1328,7 @@ const initProfileForm = () => {
     country: userData.value.country || "",
     website: userData.value.website || "",
     coordinates: userData.value.coordinates || null,
+    contactEmail: userData.value.contactEmail || userData.value.email || "", // Utiliser l'email de contact s'il existe, sinon l'email de connexion
   };
 };
 
@@ -1300,6 +1368,7 @@ const saveProfile = async () => {
       country: profileForm.value.country,
       website: profileForm.value.website,
       coordinates: profileForm.value.coordinates,
+      contactEmail: profileForm.value.contactEmail, // Ajout de l'email de contact
     });
 
     // Mettre à jour les données locales
@@ -1312,6 +1381,7 @@ const saveProfile = async () => {
       country: profileForm.value.country,
       website: profileForm.value.website,
       coordinates: profileForm.value.coordinates,
+      contactEmail: profileForm.value.contactEmail, // Ajout de l'email de contact
     };
 
     showProfileModal.value = false;
@@ -1418,6 +1488,7 @@ const updateCoordinates = (data) => {
           if (address) profileForm.value.address = address;
           if (city) profileForm.value.city = city;
           if (country) profileForm.value.country = country;
+          if (email) profileForm.value.email = email;
         }
       })
       .catch((error) => {
@@ -1431,4 +1502,91 @@ const showEditProfileModal = () => {
   initProfileForm();
   showProfileModal.value = true;
 };
+
+const badgeInfoVisible = ref(false);
+let badgeInfoTimeout = null;
+
+const clearBadgeInfoTimeout = () => {
+  if (badgeInfoTimeout) {
+    clearTimeout(badgeInfoTimeout);
+    badgeInfoTimeout = null;
+  }
+};
+
+const startBadgeInfoTimeout = () => {
+  clearBadgeInfoTimeout();
+  if (badgeInfoVisible.value) {
+    badgeInfoTimeout = setTimeout(() => {
+      badgeInfoVisible.value = false;
+    }, 2000);
+  }
+};
+
+const toggleBadgeInfo = () => {
+  badgeInfoVisible.value = !badgeInfoVisible.value;
+  clearBadgeInfoTimeout();
+  if (badgeInfoVisible.value) {
+    startBadgeInfoTimeout();
+  }
+};
+
+const startBadgeInfoEnterAnimation = (el, done) => {
+  const height = el.scrollHeight;
+  el.style.height = "0px";
+  el.style.opacity = "0";
+
+  // Force a reflow
+  el.offsetHeight;
+
+  el.style.transition = "height 0.3s ease-out, opacity 0.3s ease-out";
+  el.style.height = height + "px";
+  el.style.opacity = "1";
+
+  el.addEventListener("transitionend", function handler() {
+    el.removeEventListener("transitionend", handler);
+    el.style.height = "auto";
+    done();
+  });
+};
+
+const startBadgeInfoLeaveAnimation = (el, done) => {
+  const height = el.scrollHeight;
+  el.style.height = height + "px";
+  el.style.opacity = "1";
+
+  // Force a reflow
+  el.offsetHeight;
+
+  el.style.transition = "height 0.3s ease-in, opacity 0.3s ease-in";
+  el.style.height = "0px";
+  el.style.opacity = "0";
+
+  el.addEventListener("transitionend", function handler() {
+    el.removeEventListener("transitionend", handler);
+    done();
+  });
+};
 </script>
+
+<style scoped>
+/* Styles existants */
+
+/* Styles pour l'animation des badges */
+.badge-info-enter-active,
+.badge-info-leave-active {
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.badge-info-enter-from,
+.badge-info-leave-to {
+  opacity: 0;
+  max-height: 0;
+}
+
+.badge-info-enter-to,
+.badge-info-leave-from {
+  opacity: 1;
+  max-height: 100px;
+}
+</style>

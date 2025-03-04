@@ -31,14 +31,14 @@
         <div class="text-xs opacity-80">Villes</div>
       </div>
       <div class="flex items-center gap-2">
-        <div class="w-3 h-3 rounded-full bg-slate-400"></div>
-        <div class="text-base font-bold">5.2K+</div>
-        <div class="text-xs opacity-80">Succès</div>
-      </div>
-      <div class="flex items-center gap-2">
         <div class="w-3 h-3 rounded-full bg-blue-500"></div>
         <div class="text-base font-bold">10+</div>
         <div class="text-xs opacity-80">Pays</div>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-3 h-3 rounded-full bg-slate-400"></div>
+        <div class="text-base font-bold">5.2K+</div>
+        <div class="text-xs opacity-80">Succès</div>
       </div>
     </div>
   </div>

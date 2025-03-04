@@ -10,6 +10,7 @@ import LostPetsPage from "../pages/lost.vue";
 import FoundPetsPage from "../pages/found.vue";
 import AppMobilePage from "../pages/app-mobile.vue";
 import HowItWorksPage from "../pages/how-it-works.vue";
+import AdminPage from "../pages/admin.vue";
 
 // Navigation guard pour les routes protégées
 const requireAuth = (to, from, next) => {
@@ -48,6 +49,12 @@ const routes = [
     path: "/how-it-works",
     name: "HowItWorks",
     component: HowItWorksPage,
+  },
+  {
+    path: "/admin",
+    name: "Admin",
+    component: AdminPage,
+    beforeEnter: requireAuth,
   },
   {
     path: "/signalement",

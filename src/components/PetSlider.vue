@@ -55,6 +55,7 @@
                   :src="pet.image"
                   :alt="pet.name"
                   class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  @error="$event.target.src = '/logo-nb-transparent.png'"
                 />
                 <div class="absolute top-4 left-4">
                   <span
@@ -67,6 +68,12 @@
                   >
                     {{ pet.duration }}
                   </span>
+                </div>
+                <!-- Badge avec ID discret -->
+                <div
+                  class="absolute bottom-0 right-0 bg-black/50 text-white text-xs px-2 py-1 m-2 rounded"
+                >
+                  ID: {{ pet.id }}
                 </div>
               </div>
 
@@ -104,7 +111,91 @@
                       fill="currentColor"
                     />
                   </svg>
-                  <span class="text-gray-600 font-sans">{{ pet.date }}</span>
+                  <span class="text-gray-600 font-sans">{{
+                    formatDate(pet.date)
+                  }}</span>
+                </div>
+
+                <!-- Caractéristiques de l'animal -->
+                <div class="space-y-2 mb-4">
+                  <!-- Caractéristiques sur une ligne -->
+                  <div class="flex items-center gap-4 mt-2">
+                    <!-- Âge -->
+                    <div
+                      v-if="pet.age || pet.age_estimate"
+                      class="flex items-center gap-1"
+                    >
+                      <svg
+                        class="w-5 h-5 text-gray-600 flex-shrink-0"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                          clip-rule="evenodd"
+                        ></path>
+                      </svg>
+                      <span class="text-sm text-gray-700">
+                        {{ pet.age || pet.age_estimate }}
+                        {{
+                          isNaN(parseInt(pet.age || pet.age_estimate)) ||
+                          String(pet.age || pet.age_estimate)
+                            .toLowerCase()
+                            .includes("an")
+                            ? ""
+                            : parseInt(pet.age || pet.age_estimate) > 1
+                            ? "ans"
+                            : parseInt(pet.age || pet.age_estimate) === 1
+                            ? "an"
+                            : "mois"
+                        }}
+                      </span>
+                    </div>
+
+                    <!-- Sexe avec icône -->
+                    <div v-if="pet.gender" class="flex items-center gap-1">
+                      <span
+                        :class="[
+                          'w-5 h-5 flex items-center justify-center rounded-full text-white font-bold flex-shrink-0',
+                          pet.gender === 'male'
+                            ? 'bg-blue-600'
+                            : pet.gender === 'female'
+                            ? 'bg-pink-600'
+                            : 'bg-gray-500',
+                        ]"
+                      >
+                        {{
+                          pet.gender === "male"
+                            ? "♂"
+                            : pet.gender === "female"
+                            ? "♀"
+                            : "?"
+                        }}
+                      </span>
+                      <span class="text-sm text-gray-700">
+                        {{
+                          pet.gender === "male"
+                            ? "Mâle"
+                            : pet.gender === "female"
+                            ? "Femelle"
+                            : "Inconnu"
+                        }}
+                      </span>
+                    </div>
+
+                    <!-- Couleur avec indicateur visuel -->
+                    <div v-if="pet.color" class="flex items-center gap-1">
+                      <div
+                        class="w-5 h-5 rounded-full border border-gray-300 flex-shrink-0"
+                        :style="{
+                          background: getColorBackground(pet.color),
+                        }"
+                      ></div>
+                      <span class="text-sm text-gray-700">{{ pet.color }}</span>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="flex flex-wrap gap-2 mb-auto">
@@ -159,7 +250,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
-import { getTagColorClass } from "../constants/colors.js";
+import { getTagColorClass, getColorBackground } from "../constants/colors.js";
 
 const props = defineProps({
   pets: {
@@ -186,6 +277,44 @@ const SwiperAutoplay = Autoplay;
 const onReachEnd = () => {
   if (props.hasMore && !props.loading) {
     emit("load-more");
+  }
+};
+
+// Formater la date
+const formatDate = (date) => {
+  if (!date) return "Date inconnue";
+
+  try {
+    const dateObj = date.toDate ? date.toDate() : new Date(date);
+
+    return dateObj.toLocaleDateString("fr-FR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  } catch (error) {
+    console.error("Erreur de formatage de date:", error);
+    return "Date invalide";
+  }
+};
+
+// Formater la date de manière plus concise pour l'affichage dans les cartes
+const formatDateShort = (date) => {
+  if (!date) return "Date inconnue";
+
+  try {
+    const dateObj = date.toDate ? date.toDate() : new Date(date);
+
+    return dateObj.toLocaleDateString("fr-FR", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+  } catch (error) {
+    console.error("Erreur de formatage de date:", error);
+    return "Date invalide";
   }
 };
 </script>

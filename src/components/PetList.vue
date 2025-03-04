@@ -167,15 +167,9 @@ onMounted(() => {
 </script>
 <template>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Debug info -->
-    <div class="mb-4 p-4 bg-gray-100 rounded">
-      <p>Nombre total de chats: {{ pets.length }}</p>
-      <p>Status actuel: {{ status }}</p>
-      <p>Filtre actuel: {{ filterStatus }}</p>
-    </div>
-
     <div class="flex justify-between items-center mb-8">
       <h2 class="text-3xl font-serif text-gray-900">
+        {{ pets.length }}
         {{ status === "lost" ? "Chats Perdus" : "Chats Trouvés" }}
       </h2>
       <div class="flex gap-4">
@@ -195,7 +189,7 @@ onMounted(() => {
           :class="[
             'px-4 py-2 rounded-full text-sm font-sans',
             filterStatus === 'recent'
-              ? 'bg-secondary/30 text-gray-900'
+              ? 'bg-primary text-white'
               : 'bg-gray-200 text-gray-600 hover:bg-gray-300',
           ]"
         >
@@ -253,24 +247,25 @@ onMounted(() => {
                 :src="
                   pet.images && pet.images.length > 0
                     ? pet.images[0]
-                    : '/default-cat.jpg'
+                    : '/logo-nb-transparent.png'
                 "
                 :alt="pet.name || 'Chat sans nom'"
                 class="w-full text-lg text- h-48 object-cover transition-transform duration-500 group-hover:scale-105"
-                @error="$event.target.src = '/default-cat.jpg'"
+                @error="$event.target.src = '/logo-nb-transparent.png '"
               />
               <!-- Badge avec ID discret -->
               <div
                 class="absolute bottom-0 right-0 bg-black/50 text-white text-xs px-2 py-1 m-2 rounded"
               >
-                ID: {{ pet.id }}
+                {{ pet.name }}
               </div>
             </div>
 
-            <div class="p-6 flex-grow flex flex-col">
+            <div class="px-6 pt-6 flex-grow flex flex-col">
               <!-- Nom et informations principales -->
-              <h3 :class="CARD_CLASSES.infoLabel" class="mb-4">
-                {{ pet.name || "Chat sans nom" }}
+              <h3 :class="CARD_CLASSES.infoLabel" class="mb-4" v-if="pet.breed">
+                <span class="font-thin text-gray-500 text-xs">Race : </span>
+                {{ pet.breed || "Race inconnue" }}
               </h3>
 
               <!-- Informations importantes mises en évidence -->
@@ -301,10 +296,6 @@ onMounted(() => {
 
               <!-- Caractéristiques de l'animal -->
               <div class="space-y-2 mb-4">
-                <p :class="CARD_CLASSES.title" v-if="pet.breed">
-                  <span :class="CARD_CLASSES.infoLabel">{{ pet.breed }}</span>
-                </p>
-
                 <!-- Caractéristiques sur une ligne -->
                 <div class="flex items-center gap-4 mt-2">
                   <!-- Âge -->
@@ -407,17 +398,10 @@ onMounted(() => {
               <!-- Date de publication (déplacée juste avant "Voir les détails") -->
               <p
                 :class="CARD_CLASSES.infoItem"
-                class="text-xs text-gray-500 mt-auto mb-2 whitespace-nowrap overflow-hidden text-ellipsis"
+                class="text-xs text-center text-gray-500 mt-auto mb-2 whitespace-nowrap overflow-hidden text-ellipsis"
               >
                 Publié le {{ formatDate(pet.createdAt) }}
               </p>
-
-              <!-- Indicateur visuel de clic -->
-              <div
-                class="text-center text-secondary font-medium group-hover:underline"
-              >
-                Voir les détails
-              </div>
             </div>
           </div>
           <!-- Overlay d'effet au survol -->

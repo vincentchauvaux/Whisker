@@ -217,7 +217,7 @@ const handleScroll = () => {
 
 const handleCommencer = () => {
   if (isLoggedIn.value) {
-    router.push("/signalement");
+    router.push("/pets");
   } else {
     showLoginModal.value = true;
   }

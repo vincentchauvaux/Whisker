@@ -26,7 +26,7 @@
               class="flex items-center gap-x-3 text-base font-semibold leading-7 text-primary font-serif"
             >
               <div
-                class="h-10 w-10 flex items-center justify-center rounded-lg bg-primary-light"
+                class="rounded-md bg-white p-2 ring-1 ring-primary/20 shadow-sm"
               >
                 <svg
                   class="h-6 w-6 text-primary"
@@ -73,7 +73,7 @@
               class="flex items-center gap-x-3 text-base font-semibold leading-7 text-primary font-serif"
             >
               <div
-                class="h-10 w-10 flex items-center justify-center rounded-lg bg-primary-light"
+                class="rounded-md bg-white p-2 ring-1 ring-primary/20 shadow-sm"
               >
                 <svg
                   class="h-6 w-6 text-primary"
@@ -115,7 +115,7 @@
               class="flex items-center gap-x-3 text-base font-semibold leading-7 text-primary font-serif"
             >
               <div
-                class="h-10 w-10 flex items-center justify-center rounded-lg bg-primary-light"
+                class="rounded-md bg-white p-2 ring-1 ring-primary/20 shadow-sm"
               >
                 <svg
                   class="h-6 w-6 text-primary"

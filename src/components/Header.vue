@@ -66,13 +66,7 @@
           >
             Accueil
           </router-link>
-          <router-link
-            to="/pets"
-            class="text-gray-700 hover:text-primary transition-colors"
-            active-class="text-primary"
-          >
-            Tous les chats
-          </router-link>
+
           <router-link
             to="/lost"
             class="text-gray-700 hover:text-primary transition-colors"
@@ -88,6 +82,7 @@
             Chats trouvés
           </router-link>
           <router-link
+            v-if="user"
             to="/signalement"
             class="text-gray-700 hover:text-primary transition-colors"
             active-class="text-primary"
@@ -189,14 +184,7 @@
               >
                 Accueil
               </router-link>
-              <router-link
-                to="/pets"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-100"
-                active-class="text-primary"
-                @click="mobileMenuOpen = false"
-              >
-                Tous les chats
-              </router-link>
+
               <router-link
                 to="/lost"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-100"

@@ -117,10 +117,7 @@
                     :src="pet.image"
                     :alt="pet.name"
                     class="w-24 h-24 object-cover rounded-lg"
-                    @error="
-                      $event.target.src =
-                        'https://via.placeholder.com/200x200?text=Pas+d%27image'
-                    "
+                    @error="$event.target.src = '/logo-nb-transparent.png'"
                   />
                   <div class="flex-1 min-w-0">
                     <div class="flex items-start justify-between gap-2">
@@ -234,7 +231,7 @@ export default defineComponent({
             image:
               pet.images && pet.images.length > 0
                 ? pet.images[0]
-                : "https://via.placeholder.com/200x200?text=Pas+d%27image",
+                : "/logo-nb-transparent.png",
             coordinates: pet.last_seen_location?.coordinates || null,
           };
         });

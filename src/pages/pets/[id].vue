@@ -113,69 +113,231 @@
                   {{ pet.name || "Chat sans nom" }}
                 </h1>
 
-                <div class="flex flex-wrap gap-4 mb-6">
-                  <div v-if="pet.breed" class="flex items-center gap-2">
-                    <svg
-                      class="w-5 h-5 text-primary"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M9 11.75c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zm6 0c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-.29.02-.58.05-.86 2.36-1.05 4.23-2.98 5.21-5.37C11.07 8.33 14.05 10 17.42 10c.78 0 1.53-.09 2.25-.26.21.71.33 1.47.33 2.26 0 4.41-3.59 8-8 8z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <span class="text-gray-700">Race: {{ pet.breed }}</span>
+                <!-- Informations importantes mises en évidence -->
+                <div
+                  class="mb-6 p-4 rounded-lg"
+                  :class="
+                    pet.status === 'lost'
+                      ? STATUS_COLORS.LOST.bgLight
+                      : STATUS_COLORS.FOUND.bgLight
+                  "
+                >
+                  <p
+                    class="text-base font-medium"
+                    :class="
+                      pet.status === 'lost'
+                        ? STATUS_COLORS.LOST.text
+                        : STATUS_COLORS.FOUND.text
+                    "
+                  >
+                    <span class="font-semibold">Lieu:</span>
+                    {{ getLocationText(pet) }}
+                  </p>
+                  <p
+                    v-if="pet.status === 'lost' && pet.last_seen_date"
+                    class="text-sm mt-2"
+                    :class="
+                      pet.status === 'lost'
+                        ? STATUS_COLORS.LOST.text
+                        : STATUS_COLORS.FOUND.text
+                    "
+                  >
+                    <span class="font-semibold">Perdu le:</span>
+                    {{ formatDate(pet.last_seen_date) }}
+                  </p>
+                  <p
+                    v-if="pet.status === 'found' && pet.found_date"
+                    class="text-sm mt-2"
+                    :class="
+                      pet.status === 'lost'
+                        ? STATUS_COLORS.LOST.text
+                        : STATUS_COLORS.FOUND.text
+                    "
+                  >
+                    <span class="font-semibold">Trouvé le:</span>
+                    {{ formatDate(pet.found_date) }}
+                  </p>
+                </div>
+
+                <!-- Caractéristiques principales -->
+                <div class="mb-6">
+                  <h2 class="text-xl font-bold text-gray-900 mb-3 font-serif">
+                    Caractéristiques
+                  </h2>
+
+                  <!-- Race, couleur et âge mis en avant -->
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div v-if="pet.breed" class="bg-gray-50 p-4 rounded-lg">
+                      <div class="flex items-center gap-2">
+                        <svg
+                          class="w-6 h-6 text-primary"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M9 11.75c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zm6 0c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-.29.02-.58.05-.86 2.36-1.05 4.23-2.98 5.21-5.37C11.07 8.33 14.05 10 17.42 10c.78 0 1.53-.09 2.25-.26.21.71.33 1.47.33 2.26 0 4.41-3.59 8-8 8z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                        <div>
+                          <p class="text-sm text-gray-500">Race</p>
+                          <p class="font-medium text-gray-900">
+                            {{ pet.breed }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div v-if="pet.color" class="bg-gray-50 p-4 rounded-lg">
+                      <div class="flex items-center gap-2">
+                        <div
+                          class="w-6 h-6 rounded-full border border-gray-300 flex-shrink-0"
+                          :style="{
+                            background: pet.color
+                              .toLowerCase()
+                              .includes('blanc')
+                              ? 'white'
+                              : pet.color.toLowerCase().includes('noir')
+                              ? 'black'
+                              : pet.color.toLowerCase().includes('gris')
+                              ? 'gray'
+                              : pet.color.toLowerCase().includes('roux')
+                              ? 'orange'
+                              : pet.color.toLowerCase().includes('marron')
+                              ? 'brown'
+                              : pet.color.toLowerCase().includes('tigré')
+                              ? 'repeating-linear-gradient(45deg, #f5f5f5, #f5f5f5 5px, #e0e0e0 5px, #e0e0e0 10px)'
+                              : '#f5f5f5',
+                          }"
+                        ></div>
+                        <div>
+                          <p class="text-sm text-gray-500">Couleur</p>
+                          <p class="font-medium text-gray-900">
+                            {{ pet.color }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div v-if="pet.age" class="bg-gray-50 p-4 rounded-lg">
+                      <div class="flex items-center gap-2">
+                        <svg
+                          class="w-6 h-6 text-primary"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7v-5z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                        <div>
+                          <p class="text-sm text-gray-500">Âge</p>
+                          <p class="font-medium text-gray-900">
+                            {{ pet.age }}
+                            {{
+                              isNaN(parseInt(pet.age)) ||
+                              String(pet.age).toLowerCase().includes("an")
+                                ? ""
+                                : parseInt(pet.age) > 1
+                                ? "ans"
+                                : parseInt(pet.age) === 1
+                                ? "an"
+                                : "mois"
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div v-if="pet.color" class="flex items-center gap-2">
-                    <svg
-                      class="w-5 h-5 text-primary"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
+
+                  <!-- Autres caractéristiques -->
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div v-if="pet.gender" class="flex items-center gap-3">
+                      <span
+                        :class="[
+                          'w-8 h-8 flex items-center justify-center rounded-full text-white font-bold flex-shrink-0',
+                          pet.gender === 'male'
+                            ? 'bg-blue-600'
+                            : pet.gender === 'female'
+                            ? 'bg-pink-600'
+                            : 'bg-gray-500',
+                        ]"
+                      >
+                        {{
+                          pet.gender === "male"
+                            ? "♂"
+                            : pet.gender === "female"
+                            ? "♀"
+                            : "?"
+                        }}
+                      </span>
+                      <div>
+                        <p class="text-sm text-gray-500">Sexe</p>
+                        <p class="font-medium text-gray-900">
+                          {{ pet.gender === "male" ? "Mâle" : "Femelle" }}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div
+                      v-if="pet.microchipped !== undefined"
+                      class="flex items-center gap-3"
                     >
-                      <path
-                        d="M12 22C6.49 22 2 17.51 2 12S6.49 2 12 2s10 4.04 10 9c0 3.31-2.69 6-6 6h-1.77c-.28 0-.5.22-.5.5 0 .12.05.23.13.33.41.64 1.06 0.64 1.67 0A2.5 2.5 0 0 1 12 22zm0-18c-4.41 0-8 3.59-8 8s3.59 8 8 8c.28 0 .5-.22.5-.5a.54.54 0 0 0-.14-.35c-.41-.46-.63-1.05-.63-1.65a2.5 2.5 0 0 1 2.5-2.5H16c2.21 0 4-1.79 4-4 0-3.86-3.59-7-8-7z"
-                        fill="currentColor"
-                      />
-                      <circle cx="6.5" cy="11.5" r="1.5" fill="currentColor" />
-                      <circle cx="9.5" cy="7.5" r="1.5" fill="currentColor" />
-                      <circle cx="14.5" cy="7.5" r="1.5" fill="currentColor" />
-                      <circle cx="17.5" cy="11.5" r="1.5" fill="currentColor" />
-                    </svg>
-                    <span class="text-gray-700">Couleur: {{ pet.color }}</span>
+                      <div
+                        :class="[
+                          'w-8 h-8 flex items-center justify-center rounded-full text-white',
+                          pet.microchipped ? 'bg-green-500' : 'bg-red-500',
+                        ]"
+                      >
+                        <svg
+                          class="w-5 h-5"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                            fill="currentColor"
+                            v-if="pet.microchipped"
+                          />
+                          <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+                            fill="currentColor"
+                            v-else
+                          />
+                        </svg>
+                      </div>
+                      <div>
+                        <p class="text-sm text-gray-500">Puce électronique</p>
+                        <p class="font-medium text-gray-900">
+                          {{ pet.microchipped ? "Pucé" : "Non pucé" }}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div v-if="pet.age" class="flex items-center gap-2">
-                    <svg
-                      class="w-5 h-5 text-primary"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
+                </div>
+
+                <!-- Tags -->
+                <div v-if="pet.tags && pet.tags.length > 0" class="mb-6">
+                  <h2 class="text-xl font-bold text-gray-900 mb-3 font-serif">
+                    Particularités
+                  </h2>
+                  <div class="flex flex-wrap gap-2">
+                    <span
+                      v-for="tag in pet.tags"
+                      :key="tag"
+                      :class="[
+                        'px-3 py-1.5 rounded-full text-sm font-medium',
+                        getTagColorClass
+                          ? getTagColorClass(tag)
+                          : 'bg-gray-100 text-gray-800',
+                      ]"
                     >
-                      <path
-                        d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7v-5z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <span class="text-gray-700">Âge: {{ pet.age }}</span>
-                  </div>
-                  <div v-if="pet.gender" class="flex items-center gap-2">
-                    <svg
-                      class="w-5 h-5 text-primary"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M17.5 9.5C17.5 6.46 15.04 4 12 4S6.5 6.46 6.5 9.5c0 2.7 1.94 4.93 4.5 5.4V17H9v2h2v2h2v-2h2v-2h-2v-2.1c2.56-.47 4.5-2.7 4.5-5.4zm-9 0C8.5 7.57 10.07 6 12 6s3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <span class="text-gray-700"
-                      >Sexe:
-                      {{ pet.gender === "male" ? "Mâle" : "Femelle" }}</span
-                    >
+                      {{ tag }}
+                    </span>
                   </div>
                 </div>
 
@@ -186,91 +348,6 @@
                   <p class="text-gray-700 whitespace-pre-line">
                     {{ pet.description }}
                   </p>
-                </div>
-
-                <div v-if="pet.status === 'lost'" class="mb-6">
-                  <h2 class="text-xl font-bold text-gray-900 mb-3 font-serif">
-                    Dernière fois aperçu
-                  </h2>
-                  <div class="flex items-start gap-2">
-                    <svg
-                      class="w-5 h-5 text-primary mt-1"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <div>
-                      <p class="text-gray-700">
-                        {{ getLocationText(pet) }}
-                      </p>
-                      <p
-                        v-if="pet.last_seen_date"
-                        class="text-gray-500 text-sm mt-1"
-                      >
-                        Le {{ formatDate(pet.last_seen_date) }}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div v-else-if="pet.status === 'found'" class="mb-6">
-                  <h2 class="text-xl font-bold text-gray-900 mb-3 font-serif">
-                    Lieu de découverte
-                  </h2>
-                  <div class="flex items-start gap-2">
-                    <svg
-                      class="w-5 h-5 text-primary mt-1"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <div>
-                      <p class="text-gray-700">
-                        {{ getLocationText(pet) }}
-                      </p>
-                      <p
-                        v-if="pet.found_date"
-                        class="text-gray-500 text-sm mt-1"
-                      >
-                        Le {{ formatDate(pet.found_date) }}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div v-if="pet.microchipped !== undefined" class="mb-6">
-                  <h2 class="text-xl font-bold text-gray-900 mb-3 font-serif">
-                    Informations supplémentaires
-                  </h2>
-                  <div class="flex items-center gap-2">
-                    <svg
-                      class="w-5 h-5"
-                      :class="
-                        pet.microchipped ? 'text-green-500' : 'text-red-500'
-                      "
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <span class="text-gray-700">
-                      {{ pet.microchipped ? "Pucé" : "Non pucé" }}
-                    </span>
-                  </div>
                 </div>
               </div>
 
@@ -508,9 +585,6 @@
                       </svg>
                       Appeler
                     </button>
-                    <div v-else class="mb-6 text-gray-500">
-                      Informations de contact non disponibles
-                    </div>
                   </div>
                 </div>
               </div>
@@ -832,7 +906,11 @@ import { useRoute, useRouter } from "vue-router";
 import { inject, getCurrentInstance } from "vue";
 import MainLayout from "../../layouts/MainLayout.vue";
 import PetMap from "../../components/PetMap.vue";
-import { STATUS_COLORS } from "../../constants/colors.js";
+import {
+  STATUS_COLORS,
+  getTagColorClass,
+  getColorBackground,
+} from "../../constants/colors.js";
 
 // Accéder au store et à la route
 const { proxy } = getCurrentInstance();
@@ -896,7 +974,7 @@ const petId = computed(() => route.params.id);
 // Image actuelle dans la galerie
 const currentImage = computed(() => {
   if (!pet.value || !pet.value.images || pet.value.images.length === 0) {
-    return "https://via.placeholder.com/800x600?text=Pas+d%27image";
+    return "/logo-nb-transparent.png";
   }
   return pet.value.images[currentImageIndex.value];
 });

@@ -32,10 +32,10 @@
 
       <div class="text-center mt-12">
         <router-link
-          to="/pets"
+          to="/found"
           class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-full hover:bg-primary-dark transition-colors"
         >
-          <span>Voir tous les chats</span>
+          <span>Voir tous les chats trouvés</span>
           <svg
             class="w-5 h-5"
             viewBox="0 0 24 24"
@@ -93,7 +93,7 @@ const formattedPets = computed(() => {
       image:
         pet.images && pet.images.length > 0
           ? pet.images[0]
-          : "https://via.placeholder.com/400x300?text=Pas+d%27image",
+          : "/logo-nb-transparent.png",
       location:
         pet.found_location?.address ||
         pet.found_location?.city ||
