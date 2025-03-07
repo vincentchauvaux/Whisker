@@ -21,7 +21,7 @@ const error = ref(null);
 const filterType = ref("all"); // 'all', 'recent'
 const statusFilter = ref("all"); // 'all', 'lost', 'found'
 const searchQuery = ref("");
-const sortBy = ref("date"); // 'date', 'race', 'age', 'age_desc'
+const sortBy = ref("date_desc"); // 'date_desc', 'date_asc', 'age', 'age_desc'
 
 // Initialiser le filtre à partir des paramètres d'URL
 onMounted(() => {
@@ -120,7 +120,7 @@ const applyFilters = () => {
 // Fonction pour trier les animaux
 const sortPets = (petsToSort) => {
   switch (sortBy.value) {
-    case "date":
+    case "date_desc":
       // Tri par date (du plus récent au plus ancien)
       return [...petsToSort].sort((a, b) => {
         const dateA = a.createdAt?.toDate?.() || new Date(a.createdAt);
@@ -128,12 +128,12 @@ const sortPets = (petsToSort) => {
         return dateB - dateA;
       });
 
-    case "race":
-      // Tri alphabétique par race
+    case "date_asc":
+      // Tri par date (du plus ancien au plus récent)
       return [...petsToSort].sort((a, b) => {
-        const raceA = (a.breed || "").toLowerCase();
-        const raceB = (b.breed || "").toLowerCase();
-        return raceA.localeCompare(raceB, "fr");
+        const dateA = a.createdAt?.toDate?.() || new Date(a.createdAt);
+        const dateB = b.createdAt?.toDate?.() || new Date(b.createdAt);
+        return dateA - dateB;
       });
 
     case "age":
@@ -316,7 +316,7 @@ watch([filterType, searchQuery, sortBy, statusFilter], () => {
           :class="[
             'px-4 py-2 rounded-full text-sm font-sans flex items-center gap-1',
             filterType === 'all'
-              ? 'bg-secondary/30 text-gray-900'
+              ? 'bg-primary text-white'
               : 'bg-gray-200 text-gray-600 hover:bg-gray-300',
           ]"
         >
@@ -444,9 +444,9 @@ watch([filterType, searchQuery, sortBy, statusFilter], () => {
         />
       </div>
 
-      <div class="relative min-w-[180px]">
+      <div class="relative min-w-[60px]">
         <div
-          class="flex items-center gap-2 border border-gray-300 rounded-full px-3 py-3 bg-white"
+          class="flex items-center gap-2 border border-gray-300 rounded-full px-3 py-3 bg-white relative"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -462,15 +462,25 @@ watch([filterType, searchQuery, sortBy, statusFilter], () => {
               d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"
             />
           </svg>
+          <div
+            class="pointer-events-none text-sm text-gray-500 font-medium absolute top-1/2 transform -translate-y-1/2 left-10"
+          >
+            <span v-if="sortBy === 'date_desc'">↓</span>
+            <span v-else-if="sortBy === 'date_asc'">↑</span>
+            <span v-else-if="sortBy === 'age'">↑</span>
+            <span v-else-if="sortBy === 'age_desc'">↓</span>
+          </div>
           <select
             id="sort-select"
             v-model="sortBy"
-            class="block w-full border-0 bg-transparent focus:outline-none focus:ring-0 text-sm"
+            class="block w-full border-0 bg-transparent focus:outline-none focus:ring-0 text-sm appearance-none opacity-0 absolute inset-0 cursor-pointer"
+            aria-label="Trier par"
+            title="Options de tri"
           >
-            <option value="date">Tri par date</option>
-            <option value="race">Tri par race</option>
-            <option value="age">Tri par âge (↑)</option>
-            <option value="age_desc">Tri par âge (↓)</option>
+            <option value="date_desc">Date récente</option>
+            <option value="date_asc">Date ancienne</option>
+            <option value="age">Âge croissant</option>
+            <option value="age_desc">Âge décroissant</option>
           </select>
         </div>
       </div>
