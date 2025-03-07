@@ -8,6 +8,7 @@ import PetsIndex from "../pages/pets/index.vue";
 import PetDetailsPage from "../pages/pets/[id].vue";
 import LostPetsPage from "../pages/lost.vue";
 import FoundPetsPage from "../pages/found.vue";
+import LostFoundPage from "../pages/lost-found.vue";
 import AppMobilePage from "../pages/app-mobile.vue";
 import HowItWorksPage from "../pages/how-it-works.vue";
 import AdminPage from "../pages/admin.vue";
@@ -31,14 +32,19 @@ const routes = [
     component: Index,
   },
   {
+    path: "/lost-found",
+    name: "LostFound",
+    component: LostFoundPage,
+  },
+  {
     path: "/lost",
     name: "LostPets",
-    component: LostPetsPage,
+    redirect: { name: "LostFound", query: { filter: "lost" } },
   },
   {
     path: "/found",
     name: "FoundPets",
-    component: FoundPetsPage,
+    redirect: { name: "LostFound", query: { filter: "found" } },
   },
   {
     path: "/app-mobile",

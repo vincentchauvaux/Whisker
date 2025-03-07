@@ -68,18 +68,11 @@
           </router-link>
 
           <router-link
-            to="/lost"
+            to="/lost-found"
             class="text-gray-700 hover:text-primary transition-colors"
             active-class="text-primary"
           >
-            Chats perdus
-          </router-link>
-          <router-link
-            to="/found"
-            class="text-gray-700 hover:text-primary transition-colors"
-            active-class="text-primary"
-          >
-            Chats trouvés
+            Chats perdus / trouvés
           </router-link>
           <router-link
             v-if="user"
@@ -186,22 +179,15 @@
               </router-link>
 
               <router-link
-                to="/lost"
+                to="/lost-found"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-100"
                 active-class="text-primary"
                 @click="mobileMenuOpen = false"
               >
-                Chats perdus
+                Chats perdus / trouvés
               </router-link>
               <router-link
-                to="/found"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-100"
-                active-class="text-primary"
-                @click="mobileMenuOpen = false"
-              >
-                Chats trouvés
-              </router-link>
-              <router-link
+                v-if="user"
                 to="/signalement"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-100"
                 active-class="text-primary"
