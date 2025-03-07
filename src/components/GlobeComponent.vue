@@ -403,7 +403,7 @@ function initScene() {
     const type1Material = new THREE.LineBasicMaterial({
       color: GREEN,
       transparent: true,
-      opacity: 0.2,
+      opacity: 0.3,
       linewidth: 0.5,
     });
 
@@ -411,7 +411,7 @@ function initScene() {
     const type2Material = new THREE.LineBasicMaterial({
       color: YELLOW,
       transparent: true,
-      opacity: 0.15,
+      opacity: 0.2,
       linewidth: 0.5,
     });
 
@@ -431,81 +431,232 @@ function initScene() {
       linewidth: 0.5,
     });
 
-    // Quelques connexions principales
+    // Fonction pour créer un arc entre deux points sur le globe
+    function createArcBetweenPoints(
+      pointA,
+      pointB,
+      height,
+      material,
+      segments = 50
+    ) {
+      // Calculer le point au milieu
+      const midPoint = new THREE.Vector3()
+        .addVectors(pointA, pointB)
+        .multiplyScalar(0.5);
+
+      // Normaliser le point médian pour obtenir un point à la surface du globe
+      const surfaceMidPoint = midPoint
+        .clone()
+        .normalize()
+        .multiplyScalar(radius);
+
+      // Calculer le point culminant de l'arc
+      const arcHeight = radius * (1 + height); // height est un pourcentage du rayon
+      const arcPeakPoint = midPoint
+        .clone()
+        .normalize()
+        .multiplyScalar(arcHeight);
+
+      // Créer une courbe quadratique
+      const curve = new THREE.QuadraticBezierCurve3(
+        pointA.clone(),
+        arcPeakPoint,
+        pointB.clone()
+      );
+
+      // Créer les points de la courbe
+      const points = curve.getPoints(segments);
+
+      // Créer la géométrie de la courbe
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+
+      // Créer la ligne
+      const line = new THREE.Line(geometry, material);
+
+      return line;
+    }
+
+    // Quelques connexions principales avec arcs
     const mainConnections = [
-      [
-        latLngToVector3(50.8503, 4.3517, radius),
-        latLngToVector3(48.8566, 2.3522, radius),
-      ], // Bruxelles-Paris
-      [
-        latLngToVector3(48.8566, 2.3522, radius),
-        latLngToVector3(40.4168, -3.7038, radius),
-      ], // Paris-Madrid
-      [
-        latLngToVector3(48.8566, 2.3522, radius),
-        latLngToVector3(51.5074, -0.1278, radius),
-      ], // Paris-Londres
-      [
-        latLngToVector3(52.52, 13.405, radius),
-        latLngToVector3(48.8566, 2.3522, radius),
-      ], // Berlin-Paris
-      [
-        latLngToVector3(52.52, 13.405, radius),
-        latLngToVector3(41.9028, 12.4964, radius),
-      ], // Berlin-Rome
+      {
+        start: { lat: 50.8503, lng: 4.3517 },
+        end: { lat: 48.8566, lng: 2.3522 },
+        height: 0.2,
+      }, // Bruxelles-Paris
+      {
+        start: { lat: 48.8566, lng: 2.3522 },
+        end: { lat: 40.4168, lng: -3.7038 },
+        height: 0.3,
+      }, // Paris-Madrid
+      {
+        start: { lat: 48.8566, lng: 2.3522 },
+        end: { lat: 51.5074, lng: -0.1278 },
+        height: 0.15,
+      }, // Paris-Londres
+      {
+        start: { lat: 52.52, lng: 13.405 },
+        end: { lat: 48.8566, lng: 2.3522 },
+        height: 0.25,
+      }, // Berlin-Paris
+      {
+        start: { lat: 52.52, lng: 13.405 },
+        end: { lat: 41.9028, lng: 12.4964 },
+        height: 0.3,
+      }, // Berlin-Rome
+      {
+        start: { lat: 41.9028, lng: 12.4964 },
+        end: { lat: 37.9838, lng: 23.7275 },
+        height: 0.2,
+      }, // Rome-Athènes
+      {
+        start: { lat: 52.3676, lng: 4.9041 },
+        end: { lat: 51.5074, lng: -0.1278 },
+        height: 0.1,
+      }, // Amsterdam-Londres
+      {
+        start: { lat: 59.3293, lng: 18.0686 },
+        end: { lat: 55.6761, lng: 12.5683 },
+        height: 0.2,
+      }, // Stockholm-Copenhague
+      {
+        start: { lat: 48.2082, lng: 16.3738 },
+        end: { lat: 50.0755, lng: 14.4378 },
+        height: 0.15,
+      }, // Vienne-Prague
+      {
+        start: { lat: 45.4642, lng: 9.19 },
+        end: { lat: 41.9028, lng: 12.4964 },
+        height: 0.2,
+      }, // Milan-Rome
     ];
 
     // Ajouter les connexions principales
-    mainConnections.forEach(([start, end]) => {
-      const geometry = new THREE.BufferGeometry().setFromPoints([start, end]);
-      const line = new THREE.Line(geometry, type1Material);
-      pointGroup.add(line);
+    mainConnections.forEach(({ start, end, height }) => {
+      const startPoint = latLngToVector3(start.lat, start.lng, radius);
+      const endPoint = latLngToVector3(end.lat, end.lng, radius);
+      const arc = createArcBetweenPoints(
+        startPoint,
+        endPoint,
+        height,
+        type1Material
+      );
+      pointGroup.add(arc);
     });
 
-    // Ajouter des lignes de grille
-    const gridHelper = new THREE.Group();
+    // Générer des connexions secondaires aléatoires
+    const secondaryConnections = [];
+    // Créer un échantillon des villes pour les connexions secondaires
+    const cityCoordinates = smallPoints
+      .filter((point) => Math.random() < 0.3) // Sélectionner environ 30% des points
+      .map((point) => ({ lat: point.lat, lng: point.lng }));
 
-    // Lignes de latitude
-    for (let i = -80; i <= 80; i += 20) {
-      const material = new THREE.LineBasicMaterial({
-        color: 0x336699,
-        transparent: true,
-        opacity: 0.1,
-      });
+    // Créer un nombre limité de connexions secondaires aléatoires
+    for (let i = 0; i < 25; i++) {
+      if (cityCoordinates.length < 2) break;
 
-      const gridPoints = [];
-      for (let j = 0; j <= 360; j += 5) {
-        const position = latLngToVector3(i, j - 180, radius * 1.001);
-        gridPoints.push(position);
+      const city1Index = Math.floor(Math.random() * cityCoordinates.length);
+      const city1 = cityCoordinates[city1Index];
+
+      // Trouver une ville à proximité (dans un rayon de 20 degrés)
+      let nearestCityIndex = -1;
+      let minDistance = 100; // Une grande valeur initiale
+
+      for (let j = 0; j < cityCoordinates.length; j++) {
+        if (j === city1Index) continue;
+
+        const city2 = cityCoordinates[j];
+        const distance = Math.sqrt(
+          Math.pow(city1.lat - city2.lat, 2) +
+            Math.pow(city1.lng - city2.lng, 2)
+        );
+
+        if (distance < minDistance && distance < 20) {
+          minDistance = distance;
+          nearestCityIndex = j;
+        }
       }
 
-      const geometry = new THREE.BufferGeometry().setFromPoints(gridPoints);
-      const line = new THREE.Line(geometry, material);
-      gridHelper.add(line);
-    }
+      if (nearestCityIndex !== -1) {
+        const city2 = cityCoordinates[nearestCityIndex];
+        const height = 0.05 + Math.random() * 0.15; // Hauteur aléatoire entre 0.05 et 0.2
 
-    // Lignes de longitude
-    for (let i = -180; i < 180; i += 20) {
-      const material = new THREE.LineBasicMaterial({
-        color: 0x336699,
-        transparent: true,
-        opacity: 0.1,
-      });
+        // Déterminer le matériau en fonction de la distance
+        let material;
+        if (minDistance < 5) {
+          material = type2Material;
+        } else if (minDistance < 10) {
+          material = type3Material;
+        } else {
+          material = mixedMaterial;
+        }
 
-      const gridPoints = [];
-      for (let j = -90; j <= 90; j += 5) {
-        const position = latLngToVector3(j, i, radius * 1.001);
-        gridPoints.push(position);
+        secondaryConnections.push({
+          start: city1,
+          end: city2,
+          height,
+          material,
+        });
+
+        // Supprimer ces deux villes pour éviter de créer trop de connexions partant des mêmes villes
+        cityCoordinates.splice(Math.max(city1Index, nearestCityIndex), 1);
+        cityCoordinates.splice(Math.min(city1Index, nearestCityIndex), 1);
       }
-
-      const geometry = new THREE.BufferGeometry().setFromPoints(gridPoints);
-      const line = new THREE.Line(geometry, material);
-      gridHelper.add(line);
     }
 
-    globe.add(gridHelper);
+    // Ajouter les connexions secondaires
+    secondaryConnections.forEach(({ start, end, height, material }) => {
+      const startPoint = latLngToVector3(start.lat, start.lng, radius);
+      const endPoint = latLngToVector3(end.lat, end.lng, radius);
+      const arc = createArcBetweenPoints(
+        startPoint,
+        endPoint,
+        height,
+        material
+      );
+      pointGroup.add(arc);
+    });
 
-    // Animation
+    // Animation des arcs
+    const animatedArcs = [];
+
+    // Créer quelques arcs animés (limité pour des raisons de performance)
+    for (let i = 0; i < 5; i++) {
+      const startIndex = Math.floor(Math.random() * smallPoints.length);
+      const endIndex = Math.floor(Math.random() * smallPoints.length);
+
+      if (startIndex !== endIndex) {
+        const start = smallPoints[startIndex];
+        const end = smallPoints[endIndex];
+
+        const startPoint = latLngToVector3(start.lat, start.lng, radius);
+        const endPoint = latLngToVector3(end.lat, end.lng, radius);
+
+        // Créer un matériau animé qui pulse
+        const animatedMaterial = new THREE.LineBasicMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.1,
+          linewidth: 1,
+        });
+
+        const arc = createArcBetweenPoints(
+          startPoint,
+          endPoint,
+          0.2 + Math.random() * 0.2,
+          animatedMaterial
+        );
+        pointGroup.add(arc);
+
+        // Stocker l'arc et son matériau pour l'animation
+        animatedArcs.push({
+          arc,
+          material: animatedMaterial,
+          phase: Math.random() * Math.PI * 2, // Phase aléatoire pour une animation désynchronisée
+        });
+      }
+    }
+
+    // Mettre à jour l'animation pour inclure les arcs
     const animate = () => {
       animationId = requestAnimationFrame(animate);
 
@@ -521,6 +672,15 @@ function initScene() {
 
         // Appliquer une rotation limitée autour de l'axe Y
         globe.rotation.y = oscillation;
+
+        // Animer les arcs
+        const arcTime = Date.now() * 0.001;
+        animatedArcs.forEach((item, index) => {
+          // Faire pulser l'opacité de l'arc
+          const opacityValue =
+            0.1 + 0.4 * Math.abs(Math.sin(arcTime + item.phase));
+          item.material.opacity = opacityValue;
+        });
       }
 
       controls.update();

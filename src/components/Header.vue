@@ -59,15 +59,6 @@
         </div>
         <div class="hidden lg:flex lg:gap-x-8">
           <router-link
-            to="/"
-            class="text-gray-700 hover:text-primary transition-colors"
-            active-class="text-primary"
-            exact
-          >
-            Accueil
-          </router-link>
-
-          <router-link
             to="/lost-found"
             class="text-gray-700 hover:text-primary transition-colors"
             active-class="text-primary"
