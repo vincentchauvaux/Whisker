@@ -438,7 +438,7 @@ watch([filterType, searchQuery, sortBy, statusFilter], () => {
         <input
           v-model="searchQuery"
           type="text"
-          class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+          class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-full leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
           placeholder="Rechercher par nom, race, couleur, lieu, description..."
           @input="applyFilters"
         />
@@ -446,7 +446,7 @@ watch([filterType, searchQuery, sortBy, statusFilter], () => {
 
       <div class="relative min-w-[180px]">
         <div
-          class="flex items-center gap-2 border border-gray-300 rounded-lg px-3 py-3 bg-white"
+          class="flex items-center gap-2 border border-gray-300 rounded-full px-3 py-3 bg-white"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

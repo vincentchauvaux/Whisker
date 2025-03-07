@@ -26,7 +26,7 @@
           <div class="flex flex-wrap justify-between items-center mb-8">
             <div class="flex items-center gap-4 mb-4 md:mb-0">
               <router-link
-                to="/pets"
+                to="/lost-found"
                 class="flex items-center gap-2 text-primary hover:text-primary-dark transition-colors"
               >
                 <svg
