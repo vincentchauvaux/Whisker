@@ -17,7 +17,8 @@
               <div
                 class="relative cursor-pointer transition-all duration-300 transform hover:scale-105"
                 :class="{
-                  'ring-4 ring-secondary scale-105': formData.status === 'lost',
+                  'ring-4 ring-secondary scale-105 rounded-lg':
+                    formData.status === 'lost',
                 }"
                 @click="selectStatus('lost')"
               >
@@ -76,7 +77,7 @@
               <div
                 class="relative cursor-pointer transition-all duration-300 transform hover:scale-105"
                 :class="{
-                  'ring-4 ring-secondary scale-105':
+                  'ring-4 ring-green-500 scale-105 rounded-lg':
                     formData.status === 'found',
                 }"
                 @click="selectStatus('found')"
@@ -114,7 +115,7 @@
                 </div>
                 <div
                   v-if="formData.status === 'found'"
-                  class="absolute -top-2 -right-2 bg-secondary text-white rounded-full p-1"
+                  class="absolute -top-2 -right-2 bg-green-500 text-white rounded-full p-1"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +154,7 @@
                 <input
                   type="text"
                   v-model="formData.name"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-full focus:ring-2 focus:ring-secondary focus:border-secondary"
                   :placeholder="
                     formData.status === 'found' ? 'Inconnu' : 'Nom du chat'
                   "
@@ -172,7 +173,7 @@
                 >
                 <div class="grid grid-cols-3 gap-3">
                   <div
-                    class="cursor-pointer border rounded-full p-3 flex items-center justify-center transition-colors"
+                    class="cursor-pointer border rounded-full px-3 py-2 flex items-center justify-center transition-colors"
                     :class="
                       formData.gender === 'male'
                         ? 'bg-blue-50 border-blue-300'
@@ -189,7 +190,7 @@
                   </div>
 
                   <div
-                    class="cursor-pointer border rounded-full p-3 flex items-center justify-center transition-colors"
+                    class="cursor-pointer border rounded-full px-3 py-2 flex items-center justify-center transition-colors"
                     :class="
                       formData.gender === 'female'
                         ? 'bg-pink-50 border-pink-300'
@@ -206,7 +207,7 @@
                   </div>
 
                   <div
-                    class="cursor-pointer border rounded-full p-3 flex items-center justify-center transition-colors"
+                    class="cursor-pointer border rounded-full px-3 py-2 flex items-center justify-center transition-colors"
                     :class="
                       formData.gender === 'unknown'
                         ? 'bg-gray-50 border-gray-400'
@@ -374,7 +375,7 @@
                     v-model="formData.breed"
                     @input="filterBreeds"
                     @focus="showBreedSuggestions = true"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-secondary focus:border-secondary"
                     placeholder="Ex: Européen, Siamois..."
                   />
                   <div
@@ -406,7 +407,7 @@
                   <input
                     type="text"
                     v-model="formData.userAddress"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-l-full focus:ring-2 focus:ring-secondary focus:border-secondary"
                     :placeholder="
                       formData.status === 'found'
                         ? 'Où avez-vous trouvé ce chat?'
@@ -415,7 +416,7 @@
                   />
                   <button
                     @click="getCurrentLocation"
-                    class="px-3 py-2 bg-white text-primary border border-l-0 border-gray-300 rounded-r-lg hover:bg-primary-dark hover:text-white transition-colors"
+                    class="px-3 py-2 bg-white text-primary border border-l-0 border-gray-300 rounded-r-full hover:bg-primary-dark hover:text-white transition-colors"
                     title="Utiliser ma position actuelle"
                   >
                     <svg
@@ -692,7 +693,7 @@
               >
               <div class="relative">
                 <div
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-secondary focus-within:border-secondary flex flex-wrap gap-2 items-center"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-full focus-within:ring-2 focus-within:ring-secondary focus-within:border-secondary flex flex-wrap gap-2 items-center"
                 >
                   <div
                     v-for="feature in selectedFeatures"

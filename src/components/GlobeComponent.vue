@@ -160,9 +160,8 @@ function initScene() {
   controls.enableDamping = true;
   controls.dampingFactor = 0.05;
   controls.rotateSpeed = 0.3;
-  controls.enableZoom = true;
-  controls.minDistance = 0.8; // Réduire pour permettre un zoom plus proche
-  controls.maxDistance = 8.0; // Réduire également la distance maximale
+  controls.enableZoom = false;
+
   controls.autoRotate = true;
   controls.autoRotateSpeed = 0.2;
 
@@ -174,11 +173,11 @@ function initScene() {
   const radius = 2;
 
   // Positionner la caméra pour voir la Belgique (Europe)
-  const belgiumPosition = latLngToVector3(47.0, 4.35, radius);
+  const belgiumPosition = latLngToVector3(47.0, 0.35, radius);
   // Ajuster la position de la caméra pour être plus proche et mieux centrée
   camera.position.set(
     belgiumPosition.x * 1.5,
-    belgiumPosition.y * 1.5,
+    belgiumPosition.y * 1.3,
     belgiumPosition.z * 1.5
   );
   // Définir le point de vue centré sur la Belgique

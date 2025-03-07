@@ -70,7 +70,7 @@
                       :href="`mailto:${
                         userData.contactEmail || userData.email
                       }`"
-                      class="group w-fit md:gap-2 px-2 md:px-4 py-2 bg-primary text-white border border-primary rounded-full hover:bg-white hover:text-primary transition-all duration-300 text-sm flex items-center shadow-sm"
+                      class="group w-fit md:gap-2 px-2 md:px-4 py-2 bg-primary text-white border border-primary rounded-full hover:bg-white hover:text-primary transition-all duration-100 text-sm flex items-center shadow-sm"
                     >
                       <svg
                         class="w-5 h-5 flex-shrink-0"
@@ -92,7 +92,7 @@
                     <a
                       v-if="userData.phone"
                       :href="`tel:${userData.phone}`"
-                      class="group md:gap-2 w-fit px-2 md:px-4 py-2 bg-green-500 text-white border border-green-500 rounded-full hover:bg-white hover:text-green-500 transition-all duration-300 text-sm flex items-center shadow-sm"
+                      class="group md:gap-2 w-fit px-2 md:px-4 py-2 bg-green-500 text-white border border-green-500 rounded-full hover:bg-white hover:text-green-500 transition-all duration-100 text-sm flex items-center shadow-sm"
                     >
                       <svg
                         class="w-5 h-5 flex-shrink-0"
