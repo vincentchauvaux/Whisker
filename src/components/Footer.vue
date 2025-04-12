@@ -121,9 +121,9 @@ import { defineComponent, h } from "vue";
 const navigation = {
   main: [
     { name: "Accueil", href: "#" },
-    { name: "Signaler", href: "#" },
-    { name: "Carte", href: "#" },
-    { name: "À propos", href: "#" },
+    { name: "Signaler", href: "/signalement" },
+    { name: "À propos", href: "/how-it-works" },
+    { name: "Style Guide", href: "/styleguide" },
   ],
   services: [
     { name: "Signaler un animal", href: "#" },

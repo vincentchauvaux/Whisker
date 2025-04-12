@@ -8,7 +8,7 @@
           <h1
             class="text-pretty text-4xl font-bold tracking-tight text-primary font-serif sm:text-6xl"
           >
-            Animal Search Mobile
+            Whikser Mobile
           </h1>
           <h2
             class="text-xl font-semibold text-primary-dark font-serif mt-6 mb-4"
@@ -16,8 +16,8 @@
             L'application qui réunit les animaux perdus et leurs propriétaires
           </h2>
           <p class="text-lg leading-8 text-gray-600 mb-8 font-sans">
-            Animal Search est une application smartphone GRATUITE qui a pour but
-            de signaler tout animal égaré, blessé ou décédé aperçu sur la voie
+            Whikser est une application smartphone GRATUITE qui a pour but de
+            signaler tout animal égaré, blessé ou décédé aperçu sur la voie
             publique, grâce à des photos géolocalisées.
           </p>
           <div class="mt-10 flex flex-col gap-y-4">
@@ -25,7 +25,7 @@
               <button
                 @click="handleDownload('ios')"
                 :disabled="isDownloading"
-                class="flex items-center justify-center rounded-xl bg-black px-5 py-3 text-white shadow-sm hover:bg-gray-800 disabled:opacity-70"
+                class="flex items-center justify-center rounded-full bg-black px-5 py-3 text-white shadow-sm hover:bg-gray-800 disabled:opacity-70"
               >
                 <svg
                   class="h-6 w-6 mr-2"
@@ -44,7 +44,7 @@
               <button
                 @click="handleDownload('android')"
                 :disabled="isDownloading"
-                class="flex items-center justify-center rounded-xl bg-black px-5 py-3 text-white shadow-sm hover:bg-gray-800 disabled:opacity-70"
+                class="flex items-center justify-center rounded-full bg-black px-5 py-3 text-white shadow-sm hover:bg-gray-800 disabled:opacity-70"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

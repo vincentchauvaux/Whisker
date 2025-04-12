@@ -63,7 +63,7 @@
             class="text-gray-700 hover:text-primary transition-colors"
             active-class="text-primary"
           >
-            Chats perdus / trouvés
+            Signalement
           </router-link>
           <router-link
             v-if="user"
@@ -72,6 +72,13 @@
             active-class="text-primary"
           >
             Signaler
+          </router-link>
+          <router-link
+            to="/how-it-works"
+            class="text-gray-700 hover:text-primary transition-colors"
+            active-class="text-primary"
+          >
+            À propos
           </router-link>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -186,12 +193,20 @@
               >
                 Signaler
               </router-link>
+              <router-link
+                to="/how-it-works"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-100"
+                active-class="text-primary"
+                @click="mobileMenuOpen = false"
+              >
+                À propos
+              </router-link>
             </div>
             <div class="py-6">
               <router-link
                 v-if="user"
                 to="/profile"
-                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-primary hover:bg-primary-light font-sans flex items-center gap-3"
+                class="-mx-3 rounded-lg px-3 py-2.5 text-base/7 font-semibold text-primary hover:bg-primary-light font-sans flex items-center gap-3"
                 @click="mobileMenuOpen = false"
               >
                 <img

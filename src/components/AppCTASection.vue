@@ -1,10 +1,8 @@
 <template>
-  <section
-    class="relative isolate overflow-hidden bg-primary-light py-24 sm:py-32"
-  >
+  <section class="relative isolate overflow-hidden py-24 sm:py-32">
     <div class="absolute inset-0 -z-10 overflow-hidden">
       <svg
-        class="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]"
+        class="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_bottom,white,transparent)]"
         aria-hidden="true"
       >
         <defs>
@@ -18,8 +16,13 @@
           >
             <path d="M100 200V.5M.5 .5H200" fill="none" />
           </pattern>
+          <linearGradient id="grid-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="currentColor" stop-opacity="0.3" />
+            <stop offset="80%" stop-color="currentColor" stop-opacity="0.05" />
+            <stop offset="100%" stop-color="currentColor" stop-opacity="0" />
+          </linearGradient>
         </defs>
-        <svg x="50%" y="-1" class="overflow-visible fill-primary-light">
+        <svg x="50%" y="-1" class="overflow-visible fill-white">
           <path
             d="M-100.5 0h201v201h-201Z M699.5 0h201v201h-201Z M499.5 400h201v201h-201Z M-300.5 600h201v201h-201Z"
             stroke-width="0"
@@ -30,6 +33,7 @@
           height="100%"
           stroke-width="0"
           fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)"
+          style="stroke: url(#grid-gradient)"
         />
       </svg>
     </div>
@@ -48,9 +52,29 @@
         <div
           class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4"
         >
+          <router-link
+            to="/how-it-works"
+            class="flex items-center justify-center rounded-full bg-primary px-5 py-3 text-white shadow-sm hover:bg-primary-dark mb-4 w-full sm:w-auto"
+          >
+            <svg
+              class="h-6 w-6 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"
+              />
+            </svg>
+            Comment ça marche
+          </router-link>
+
           <a
             href="#"
-            class="flex items-center justify-center rounded-xl bg-black px-5 py-3 text-white shadow-sm hover:bg-gray-800"
+            class="flex items-center justify-center rounded-full bg-black px-5 py-3 text-white shadow-sm hover:bg-gray-800"
           >
             <svg class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
               <path
@@ -64,7 +88,7 @@
           </a>
           <a
             href="#"
-            class="flex items-center justify-center rounded-xl bg-black px-5 py-3 text-white shadow-sm hover:bg-gray-800"
+            class="flex items-center justify-center rounded-full bg-black px-5 py-3 text-white shadow-sm hover:bg-gray-800"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +111,7 @@
         <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div class="text-center">
             <div
-              class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-light border border-primary"
+              class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white border border-primary"
             >
               <svg
                 class="h-6 w-6 text-primary"
@@ -115,7 +139,7 @@
 
           <div class="text-center">
             <div
-              class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-light border border-primary"
+              class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white border border-primary"
             >
               <svg
                 class="h-6 w-6 text-primary"
@@ -143,7 +167,7 @@
 
           <div class="text-center">
             <div
-              class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-light border border-primary"
+              class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white border border-primary"
             >
               <svg
                 class="h-6 w-6 text-primary"
@@ -171,7 +195,7 @@
 
           <div class="text-center">
             <div
-              class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-light border border-primary"
+              class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white border border-primary"
             >
               <svg
                 class="h-6 w-6 text-primary"

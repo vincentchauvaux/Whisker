@@ -1,6 +1,6 @@
 <template>
   <MainLayout>
-    <div class="bg-gradient-to-b from-primary-light to-white py-16">
+    <div class="py-16">
       <div class="container mx-auto px-4 max-w-4xl mt-16">
         <h1 class="text-4xl font-bold text-center text-primary font-serif mb-8">
           Signaler un chat
