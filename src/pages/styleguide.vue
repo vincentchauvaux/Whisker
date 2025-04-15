@@ -1519,80 +1519,320 @@
       <!-- 8. Interface utilisateur -->
       <section id="interface" class="mt-20">
         <h2
-          class="text-3xl font-bold tracking-tight text-primary font-serif mb-6"
+          class="text-3xl font-bold tracking-tight text-primary font-serif mb-6 animate-fade-in"
         >
           8. Interface utilisateur
         </h2>
-        <div class="prose prose-primary max-w-none">
-          <p>
-            L'interface utilisateur de Whisker Quest est conçue pour être
-            intuitive, accessible et efficace, permettant aux utilisateurs de
-            signaler ou rechercher des animaux rapidement.
-          </p>
 
-          <h3>Principes de conception</h3>
-          <ul>
-            <li>
-              <strong>Accessibilité</strong> : Conformité aux normes WCAG pour
-              une expérience inclusive
-            </li>
-            <li>
-              <strong>Responsive design</strong> : Adaptation fluide à tous les
-              appareils, du mobile au desktop
-            </li>
-            <li>
-              <strong>Navigation intuitive</strong> : Architecture d'information
-              claire et prévisible
-            </li>
-            <li>
-              <strong>Feedback utilisateur</strong> : Indications visuelles
-              claires pour toutes les interactions
-            </li>
-            <li>
-              <strong>Performance</strong> : Temps de chargement optimisés et
-              animations légères
-            </li>
-          </ul>
+        <!-- Introduction avec design moderne -->
+        <div
+          class="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl p-8 mb-12 hover:shadow-lg transition-all duration-300 animate-slide-up"
+        >
+          <div class="max-w-3xl">
+            <p class="text-lg text-primary-dark leading-relaxed">
+              L'interface utilisateur de Whisker Quest est conçue pour être
+              intuitive, accessible et efficace, permettant aux utilisateurs de
+              signaler ou rechercher des animaux rapidement.
+            </p>
+          </div>
+        </div>
 
-          <h3>Grille et espacement</h3>
-          <p>
-            Notre système utilise une grille flexible basée sur des multiples de
-            4px pour assurer la cohérence visuelle. Les marges, paddings et
-            espacements suivent cette logique pour créer une hiérarchie spatiale
-            claire.
-          </p>
+        <!-- Principes de conception avec illustrations -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <!-- Accessibilité -->
+          <div
+            class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-4px] animate-fade-in"
+            style="animation-delay: 100ms"
+          >
+            <div
+              class="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mb-4 hover:scale-110 transition-transform duration-300"
+            >
+              <svg
+                class="h-6 w-6 text-green-600"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-primary mb-2">Accessibilité</h3>
+            <p class="text-primary-dark text-sm">
+              Conformité aux normes WCAG pour une expérience inclusive
+            </p>
+            <div class="mt-4 space-y-2">
+              <div
+                class="flex items-center gap-2 text-sm text-gray-600 hover:translate-x-1 transition-transform"
+              >
+                <svg
+                  class="h-4 w-4 text-green-500"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>Contraste optimal</span>
+              </div>
+              <div
+                class="flex items-center gap-2 text-sm text-gray-600 hover:translate-x-1 transition-transform"
+                style="transition-delay: 50ms"
+              >
+                <svg
+                  class="h-4 w-4 text-green-500"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>Navigation au clavier</span>
+              </div>
+              <div
+                class="flex items-center gap-2 text-sm text-gray-600 hover:translate-x-1 transition-transform"
+                style="transition-delay: 100ms"
+              >
+                <svg
+                  class="h-4 w-4 text-green-500"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>Lecteurs d'écran</span>
+              </div>
+            </div>
+          </div>
 
-          <h3>Responsive design</h3>
-          <p>
-            L'interface s'adapte progressivement aux différentes tailles d'écran
-            :
-          </p>
-          <ul>
-            <li>
-              Mobile : Design optimisé pour les interactions tactiles et l'accès
-              rapide aux fonctionnalités clés
-            </li>
-            <li>
-              Tablette : Mise en page hybride exploitant l'espace supplémentaire
-            </li>
-            <li>
-              Desktop : Expérience enrichie avec des fonctionnalités avancées et
-              des mises en page multiples colonnes
-            </li>
-          </ul>
+          <!-- Responsive design -->
+          <div
+            class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-4px] animate-fade-in"
+            style="animation-delay: 200ms"
+          >
+            <div
+              class="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center mb-4 hover:scale-110 transition-transform duration-300"
+            >
+              <svg
+                class="h-6 w-6 text-blue-600"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-primary mb-2">
+              Responsive design
+            </h3>
+            <p class="text-primary-dark text-sm">
+              Adaptation fluide à tous les appareils
+            </p>
+            <div class="mt-4 flex gap-4">
+              <div class="device-container flex-1 relative h-64">
+                <div
+                  class="responsive-device absolute inset-0 bg-gray-100 rounded-lg overflow-hidden transition-all duration-700"
+                >
+                  <div
+                    class="absolute inset-x-2 top-2 h-4 bg-primary/10 rounded"
+                  ></div>
+                  <div
+                    class="absolute inset-x-2 top-8 bottom-2 bg-primary/5 rounded"
+                  >
+                    <!-- Contenu simulé -->
+                    <div
+                      class="absolute inset-x-4 top-4 h-2 bg-primary/10 rounded w-2/4"
+                    ></div>
+                    <div
+                      class="absolute inset-x-4 top-10 h-2 bg-primary/10 rounded w-1/2"
+                    ></div>
+                    <div
+                      class="absolute inset-x-4 top-16 h-2 bg-primary/10 rounded w-31"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="flex-1 aspect-[9/16] bg-gray-100 rounded-lg relative overflow-hidden"
+              >
+                <div
+                  class="absolute inset-x-2 top-2 h-4 bg-primary/10 rounded"
+                ></div>
+                <div
+                  class="absolute inset-x-2 top-8 bottom-2 bg-primary/5 rounded"
+                ></div>
+              </div>
+            </div>
+          </div>
 
-          <h3>États d'interface</h3>
-          <p>Chaque élément interactif communique clairement son état :</p>
-          <ul>
-            <li>État par défaut : Apparence normale de l'élément</li>
-            <li>État de survol : Légère accentuation visuelle (hover)</li>
-            <li>
-              État actif/focus : Indication visuelle claire de l'interaction
-            </li>
-            <li>
-              État désactivé : Apparence atténuée indiquant la non-disponibilité
-            </li>
-          </ul>
+          <!-- Navigation intuitive -->
+          <div
+            class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-4px] animate-fade-in"
+            style="animation-delay: 300ms"
+          >
+            <div
+              class="h-12 w-12 rounded-full bg-amber-100 flex items-center justify-center mb-4 hover:scale-110 transition-transform duration-300"
+            >
+              <svg
+                class="h-6 w-6 text-amber-600"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+                />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-primary mb-2">
+              Navigation intuitive
+            </h3>
+            <p class="text-primary-dark text-sm">
+              Architecture d'information claire
+            </p>
+            <div class="mt-4 space-y-2">
+              <div
+                class="h-8 bg-primary/5 rounded-lg hover:bg-primary/10 transition-colors duration-300"
+              ></div>
+              <div
+                class="h-24 bg-primary/5 rounded-lg hover:bg-primary/10 transition-colors duration-300"
+              ></div>
+              <div
+                class="h-8 bg-primary/5 rounded-lg hover:bg-primary/10 transition-colors duration-300"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grille et espacement avec exemple visuel -->
+        <div class="bg-white rounded-xl p-8 shadow-sm mb-12">
+          <h3 class="text-xl font-bold text-primary mb-6">
+            Grille et espacement
+          </h3>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <p class="text-primary-dark mb-4">
+                Notre système utilise une grille flexible basée sur des
+                multiples de 4px pour assurer la cohérence visuelle. Les marges,
+                paddings et espacements suivent cette logique pour créer une
+                hiérarchie spatiale claire.
+              </p>
+              <div class="space-y-4">
+                <div class="flex items-center gap-2">
+                  <div class="w-4 h-4 bg-secondary"></div>
+                  <span class="text-sm text-gray-600"
+                    >4px - Espacement minimal</span
+                  >
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 bg-secondary"></div>
+                  <span class="text-sm text-gray-600"
+                    >8px - Espacement standard</span
+                  >
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="w-16 h-16 bg-secondary"></div>
+                  <span class="text-sm text-gray-600"
+                    >16px - Espacement large</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-xl">
+              <div class="grid grid-cols-4 gap-4 h-full">
+                <div class="bg-primary/10 rounded"></div>
+                <div class="bg-primary/20 rounded"></div>
+                <div class="bg-primary/30 rounded"></div>
+                <div class="bg-primary/40 rounded"></div>
+                <div class="bg-primary/20 rounded col-span-2"></div>
+                <div class="bg-primary/30 rounded col-span-2"></div>
+                <div class="bg-primary/30 rounded col-span-3"></div>
+                <div class="bg-primary/40 rounded"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- États d'interface avec exemples interactifs -->
+        <div class="bg-white rounded-xl p-8 shadow-sm">
+          <h3 class="text-xl font-bold text-primary mb-6">États d'interface</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- État par défaut -->
+            <div class="space-y-4">
+              <h4 class="font-medium text-primary">État par défaut</h4>
+              <button class="w-full px-4 py-2 bg-primary text-white rounded-lg">
+                Bouton normal
+              </button>
+              <div class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                Champ de texte
+              </div>
+            </div>
+
+            <!-- État de survol -->
+            <div class="space-y-4">
+              <h4 class="font-medium text-primary">État de survol</h4>
+              <button
+                class="w-full px-4 py-2 bg-primary-dark text-white rounded-lg"
+              >
+                Bouton survolé
+              </button>
+              <div class="w-full px-4 py-2 border-2 border-primary rounded-lg">
+                Champ de texte actif
+              </div>
+            </div>
+
+            <!-- État actif/focus -->
+            <div class="space-y-4">
+              <h4 class="font-medium text-primary">État actif/focus</h4>
+              <button
+                class="w-full px-4 py-2 bg-primary-dark text-white rounded-lg ring-2 ring-offset-2 ring-primary"
+              >
+                Bouton focus
+              </button>
+              <div
+                class="w-full px-4 py-2 border-2 border-primary rounded-lg bg-primary/5"
+              >
+                Champ de texte focus
+              </div>
+            </div>
+
+            <!-- État désactivé -->
+            <div class="space-y-4">
+              <h4 class="font-medium text-primary">État désactivé</h4>
+              <button
+                class="w-full px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed"
+              >
+                Bouton désactivé
+              </button>
+              <div
+                class="w-full px-4 py-2 bg-gray-100 border border-gray-200 rounded-lg text-gray-400"
+              >
+                Champ désactivé
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -2054,3 +2294,88 @@ import { ref } from "vue";
 // Pour gérer l'affichage des cartes dans la section "Cartes et conteneurs"
 const activeCard = ref("signalement");
 </script>
+
+<style>
+@keyframes device-cycle {
+  0%,
+  25% {
+    aspect-ratio: 16/9;
+    opacity: 1;
+    transform: scale(1);
+  }
+  33%,
+  58% {
+    aspect-ratio: 3/4;
+    opacity: 1;
+    transform: scale(0.9);
+  }
+  66%,
+  91% {
+    aspect-ratio: 9/16;
+    opacity: 1;
+    transform: scale(0.8);
+  }
+  100% {
+    aspect-ratio: 16/9;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.device-container .device {
+  animation: device-cycle 6s infinite ease-in-out;
+}
+
+.device-container .device.desktop {
+  animation-delay: 0s;
+}
+
+.device-container .device.tablet {
+  animation-delay: -4s;
+}
+
+.device-container .device.mobile {
+  animation-delay: -2s;
+}
+
+@keyframes responsive-transform {
+  0%,
+  30% {
+    width: 45%;
+    height: 50%;
+    transform: translateX(60%);
+  }
+  40%,
+  60% {
+    width: 65%;
+    height: 75%;
+    transform: translateX(25%);
+  }
+  70%,
+  90% {
+    width: 85%;
+    height: 55%;
+    transform: translateX(10%);
+  }
+  100% {
+    width: 45%;
+    height: 50%;
+    transform: translateX(60%);
+  }
+}
+
+.responsive-device {
+  animation: responsive-transform 6s infinite ease-in-out;
+  transform-origin: center center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Suppression des anciennes animations */
+.device-container .device,
+.device-container .device.desktop,
+.device-container .device.tablet,
+.device-container .device.mobile {
+  animation: none;
+}
+</style>
