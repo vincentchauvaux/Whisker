@@ -53,6 +53,7 @@ export default {
       zoom,
       minZoom: 6,
       maxZoom: 15,
+      scrollZoom: false,
     });
 
     // Ajouter les contrôles de navigation

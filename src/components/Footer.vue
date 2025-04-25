@@ -120,16 +120,14 @@ import { defineComponent, h } from "vue";
 
 const navigation = {
   main: [
-    { name: "Accueil", href: "#" },
-    { name: "Signaler", href: "/signalement" },
-    { name: "À propos", href: "/how-it-works" },
-    { name: "Style Guide", href: "/styleguide" },
+    { name: "Nos Signalements", href: "/signalements" },
+    { name: "Comment ça marche ?", href: "/how-it-works" },
+    { name: "Notre App", href: "/app-mobile" },
+    { name: "Signaler un animal", href: "/signaler" },
   ],
   services: [
-    { name: "Signaler un animal", href: "#" },
-    { name: "Rechercher un animal", href: "#" },
-    { name: "Refuges partenaires", href: "#" },
-    { name: "Vétérinaires", href: "#" },
+    { name: "Style Guide", href: "/styleguide" },
+    { name: "Présentation Whisker Quest", href: "/whisker-quest" },
   ],
   legal: [
     { name: "Mentions légales", href: "#" },

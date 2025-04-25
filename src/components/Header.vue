@@ -63,7 +63,22 @@
             class="text-gray-700 hover:text-primary transition-colors"
             active-class="text-primary"
           >
-            Signalement
+            Nos signalements
+          </router-link>
+
+          <router-link
+            to="/how-it-works"
+            class="text-gray-700 hover:text-primary transition-colors"
+            active-class="text-primary"
+          >
+            Comment ?
+          </router-link>
+          <router-link
+            to="/app-mobile"
+            class="text-gray-700 hover:text-primary transition-colors"
+            active-class="text-primary"
+          >
+            Notre App
           </router-link>
           <router-link
             v-if="user"
@@ -71,14 +86,7 @@
             class="text-gray-700 hover:text-primary transition-colors"
             active-class="text-primary"
           >
-            Signaler
-          </router-link>
-          <router-link
-            to="/how-it-works"
-            class="text-gray-700 hover:text-primary transition-colors"
-            active-class="text-primary"
-          >
-            À propos
+            Signaler un animal
           </router-link>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
