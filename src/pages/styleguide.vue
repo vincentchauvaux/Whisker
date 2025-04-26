@@ -1,6 +1,14 @@
 <template>
   <MainLayout>
     <div class="bg-white py-16 sm:py-24">
+      <!-- Toast notification -->
+      <div
+        v-if="showToast"
+        class="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg transform transition-all duration-300"
+      >
+        {{ toastMessage }}
+      </div>
+
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
           <!-- Logo -->
@@ -211,7 +219,10 @@
             <div
               class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6"
             >
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer hover:shadow-md transition-all"
+                @click="copyToClipboard('#1B3B44')"
+              >
                 <div class="h-24 bg-primary"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Primaire</h4>
@@ -221,7 +232,10 @@
                   </p>
                 </div>
               </div>
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer hover:shadow-md transition-all"
+                @click="copyToClipboard('#E67E22')"
+              >
                 <div class="h-24 bg-secondary"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Secondaire</h4>
@@ -231,7 +245,10 @@
                   </p>
                 </div>
               </div>
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer hover:shadow-md transition-all"
+                @click="copyToClipboard('#BFCFD3')"
+              >
                 <div class="h-24 bg-primary-light"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Primaire clair</h4>
@@ -241,7 +258,10 @@
                   </p>
                 </div>
               </div>
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer hover:shadow-md transition-all"
+                @click="copyToClipboard('#FFFFFF')"
+              >
                 <div class="h-24 bg-white"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Blanc</h4>
@@ -257,7 +277,10 @@
             <div
               class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6"
             >
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer hover:shadow-md transition-all"
+                @click="copyToClipboard('#22C55E')"
+              >
                 <div class="h-24 bg-green-500"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Succès</h4>
@@ -267,7 +290,10 @@
                   </p>
                 </div>
               </div>
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer hover:shadow-md transition-all"
+                @click="copyToClipboard('#EF4444')"
+              >
                 <div class="h-24 bg-red-500"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Erreur</h4>
@@ -277,7 +303,10 @@
                   </p>
                 </div>
               </div>
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer hover:shadow-md transition-all"
+                @click="copyToClipboard('#F59E0B')"
+              >
                 <div class="h-24 bg-amber-500"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Avertissement</h4>
@@ -285,7 +314,10 @@
                   <p class="text-sm text-gray-500">Pour les avertissements</p>
                 </div>
               </div>
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer hover:shadow-md transition-all"
+                @click="copyToClipboard('#3B82F6')"
+              >
                 <div class="h-24 bg-blue-500"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Information</h4>
@@ -2330,6 +2362,24 @@ import MainLayout from "../layouts/MainLayout.vue";
 
 // Pour gérer l'affichage des cartes dans la section "Cartes et conteneurs"
 const activeCard = ref("signalement");
+
+const showToast = ref(false);
+const toastMessage = ref("");
+const toastTimeout = ref(null);
+
+const copyToClipboard = (text) => {
+  navigator.clipboard.writeText(text);
+  toastMessage.value = `${text} copié !`;
+  showToast.value = true;
+
+  if (toastTimeout.value) {
+    clearTimeout(toastTimeout.value);
+  }
+
+  toastTimeout.value = setTimeout(() => {
+    showToast.value = false;
+  }, 2000);
+};
 </script>
 
 <style>

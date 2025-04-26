@@ -1,7 +1,7 @@
 <template>
   <MainLayout>
-    <div class="bg-white">
-      <main>
+    <div class="bg-white py-16 sm:py-24">
+      <main class="mx-auto max-w-7xl px-6 lg:px-8">
         <HeroSection />
         <SearchAppSection />
         <FoundFriendsSection />

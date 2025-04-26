@@ -36,16 +36,13 @@
       >
         <div class="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
           <div class="flex">
-            <div
-              class="relative flex items-center gap-x-4 rounded-full bg-white px-4 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20"
-            >
-              <span class="font-semibold text-primary font-serif">Nouveau</span>
-              <span class="h-4 w-px bg-gray-900/10" aria-hidden="true" />
+            <Badge variant="primary" size="md">
+              <span class="font-serif">Nouveau</span>
+              <span class="h-4 w-px bg-gray-900/10 mx-2" aria-hidden="true" />
               <a href="/app-mobile" class="flex items-center gap-x-1 font-sans">
-                <span class="absolute inset-0" aria-hidden="true" />
                 Application mobile disponible
                 <svg
-                  class="-mr-2 size-5 text-primary"
+                  class="-mr-2 size-5 text-secondary"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -56,13 +53,11 @@
                   />
                 </svg>
               </a>
-            </div>
+            </Badge>
           </div>
-          <h1
-            class="mt-10 text-pretty text-4xl font-bold tracking-tight text-primary font-serif sm:text-6xl"
-          >
+          <Heading tag="h1" size="3xl" class="mt-10">
             Trouver ou perdu, Vous êtes au bon endroit !
-          </h1>
+          </Heading>
           <p
             class="mt-8 text-pretty text-lg font-medium text-primary-dark font-sans sm:text-xl/8"
           >
@@ -72,10 +67,11 @@
           </p>
           <div class="mt-10 flex flex-col gap-y-4">
             <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
-              <button
+              <Button
+                variant="secondary"
+                size="lg"
                 @click="handleDownload('ios')"
                 :disabled="isDownloading"
-                class="flex items-center justify-center rounded-full bg-black px-5 py-3 text-white shadow-sm hover:bg-gray-800 disabled:opacity-70"
               >
                 <svg
                   class="h-6 w-6 mr-2"
@@ -90,28 +86,25 @@
                   ></path>
                 </svg>
                 App Store
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="secondary"
+                size="lg"
                 @click="handleDownload('android')"
                 :disabled="isDownloading"
-                class="flex items-center justify-center rounded-full bg-black px-5 py-3 text-white shadow-sm hover:bg-gray-800 disabled:opacity-70"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  width="100"
                   class="h-6 w-6 mr-2"
-                  height="100"
-                  viewBox="0 0 50 50"
-                  style="fill: #ffffff"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
                 >
                   <path
-                    d="M 7.125 2 L 28.78125 23.5 L 34.71875 17.5625 L 8.46875 2.40625 C 8.03125 2.152344 7.5625 2.011719 7.125 2 Z M 5.3125 3 C 5.117188 3.347656 5 3.757813 5 4.21875 L 5 46 C 5 46.335938 5.070313 46.636719 5.1875 46.90625 L 27.34375 24.90625 Z M 36.53125 18.59375 L 30.1875 24.90625 L 36.53125 31.1875 L 44.28125 26.75 C 45.382813 26.113281 45.539063 25.304688 45.53125 24.875 C 45.519531 24.164063 45.070313 23.5 44.3125 23.09375 C 43.652344 22.738281 38.75 19.882813 36.53125 18.59375 Z M 28.78125 26.3125 L 6.9375 47.96875 C 7.300781 47.949219 7.695313 47.871094 8.0625 47.65625 C 8.917969 47.160156 26.21875 37.15625 26.21875 37.15625 L 34.75 32.25 Z"
-                  ></path>
+                    d="M17.523 15.3414c-.5511 0-1.0029-.4473-1.0029-1.0029s.4473-1.0029 1.0029-1.0029c.5511 0 1.0029.4473 1.0029 1.0029s-.4473 1.0029-1.0029 1.0029m-11.046 0c-.5511 0-1.0029-.4473-1.0029-1.0029s.4473-1.0029 1.0029-1.0029c.5511 0 1.0029.4473 1.0029 1.0029s-.4473 1.0029-1.0029 1.0029m11.4045-6.02l1.9973-3.4592c.0791-.137.0129-.3218-.1473-.3218h-.9575c-.2362 0-.4346.1181-.5522.3153l-1.7973 3.1168c-1.1537-.4331-2.4302-.6693-3.7773-.6693-1.3507 0-2.6297.2362-3.7834.6693l-1.7973-3.1168c-.1181-.1973-.3153-.3153-.5522-.3153h-.9575c-.1602 0-.2264.1848-.1473.3218l1.9973 3.4592c-1.9382 1.2264-3.2634 3.2634-3.2634 5.6257v.3153c0 .4346.355.7896.7896.7896h14.4375c.4346 0 .7896-.355.7896-.7896v-.3153c0-2.3623-1.3252-4.3993-3.2634-5.6257"
+                  />
                 </svg>
-                Google Play
-              </button>
+                Play Store
+              </Button>
             </div>
             <div class="mt-4">
               <router-link
@@ -162,71 +155,41 @@
       </div>
     </div>
 
-    <!-- Modal de connexion -->
-    <div
+    <Modal
       v-if="showLoginModal"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+      :is-open="showLoginModal"
+      title="Connexion"
+      @close="showLoginModal = false"
     >
-      <div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
-        <h2 class="text-xl font-bold mb-4 text-primary font-serif">
-          Connexion
-        </h2>
+      <form @submit.prevent="login" class="space-y-4">
+        <Input
+          id="email"
+          v-model="loginForm.email"
+          type="email"
+          label="Email"
+          placeholder="votre@email.com"
+          required
+        />
+        <Input
+          id="password"
+          v-model="loginForm.password"
+          type="password"
+          label="Mot de passe"
+          required
+        />
 
-        <form @submit.prevent="login" class="space-y-4">
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-700"
-              >Email</label
-            >
-            <input
-              type="email"
-              id="email"
-              v-model="loginForm.email"
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
-              required
-            />
-          </div>
+        <Alert v-if="loginError" variant="error">
+          {{ loginError }}
+        </Alert>
 
-          <div>
-            <label
-              for="password"
-              class="block text-sm font-medium text-gray-700"
-              >Mot de passe</label
-            >
-            <input
-              type="password"
-              id="password"
-              v-model="loginForm.password"
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
-              required
-            />
-          </div>
-
-          <p v-if="loginError" class="text-red-500 text-sm">{{ loginError }}</p>
-
-          <div class="flex justify-between">
-            <button
-              type="button"
-              @click="showLoginModal = false"
-              class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
-            >
-              Annuler
-            </button>
-            <button
-              type="submit"
-              class="px-4 py-2 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary-dark"
-            >
-              Se connecter
-            </button>
-          </div>
-
-          <div class="text-center text-sm text-gray-500">
-            <a href="/register" class="text-primary hover:text-primary-dark"
-              >Créer un compte</a
-            >
-          </div>
-        </form>
-      </div>
-    </div>
+        <div class="flex justify-end gap-4 mt-6">
+          <Button variant="tertiary" @click="showLoginModal = false">
+            Annuler
+          </Button>
+          <Button variant="primary" type="submit">Se connecter</Button>
+        </div>
+      </form>
+    </Modal>
   </div>
 </template>
 
@@ -238,6 +201,12 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import Button from "./ui/Button.vue";
+import Input from "./ui/Input.vue";
+import Alert from "./ui/Alert.vue";
+import Modal from "./ui/Modal.vue";
+import Badge from "./ui/Badge.vue";
+import Heading from "./ui/Heading.vue";
 
 const router = useRouter();
 const auth = getAuth();
@@ -248,19 +217,14 @@ const loginForm = ref({
   password: "",
 });
 const loginError = ref("");
+const isDownloading = ref(false);
 
-const scrollY = ref(0);
-
-const handleScroll = () => {
-  scrollY.value = window.scrollY;
-};
-
-const handleCommencer = () => {
-  if (isLoggedIn.value) {
-    router.push("/pets");
-  } else {
-    showLoginModal.value = true;
-  }
+const handleDownload = (platform) => {
+  isDownloading.value = true;
+  // Simuler le téléchargement
+  setTimeout(() => {
+    isDownloading.value = false;
+  }, 1000);
 };
 
 const login = async () => {
@@ -280,16 +244,10 @@ const login = async () => {
 };
 
 onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
-
   // Vérifier l'état de l'authentification
   onAuthStateChanged(auth, (user) => {
     isLoggedIn.value = !!user;
   });
-});
-
-onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll);
 });
 </script>
 
