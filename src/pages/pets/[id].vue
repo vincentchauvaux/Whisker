@@ -974,7 +974,7 @@ const petId = computed(() => route.params.id);
 // Image actuelle dans la galerie
 const currentImage = computed(() => {
   if (!pet.value || !pet.value.images || pet.value.images.length === 0) {
-    return "/logo-nb-transparent.png";
+    return "/Logo-graphique-2-big.png";
   }
   return pet.value.images[currentImageIndex.value];
 });

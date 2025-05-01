@@ -117,7 +117,7 @@
                     :src="pet.image"
                     :alt="pet.name"
                     class="w-24 h-24 object-cover rounded-lg"
-                    @error="$event.target.src = '/logo-nb-transparent.png'"
+                    @error="$event.target.src = '/Logo-graphique-2-big.png'"
                   />
                   <div class="flex-1 min-w-0">
                     <div class="flex items-start justify-between gap-2">
@@ -231,7 +231,7 @@ export default defineComponent({
             image:
               pet.images && pet.images.length > 0
                 ? pet.images[0]
-                : "/logo-nb-transparent.png",
+                : "/Logo-graphique-2-big.png",
             coordinates: pet.last_seen_location?.coordinates || null,
           };
         });

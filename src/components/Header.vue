@@ -22,7 +22,7 @@
                   ? 'h-8 brightness-100 sepia-[.25] hue-rotate-[310deg] saturate-[.9]'
                   : 'h-12 brightness-100 sepia-[.25] hue-rotate-[310deg] saturate-[.9]',
               ]"
-              src="/logo-nb-transparent.png"
+              src="/Logo-graphique-2-big.png"
               alt="Whisker Logo"
             />
             <div
@@ -133,7 +133,7 @@
             <span class="sr-only">Whisker</span>
             <img
               class="w-auto opa transition-all duration-300 h-8 brightness-100 sepia-[.25] hue-rotate-[310deg] saturate-[.9]"
-              src="/logo-nb-transparent.png"
+              src="/Logo-graphique-2-big.png"
               alt="Whisker Logo"
             />
             <div class="flex items-baseline gap-1">
@@ -520,13 +520,13 @@ const handleImageError = (event) => {
       console.error(
         "Échec avec l'URL simplifiée, utilisation de l'image par défaut"
       );
-      event.target.src = "/logo-nb-transparent.png";
+      event.target.src = "/Logo-graphique-2-big.png";
       // Supprimer le gestionnaire pour éviter les boucles
       event.target.onerror = null;
     };
   } else {
     // Pour les autres types d'URL ou si la tentative alternative a échoué
-    event.target.src = "/logo-nb-transparent.png";
+    event.target.src = "/Logo-graphique-2-big.png";
   }
 };
 </script>

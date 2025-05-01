@@ -93,7 +93,7 @@ const formattedPets = computed(() => {
       image:
         pet.images && pet.images.length > 0
           ? pet.images[0]
-          : "/logo-nb-transparent.png",
+          : "/Logo-graphique-2-big.png",
       location:
         pet.found_location?.address ||
         pet.found_location?.city ||

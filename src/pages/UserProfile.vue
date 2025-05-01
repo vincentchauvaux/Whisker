@@ -876,7 +876,7 @@
                           :src="
                             pet.images && pet.images.length > 0
                               ? pet.images[0]
-                              : '/logo-nb-transparent.png'
+                              : '/Logo-graphique-2-big.png'
                           "
                           alt="Photo de l'animal"
                           class="w-20 h-20 object-cover rounded-lg"
@@ -1434,13 +1434,13 @@ const handleProfileImageError = (event) => {
       console.error(
         "Échec avec l'URL simplifiée, utilisation de l'image par défaut"
       );
-      event.target.src = "/logo-nb-transparent.png";
+      event.target.src = "/Logo-graphique-2-big.png";
       // Supprimer le gestionnaire pour éviter les boucles
       event.target.onerror = null;
     };
   } else {
     // Pour les autres types d'URL ou si la tentative alternative a échoué
-    event.target.src = "/logo-nb-transparent.png";
+    event.target.src = "/Logo-graphique-2-big.png";
   }
 };
 

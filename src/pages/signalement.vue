@@ -1020,7 +1020,7 @@
                     :src="formData.images[0]"
                     alt="Preview"
                     class="max-h-48 mx-auto rounded-lg"
-                    @error="$event.target.src = '/logo-nb-transparent.png'"
+                    @error="$event.target.src = '/Logo-graphique-2-big.png'"
                   />
                   <button
                     @click.stop="formData.images = []"
@@ -1649,7 +1649,7 @@ const getCurrentLocation = () => {
 // Utiliser une image par défaut pour le signalement
 const useDefaultImage = () => {
   // Utiliser le logo local comme image par défaut
-  const defaultImageUrl = "/logo-nb-transparent.png";
+  const defaultImageUrl = "/Logo-graphique-2-big.png";
   formData.value.images = [defaultImageUrl];
 };
 

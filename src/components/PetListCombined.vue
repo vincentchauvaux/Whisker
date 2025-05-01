@@ -539,11 +539,11 @@ watch([filterType, searchQuery, sortBy, statusFilter], () => {
                 :src="
                   pet.images && pet.images.length > 0
                     ? pet.images[0]
-                    : '/logo-nb-transparent.png'
+                    : '/Logo-graphique-2-big.png'
                 "
                 :alt="pet.name || 'Chat sans nom'"
                 class="w-full text-lg text- h-48 object-cover transition-transform duration-500 group-hover:scale-105"
-                @error="$event.target.src = '/logo-nb-transparent.png '"
+                @error="$event.target.src = '/Logo-graphique-2-big.png '"
               />
               <!-- Badge avec ID discret -->
               <div

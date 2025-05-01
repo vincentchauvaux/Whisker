@@ -92,7 +92,7 @@ const formattedPets = computed(() => {
       image:
         pet.images && pet.images.length > 0
           ? pet.images[0]
-          : "/logo-nb-transparent.png",
+          : "/Logo-graphique-2-big.png",
       location: pet.last_seen_location?.address || "Lieu inconnu",
       date: formattedDate,
       duration: `Perdu depuis ${diffDays} jour${diffDays > 1 ? "s" : ""}`,

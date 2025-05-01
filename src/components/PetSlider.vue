@@ -55,7 +55,7 @@
                   :src="pet.image"
                   :alt="pet.name"
                   class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  @error="$event.target.src = '/logo-nb-transparent.png'"
+                  @error="$event.target.src = '/Logo-graphique-2-big.png'"
                 />
                 <div class="absolute top-4 left-4">
                   <span

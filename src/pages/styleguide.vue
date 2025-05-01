@@ -4,12 +4,30 @@
       <div class="mx-auto max-w-4xl text-center">
         <!-- Logo -->
         <div class="flex justify-center items-center mb-8">
-          <div class="flex items-baseline gap-1 ml-2">
-            <span class="font-sans font-bold text-primary text-3xl"
+          <router-link
+            to="/"
+            class="group relative flex items-baseline gap-1 ml-2"
+          >
+            <!-- Logo qui apparaît au survol -->
+            <div
+              class="absolute -top-12 left-1/2 -translate-x-1/2 transform opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
+            >
+              <img
+                src="/Logo-graphique-2-big.png"
+                alt="Logo Whisker Quest"
+                class="w-12 h-12 hover:scale-110 transition-transform"
+              />
+            </div>
+            <!-- Texte du logo -->
+            <span
+              class="font-sans font-bold text-primary text-3xl group-hover:opacity-80 transition-opacity"
               >Whisker</span
             >
-            <span class="font-serif text-secondary text-3xl">Quest</span>
-          </div>
+            <span
+              class="font-serif text-secondary text-3xl group-hover:opacity-80 transition-opacity"
+              >Quest</span
+            >
+          </router-link>
         </div>
 
         <h1
@@ -147,7 +165,7 @@
             class="bg-white p-8 rounded-xl border border-gray-200 flex flex-col items-center mb-8"
           >
             <img
-              src="/logo-nb-transparent.png"
+              src="/Logo-graphique-2-big.png"
               alt="Whisker Quest Logo"
               class="h-24 w-auto mb-4"
             />
@@ -2377,5 +2395,19 @@ const activeCard = ref("signalement");
 .device-container .device.tablet,
 .device-container .device.mobile {
   animation: none;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -5px);
+  }
+}
+
+.group:hover .absolute {
+  animation: float 2s ease-in-out infinite;
 }
 </style>

@@ -93,7 +93,7 @@
                     :src="
                       pet.images && pet.images.length > 0
                         ? pet.images[0]
-                        : '/logo-nb-transparent.png'
+                        : '/Logo-graphique-2-big.png'
                     "
                     :alt="pet.name || 'Chat sans nom'"
                     class="w-full h-full object-cover"

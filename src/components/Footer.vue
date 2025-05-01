@@ -6,7 +6,7 @@
           <div class="flex items-center gap-2">
             <img
               class="h-12 w-auto brightness-100 sepia-[.25] hue-rotate-[310deg] saturate-[.9]"
-              src="/logo-blanc-1141.png"
+              src="/Logo-graphique-2-big-w.png"
               alt="Whisker Logo"
             />
             <div class="flex items-baseline gap-1">
