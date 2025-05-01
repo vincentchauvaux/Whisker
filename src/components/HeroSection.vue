@@ -75,7 +75,7 @@
               <button
                 @click="handleDownload('ios')"
                 :disabled="isDownloading"
-                class="flex items-center justify-center rounded-full bg-black px-5 py-3 text-white shadow-sm hover:bg-gray-800 disabled:opacity-70"
+                class="flex items-center justify-center rounded-full bg-primary px-5 py-3 text-white shadow-sm hover:bg-primary-dark disabled:opacity-70"
               >
                 <svg
                   class="h-6 w-6 mr-2"
@@ -94,7 +94,7 @@
               <button
                 @click="handleDownload('android')"
                 :disabled="isDownloading"
-                class="flex items-center justify-center rounded-full bg-black px-5 py-3 text-white shadow-sm hover:bg-gray-800 disabled:opacity-70"
+                class="flex items-center justify-center rounded-full bg-primary px-5 py-3 text-white shadow-sm hover:bg-primary-dark disabled:opacity-70"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
