@@ -54,7 +54,7 @@
         >
           <router-link
             to="/how-it-works"
-            class="flex items-center justify-center rounded-full bg-primary px-5 py-3 text-white shadow-sm hover:bg-primary-dark mb-4 w-full sm:w-auto"
+            class="flex items-center justify-center rounded-full bg-primary px-5 py-3 text-white shadow-sm hover:bg-primary-dark"
           >
             <svg
               class="h-6 w-6 mr-2"

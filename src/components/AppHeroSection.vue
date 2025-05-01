@@ -135,9 +135,9 @@ import {
 
 // Utilisation des hooks d'animation
 const { getTransformStyle } = useScrollAnimation({
-  scrollSpeed: 0.3,
-  maxOffset: 200,
-  scrollFactor: 0.2,
+  scrollSpeed: 0.08,
+  maxOffset: 900,
+  scrollFactor: 0.15,
 });
 
 const { blobClasses } = useBlobAnimation();
