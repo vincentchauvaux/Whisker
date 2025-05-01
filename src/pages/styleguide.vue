@@ -154,6 +154,10 @@
                 src="/Logo-graphique-2-big.png"
                 alt="Whisker Quest Logo"
                 class="h-24 w-auto mb-4"
+                style="
+                  filter: invert(18%) sepia(17%) saturate(1162%)
+                    hue-rotate(153deg) brightness(95%) contrast(90%);
+                "
               />
               <div class="flex items-baseline gap-1 text-2xl mt-4">
                 <span class="font-sans font-bold text-primary">Whisker</span>

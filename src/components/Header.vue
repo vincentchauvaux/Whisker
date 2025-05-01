@@ -17,11 +17,11 @@
             <span class="sr-only">Whisker</span>
             <img
               class="w-auto transition-all duration-300"
-              :class="[
-                scrolled
-                  ? 'h-8 brightness-100 sepia-[.25] hue-rotate-[310deg] saturate-[.9]'
-                  : 'h-12 brightness-100 sepia-[.25] hue-rotate-[310deg] saturate-[.9]',
-              ]"
+              :class="[scrolled ? 'h-8' : 'h-12']"
+              style="
+                filter: invert(18%) sepia(17%) saturate(1162%)
+                  hue-rotate(153deg) brightness(95%) contrast(90%);
+              "
               src="/Logo-graphique-2-big.png"
               alt="Whisker Logo"
             />
