@@ -151,7 +151,7 @@
               class="bg-white p-8 rounded-xl border border-gray-200 flex flex-col items-center mb-8"
             >
               <img
-                src="/logo-nb-transparent.png"
+                src="/Logo-graphique-2-big.png"
                 alt="Whisker Quest Logo"
                 class="h-24 w-auto mb-4"
               />

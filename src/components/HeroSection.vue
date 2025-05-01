@@ -10,14 +10,14 @@
             id="83fd4e5a-9d52-42fc-97b6-718e5d7ee527"
             width="200"
             height="200"
-            x="50%"
+            x="69%"
             y="-1"
             patternUnits="userSpaceOnUse"
           >
             <path d="M100 200V.5M.5 .5H200" fill="none" />
           </pattern>
         </defs>
-        <svg x="50%" y="-1" class="overflow-visible fill-primary-light">
+        <svg x="69%" y="-1" class="overflow-visible fill-primary-light">
           <path
             d="M-100.5 0h201v201h-201Z M699.5 0h201v201h-201Z M499.5 400h201v201h-201Z M-300.5 600h201v201h-201Z"
             stroke-width="0"
@@ -152,7 +152,7 @@
               clip-path="url(#2ade4387-9c63-4fc4-b754-10e687a0d332)"
             >
               <img
-                src="/affiches/affiche-3-720.jpg"
+                src="/affiches/affiche-3-720-2.png"
                 alt="Capture d'écran de l'application mobile"
                 class="w-full h-full object-cover"
               />
