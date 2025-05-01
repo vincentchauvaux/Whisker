@@ -211,7 +211,10 @@
             <div
               class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6"
             >
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group"
+                @click="copyColor('#1B3B44', 0)"
+              >
                 <div class="h-24 bg-primary"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Primaire</h4>
@@ -220,18 +223,40 @@
                     Utilisé pour les titres et éléments principaux
                   </p>
                 </div>
+                <transition name="fade">
+                  <div
+                    v-if="copied[0]"
+                    class="absolute top-2 right-2 bg-primary text-white text-xs px-3 py-1 rounded shadow z-10"
+                  >
+                    Couleur #1B3B44 copiée !
+                  </div>
+                </transition>
               </div>
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group"
+                @click="copyColor('#F26052', 1)"
+              >
                 <div class="h-24 bg-secondary"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Secondaire</h4>
-                  <p class="text-sm text-gray-600">#E67E22</p>
+                  <p class="text-sm text-gray-600">#F26052</p>
                   <p class="text-sm text-gray-500">
                     Utilisé pour les accents et les appels à l'action
                   </p>
                 </div>
+                <transition name="fade">
+                  <div
+                    v-if="copied[1]"
+                    class="absolute top-2 right-2 bg-secondary text-white text-xs px-3 py-1 rounded shadow z-10"
+                  >
+                    Couleur #F26052 copiée !
+                  </div>
+                </transition>
               </div>
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group"
+                @click="copyColor('#BFCFD3', 2)"
+              >
                 <div class="h-24 bg-primary-light"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Primaire clair</h4>
@@ -240,8 +265,19 @@
                     Utilisé pour les fonds et les nuances plus légères
                   </p>
                 </div>
+                <transition name="fade">
+                  <div
+                    v-if="copied[2]"
+                    class="absolute top-2 right-2 bg-primary-light text-primary text-xs px-3 py-1 rounded shadow z-10"
+                  >
+                    Couleur #BFCFD3 copiée !
+                  </div>
+                </transition>
               </div>
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group"
+                @click="copyColor('#FFFFFF', 3)"
+              >
                 <div class="h-24 bg-white"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Blanc</h4>
@@ -250,6 +286,14 @@
                     Utilisé pour les fonds et le texte sur fond sombre
                   </p>
                 </div>
+                <transition name="fade">
+                  <div
+                    v-if="copied[3]"
+                    class="absolute top-2 right-2 bg-gray-800 text-white text-xs px-3 py-1 rounded shadow z-10"
+                  >
+                    Couleur #FFFFFF copiée !
+                  </div>
+                </transition>
               </div>
             </div>
 
@@ -2330,6 +2374,16 @@ import MainLayout from "../layouts/MainLayout.vue";
 
 // Pour gérer l'affichage des cartes dans la section "Cartes et conteneurs"
 const activeCard = ref("signalement");
+
+// Pour le message de copie couleur
+const copied = ref([false, false, false, false]);
+function copyColor(hex, idx) {
+  navigator.clipboard.writeText(hex);
+  copied.value[idx] = true;
+  setTimeout(() => {
+    copied.value[idx] = false;
+  }, 1500);
+}
 </script>
 
 <style>
@@ -2428,5 +2482,14 @@ const activeCard = ref("signalement");
 
 .group:hover .absolute {
   animation: float 2s ease-in-out infinite;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
