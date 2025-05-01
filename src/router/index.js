@@ -13,6 +13,7 @@ import AppMobilePage from "../pages/app-mobile.vue";
 import HowItWorksPage from "../pages/how-it-works.vue";
 import AdminPage from "../pages/admin.vue";
 import StyleGuidePage from "../pages/styleguide.vue";
+import WhiskerQuestPage from "../pages/whisker-quest.vue";
 
 // Navigation guard pour les routes protégées
 const requireAuth = (to, from, next) => {
@@ -104,6 +105,11 @@ const routes = [
     path: "/styleguide",
     name: "StyleGuide",
     component: StyleGuidePage,
+  },
+  {
+    path: "/whisker-quest",
+    name: "WhiskerQuest",
+    component: WhiskerQuestPage,
   },
 ];
 
