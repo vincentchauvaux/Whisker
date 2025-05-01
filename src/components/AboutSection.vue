@@ -58,7 +58,7 @@
             >
               <img
                 alt="Équipe en action"
-                src="https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?q=80&w=560&auto=format&fit=crop"
+                src="/affiches/afffiche-04.png"
                 class="block size-full object-cover"
               />
             </div>
@@ -67,7 +67,7 @@
             >
               <img
                 alt="Refuge partenaire"
-                src="https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?q=80&w=560&auto=format&fit=crop"
+                src="/affiches/goodies-2-1.png"
                 class="block size-full object-cover"
               />
             </div>
@@ -76,7 +76,7 @@
             >
               <img
                 alt="Retrouvailles heureuses"
-                src="https://images.unsplash.com/photo-1560743641-3914f2c45636?q=80&w=560&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?q=80&w=560&auto=format&fit=crop"
                 class="block size-full object-cover"
               />
             </div>

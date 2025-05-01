@@ -45,7 +45,7 @@
               <iframe
                 ref="videoIframe"
                 class="absolute top-0 left-0 w-full h-full rounded-2xl"
-                :src="`https://www.youtube.com/embed/i31ZeWeOHgY?si=FI7qMi9RY-rmp7NH&mute=1&loop=1&playlist=i31ZeWeOHgY&enablejsapi=1`"
+                :src="`https://www.youtube.com/embed/CW0p4WuIjZ4?si=di350_MEa3bbrrF-`"
                 title="YouTube video player"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
