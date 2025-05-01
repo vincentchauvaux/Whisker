@@ -212,8 +212,8 @@
               class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6"
             >
               <div
-                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group"
-                @click="copyColor('#1B3B44', 0)"
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:rotate-2 hover:scale-105"
+                @click="copyColor('#1B3B44')"
               >
                 <div class="h-24 bg-primary"></div>
                 <div class="p-4">
@@ -223,18 +223,10 @@
                     Utilisé pour les titres et éléments principaux
                   </p>
                 </div>
-                <transition name="fade">
-                  <div
-                    v-if="copied[0]"
-                    class="absolute top-2 right-2 bg-primary text-white text-xs px-3 py-1 rounded shadow z-10"
-                  >
-                    Couleur #1B3B44 copiée !
-                  </div>
-                </transition>
               </div>
               <div
-                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group"
-                @click="copyColor('#F26052', 1)"
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:-rotate-2 hover:scale-105"
+                @click="copyColor('#F26052')"
               >
                 <div class="h-24 bg-secondary"></div>
                 <div class="p-4">
@@ -244,18 +236,10 @@
                     Utilisé pour les accents et les appels à l'action
                   </p>
                 </div>
-                <transition name="fade">
-                  <div
-                    v-if="copied[1]"
-                    class="absolute top-2 right-2 bg-secondary text-white text-xs px-3 py-1 rounded shadow z-10"
-                  >
-                    Couleur #F26052 copiée !
-                  </div>
-                </transition>
               </div>
               <div
-                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group"
-                @click="copyColor('#BFCFD3', 2)"
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:rotate-1 hover:scale-105"
+                @click="copyColor('#BFCFD3')"
               >
                 <div class="h-24 bg-primary-light"></div>
                 <div class="p-4">
@@ -265,18 +249,10 @@
                     Utilisé pour les fonds et les nuances plus légères
                   </p>
                 </div>
-                <transition name="fade">
-                  <div
-                    v-if="copied[2]"
-                    class="absolute top-2 right-2 bg-primary-light text-primary text-xs px-3 py-1 rounded shadow z-10"
-                  >
-                    Couleur #BFCFD3 copiée !
-                  </div>
-                </transition>
               </div>
               <div
-                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group"
-                @click="copyColor('#FFFFFF', 3)"
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:-rotate-1 hover:scale-105"
+                @click="copyColor('#FFFFFF')"
               >
                 <div class="h-24 bg-white"></div>
                 <div class="p-4">
@@ -286,14 +262,6 @@
                     Utilisé pour les fonds et le texte sur fond sombre
                   </p>
                 </div>
-                <transition name="fade">
-                  <div
-                    v-if="copied[3]"
-                    class="absolute top-2 right-2 bg-gray-800 text-white text-xs px-3 py-1 rounded shadow z-10"
-                  >
-                    Couleur #FFFFFF copiée !
-                  </div>
-                </transition>
               </div>
             </div>
 
@@ -301,7 +269,10 @@
             <div
               class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6"
             >
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:rotate-2 hover:scale-105"
+                @click="copyColor('#22C55E')"
+              >
                 <div class="h-24 bg-green-500"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Succès</h4>
@@ -311,7 +282,10 @@
                   </p>
                 </div>
               </div>
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:-rotate-2 hover:scale-105"
+                @click="copyColor('#EF4444')"
+              >
                 <div class="h-24 bg-red-500"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Erreur</h4>
@@ -321,7 +295,10 @@
                   </p>
                 </div>
               </div>
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:rotate-1 hover:scale-105"
+                @click="copyColor('#F59E0B')"
+              >
                 <div class="h-24 bg-amber-500"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Avertissement</h4>
@@ -329,7 +306,10 @@
                   <p class="text-sm text-gray-500">Pour les avertissements</p>
                 </div>
               </div>
-              <div class="rounded-xl overflow-hidden border border-gray-200">
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:-rotate-1 hover:scale-105"
+                @click="copyColor('#3B82F6')"
+              >
                 <div class="h-24 bg-blue-500"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Information</h4>
@@ -2366,6 +2346,19 @@
       </div>
     </div>
   </MainLayout>
+
+  <!-- Message global de copie en bas à droite -->
+  <teleport to="body">
+    <transition name="fade">
+      <div
+        v-if="globalCopiedHex"
+        class="fixed bottom-6 right-6 z-50 bg-primary text-white px-4 py-2 rounded-lg shadow-lg text-sm opacity-90"
+        style="pointer-events: none"
+      >
+        Couleur {{ globalCopiedHex }} copiée !
+      </div>
+    </transition>
+  </teleport>
 </template>
 
 <script setup>
@@ -2375,13 +2368,15 @@ import MainLayout from "../layouts/MainLayout.vue";
 // Pour gérer l'affichage des cartes dans la section "Cartes et conteneurs"
 const activeCard = ref("signalement");
 
-// Pour le message de copie couleur
-const copied = ref([false, false, false, false]);
-function copyColor(hex, idx) {
+// Message global pour la copie
+const globalCopiedHex = ref("");
+let globalCopiedTimeout = null;
+function copyColor(hex) {
   navigator.clipboard.writeText(hex);
-  copied.value[idx] = true;
-  setTimeout(() => {
-    copied.value[idx] = false;
+  globalCopiedHex.value = hex;
+  if (globalCopiedTimeout) clearTimeout(globalCopiedTimeout);
+  globalCopiedTimeout = setTimeout(() => {
+    globalCopiedHex.value = "";
   }, 1500);
 }
 </script>
