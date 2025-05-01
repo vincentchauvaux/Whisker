@@ -152,7 +152,7 @@
               clip-path="url(#2ade4387-9c63-4fc4-b754-10e687a0d332)"
             >
               <img
-                src="/affiches/affiche-3-720-2.png"
+                src="/affiches/affiche-3-720--4-affcihe.png"
                 alt="Capture d'écran de l'application mobile"
                 class="w-full h-full object-cover"
               />
