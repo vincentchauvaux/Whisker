@@ -1,16 +1,17 @@
 <template>
-  <div class="bg-white py-16 sm:py-24">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="mx-auto max-w-4xl text-center">
-        <!-- Logo -->
-        <div class="flex justify-center items-center mb-8">
-          <div class="flex items-baseline gap-1 ml-2">
-            <span class="font-sans font-bold text-primary text-3xl"
-              >Whisker</span
-            >
-            <span class="font-serif text-secondary text-3xl">Quest</span>
+  <MainLayout>
+    <div class="bg-white py-16 sm:py-24">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-4xl text-center">
+          <!-- Logo -->
+          <div class="flex justify-center items-center mb-8">
+            <div class="flex items-baseline gap-1 ml-2">
+              <span class="font-sans font-bold text-primary text-3xl"
+                >Whisker</span
+              >
+              <span class="font-serif text-secondary text-3xl">Quest</span>
+            </div>
           </div>
-        </div>
 
           <h1
             class="text-4xl font-bold tracking-tight text-primary font-serif sm:text-5xl mt-4"
@@ -137,60 +138,60 @@
           </div>
         </section>
 
-      <!-- 2. Identité de marque -->
-      <section id="identite" class="mt-20">
-        <h2
-          class="text-3xl font-bold tracking-tight text-primary font-serif mb-6"
-        >
-          2. Identité de marque
-        </h2>
-        <div class="prose prose-primary max-w-none">
-          <h3>Logo</h3>
-          <div
-            class="bg-white p-8 rounded-xl border border-gray-200 flex flex-col items-center mb-8"
+        <!-- 2. Identité de marque -->
+        <section id="identite" class="mt-20">
+          <h2
+            class="text-3xl font-bold tracking-tight text-primary font-serif mb-6"
           >
-            <img
-              src="/logo-nb-transparent.png"
-              alt="Whisker Quest Logo"
-              class="h-24 w-auto mb-4"
-            />
-            <div class="flex items-baseline gap-1 text-2xl mt-4">
-              <span class="font-sans font-bold text-primary">Whisker</span>
-              <span class="font-serif text-secondary">Quest</span>
+            2. Identité de marque
+          </h2>
+          <div class="prose prose-primary max-w-none">
+            <h3>Logo</h3>
+            <div
+              class="bg-white p-8 rounded-xl border border-gray-200 flex flex-col items-center mb-8"
+            >
+              <img
+                src="/logo-nb-transparent.png"
+                alt="Whisker Quest Logo"
+                class="h-24 w-auto mb-4"
+              />
+              <div class="flex items-baseline gap-1 text-2xl mt-4">
+                <span class="font-sans font-bold text-primary">Whisker</span>
+                <span class="font-serif text-secondary">Quest</span>
+              </div>
             </div>
+            <p>
+              Notre logo combine une icône de chat stylisée avec la typographie
+              distinctive du nom "Whisker Quest", où "Whisker" est en police
+              sans-serif gras et "Quest" en serif, symbolisant le mélange de
+              modernité et de tradition.
+            </p>
+            <h3>Personnalité de marque</h3>
+            <p>
+              La personnalité de Whisker Quest est caractérisée par les
+              attributs suivants :
+            </p>
+            <ul>
+              <li>
+                <strong>Bienveillante</strong> : Nous montrons de l'empathie
+                envers les propriétaires d'animaux dans des situations
+                stressantes.
+              </li>
+              <li>
+                <strong>Professionnelle</strong> : Nous abordons notre mission
+                avec sérieux et compétence.
+              </li>
+              <li>
+                <strong>Accessible</strong> : Notre plateforme est conçue pour
+                être utilisée facilement par tous.
+              </li>
+              <li>
+                <strong>Rassurante</strong> : Notre design inspire confiance et
+                sécurité.
+              </li>
+            </ul>
           </div>
-          <p>
-            Notre logo combine une icône de chat stylisée avec la typographie
-            distinctive du nom "Whisker Quest", où "Whisker" est en police
-            sans-serif gras et "Quest" en serif, symbolisant le mélange de
-            modernité et de tradition.
-          </p>
-          <h3>Personnalité de marque</h3>
-          <p>
-            La personnalité de Whisker Quest est caractérisée par les attributs
-            suivants :
-          </p>
-          <ul>
-            <li>
-              <strong>Bienveillante</strong> : Nous montrons de l'empathie
-              envers les propriétaires d'animaux dans des situations
-              stressantes.
-            </li>
-            <li>
-              <strong>Professionnelle</strong> : Nous abordons notre mission
-              avec sérieux et compétence.
-            </li>
-            <li>
-              <strong>Accessible</strong> : Notre plateforme est conçue pour
-              être utilisée facilement par tous.
-            </li>
-            <li>
-              <strong>Rassurante</strong> : Notre design inspire confiance et
-              sécurité.
-            </li>
-          </ul>
-        </div>
-      </section>
+        </section>
 
         <!-- 3. Palette de couleurs -->
         <section id="couleurs" class="mt-20">
