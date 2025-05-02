@@ -13,8 +13,8 @@
           <h3
             class="text-xl font-semibold text-primary-dark font-serif mt-6 mb-4"
           >
-            La Plateforme de Centralisation<br />
-            de Signalement d'Animaux Trouvés et Perdus
+            La plateforme de centralisation<br />
+            de signalement d'animaux trouvés et perdus
           </h3>
           <p class="text-lg leading-8 text-gray-600 mb-8 font-sans">
             Animal Search est une application smartphone GRATUITE qui a pour but

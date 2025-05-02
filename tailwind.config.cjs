@@ -16,8 +16,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["Montserrat", "sans-serif"],
-        serif: ['"Old Standard TT"', "serif"],
+        sans: ["Inter", "sans-serif"],
+        serif: ['"Libre Baskerville"', "serif"],
       },
     },
   },
