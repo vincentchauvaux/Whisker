@@ -47,7 +47,6 @@
                 class="absolute top-0 left-0 w-full h-full rounded-2xl"
                 :src="`https://www.youtube.com/embed/i31ZeWeOHgY?si=FI7qMi9RY-rmp7NH&mute=1&loop=1&playlist=i31ZeWeOHgY&enablejsapi=1`"
                 title="YouTube video player"
-                frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen
@@ -66,41 +65,61 @@ import { ref, onMounted, onUnmounted } from "vue";
 const videoContainer = ref(null);
 const videoIframe = ref(null);
 let observer = null;
+let player = null;
+
+const onYouTubeIframeAPIReady = () => {
+  player = new YT.Player(videoIframe.value, {
+    events: {
+      onReady: onPlayerReady,
+      onStateChange: onPlayerStateChange,
+    },
+  });
+};
+
+const onPlayerReady = () => {
+  // La vidéo est prête, on peut maintenant l'observer
+  if (videoContainer.value) {
+    observer.observe(videoContainer.value);
+  }
+};
+
+const onPlayerStateChange = (event) => {
+  // Gérer les changements d'état de la vidéo si nécessaire
+};
 
 onMounted(() => {
+  // Charger l'API YouTube
+  const tag = document.createElement("script");
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName("script")[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // Configurer l'Intersection Observer
   observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && player) {
           // Démarrer la vidéo quand elle est visible
-          const player = videoIframe.value;
-          player.contentWindow.postMessage(
-            '{"event":"command","func":"playVideo","args":""}',
-            "*"
-          );
-        } else {
+          player.playVideo();
+        } else if (player) {
           // Mettre en pause la vidéo quand elle n'est plus visible
-          const player = videoIframe.value;
-          player.contentWindow.postMessage(
-            '{"event":"command","func":"pauseVideo","args":""}',
-            "*"
-          );
+          player.pauseVideo();
         }
       });
     },
     {
-      threshold: 0.5, // Déclencher quand 50% de la vidéo est visible
+      threshold: 0.5,
+      rootMargin: "50px", // Déclencher un peu avant que la vidéo ne soit complètement visible
     }
   );
-
-  if (videoContainer.value) {
-    observer.observe(videoContainer.value);
-  }
 });
 
 onUnmounted(() => {
   if (observer) {
     observer.disconnect();
+  }
+  if (player) {
+    player.destroy();
   }
 });
 </script>
