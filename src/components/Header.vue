@@ -22,7 +22,7 @@
                 filter: invert(18%) sepia(17%) saturate(1162%)
                   hue-rotate(153deg) brightness(95%) contrast(90%);
               "
-              src="/Logo-graphique-2-big.png"
+              src="/Logo graphique-model-6-big.svg"
               alt="Whisker Logo"
             />
             <div
