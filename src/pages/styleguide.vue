@@ -146,12 +146,11 @@
             2. Identité de marque
           </h2>
           <div class="prose prose-primary max-w-none">
-            <h3>Logo</h3>
             <div
               class="bg-white p-8 rounded-xl border border-gray-200 flex flex-col items-center mb-8"
             >
               <img
-                src="/Logo-graphique-2-big.png"
+                src="/Logo graphique-model-6-big.svg"
                 alt="Whisker Quest Logo"
                 class="h-24 w-auto mb-4"
                 style="
@@ -332,7 +331,7 @@
             </p>
             <ul>
               <li>
-                Le bleu-vert primaire (primary) est utilisé pour les éléments
+                Le Vert Profond primaire est utilisé pour les éléments
                 d'interface principaux, l'en-tête et le pied de page
               </li>
               <li>
