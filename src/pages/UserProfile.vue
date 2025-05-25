@@ -407,23 +407,12 @@
                     v-if="userBadges.includes('explorer')"
                     class="flex flex-col items-center p-3 rounded-lg bg-blue-100 hover:shadow-md transition-shadow group relative"
                   >
-                    <div
-                      class="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center mb-2"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-10 w-10 text-white"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <circle cx="12" cy="12" r="10" />
-                        <polygon
-                          points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"
-                        />
-                      </svg>
-                    </div>
+                    <img
+                      src="/icon/badge/oiseau.svg"
+                      alt="Explorateur urbain"
+                      class="h-16 w-16"
+                    />
+
                     <h3 class="text-sm font-medium text-center">
                       Explorateur urbain
                     </h3>
@@ -439,20 +428,12 @@
                     v-if="userBadges.includes('guardian')"
                     class="flex flex-col items-center p-3 rounded-lg bg-green-100 hover:shadow-md transition-shadow group relative"
                   >
-                    <div
-                      class="w-16 h-16 rounded-full bg-green-600 flex items-center justify-center mb-2"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-10 w-10 text-white"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                      </svg>
-                    </div>
+                    <img
+                      src="/icon/badge/bouclier étoile.svg"
+                      alt="Explorateur urbain"
+                      class="h-16 w-16"
+                    />
+
                     <h3 class="text-sm font-medium text-center">
                       Gardien des animaux
                     </h3>
@@ -468,23 +449,12 @@
                     v-if="userBadges.includes('samaritan')"
                     class="flex flex-col items-center p-3 rounded-lg bg-orange-100 hover:shadow-md transition-shadow group relative"
                   >
-                    <div
-                      class="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center mb-2"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-10 w-10 text-white"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path
-                          d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
-                        />
-                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
-                      </svg>
-                    </div>
+                    <img
+                      src="/icon/badge/boussole.svg"
+                      alt="Explorateur urbain"
+                      class="h-16 w-16"
+                    />
+
                     <h3 class="text-sm font-medium text-center">
                       Samaritain communautaire
                     </h3>
@@ -500,21 +470,12 @@
                     v-if="userBadges.includes('detective')"
                     class="flex flex-col items-center p-3 rounded-lg bg-yellow-100 hover:shadow-md transition-shadow group relative"
                   >
-                    <div
-                      class="w-16 h-16 rounded-full bg-yellow-500 flex items-center justify-center mb-2"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-10 w-10 text-white"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <circle cx="11" cy="11" r="8" />
-                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                      </svg>
-                    </div>
+                    <img
+                      src="/icon/badge/livre.svg"
+                      alt="Explorateur urbain"
+                      class="h-16 w-16"
+                    />
+
                     <h3 class="text-sm font-medium text-center">
                       Détective des poils
                     </h3>
@@ -530,30 +491,12 @@
                     v-if="userBadges.includes('contributor')"
                     class="flex flex-col items-center p-3 rounded-lg bg-blue-100 hover:shadow-md transition-shadow group relative"
                   >
-                    <div
-                      class="w-16 h-16 rounded-full bg-blue-800 flex items-center justify-center mb-2"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-10 w-10 text-white"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <rect
-                          x="3"
-                          y="4"
-                          width="18"
-                          height="18"
-                          rx="2"
-                          ry="2"
-                        />
-                        <line x1="16" y1="2" x2="16" y2="6" />
-                        <line x1="8" y1="2" x2="8" y2="6" />
-                        <line x1="3" y1="10" x2="21" y2="10" />
-                      </svg>
-                    </div>
+                    <img
+                      src="/icon/badge/poigné de main.svg"
+                      alt="Explorateur urbain"
+                      class="h-16 w-16"
+                    />
+
                     <h3 class="text-sm font-medium text-center">
                       Contributeur assidu
                     </h3>
@@ -570,23 +513,11 @@
                     v-if="userBadges.includes('diplomat')"
                     class="flex flex-col items-center p-3 rounded-lg bg-purple-100 hover:shadow-md transition-shadow group relative"
                   >
-                    <div
-                      class="w-16 h-16 rounded-full bg-purple-500 flex items-center justify-center mb-2"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-10 w-10 text-white"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                        <circle cx="9" cy="7" r="4" />
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                      </svg>
-                    </div>
+                    <img
+                      src="/icon/badge/médaille.svg"
+                      alt="Explorateur urbain"
+                      class="h-16 w-16"
+                    />
                     <h3 class="text-sm font-medium text-center">
                       Diplomate des chats
                     </h3>
@@ -665,22 +596,11 @@
                     v-if="userBadges.includes('friend')"
                     class="flex flex-col items-center p-3 rounded-lg bg-pink-100 hover:shadow-md transition-shadow group relative"
                   >
-                    <div
-                      class="w-16 h-16 rounded-full bg-pink-500 flex items-center justify-center mb-2"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-10 w-10 text-white"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path
-                          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                        />
-                      </svg>
-                    </div>
+                    <img
+                      src="/icon/badge/médaille.svg"
+                      alt="Explorateur urbain"
+                      class="h-16 w-16"
+                    />
                     <h3 class="text-sm font-medium text-center">
                       Ami des animaux
                     </h3>
@@ -697,22 +617,11 @@
                     v-if="userBadges.includes('treasure')"
                     class="flex flex-col items-center p-3 rounded-lg bg-amber-100 hover:shadow-md transition-shadow group relative"
                   >
-                    <div
-                      class="w-16 h-16 rounded-full bg-amber-600 flex items-center justify-center mb-2"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-10 w-10 text-white"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path d="M4 7V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3" />
-                        <path d="M20 14v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3" />
-                        <path d="M2 7h20v7H2z" />
-                      </svg>
-                    </div>
+                    <img
+                      src="/icon/badge/coffre.svg"
+                      alt="Explorateur urbain"
+                      class="h-16 w-16"
+                    />
                     <h3 class="text-sm font-medium text-center">
                       Chasseur de trésors
                     </h3>
@@ -728,23 +637,11 @@
                     v-if="userBadges.includes('veteran')"
                     class="flex flex-col items-center p-3 rounded-lg bg-blue-100 hover:shadow-md transition-shadow group relative"
                   >
-                    <div
-                      class="w-16 h-16 rounded-full bg-blue-700 flex items-center justify-center mb-2"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-10 w-10 text-white"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <circle cx="12" cy="8" r="7" />
-                        <polyline
-                          points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"
-                        />
-                      </svg>
-                    </div>
+                    <img
+                      src="/icon/badge/coeur pate 3.svg"
+                      alt="Explorateur urbain"
+                      class="h-16 w-16"
+                    />
                     <h3 class="text-sm font-medium text-center">
                       Vétéran des sauvetages
                     </h3>
@@ -760,22 +657,11 @@
                     v-if="userBadges.includes('night')"
                     class="flex flex-col items-center p-3 rounded-lg bg-gray-800 hover:shadow-md transition-shadow group relative"
                   >
-                    <div
-                      class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mb-2"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-10 w-10 text-yellow-300"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path
-                          d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
-                        />
-                      </svg>
-                    </div>
+                    <img
+                      src="/icon/badge/loupe patte.svg"
+                      alt="Explorateur urbain"
+                      class="h-16 w-16"
+                    />
                     <h3 class="text-sm font-medium text-center text-white">
                       Éclaireur nocturne
                     </h3>

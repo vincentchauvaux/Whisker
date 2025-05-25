@@ -34,6 +34,7 @@
               <a
                 href="#intro"
                 class="block rounded-lg hover:bg-gray-100 p-3 transition"
+                @click.prevent="scrollToSectionWithOffset('intro')"
               >
                 <span class="font-medium text-primary">1. Introduction</span>
               </a>
@@ -42,6 +43,7 @@
               <a
                 href="#identite"
                 class="block rounded-lg hover:bg-gray-100 p-3 transition"
+                @click.prevent="scrollToSectionWithOffset('identite')"
               >
                 <span class="font-medium text-primary"
                   >2. Identité de marque</span
@@ -52,6 +54,7 @@
               <a
                 href="#couleurs"
                 class="block rounded-lg hover:bg-gray-100 p-3 transition"
+                @click.prevent="scrollToSectionWithOffset('couleurs')"
               >
                 <span class="font-medium text-primary"
                   >3. Palette de couleurs</span
@@ -62,6 +65,7 @@
               <a
                 href="#typographie"
                 class="block rounded-lg hover:bg-gray-100 p-3 transition"
+                @click.prevent="scrollToSectionWithOffset('typographie')"
               >
                 <span class="font-medium text-primary">4. Typographie</span>
               </a>
@@ -70,6 +74,7 @@
               <a
                 href="#composants"
                 class="block rounded-lg hover:bg-gray-100 p-3 transition"
+                @click.prevent="scrollToSectionWithOffset('composants')"
               >
                 <span class="font-medium text-primary">5. Composants UI</span>
               </a>
@@ -78,6 +83,7 @@
               <a
                 href="#iconographie"
                 class="block rounded-lg hover:bg-gray-100 p-3 transition"
+                @click.prevent="scrollToSectionWithOffset('iconographie')"
               >
                 <span class="font-medium text-primary">6. Iconographie</span>
               </a>
@@ -85,7 +91,8 @@
             <li>
               <a
                 href="#images"
-                class="block rounded-lg hover:bg-gray-100 p-3 transition"
+                class="block rounded-lg hover:bg-gray-100 p-3 transition" 
+                @click.prevent="scrollToSectionWithOffset('images')"
               >
                 <span class="font-medium text-primary">7. Photographie</span>
               </a>
@@ -94,6 +101,7 @@
               <a
                 href="#interface"
                 class="block rounded-lg hover:bg-gray-100 p-3 transition"
+                @click.prevent="scrollToSectionWithOffset('interface')"
               >
                 <span class="font-medium text-primary"
                   >8. Interface utilisateur</span
@@ -104,6 +112,7 @@
               <a
                 href="#cartes"
                 class="block rounded-lg hover:bg-gray-100 p-3 transition"
+                @click.prevent="scrollToSectionWithOffset('cartes')"
               >
                 <span class="font-medium text-primary"
                   >9. Cartes et géolocalisation</span
@@ -121,19 +130,33 @@
             1. Introduction
           </h2>
           <div class="prose prose-primary max-w-none">
-            <p>
-              Cette charte graphique a été conçue pour garantir la cohérence
-              visuelle de la plateforme Whisker Quest, dédiée à la recherche et
-              au signalement des chats perdus. Notre identité visuelle reflète
-              nos valeurs fondamentales : l'empathie, l'accessibilité et
-              l'efficacité.
+            <p class="mb-4">
+              Bienvenue dans la charte graphique de
+              <span class="font-bold">Whisker Quest</span>, notre guide de
+              référence pour assurer la cohérence visuelle et éditoriale de la
+              plateforme.
+            </p>
+            <p class="mb-4">
+              <span class="font-bold">Whisker Quest</span> est une application
+              dédiée à la recherche et au signalement de chats perdus. Notre
+              identité visuelle incarne des valeurs essentielles :
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li>empathie</li>
+              <li>accessibilité</li>
+              <li>efficacité</li>
+            </ul>
+            <p class="mb-4">
+              Chaque élément graphique a été pensé pour inspirer confiance,
+              faciliter la navigation et renforcer notre mission : aider les
+              utilisateurs à retrouver leurs compagnons à quatre pattes.
             </p>
             <p>
-              Ce document présente les directives à suivre pour tous les
-              éléments visuels, permettant de maintenir la cohérence de notre
-              identité de marque. Il aide les designers, développeurs et
-              partenaires à créer des contenus alignés avec l'esthétique et les
-              valeurs de Whisker Quest.
+              Ce guide s'adresse à tous ceux qui participent à la création de
+              contenus pour la marque : designers, développeurs, partenaires. Il
+              établit des règles claires pour garantir une esthétique cohérente,
+              porteuse de sens, et fidèle à l'univers
+              <span class="font-bold">Whisker Quest</span>.
             </p>
           </div>
         </section>
@@ -143,7 +166,7 @@
           <h2
             class="text-3xl font-bold tracking-tight text-primary font-serif mb-6"
           >
-            2. Identité de marque
+            2. Logo
           </h2>
           <div class="prose prose-primary max-w-none">
             <div
@@ -163,36 +186,139 @@
                 <span class="font-serif text-secondary">Quest</span>
               </div>
             </div>
+
+            <h3
+              class="mt-2 text-xl font-bold tracking-tight text-primary font-serif mb-6"
+            >
+              Personnalité de marque
+            </h3>
             <p>
-              Notre logo combine une icône de chat stylisée avec la typographie
-              distinctive du nom "Whisker Quest", où "Whisker" est en police
-              sans-serif gras et "Quest" en serif, symbolisant le mélange de
-              modernité et de tradition.
+              Le logo de Whisker Quest est bien plus qu'une simple signature 
+              graphique : il raconte une histoire.
+              
+              <p class="mb-4">
+                Le Q de Quest, en Libre Baskerville, a été choisi pour ses courbes évocatrices :
+              </p>
+
+              <ul class="list-disc pl-6 mb-4">
+                <li class="mb-2">
+                  Il évoque une moustache féline, clin d'œil discret au monde des chats.
+                </li>
+                <li class="mb-2">
+                  Il peut aussi être perçu comme une loupe, symbole classique de la recherche — 
+                  un hommage au côté Sherlock Holmes de notre mission.
+                </li>
+                <li>
+                  En son centre, on retrouve la tête du chat stylisée, intégrée comme 
+                  l'objectif de la quête.
+                </li>
+              </ul>
             </p>
-            <h3>Personnalité de marque</h3>
-            <p>
-              La personnalité de Whisker Quest est caractérisée par les
-              attributs suivants :
-            </p>
-            <ul>
-              <li>
-                <strong>Bienveillante</strong> : Nous montrons de l'empathie
-                envers les propriétaires d'animaux dans des situations
-                stressantes.
-              </li>
-              <li>
-                <strong>Professionnelle</strong> : Nous abordons notre mission
-                avec sérieux et compétence.
-              </li>
-              <li>
-                <strong>Accessible</strong> : Notre plateforme est conçue pour
-                être utilisée facilement par tous.
-              </li>
-              <li>
-                <strong>Rassurante</strong> : Notre design inspire confiance et
-                sécurité.
-              </li>
-            </ul>
+            <h3 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6">Utilisation correcte et incorrecte du logo</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
+              <!-- À FAIRE -->
+              <div>
+                <h4 class="text-lg font-bold text-green-700 mb-4">À faire</h4>
+                <div class="flex flex-col gap-6">
+                  <div class="flex flex-col items-center">
+                    <div class="bg-[#1B3B44] rounded-xl flex items-center justify-center p-6 mb-2">
+                      <img src="/logo/Logo-graphique-model-6-big-w.png" alt="Logo blanc" class="h-20 w-auto">
+                    </div>
+                    <span class="text-sm text-green-500">Logo blanc (officiel)</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="rounded-xl flex items-center justify-center p-6 mb-2 bg-[#f3f3f3]">
+                      <img src="/logo/Logo-graphique-model-6-big.png" alt="Logo noir" class="h-20 w-auto">
+                    </div>
+                    <span class="text-sm text-green-500">Logo noir (officiel)</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="bg-[#1B3B44] rounded-xl flex items-center justify-center p-6 mb-2">
+                      <img src="/logo/Logo-graphique-model-7-big-o.png" alt="Logo orange" class="h-20 w-auto">
+                    </div>
+                    <span class="text-sm text-green-500">Logo orange (officiel)</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="rounded-xl flex items-center justify-center p-6 mb-2 bg-[#f3f3f3]">
+                      <img src="/logo/Logo-graphique-model-7-big-v.png" alt="Logo vert" class="h-20 w-auto">
+                    </div>
+                    <span class="text-sm text-green-500">Logo vert (officiel)</span>
+                  </div>
+                </div>
+              </div>
+              <!-- À NE PAS FAIRE -->
+              <div>
+                <h4 class="text-lg font-bold text-red-700 mb-4">À ne pas faire</h4>
+                <div class="flex flex-col gap-6">
+                  <div class="flex flex-col items-center">
+                    <div class="rounded-xl flex items-center justify-center p-6 mb-2 bg-[#f3f3f3]">
+                      <img src="/logo/Logo-graphique-model-6-big.png" alt="Logo squeezé" class="h-20 w-auto" style="transform: scaleX(0.7);">
+                    </div>
+                    <span class="text-sm text-red-500">Ne pas aplatir/squeezer</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="rounded-xl flex items-center justify-center p-6 mb-2 bg-[#f3f3f3]">
+                      <img src="/logo/Logo-graphique-model-6-big.png" alt="Logo déformé" class="h-20 w-auto" style="transform: skewX(20deg);">
+                    </div>
+                    <span class="text-sm text-red-500">Ne pas déformer (skew)</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="rounded-xl flex items-center justify-center mt-14 p-6 mb-2 bg-[#f3f3f3] overflow-hidden" style=" height: 72px;">
+                      <img src="/logo/Logo-graphique-model-6-big.png" alt="Logo cropé" class="h-20 w-auto" style="margin-top: -16px; margin-left: -8px;">
+                    </div>
+                    <span class="text-sm text-red-500">Ne pas recadrer/couper</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="rounded-xl flex items-center justify-center p-6 mb-2 bg-[#f3f3f3]">
+                      <img src="/logo/Logo-graphique-model-7-big-o.png" alt="Logo recoloré" class="h-20 w-auto" style="filter: hue-rotate(300deg);">
+                    </div>
+                    <span class="text-sm text-red-500">Ne pas modifier les couleurs</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col items-center">
+                <div>
+                  <h4 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6 ">accompagnement</h4>
+                  <p>
+                    Il poura être accompagné du nom de la marque
+                    <div
+              class="bg-white p-8 rounded-xl border border-gray-200 flex flex-raw items-center mt-8"
+            >
+              <img
+                src="/Logo graphique-model-6-big.svg"
+                alt="Whisker Quest Logo"
+                class="h-24 w-auto mb-4"
+                style="
+                  filter: invert(18%) sepia(17%) saturate(1162%)
+                    hue-rotate(153deg) brightness(95%) contrast(90%);
+                "
+              />
+              <div class="flex items-baseline gap-1 text-2xl mt-4">
+                <span class="font-sans font-bold text-primary">Whisker</span>
+                <span class="font-serif text-secondary">Quest</span>
+              </div>
+            </div>
+                  </p>
+                </div>
+              </div>
+              <div class="flex flex-col items-center">
+                <div>
+                  <h4 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6">Incrustation</h4>
+                  <p>
+                    Il poura être incrusté dans le titre même pour une meilleur lisibilité.
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 flex flex-col items-center mt-8">
+             
+              <div class="flex items-baseline gap-1 text-2xl mt-4 flex-wrap-1 relative h-24">
+                
+                <span class="font-sans font-bold text-primary absolute top-8 -left-[90px]">Whisker</span>
+                <img src="/logo/Logo-graphique-model-7-big-o.png" alt="Logo recoloré" class="h-20 w-auto  top-0 left-0" >
+                <span class="font-serif text-secondary absolute top-8 left-[70px]">uest</span>
+              </div>
+            </div>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -210,7 +336,7 @@
               assurant l'accessibilité et la lisibilité.
             </p>
 
-            <h3>Couleurs principales</h3>
+            <h3 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6">Couleurs principales</h3>
             <div
               class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6"
             >
@@ -268,9 +394,9 @@
               </div>
             </div>
 
-            <h3>Couleurs secondaires et fonctionnelles</h3>
+            <h3 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6">Couleurs secondaires et fonctionnelles</h3>
             <div
-              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6"
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 my-6"
             >
               <div
                 class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:rotate-2 hover:scale-105"
@@ -281,7 +407,7 @@
                   <h4 class="font-medium">Succès</h4>
                   <p class="text-sm text-gray-600">#22C55E</p>
                   <p class="text-sm text-gray-500">
-                    Pour les actions réussies et confirmations
+                    Pour les actions réussies, chats trouvés et confirmations
                   </p>
                 </div>
               </div>
@@ -294,11 +420,11 @@
                   <h4 class="font-medium">Erreur</h4>
                   <p class="text-sm text-gray-600">#EF4444</p>
                   <p class="text-sm text-gray-500">
-                    Pour les erreurs et alertes
+                    Pour les erreurs, alertes et chats non trouvés
                   </p>
                 </div>
               </div>
-              <div
+              <!-- <div
                 class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:rotate-1 hover:scale-105"
                 @click="copyColor('#F59E0B')"
               >
@@ -321,34 +447,64 @@
                     Pour les messages d'information
                   </p>
                 </div>
-              </div>
+              </div> -->
             </div>
 
-            <h3>Utilisation des couleurs</h3>
+            <h4 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6">Utilisation des couleurs</h4>
             <p>
-              Nos couleurs sont appliquées selon des principes cohérents afin de
-              guider les utilisateurs à travers l'interface :
+              Nos couleurs sont appliquées selon des principes cohérents afin de guider les utilisateurs à travers l'interface :
             </p>
-            <ul>
+            <ul class="list-disc pl-6 space-y-2 mt-2">
               <li>
-                Le Vert Profond primaire est utilisé pour les éléments
-                d'interface principaux, l'en-tête et le pied de page
+                Le Vert Profond primaire est utilisé pour les éléments principaux, l'en-tête et pied de page, les titres et la plupart des backgrounds.
               </li>
               <li>
-                L'orange secondaire est utilisé pour les boutons d'action et
-                points d'accent
+                L'orange secondaire est utilisé pour contraster avec le vert profond et les boutons d'action et points d'accent
               </li>
               <li>
-                Des teintes primaires plus claires sont utilisées pour les
-                arrière-plans et les éléments secondaires
+                Des teintes primaires plus claires sont utilisées pour les arrière-plans et les éléments secondaires
               </li>
               <li>
-                Les couleurs fonctionnelles communiquent clairement les états et
-                les feedbacks
+                Les couleurs fonctionnelles communiquent clairement les situations des chats.
               </li>
             </ul>
           </div>
-        </section>
+
+          <section id="nuances" class="mt-20">
+            <h2 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6">Nuances de couleur</h2>
+            <div class="prose prose-primary max-w-none">
+              <p>
+                Nous utilisons des nuances de couleur pour les badges et les éléments secondaires.
+              </p>
+              <div
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 my-6"
+            >
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:rotate-2 hover:scale-105"
+                @click="copyColor('#0C1B1E')"
+              >
+                <div class="h-24 bg-[#0C1B1E]"></div>
+                <div class="p-4">
+                  <h4 class="font-medium">Vert foncé</h4>
+                  <p class="text-sm text-gray-600">#0C1B1E</p>
+                 
+                </div>
+              </div>
+              <div
+                class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:-rotate-2 hover:scale-105"
+                @click="copyColor('#CC4E48')"
+              >
+                <div class="h-24 bg-[#CC4E48]"></div>
+                <div class="p-4">
+                  <h4 class="font-medium">Orange foncé</h4>
+                  <p class="text-sm text-gray-600">#CC4E48</p>
+                  
+                </div>
+              </div>
+              </div>
+            </div>
+          </section>
+          </section>
 
         <!-- 4. Typographie -->
         <section id="typographie" class="mt-20">
@@ -359,10 +515,7 @@
           </h2>
           <div class="prose prose-primary max-w-none">
             <p class="text-lg">
-              Notre système typographique combine deux polices complémentaires
-              pour équilibrer professionnalisme et chaleur humaine. Cette
-              dualité reflète notre approche : rigoureuse dans notre mission
-              mais profondément humaine dans nos interactions.
+              Le système typographique repose sur deux polices aux fonctions distinctes mais complémentaires. Libre Baskerville, serif traditionnelle, évoque l'univers des petites annonces et des journaux imprimés, renforçant la lisibilité et la crédibilité des titres. Elle structure visuellement les contenus à forte valeur narrative. Inter, sans-serif contemporaine, est optimisée pour les interfaces numériques : excellente lisibilité à l'écran, large gamme de graisses, et rendu clair même à petite taille. Ce duo permet une hiérarchie typographique cohérente et adaptée aux usages print comme web.
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
@@ -499,7 +652,7 @@
               </div>
             </div>
 
-            <h3 class="mt-10 mb-4">Règles typographiques et utilisation</h3>
+            <h3 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6">Règles typographiques et utilisation</h3>
 
             <div class="bg-gray-50 rounded-xl p-6 mb-8">
               <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -568,7 +721,7 @@
                   <ul class="space-y-2 text-primary-dark">
                     <li class="flex gap-2 items-start">
                       <svg
-                        class="h-5 w-5 text-secondary flex-shrink-0 mt-0.5"
+                        class="h-5 w-5 text-primary flex-shrink-0 mt-0.5"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -586,7 +739,7 @@
                     </li>
                     <li class="flex gap-2 items-start">
                       <svg
-                        class="h-5 w-5 text-secondary flex-shrink-0 mt-0.5"
+                        class="h-5 w-5 text-primary flex-shrink-0 mt-0.5"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -604,7 +757,7 @@
                     </li>
                     <li class="flex gap-2 items-start">
                       <svg
-                        class="h-5 w-5 text-secondary flex-shrink-0 mt-0.5"
+                        class="h-5 w-5 text-primary flex-shrink-0 mt-0.5"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -625,7 +778,7 @@
               </div>
             </div>
 
-            <h3 class="mt-10 mb-4">Exemples d'application</h3>
+            <h3 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6">Exemples d'application</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div
                 class="rounded-xl border border-gray-200 overflow-hidden bg-white shadow-sm"
@@ -736,12 +889,10 @@
           </h2>
           <div class="prose prose-primary max-w-none">
             <p>
-              Nos composants d'interface sont conçus pour être cohérents,
-              accessibles et intuitifs. Chaque composant respecte notre système
-              de design global.
+              Nos composants d'interface sont clairs, accessibles et cohérents. Chacun s'intègre naturellement dans notre design system, pour une expérience fluide et unifiée.
             </p>
 
-            <h3>Boutons</h3>
+            <h3 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6">Boutons</h3>
             <div
               class="bg-gray-50 p-6 rounded-xl my-6 grid grid-cols-1 sm:grid-cols-2 gap-6"
             >
@@ -796,7 +947,7 @@
               </div>
             </div>
 
-            <h3>Formulaires</h3>
+            <!-- <h3 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6">Formulaires</h3>
             <div class="bg-gray-50 p-6 rounded-xl my-6">
               <div class="max-w-md space-y-6">
                 <div>
@@ -842,9 +993,9 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
-            <h3>Cartes et conteneurs</h3>
+            <h3 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6">Cartes et conteneurs</h3>
             <div class="bg-gray-50 p-6 rounded-xl my-6">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="bg-white rounded-xl shadow overflow-hidden">
@@ -856,12 +1007,12 @@
                       Les cartes sont utilisées pour présenter des informations
                       groupées
                     </p>
-                    <button
+                    <!-- <button
                       class="text-secondary font-medium text-sm hover:text-secondary-dark"
                     >
                       En savoir plus
                       <span aria-hidden="true"> →</span>
-                    </button>
+                    </button> -->
                     <!-- Carte de signalement d'animal trouvé -->
                     <div>
                       <button
@@ -1133,13 +1284,12 @@
           </h2>
           <div class="prose prose-primary max-w-none">
             <p class="text-lg">
-              Nos icônes sont conçues pour être immédiatement reconnaissables et
-              cohérentes dans l'ensemble de notre plateforme. Elles facilitent
-              la navigation et améliorent l'expérience utilisateur en
+              Nos icônes sont immédiatement reconnaissables et
+              cohérentes dans l'ensemble de notre plateforme. Elles améliorent l'expérience utilisateur en
               fournissant des repères visuels clairs.
             </p>
 
-            <h3 class="mt-10">Style d'icônes</h3>
+            <h3 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6">Icônes d'interface</h3>
             <div class="bg-gray-50 p-6 rounded-xl my-6">
               <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 <!-- Exemples d'icônes -->
@@ -1159,74 +1309,33 @@
                       d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                     />
                   </svg>
-                  <p class="text-sm text-primary font-medium mt-3">Accueil</p>
-                  <p class="text-xs text-gray-500 mt-1">Navigation primaire</p>
+                  <p class="text-sm text-primary font-medium mt-3">Adresse</p>
+                  <p class="text-xs text-gray-500 mt-1">Represente le l'habitat</p>
                 </div>
                 <div
                   class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm"
                 >
-                  <svg
-                    class="h-8 w-8 text-primary"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                    />
-                  </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                   <p class="text-sm text-primary font-medium mt-3">
-                    Utilisateurs
+                    Chat perdu
                   </p>
-                  <p class="text-xs text-gray-500 mt-1">Comptes et profils</p>
+                  <p class="text-xs text-gray-500 mt-1">Smiley triste</p>
                 </div>
                 <div
                   class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm"
                 >
-                  <svg
-                    class="h-8 w-8 text-primary"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
+                <svg data-v-0d565b4a="" class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path data-v-0d565b4a="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                   <p class="text-sm text-primary font-medium mt-3">
-                    Localisation
+                    Modifier
                   </p>
-                  <p class="text-xs text-gray-500 mt-1">Géolocalisation</p>
+                  <p class="text-xs text-gray-500 mt-1">Réécrire les informations</p>
                 </div>
                 <div
                   class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm"
                 >
-                  <svg
-                    class="h-8 w-8 text-primary"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <p class="text-sm text-primary font-medium mt-3">Recherche</p>
-                  <p class="text-xs text-gray-500 mt-1">Fonctionnalité clé</p>
+                <svg data-v-0d565b4a="" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path data-v-0d565b4a="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                  <p class="text-sm text-primary font-medium mt-3">Déconnexion</p>
+                  <p class="text-xs text-gray-500 mt-1">Quitter la session</p>
                 </div>
               </div>
 
@@ -1260,9 +1369,9 @@
               </div>
             </div>
 
-            <h3 class="mt-10">Badges et accomplissements</h3>
+            <h3 class="mt-10 text-xl font-bold tracking-tight text-primary font-serif mb-6">Badges et accomplissements</h3>
             <p>
-              Les badges et accomplissements sont des éléments visuels qui
+              Les badges sont des éléments visuels qui
               valorisent les contributions des utilisateurs et stimulent
               l'engagement sur notre plateforme. Ils récompensent les
               différentes actions et jalons atteints.
@@ -1274,110 +1383,57 @@
                 <!-- Badge Héros -->
                 <div class="flex flex-col items-center">
                   <div class="relative">
-                    <div
-                      class="absolute inset-0 rounded-full bg-gradient-to-br from-yellow-300 to-amber-500 blur opacity-25"
-                    ></div>
-                    <div
-                      class="relative bg-white rounded-full p-3 border-2 border-amber-400 shadow-sm"
-                    >
-                      <svg
-                        class="h-16 w-16 text-amber-500"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path
-                          d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-4.987-3.744A7.966 7.966 0 0012 20c1.97 0 3.773-.712 5.167-1.892A6.979 6.979 0 0112.16 16a6.981 6.981 0 01-5.147 2.256zM5.616 16.82A8.975 8.975 0 0112.16 14a8.972 8.972 0 016.362 2.634 8 8 0 10-12.906.187zM12 13a4 4 0 110-8 4 4 0 010 8zm0-2a2 2 0 100-4 2 2 0 000 4z"
-                        />
-                      </svg>
-                    </div>
+                   
+                    
+                    <img src="/icon/badge/main chat.svg" alt="Héros local" class="h-20 w-20">
+                      
+                    
                   </div>
                   <p class="text-sm font-medium text-primary mt-3">
-                    Héros local
+                    Compagnon des sauvetages
+
                   </p>
                   <p class="text-xs text-gray-500 text-center mt-1">
-                    5+ animaux retrouvés
+                    Accompagne un autre membre pour capturer un animal blessé.
                   </p>
                 </div>
 
                 <!-- Badge Expert -->
                 <div class="flex flex-col items-center">
                   <div class="relative">
-                    <div
-                      class="absolute inset-0 rounded-full bg-gradient-to-br from-sky-300 to-blue-500 blur opacity-25"
-                    ></div>
-                    <div
-                      class="relative bg-white rounded-full p-3 border-2 border-blue-400 shadow-sm"
-                    >
-                      <svg
-                        class="h-16 w-16 text-blue-500"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path
-                          d="M9.68 13.69L12 11.93l2.31 1.76-.88-2.85L15.75 9h-2.84L12 6.19 11.09 9H8.25l2.31 1.84-.88 2.85zM20 10c0-4.42-3.58-8-8-8s-8 3.58-8 8c0 2.03.76 3.87 2 5.28V23l6-2 6 2v-7.72A7.96 7.96 0 0020 10zm-8-6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6 2.69-6 6-6z"
-                        />
-                      </svg>
-                    </div>
+
+                    <img src="/icon/badge/boussole.svg" alt="Héros local" class="h-20 w-20 ">
+                    
                   </div>
-                  <p class="text-sm font-medium text-primary mt-3">Expert</p>
+                  <p class="text-sm font-medium text-primary mt-3">Explorateur urbain</p>
                   <p class="text-xs text-gray-500 text-center mt-1">
-                    20+ signalements vérifiés
+                    Signale un chat errant aperçu dans son quartier
                   </p>
                 </div>
 
                 <!-- Badge Contributeur -->
                 <div class="flex flex-col items-center">
                   <div class="relative">
-                    <div
-                      class="absolute inset-0 rounded-full bg-gradient-to-br from-green-300 to-emerald-500 blur opacity-25"
-                    ></div>
-                    <div
-                      class="relative bg-white rounded-full p-3 border-2 border-emerald-400 shadow-sm"
-                    >
-                      <svg
-                        class="h-16 w-16 text-emerald-500"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path
-                          d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
-                        />
-                      </svg>
-                    </div>
+                    <img src="/icon/badge/loupe patte.svg" alt="Héros local" class="h-20 w-20">
                   </div>
                   <p class="text-sm font-medium text-primary mt-3">
-                    Contributeur
+                    Détective des poils
                   </p>
                   <p class="text-xs text-gray-500 text-center mt-1">
-                    10+ mises à jour de données
+                    Compare les particularités d'un animal trouvé.
                   </p>
                 </div>
 
                 <!-- Badge Premier pas -->
                 <div class="flex flex-col items-center">
                   <div class="relative">
-                    <div
-                      class="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-300 to-purple-500 blur opacity-25"
-                    ></div>
-                    <div
-                      class="relative bg-white rounded-full p-3 border-2 border-indigo-400 shadow-sm"
-                    >
-                      <svg
-                        class="h-16 w-16 text-indigo-500"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path
-                          d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"
-                        />
-                      </svg>
-                    </div>
+                    <img src="/icon/badge/poigné de main.svg" alt="Héros local" class="h-20 w-20">
                   </div>
                   <p class="text-sm font-medium text-primary mt-3">
-                    Premier pas
+                    Samaritain communautaire
                   </p>
                   <p class="text-xs text-gray-500 text-center mt-1">
-                    Premier signalement réalisé
+                     Aide un voisin à signaler un chat trouvé.
                   </p>
                 </div>
               </div>
@@ -1418,8 +1474,7 @@
                         />
                       </svg>
                       <span
-                        >Palette de couleurs évoquant la rareté et
-                        l'importance</span
+                        >Palette de couleurs évoquant whisker quest</span
                       >
                     </li>
                     <li class="flex items-start gap-2">
@@ -1435,8 +1490,7 @@
                         />
                       </svg>
                       <span
-                        >Effet visuel subtil pour attirer l'attention sans
-                        surcharge</span
+                        >Des couleurs secondaires sont autorisées dans certaines situations</span
                       >
                     </li>
                   </ul>
@@ -1471,8 +1525,7 @@
                         />
                       </svg>
                       <span
-                        >Associés aux signalements pour indiquer la
-                        fiabilité</span
+                        >Défini une action en un idéogramme</span
                       >
                     </li>
                     <li class="flex items-start gap-2">
@@ -1486,8 +1539,7 @@
                         />
                       </svg>
                       <span
-                        >Présentés lors de l'obtention pour encourager
-                        l'engagement</span
+                        >Permet de rendre l'application plus interactive et ludique</span
                       >
                     </li>
                   </ul>
@@ -1507,17 +1559,16 @@
           <div class="prose prose-primary max-w-none">
             <p>
               Les images jouent un rôle crucial dans notre plateforme, notamment
-              pour les signalements d'animaux. Nos principes directeurs assurent
-              une cohérence visuelle.
+              pour les signalements d'animaux.<br>Nous distinguons deux types d'images.
             </p>
 
-            <h3>Style photographique</h3>
-            <p>Notre style photographique privilégie :</p>
-            <ul>
+            <h3 class="mt-10 text-xl font-bold tracking-tight text-primary font-serif mb-6">Les cards de signalement</h3>
+            <p>Les cards de signalement sont des images qui permettent d'identifier facilement l'animal. </p>
+            <h4 class="font-medium text-primary my-3">Elles doivent etre de préférence :</h4>
+            <ul class="list-disc list-inside">
               <li>Des images claires, bien éclairées et nettes</li>
               <li>Des photos authentiques montrant clairement les animaux</li>
               <li>Un cadrage permettant d'identifier facilement l'animal</li>
-              <li>Des arrière-plans neutres quand c'est possible</li>
             </ul>
 
             <div
@@ -1546,18 +1597,42 @@
               </div>
             </div>
 
-            <p>
-              Pour les photos de signalement, nous encourageons les utilisateurs
-              à fournir :
-            </p>
-            <ul>
-              <li>Plusieurs angles pour mieux identifier l'animal</li>
+            <h3 class="mt-10 text-xl font-bold tracking-tight text-primary font-serif mb-6">Les photos de communication</h3>
+            <p>Les photos de communication sont des images qui sont utiliser sur le site et suport de communication. </p>
+            <h4 class="font-medium text-primary my-3">Elles doivent etre de préférence :</h4>
+            <ul class="list-disc list-inside">
+              <li>Net et clair</li>
               <li>
-                Des détails sur les signes distinctifs (marques, couleur des
-                yeux, etc.)
+               Le sujet est  un chat, un humain ou un reference a la marque
               </li>
-              <li>Des images récentes et de bonne qualité</li>
+              <li>L'utilisation de filtre de couleurs ou de paterne est autorisée </li>
+              <li>Des effets viusel tel que bokeh peuvent etre apliqué</li>
             </ul>
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-6"
+            >
+              <div class="rounded-lg overflow-hidden">
+                <img
+                  src="/affiches/Affiche_9.4.jpg"
+                  alt="Chat tigré"
+                  class="w-full  object-cover"
+                />
+              </div>
+              <div class="rounded-lg overflow-hidden">
+                <img
+                  src="/affiches/Affiche_10.2.jpg"
+                  alt="Chat roux"
+                  class="w-full object-cover"
+                />
+              </div>
+              <div class="rounded-lg overflow-hidden">
+                <img
+                  src="/affiches/Affiche_11.5.jpg"
+                  alt="Chat noir"
+                  class="w-full  object-cover"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -1571,13 +1646,13 @@
 
           <!-- Introduction avec design moderne -->
           <div
-            class="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl p-8 mb-12 hover:shadow-lg transition-all duration-300 animate-slide-up"
+            class="bg-gray-50 rounded-2xl p-8 mb-12 hover:shadow-lg transition-all duration-300 animate-slide-up"
           >
             <div class="max-w-3xl">
               <p class="text-lg text-primary-dark leading-relaxed">
                 L'interface utilisateur de Whisker Quest est conçue pour être
                 intuitive, accessible et efficace, permettant aux utilisateurs
-                de signaler ou rechercher des animaux rapidement.
+                de signaler ou rechercher des animaux rapidement dans un environnement ludique et interactif.
               </p>
             </div>
           </div>
@@ -1695,7 +1770,7 @@
                 Adaptation fluide à tous les appareils
               </p>
               <div class="mt-4 flex gap-4">
-                <div class="device-container flex-1 relative h-64">
+                <div class="device-container flex-1 relative h-56">
                   <div
                     class="responsive-device absolute inset-0 bg-gray-100 rounded-lg overflow-hidden transition-all duration-700"
                   >
@@ -1719,7 +1794,7 @@
                   </div>
                 </div>
                 <div
-                  class="flex-1 aspect-[9/16] bg-gray-100 rounded-lg relative overflow-hidden"
+                  class="flex-1 h-50 bg-gray-100 rounded-lg relative overflow-hidden"
                 >
                   <div
                     class="absolute inset-x-2 top-2 h-4 bg-primary/10 rounded"
@@ -1901,10 +1976,10 @@
               Les cartes interactives sont au cœur de notre plateforme,
               permettant aux utilisateurs de visualiser, rechercher et signaler
               des animaux perdus selon leur localisation. Notre implémentation
-              utilise MapBox pour offrir une expérience cartographique optimale.
+              utilise MapBox pour offrir une expérience cartographique optimale et treeJS pour la carte animé.
             </p>
 
-            <h3 class="mt-10">Styles et thèmes de carte</h3>
+            <h3 class="mt-10 text-xl font-bold tracking-tight text-primary font-serif mb-6">Styles et thèmes de carte</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
               <div
                 class="rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-all"
@@ -1921,7 +1996,7 @@
                 </div>
                 <div class="p-6">
                   <h4 class="text-lg font-serif font-bold text-primary mb-2">
-                    Style clair (par défaut)
+                    Mapbox
                   </h4>
                   <p class="text-sm text-primary-dark">
                     Utilisé comme style principal de notre application. Ce style
@@ -1936,8 +2011,7 @@
                     <li class="flex items-start gap-2">
                       <span class="text-secondary">•</span>
                       <span
-                        >Contraste optimal pour les marqueurs de
-                        signalement</span
+                        >jeu de couleur pour distinguer perdu et trouvé</span
                       >
                     </li>
                   </ul>
@@ -1949,7 +2023,7 @@
               >
                 <div class="h-48 bg-slate-800 relative overflow-hidden">
                   <img
-                    src="/map-works.png"
+                    src="/public/printscreen/treejs.png"
                     alt="Style de carte sombre"
                     class="object-cover h-full w-full"
                   />
@@ -1959,23 +2033,20 @@
                 </div>
                 <div class="p-6">
                   <h4 class="text-lg font-serif font-bold text-primary mb-2">
-                    Style sombre
+                    TreeJS
                   </h4>
                   <p class="text-sm text-primary-dark">
-                    Option alternative disponible dans les préférences
-                    utilisateur. Ce style réduit la fatigue visuelle en
-                    conditions de faible luminosité.
+                   Disponible sur la page explicative "comment ça marche ?". utiliser pour visualiser la communauté.
                   </p>
                   <ul class="mt-4 text-sm space-y-1 text-gray-600">
                     <li class="flex items-start gap-2">
                       <span class="text-secondary">•</span>
-                      <span>Idéal pour l'utilisation nocturne</span>
+                      <span>Un code couleur pour chaque type de signalement</span>
                     </li>
                     <li class="flex items-start gap-2">
                       <span class="text-secondary">•</span>
                       <span
-                        >Marqueurs avec luminosité accrue pour meilleure
-                        visibilité</span
+                        >Une carte interactive avec des animations</span
                       >
                     </li>
                   </ul>
@@ -1983,7 +2054,7 @@
               </div>
             </div>
 
-            <h3 class="mt-10">Marqueurs et visualisation des données</h3>
+            <!-- <h3 class="mt-10 text-xl font-bold tracking-tight text-primary font-serif mb-6">Marqueurs et visualisation des données</h3>
             <div class="bg-gray-50 p-6 rounded-xl my-6">
               <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div>
@@ -2194,9 +2265,9 @@
                   </div>
                 </div>
               </div>
-            </div>
-
-            <h3 class="mt-10">Performances et accessibilité</h3>
+            </div> -->
+ 
+            <!-- <h3 class="mt-10 text-xl font-bold tracking-tight text-primary font-serif mb-6">Performances et accessibilité</h3>
             <div class="bg-white p-6 rounded-xl border border-gray-200 my-6">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -2307,7 +2378,7 @@
                   </ul>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </section>
 
@@ -2362,10 +2433,24 @@
       </div>
     </transition>
   </teleport>
+
+  <!-- Bouton "Back to top" -->
+  <teleport to="body">
+    <transition name="fade">
+      <button
+        v-if="showBackToTop"
+        @click="scrollToTop"
+        class="fixed bottom-6 right-6 z-50 bg-primary text-white px-3 py-2 rounded-full shadow-lg text-sm hover:bg-primary-dark transition"
+        aria-label="Remonter en haut"
+      >
+        ↑
+      </button>
+    </transition>
+  </teleport>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import MainLayout from "../layouts/MainLayout.vue";
 
 // Pour gérer l'affichage des cartes dans la section "Cartes et conteneurs"
@@ -2381,6 +2466,37 @@ function copyColor(hex) {
   globalCopiedTimeout = setTimeout(() => {
     globalCopiedHex.value = "";
   }, 1500);
+}
+
+function scrollToSectionWithOffset(id, offset = 82) { // 64px = 4rem
+  const el = document.getElementById(id);
+  if (el) {
+    const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+}
+
+const showBackToTop = ref(false);
+
+function handleScroll() {
+  const sommaire = document.querySelector('.mt-16.rounded-xl.bg-gray-50.p-8');
+  if (sommaire) {
+    const bottomSommaire = sommaire.offsetTop + sommaire.offsetHeight;
+    showBackToTop.value = window.scrollY > bottomSommaire;
+  } else {
+    showBackToTop.value = window.scrollY > 400; // fallback
+  }
+}
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 </script>
 
@@ -2490,4 +2606,84 @@ function copyColor(hex) {
 .fade-leave-to {
   opacity: 0;
 }
+
+    .usage-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .usage-card {
+      flex: 1;
+      min-width: 300px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .card-header {
+      padding: 15px;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+    }
+    
+    .correct {
+      background-color: #4CAF50;
+    }
+    
+    .incorrect {
+      background-color: #F44336;
+    }
+    
+    .logo-container {
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f9f9f9;
+      height: 200px;
+    }
+    
+    .description {
+      padding: 20px;
+      background-color: white;
+    }
+    
+    /* Exemple de mauvais usage - Logo cropé */
+    .cropped-container {
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .cropped-logo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 180px;
+      height: 180px;
+    }
+    
+    /* Autres exemples de mauvais usages */
+    .stretched-logo {
+      width: 180px;
+      height: 100px;
+    }
+    
+    .compressed-logo {
+      width: 100px;
+      height: 180px;
+    }
+    
+    .colored-logo {
+      filter: hue-rotate(90deg);
+    }
+    
+    .proper-logo {
+      width: 150px;
+      height: 150px;
+    }
 </style>
