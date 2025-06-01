@@ -15,6 +15,8 @@ import AdminPage from "../pages/admin.vue";
 import StyleGuidePage from "../pages/styleguide.vue";
 import WhiskerQuestPage from "../pages/whisker-quest.vue";
 import RapportPage from "../components/rapport.vue";
+import CahierDesChargesPage from "../components/cahier-des-charges.vue";
+import ConditionsGeneralesPage from "../components/conditions-generales.vue";
 
 // Navigation guard pour les routes protégées
 const requireAuth = (to, from, next) => {
@@ -116,6 +118,16 @@ const routes = [
     path: "/rapport",
     name: "Rapport",
     component: RapportPage,
+  },
+  {
+    path: "/cahier-des-charges",
+    name: "CahierDesCharges",
+    component: CahierDesChargesPage,
+  },
+  {
+    path: "/conditions-generales",
+    name: "ConditionsGenerales",
+    component: ConditionsGeneralesPage,
   },
 ];
 

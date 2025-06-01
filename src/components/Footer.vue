@@ -127,13 +127,14 @@ const navigation = {
   ],
   services: [
     { name: "Style Guide", href: "/styleguide" },
-
     { name: "Rapport TFE", href: "/rapport" },
+    { name: "Cahier des charges", href: "/cahier-des-charges" },
+    { name: "Conditions générales", href: "/conditions-generales" },
   ],
   legal: [
     { name: "Mentions légales", href: "#" },
     { name: "Politique de confidentialité", href: "#" },
-    { name: "CGU", href: "#" },
+    { name: "Conditions générales", href: "/conditions-generales" },
   ],
   social: [
     {
