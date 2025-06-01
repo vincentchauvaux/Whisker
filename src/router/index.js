@@ -14,6 +14,7 @@ import HowItWorksPage from "../pages/how-it-works.vue";
 import AdminPage from "../pages/admin.vue";
 import StyleGuidePage from "../pages/styleguide.vue";
 import WhiskerQuestPage from "../pages/whisker-quest.vue";
+import RapportPage from "../components/rapport.vue";
 
 // Navigation guard pour les routes protégées
 const requireAuth = (to, from, next) => {
@@ -110,6 +111,11 @@ const routes = [
     path: "/whisker-quest",
     name: "WhiskerQuest",
     component: WhiskerQuestPage,
+  },
+  {
+    path: "/rapport",
+    name: "Rapport",
+    component: RapportPage,
   },
 ];
 

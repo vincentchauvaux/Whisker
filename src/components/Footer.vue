@@ -127,7 +127,8 @@ const navigation = {
   ],
   services: [
     { name: "Style Guide", href: "/styleguide" },
-    { name: "Présentation Whisker Quest", href: "/whisker-quest" },
+
+    { name: "Rapport TFE", href: "/rapport" },
   ],
   legal: [
     { name: "Mentions légales", href: "#" },

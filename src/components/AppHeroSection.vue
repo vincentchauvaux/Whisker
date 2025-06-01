@@ -110,7 +110,7 @@
                 :style="phoneScrollStyle"
               >
                 <img
-                  src="/img/fullscreen-home.png"
+                  src="/public/printscreen/home-mob.png"
                   alt="Application Animal Search"
                   class="w-full drop-shadow-2xl"
                 />
