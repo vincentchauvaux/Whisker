@@ -278,7 +278,7 @@
               </div>
               <div class="flex flex-col items-center">
                 <div>
-                  <h4 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6 ">accompagnement</h4>
+                  <h4 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6 ">Accompagnement</h4>
                   <p>
                     Il pourra être accompagné du nom de la marque
                     <div
