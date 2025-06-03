@@ -342,54 +342,114 @@
             >
               <div
                 class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:rotate-2 hover:scale-105"
-                @click="copyColor('#1B3B44')"
               >
+              <!-- CMJN : C:88,59% M:57,97% J:50,89% N:53,41% -->
                 <div class="h-24 bg-primary"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Primaire</h4>
-                  <p class="text-sm text-gray-600">#1B3B44</p>
                   <p class="text-sm text-gray-500">
                     Utilisé pour les titres et éléments principaux
                   </p>
+                  <div class="flex mt-3">
+                    <div 
+                      @click="copyColor('#1B3B44')"
+                      class="flex-1 text-left p-2 rounded-l-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono">#1B3B44</p>
+                      <p class="text-xs text-gray-400">HEX</p>
+                    </div>
+                    <div 
+                      @click="copyColor('C:88,59% M:57,97% J:50,89% N:53,41%')"
+                      class="flex-1 text-right p-2 rounded-r-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono text-xs">C:89% M:58% J:51% N:53%</p>
+                      <p class="text-xs text-gray-400">CMJN</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div
                 class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:-rotate-2 hover:scale-105"
-                @click="copyColor('#F26052')"
               >
+              <!-- CMJN : C:0% M:74,22% J:63,38% N:0% -->
                 <div class="h-24 bg-secondary"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Secondaire</h4>
-                  <p class="text-sm text-gray-600">#F26052</p>
                   <p class="text-sm text-gray-500">
                     Utilisé pour les accents et les appels à l'action
                   </p>
+                  <div class="flex mt-3">
+                    <div 
+                      @click="copyColor('#F26052')"
+                      class="flex-1 text-left p-2 rounded-l-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono">#F26052</p>
+                      <p class="text-xs text-gray-400">HEX</p>
+                    </div>
+                    <div 
+                      @click="copyColor('C:0% M:74,22% J:63,38% N:0%')"
+                      class="flex-1 text-right p-2 rounded-r-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono text-xs">C:0% M:74% J:63% N:0%</p>
+                      <p class="text-xs text-gray-400">CMJN</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div
                 class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:rotate-1 hover:scale-105"
-                @click="copyColor('#BFCFD3')"
               >
+              <!-- CMJN : C:29,85% M:12,44% J:16,14% N:0,15% -->
                 <div class="h-24 bg-primary-light"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Primaire clair</h4>
-                  <p class="text-sm text-gray-600">#BFCFD3</p>
                   <p class="text-sm text-gray-500">
                     Utilisé pour les fonds et les nuances plus légères
                   </p>
+                  <div class="flex mt-3">
+                    <div 
+                      @click="copyColor('#BFCFD3')"
+                      class="flex-1 text-left p-2 rounded-l-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono">#BFCFD3</p>
+                      <p class="text-xs text-gray-400">HEX</p>
+                    </div>
+                    <div 
+                      @click="copyColor('C:29,85% M:12,44% J:16,14% N:0,15%')"
+                      class="flex-1 text-right p-2 rounded-r-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono text-xs">C:30% M:12% J:16% N:0%</p>
+                      <p class="text-xs text-gray-400">CMJN</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div
                 class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:-rotate-1 hover:scale-105"
-                @click="copyColor('#FFFFFF')"
               >
-                <div class="h-24 bg-white"></div>
+              <!-- CMJN : C:0% M:0% J:0% N:0% -->
+                <div class="h-24 bg-white border-b border-gray-200"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Blanc</h4>
-                  <p class="text-sm text-gray-600">#FFFFFF</p>
                   <p class="text-sm text-gray-500">
                     Utilisé pour les fonds et le texte sur fond sombre
                   </p>
+                  <div class="flex mt-3">
+                    <div 
+                      @click="copyColor('#FFFFFF')"
+                      class="flex-1 text-left p-2 rounded-l-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono">#FFFFFF</p>
+                      <p class="text-xs text-gray-400">HEX</p>
+                    </div>
+                    <div 
+                      @click="copyColor('C:0% M:0% J:0% N:0%')"
+                      class="flex-1 text-right p-2 rounded-r-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono text-xs">C:0% M:0% J:0% N:0%</p>
+                      <p class="text-xs text-gray-400">CMJN</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -400,28 +460,58 @@
             >
               <div
                 class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:rotate-2 hover:scale-105"
-                @click="copyColor('#22C55E')"
               >
+              <!-- CMJN : C:70,55% M:0% J:78,9% N:0% -->
                 <div class="h-24 bg-green-500"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Succès</h4>
-                  <p class="text-sm text-gray-600">#22C55E</p>
                   <p class="text-sm text-gray-500">
                     Pour les actions réussies, chats trouvés et confirmations
                   </p>
+                  <div class="flex mt-3">
+                    <div 
+                      @click="copyColor('#22C55E')"
+                      class="flex-1 text-left p-2 rounded-l-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono">#22C55E</p>
+                      <p class="text-xs text-gray-400">HEX</p>
+                    </div>
+                    <div 
+                      @click="copyColor('C:70,55% M:0% J:78,9% N:0%')"
+                      class="flex-1 text-right p-2 rounded-r-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono text-xs">C:71% M:0% J:79% N:0%</p>
+                      <p class="text-xs text-gray-400">CMJN</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div
                 class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:-rotate-2 hover:scale-105"
-                @click="copyColor('#EF4444')"
               >
+              <!-- CMJN : C:0% M:84,08% J:67,79% N:0% -->
                 <div class="h-24 bg-red-500"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Erreur</h4>
-                  <p class="text-sm text-gray-600">#EF4444</p>
                   <p class="text-sm text-gray-500">
                     Pour les erreurs, alertes et chats non trouvés
                   </p>
+                  <div class="flex mt-3">
+                    <div 
+                      @click="copyColor('#EF4444')"
+                      class="flex-1 text-left p-2 rounded-l-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono">#EF4444</p>
+                      <p class="text-xs text-gray-400">HEX</p>
+                    </div>
+                    <div 
+                      @click="copyColor('C:0% M:84,08% J:67,79% N:0%')"
+                      class="flex-1 text-right p-2 rounded-r-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono text-xs">C:0% M:84% J:68% N:0%</p>
+                      <p class="text-xs text-gray-400">CMJN</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- <div
@@ -483,22 +573,51 @@
                 class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:rotate-2 hover:scale-105"
                 @click="copyColor('#0C1B1E')"
               >
+              <!-- CMJN : C:91,08% M:67,89% J:60,05% N:72,82% -->
                 <div class="h-24 bg-[#0C1B1E]"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Vert foncé</h4>
-                  <p class="text-sm text-gray-600">#0C1B1E</p>
-                 
+                  <div class="flex mt-3">
+                    <div 
+                      @click="copyColor('#0C1B1E')"
+                      class="flex-1 text-left p-2 rounded-l-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono">#0C1B1E</p>
+                      <p class="text-xs text-gray-400">HEX</p>
+                    </div>
+                    <div 
+                      @click="copyColor('C:91,08% M:67,89% J:60,05% N:72,82%')"
+                      class="flex-1 text-right p-2 rounded-r-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono text-xs">C:91% M:68% J:60% N:73%</p>
+                      <p class="text-xs text-gray-400">CMJN</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div
                 class="rounded-xl overflow-hidden border border-gray-200 cursor-pointer relative group transition-transform duration-300 hover:-rotate-2 hover:scale-105"
-                @click="copyColor('#CC4E48')"
               >
+              <!-- CMJN : C:14,92% M:79,49% J:67,64% N:3,94% -->
                 <div class="h-24 bg-[#CC4E48]"></div>
                 <div class="p-4">
                   <h4 class="font-medium">Orange foncé</h4>
-                  <p class="text-sm text-gray-600">#CC4E48</p>
-                  
+                  <div class="flex mt-3">
+                    <div 
+                      @click="copyColor('#CC4E48')"
+                      class="flex-1 text-left p-2 rounded-l-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono">#CC4E48</p>
+                      <p class="text-xs text-gray-400">HEX</p>
+                    </div>
+                    <div 
+                      @click="copyColor('C:14,92% M:79,49% J:67,64% N:3,94%')"
+                      class="flex-1 text-right p-2 rounded-r-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <p class="text-sm text-gray-600 font-mono text-xs">C:15% M:79% J:68% N:4%</p>
+                      <p class="text-xs text-gray-400">CMJN</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               </div>
