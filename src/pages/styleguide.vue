@@ -202,7 +202,7 @@
 
               <ul class="list-disc pl-6 mb-4">
                 <li class="mb-2">
-                  Il évoque une moustache féline, clin d'œil discret au monde des chats.
+                  Il évoque la queue du félin, clin d'œil discret au monde des chats.
                 </li>
                 <li class="mb-2">
                   Il peut aussi être perçu comme une loupe, symbole classique de la recherche — 
@@ -280,7 +280,7 @@
                 <div>
                   <h4 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6 ">accompagnement</h4>
                   <p>
-                    Il poura être accompagné du nom de la marque
+                    Il pourra être accompagné du nom de la marque
                     <div
               class="bg-white p-8 rounded-xl border border-gray-200 flex flex-raw items-center mt-8"
             >
@@ -305,7 +305,7 @@
                 <div>
                   <h4 class="mt-8 text-xl font-bold tracking-tight text-primary font-serif mb-6">Incrustation</h4>
                   <p>
-                    Il poura être incrusté dans le titre même pour une meilleur lisibilité.
+                    Il pourra être incrusté dans le titre même pour une meilleure lisibilité.
                     <div class="bg-white p-8 rounded-xl border border-gray-200 flex flex-col items-center mt-8">
              
               <div class="flex items-baseline gap-1 text-2xl mt-4 flex-wrap-1 relative h-24">
