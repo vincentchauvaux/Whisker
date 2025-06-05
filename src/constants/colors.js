@@ -101,19 +101,19 @@ export const GENDER_COLORS = {
   MALE: {
     bg: "bg-blue-600",
     text: "text-white",
-    symbol: "♂",
+    icon: "mars",
     label: "Mâle",
   },
   FEMALE: {
     bg: "bg-pink-600",
     text: "text-white",
-    symbol: "♀",
+    icon: "venus",
     label: "Femelle",
   },
   UNKNOWN: {
     bg: "bg-gray-500",
     text: "text-white",
-    symbol: "?",
+    icon: "question",
     label: "Inconnu",
   },
 };

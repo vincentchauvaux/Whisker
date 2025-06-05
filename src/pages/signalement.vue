@@ -184,7 +184,10 @@
                     <div
                       class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center"
                     >
-                      <span class="text-blue-500 text-xl font-bold">♂</span>
+                      <font-awesome-icon
+                        :icon="['fas', 'mars']"
+                        class="text-blue-500 text-xl"
+                      />
                     </div>
                     <span class="ml-2 text-sm">Mâle</span>
                   </div>
@@ -201,7 +204,10 @@
                     <div
                       class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center"
                     >
-                      <span class="text-pink-500 text-xl font-bold">♀</span>
+                      <font-awesome-icon
+                        :icon="['fas', 'venus']"
+                        class="text-pink-500 text-xl"
+                      />
                     </div>
                     <span class="ml-2 text-sm">Femelle</span>
                   </div>
@@ -218,7 +224,10 @@
                     <div
                       class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"
                     >
-                      <span class="text-gray-500 text-xl font-bold">?</span>
+                      <font-awesome-icon
+                        :icon="['fas', 'question']"
+                        class="text-gray-500 text-xl"
+                      />
                     </div>
                     <span class="ml-2 text-sm">Inconnu</span>
                   </div>

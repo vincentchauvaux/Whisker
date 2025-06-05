@@ -166,13 +166,17 @@
                             : 'bg-gray-500',
                         ]"
                       >
-                        {{
-                          pet.gender === "male"
-                            ? "♂"
-                            : pet.gender === "female"
-                            ? "♀"
-                            : "?"
-                        }}
+                        <font-awesome-icon
+                          :icon="[
+                            'fas',
+                            pet.gender === 'male'
+                              ? 'mars'
+                              : pet.gender === 'female'
+                              ? 'venus'
+                              : 'question',
+                          ]"
+                          class="text-sm"
+                        />
                       </span>
                       <span class="text-sm text-gray-700">
                         {{
@@ -251,6 +255,7 @@ import "swiper/css/pagination";
 import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { getTagColorClass, getColorBackground } from "../constants/colors.js";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const props = defineProps({
   pets: {

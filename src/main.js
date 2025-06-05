@@ -3,6 +3,7 @@ import "./style.css";
 import App from "./App.vue";
 import router from "./router";
 import FirebasePlugin from "./plugins/firebase";
+import { FontAwesomeIcon } from "./plugins/fontawesome";
 import {
   initializeFirebaseData,
   initializeDataOnce,
@@ -38,6 +39,9 @@ app.use(Toast, {
   icon: true,
   rtl: false,
 });
+
+// Enregistrer le composant FontAwesomeIcon globalement
+app.component("font-awesome-icon", FontAwesomeIcon);
 
 // Rendre les stores disponibles globalement
 app.config.globalProperties.$userStore = userStore;

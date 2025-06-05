@@ -266,13 +266,16 @@
                             : 'bg-gray-500',
                         ]"
                       >
-                        {{
-                          pet.gender === "male"
-                            ? "♂"
-                            : pet.gender === "female"
-                            ? "♀"
-                            : "?"
-                        }}
+                        <font-awesome-icon
+                          :icon="[
+                            'fas',
+                            pet.gender === 'male'
+                              ? 'mars'
+                              : pet.gender === 'female'
+                              ? 'venus'
+                              : 'question',
+                          ]"
+                        />
                       </span>
                       <div>
                         <p class="text-sm text-gray-500">Sexe</p>

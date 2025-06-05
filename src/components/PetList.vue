@@ -9,6 +9,7 @@ import {
   getTagColorClass,
   getColorBackground,
 } from "../constants/colors.js";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const router = useRouter();
 const props = defineProps({
@@ -344,13 +345,17 @@ onMounted(() => {
                           : 'bg-gray-500',
                       ]"
                     >
-                      {{
-                        pet.gender === "male"
-                          ? "♂"
-                          : pet.gender === "female"
-                          ? "♀"
-                          : "?"
-                      }}
+                      <font-awesome-icon
+                        :icon="[
+                          'fas',
+                          pet.gender === 'male'
+                            ? 'mars'
+                            : pet.gender === 'female'
+                            ? 'venus'
+                            : 'question',
+                        ]"
+                        class="text-sm"
+                      />
                     </span>
                     <span class="text-sm text-gray-700">
                       {{
