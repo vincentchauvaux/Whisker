@@ -43,7 +43,7 @@
                   <div class="font-semibold text-primary font-serif">
                     Sophie D.
                   </div>
-                  <div class="text-gray-500 font-sans">Paris</div>
+                  <div class="text-gray-500 font-sans">Bruxelles</div>
                 </div>
               </figcaption>
             </figure>
@@ -73,7 +73,7 @@
                   <div class="font-semibold text-primary font-serif">
                     Thomas L.
                   </div>
-                  <div class="text-gray-500 font-sans">Lyon</div>
+                  <div class="text-gray-500 font-sans">Liège</div>
                 </div>
               </figcaption>
             </figure>
@@ -102,7 +102,7 @@
                   <div class="font-semibold text-primary font-serif">
                     Marie F.
                   </div>
-                  <div class="text-gray-500 font-sans">Bordeaux</div>
+                  <div class="text-gray-500 font-sans">Bruges</div>
                 </div>
               </figcaption>
             </figure>
@@ -131,7 +131,7 @@
                   <div class="font-semibold text-primary font-serif">
                     Pierre M.
                   </div>
-                  <div class="text-gray-500 font-sans">Toulouse</div>
+                  <div class="text-gray-500 font-sans">Namur</div>
                 </div>
               </figcaption>
             </figure>
@@ -159,7 +159,7 @@
                   <div class="font-semibold text-primary font-serif">
                     Lucie B.
                   </div>
-                  <div class="text-gray-500 font-sans">Nantes</div>
+                  <div class="text-gray-500 font-sans">Gand</div>
                 </div>
               </figcaption>
             </figure>
@@ -187,7 +187,7 @@
                   <div class="font-semibold text-primary font-serif">
                     Julien R.
                   </div>
-                  <div class="text-gray-500 font-sans">Marseille</div>
+                  <div class="text-gray-500 font-sans">Dinant</div>
                 </div>
               </figcaption>
             </figure>
