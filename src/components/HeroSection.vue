@@ -61,7 +61,7 @@
           <h1
             class="mt-10 text-pretty text-4xl font-bold tracking-tight text-primary font-serif sm:text-6xl"
           >
-            Trouvé ou perdu, Vous êtes au bon endroit !
+            Trouvé ou perdu, vous êtes au bon endroit !
           </h1>
           <p
             class="mt-8 text-pretty text-lg font-medium text-primary-dark font-sans sm:text-xl/8"
