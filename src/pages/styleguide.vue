@@ -1999,11 +1999,11 @@
               <div class="space-y-4">
                 <h4 class="font-medium text-primary">État par défaut</h4>
                 <button
-                  class="w-full px-4 py-2 bg-primary text-white rounded-lg"
+                  class="w-full px-4 py-2 bg-primary text-white rounded-full"
                 >
                   Bouton normal
                 </button>
-                <div class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                <div class="w-full px-4 py-2 border border-gray-300 rounded-full">
                   Champ de texte
                 </div>
               </div>
@@ -2017,7 +2017,7 @@
                   Bouton survolé
                 </button>
                 <div
-                  class="w-full px-4 py-2 border-2 border-primary rounded-lg"
+                  class="w-full px-4 py-2 border-2 border-primary rounded-full"
                 >
                   Champ de texte actif
                 </div>
@@ -2032,7 +2032,7 @@
                   Bouton focus
                 </button>
                 <div
-                  class="w-full px-4 py-2 border-2 border-primary rounded-lg bg-primary/5"
+                  class="w-full px-4 py-2 border-2 border-primary rounded-full bg-primary/5"
                 >
                   Champ de texte focus
                 </div>
@@ -2042,12 +2042,12 @@
               <div class="space-y-4">
                 <h4 class="font-medium text-primary">État désactivé</h4>
                 <button
-                  class="w-full px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed"
+                  class="w-full px-4 py-2 bg-gray-300 text-gray-500 rounded-full cursor-not-allowed"
                 >
                   Bouton désactivé
                 </button>
                 <div
-                  class="w-full px-4 py-2 bg-gray-100 border border-gray-200 rounded-lg text-gray-400"
+                  class="w-full px-4 py-2 bg-gray-100 border border-gray-200 rounded-full text-gray-400"
                 >
                   Champ désactivé
                 </div>
